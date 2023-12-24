@@ -1,7 +1,6 @@
-package com.meddjamm.sn.controller.api;
+package com.meddjamm.sn.remote.controller.api;
 
-import com.meddjamm.sn.model.Classification;
-import com.meddjamm.sn.model.DiagnosticPrincipal;
+import com.meddjamm.sn.entity.DiagnosticPrincipal;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

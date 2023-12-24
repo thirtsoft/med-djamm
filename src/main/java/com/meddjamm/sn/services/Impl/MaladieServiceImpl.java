@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services.Impl;
 
-import com.meddjamm.sn.model.Maladie;
+import com.meddjamm.sn.entity.Maladie;
 import com.meddjamm.sn.repository.MaladieRepository;
 import com.meddjamm.sn.services.MaladieService;
 import org.springframework.stereotype.Service;

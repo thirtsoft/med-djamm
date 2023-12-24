@@ -1,4 +1,4 @@
-package com.meddjamm.sn.model;
+package com.meddjamm.sn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

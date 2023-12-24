@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services;
 
-import com.meddjamm.sn.model.Patient;
+import com.meddjamm.sn.entity.Patient;
 
 import java.util.List;
 

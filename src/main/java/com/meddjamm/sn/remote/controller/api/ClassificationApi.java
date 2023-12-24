@@ -1,6 +1,7 @@
-package com.meddjamm.sn.controller.api;
+package com.meddjamm.sn.remote.controller.api;
 
-import com.meddjamm.sn.model.Classification;
+import com.meddjamm.sn.entity.Classification;
+import com.meddjamm.sn.remote.model.ClassificationDs;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,10 @@ public interface ClassificationApi {
     ResponseEntity<Classification> updateClassification(@PathVariable Long id, @RequestBody Classification classification) throws Exception;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Classification> findById(@PathVariable Long id);
+    ResponseEntity<ClassificationDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<Classification>> findAllClassifications();
+    ResponseEntity<List<ClassificationDs>> findAllClassifications();
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteClassification(@PathVariable Long id);

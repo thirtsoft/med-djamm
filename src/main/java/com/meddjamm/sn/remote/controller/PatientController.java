@@ -1,13 +1,14 @@
-package com.meddjamm.sn.controller;
+package com.meddjamm.sn.remote.controller;
 
-import com.meddjamm.sn.controller.api.PatientApi;
-import com.meddjamm.sn.model.Patient;
+import com.meddjamm.sn.assembler.PatientAssembler;
+import com.meddjamm.sn.entity.Patient;
+import com.meddjamm.sn.remote.controller.api.PatientApi;
+import com.meddjamm.sn.remote.model.PatientDetailDs;
+import com.meddjamm.sn.remote.model.PatientMinDs;
 import com.meddjamm.sn.services.PatientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,9 +18,11 @@ import java.util.List;
 public class PatientController implements PatientApi {
 
     private final PatientService patientService;
+    private final PatientAssembler patientAssembler;
 
-    public PatientController(PatientService patientService) {
+    public PatientController(PatientService patientService, PatientAssembler patientAssembler) {
         this.patientService = patientService;
+        this.patientAssembler = patientAssembler;
     }
 
     @Override
@@ -35,14 +38,14 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<Patient> findById(Long id) {
-        Patient patientResult = patientService.findById(id);
+    public ResponseEntity<PatientDetailDs> findById(Long id) {
+        PatientDetailDs patientResult = patientAssembler.assemblePatientDetails(patientService.findById(id));
         return new ResponseEntity<>(patientResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<Patient>> findAllPatients() {
-        List<Patient> patientResult = patientService.findAllPatients();
+    public ResponseEntity<List<PatientMinDs>> findAllPatients() {
+        List<PatientMinDs> patientResult = patientAssembler.assembleEntitiesFrom(patientService.findAllPatients());
         return new ResponseEntity<>(patientResult, HttpStatus.OK);
     }
 

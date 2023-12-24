@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services;
 
-import com.meddjamm.sn.model.DiagnosticPrincipal;
+import com.meddjamm.sn.entity.DiagnosticPrincipal;
 
 import java.util.List;
 

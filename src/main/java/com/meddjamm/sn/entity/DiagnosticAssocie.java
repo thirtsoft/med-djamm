@@ -1,5 +1,4 @@
-package com.meddjamm.sn.model;
-
+package com.meddjamm.sn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,17 +8,15 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "critere_utilise")
+@Table(name = "diagnostic_associe")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CritereUtilise implements Serializable {
+public class DiagnosticAssocie implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String libelle;
-
-
 }

@@ -1,8 +1,8 @@
 package com.meddjamm.sn;
 
-import com.meddjamm.sn.model.Classification;
-import com.meddjamm.sn.model.Maladie;
-import com.meddjamm.sn.model.Patient;
+import com.meddjamm.sn.entity.Classification;
+import com.meddjamm.sn.entity.Maladie;
+import com.meddjamm.sn.entity.Patient;
 import com.meddjamm.sn.repository.ClassificationRepository;
 import com.meddjamm.sn.repository.MaladieRepository;
 import com.meddjamm.sn.repository.PatientRepository;
