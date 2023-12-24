@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services.Impl;
 
-import com.meddjamm.sn.model.Classification;
+import com.meddjamm.sn.entity.Classification;
 import com.meddjamm.sn.repository.ClassificationRepository;
 import com.meddjamm.sn.services.ClassificationService;
 import org.springframework.stereotype.Service;

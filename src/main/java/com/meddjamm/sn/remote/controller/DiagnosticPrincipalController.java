@@ -1,7 +1,7 @@
-package com.meddjamm.sn.controller;
+package com.meddjamm.sn.remote.controller;
 
-import com.meddjamm.sn.controller.api.DiagnosticPrincipalApi;
-import com.meddjamm.sn.model.DiagnosticPrincipal;
+import com.meddjamm.sn.entity.DiagnosticPrincipal;
+import com.meddjamm.sn.remote.controller.api.DiagnosticPrincipalApi;
 import com.meddjamm.sn.services.DiagnosticPrincipalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

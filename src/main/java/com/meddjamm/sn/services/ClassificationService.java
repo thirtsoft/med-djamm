@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services;
 
-import com.meddjamm.sn.model.Classification;
+import com.meddjamm.sn.entity.Classification;
 
 import java.util.List;
 

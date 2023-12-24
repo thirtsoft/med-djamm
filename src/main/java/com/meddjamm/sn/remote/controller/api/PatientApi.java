@@ -1,6 +1,8 @@
-package com.meddjamm.sn.controller.api;
+package com.meddjamm.sn.remote.controller.api;
 
-import com.meddjamm.sn.model.Patient;
+import com.meddjamm.sn.entity.Patient;
+import com.meddjamm.sn.remote.model.PatientDetailDs;
+import com.meddjamm.sn.remote.model.PatientMinDs;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +20,10 @@ public interface PatientApi {
     ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) throws Exception;
 
     @GetMapping(value = "/{id}")
-    ResponseEntity<Patient> findById(@PathVariable Long id);
+    ResponseEntity<PatientDetailDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/list")
-    ResponseEntity<List<Patient>> findAllPatients();
+    ResponseEntity<List<PatientMinDs>> findAllPatients();
 
     @DeleteMapping(value = "/delete/{id}")
     void deletePatient(@PathVariable Long id);

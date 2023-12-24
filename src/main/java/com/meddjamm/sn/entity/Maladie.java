@@ -1,4 +1,4 @@
-package com.meddjamm.sn.model;
+package com.meddjamm.sn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +9,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "classification")
+@Table(name = "maladie")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Classification implements Serializable {
+public class Maladie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

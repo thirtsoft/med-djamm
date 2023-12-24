@@ -1,11 +1,12 @@
-package com.meddjamm.sn.controller;
+package com.meddjamm.sn.remote.controller;
 
-import com.meddjamm.sn.controller.api.ClassificationApi;
-import com.meddjamm.sn.model.Classification;
+import com.meddjamm.sn.assembler.ClassificationAssembler;
+import com.meddjamm.sn.entity.Classification;
+import com.meddjamm.sn.remote.controller.api.ClassificationApi;
+import com.meddjamm.sn.remote.model.ClassificationDs;
 import com.meddjamm.sn.services.ClassificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +17,11 @@ import java.util.List;
 public class ClassificationController implements ClassificationApi {
 
     private final ClassificationService classificationService;
+    private final ClassificationAssembler classificationAssembler;
 
-    public ClassificationController(ClassificationService classificationService) {
+    public ClassificationController(ClassificationService classificationService, ClassificationAssembler classificationAssembler) {
         this.classificationService = classificationService;
+        this.classificationAssembler = classificationAssembler;
     }
 
     @Override
@@ -34,14 +37,15 @@ public class ClassificationController implements ClassificationApi {
     }
 
     @Override
-    public ResponseEntity<Classification> findById(Long id) {
-        Classification classificationResult = classificationService.findById(id);
+    public ResponseEntity<ClassificationDs> findById(Long id) {
+        ClassificationDs classificationResult = classificationAssembler.assembleEntityToDs(classificationService.findById(id));
         return new ResponseEntity<>(classificationResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<Classification>> findAllClassifications() {
-        List<Classification> classificationList = classificationService.findAllClassifications();
+    public ResponseEntity<List<ClassificationDs>> findAllClassifications() {
+        List<ClassificationDs> classificationList = classificationService.findAllClassifications().stream()
+                .map(classificationAssembler::assembleEntityToDs).toList();
         return new ResponseEntity<>(classificationList, HttpStatus.OK);
     }
 

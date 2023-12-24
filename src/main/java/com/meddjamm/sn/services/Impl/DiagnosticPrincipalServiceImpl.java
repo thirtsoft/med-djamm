@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services.Impl;
 
-import com.meddjamm.sn.model.DiagnosticPrincipal;
+import com.meddjamm.sn.entity.DiagnosticPrincipal;
 import com.meddjamm.sn.repository.DiagnosticPrincipalRepository;
 import com.meddjamm.sn.services.DiagnosticPrincipalService;
 import org.springframework.stereotype.Service;

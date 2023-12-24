@@ -1,4 +1,4 @@
-package com.meddjamm.sn.model;
+package com.meddjamm.sn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,28 +7,18 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-@Table(name = "rendez_vous")
+@Table(name = "classification")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RendezVous implements Serializable {
-
+public class Classification implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(columnDefinition = "int default 0", unique = true)
-    private int numeroRendezVous;
-
-    private String heure;
-
+    private String libelle;
     private Date createDate;
-
-    private int etat;
-
     private int actif;
 
     public boolean isActif() {

@@ -1,7 +1,6 @@
 package com.meddjamm.sn.repository;
 
-import com.meddjamm.sn.model.Classification;
-import com.meddjamm.sn.model.Maladie;
+import com.meddjamm.sn.entity.Maladie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

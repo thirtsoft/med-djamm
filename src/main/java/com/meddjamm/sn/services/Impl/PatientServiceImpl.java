@@ -1,13 +1,12 @@
 package com.meddjamm.sn.services.Impl;
 
-import com.meddjamm.sn.model.Patient;
+import com.meddjamm.sn.entity.Patient;
 import com.meddjamm.sn.repository.PatientRepository;
 import com.meddjamm.sn.services.PatientService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PatientServiceImpl implements PatientService {
