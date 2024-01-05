@@ -4,6 +4,7 @@ import com.meddjamm.sn.assembler.ClassificationAssembler;
 import com.meddjamm.sn.entity.Classification;
 import com.meddjamm.sn.remote.controller.api.ClassificationApi;
 import com.meddjamm.sn.remote.model.ClassificationDs;
+import com.meddjamm.sn.remote.model.PatientMinDs;
 import com.meddjamm.sn.services.ClassificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +45,7 @@ public class ClassificationController implements ClassificationApi {
 
     @Override
     public ResponseEntity<List<ClassificationDs>> findAllClassifications() {
-        List<ClassificationDs> classificationList = classificationService.findAllClassifications().stream()
-                .map(classificationAssembler::assembleEntityToDs).toList();
+        List<ClassificationDs> classificationList = classificationAssembler.assembleEntitiesFrom(classificationService.findAllClassifications());
         return new ResponseEntity<>(classificationList, HttpStatus.OK);
     }
 
