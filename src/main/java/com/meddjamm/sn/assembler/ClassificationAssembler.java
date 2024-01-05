@@ -18,7 +18,16 @@ public class ClassificationAssembler {
         classificationDs.setId(classification.getId());
         classificationDs.setLibelle(classification.getLibelle());
         classificationDs.setCreateDate(classification.getCreateDate());
-        classificationDs.setActif(classification.getActif());
+        classificationDs.setActif(classification.isActif());
         return classificationDs;
+    }
+
+    public Classification assembleClassificationFromDs(ClassificationDs classificationDs) {
+        Classification classification = new Classification();
+        classification.setId(classificationDs.getId());
+        classification.setLibelle(classificationDs.getLibelle());
+        classification.setCreateDate(classificationDs.getCreateDate());
+        classification.setActif(classificationDs.isActif());
+        return classification;
     }
 }

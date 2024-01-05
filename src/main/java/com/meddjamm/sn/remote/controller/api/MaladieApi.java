@@ -13,10 +13,10 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface MaladieApi {
 
     @PostMapping(value = "/save")
-    ResponseEntity<Maladie> creerMaladie(@RequestBody Maladie maladie);
+    ResponseEntity<MaladieDs> creerMaladie(@RequestBody MaladieDs maladieDs);
 
     @PutMapping(value = "/edit/{id}")
-    ResponseEntity<Maladie> updateMaladie(@PathVariable Long id, @RequestBody Maladie maladie) throws Exception;
+    ResponseEntity<MaladieDs> updateMaladie(@PathVariable Long id, @RequestBody MaladieDs maladieDs) throws Exception;
 
     @GetMapping(value = "/{id}")
     ResponseEntity<MaladieDs> findById(@PathVariable Long id);

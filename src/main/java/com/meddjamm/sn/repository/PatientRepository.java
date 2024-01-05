@@ -9,4 +9,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("SELECT DISTINCT p from Patient p where p.id=:id and p.actif=1")
     Patient findPatientById(@Param("id") Long id);
+
+    Patient findPatientByIndex(@Param("index") String index);
 }

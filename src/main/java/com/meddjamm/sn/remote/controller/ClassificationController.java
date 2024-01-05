@@ -4,6 +4,7 @@ import com.meddjamm.sn.assembler.ClassificationAssembler;
 import com.meddjamm.sn.entity.Classification;
 import com.meddjamm.sn.remote.controller.api.ClassificationApi;
 import com.meddjamm.sn.remote.model.ClassificationDs;
+import com.meddjamm.sn.remote.model.MaladieDs;
 import com.meddjamm.sn.remote.model.PatientMinDs;
 import com.meddjamm.sn.services.ClassificationService;
 import org.springframework.http.HttpStatus;
@@ -26,15 +27,15 @@ public class ClassificationController implements ClassificationApi {
     }
 
     @Override
-    public ResponseEntity<Classification> creerClassification(Classification classification) {
-        Classification classificationResult = classificationService.saveClassification(classification);
-        return new ResponseEntity<>(classificationResult, HttpStatus.CREATED);
+    public ResponseEntity<ClassificationDs> creerClassification(ClassificationDs classificationDs) {
+        Classification classificationAjouter = classificationAssembler.assembleClassificationFromDs(classificationDs);
+        return new ResponseEntity<>(classificationAssembler.assembleEntityToDs(classificationService.saveClassification(classificationAjouter)), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Classification> updateClassification(Long id, Classification classification) throws Exception {
-        Classification classificationResult = classificationService.updateClassification(id, classification);
-        return new ResponseEntity<>(classificationResult, HttpStatus.OK);
+    public ResponseEntity<ClassificationDs> updateClassification(Long id, ClassificationDs classificationDs) throws Exception {
+        Classification classificationModifier = classificationAssembler.assembleClassificationFromDs(classificationDs);
+        return new ResponseEntity<>(classificationAssembler.assembleEntityToDs(classificationService.updateClassification(id, classificationModifier)), HttpStatus.OK);
     }
 
     @Override

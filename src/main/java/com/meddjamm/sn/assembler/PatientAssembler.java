@@ -41,7 +41,35 @@ public class PatientAssembler {
         return PatientDetailDs;
     }
 
-    private PatientMinDs assembleMinFrom(Patient patient) {
+    public Patient assemblePatientFromDs(PatientDetailDs patientDetailDs) {
+        Patient patient = new Patient();
+        patient.setIndex(patientDetailDs.getIndex());
+        patient.setDateInscription(patientDetailDs.getDateInscription());
+        patient.setNom(patientDetailDs.getNom());
+        patient.setPrenom(patientDetailDs.getPrenom());
+        patient.setSexe(patientDetailDs.getSexe());
+        patient.setAge(patientDetailDs.getAge());
+        patient.setCivilite(patientDetailDs.getCivilite());
+        patient.setAddress(patientDetailDs.getAddress());
+        patient.setDateNaissance(patientDetailDs.getDateNaissance());
+        patient.setNumeroTelephone(patientDetailDs.getNumeroTelephone());
+        patient.setProfession(patientDetailDs.getProfession());
+        patient.setSituationMatrimonial(patientDetailDs.getSituationMatrimonial());
+        patient.setPhoto(patientDetailDs.getPhoto());
+        patient.setRace(patientDetailDs.getRace());
+        patient.setEthnie(patientDetailDs.getEthnie());
+        patient.setOrigine(patientDetailDs.getOrigine());
+        patient.setNationalite(patientDetailDs.getNationalite());
+        patient.setOriginePere(patientDetailDs.getOriginePere());
+        patient.setOrigineMere(patientDetailDs.getOrigineMere());
+        patient.setPrototype(patientDetailDs.getPrototype());
+        patient.setConsanguinite(patientDetailDs.getConsanguinite());
+        patient.setNiveauSocialEconomique(patientDetailDs.getNiveauSocialEconomique());
+        patient.setRegimeAlimentaire(patientDetailDs.getRegimeAlimentaire());
+        return patient;
+    }
+
+    public PatientMinDs assembleMinFrom(Patient patient) {
         PatientMinDs patientMinDs = new PatientMinDs();
         patientMinDs.setIndex(patient.getIndex());
         patientMinDs.setDateInscription(patient.getDateInscription());

@@ -18,7 +18,16 @@ public class MaladieAssembler {
         maladieDs.setId(maladie.getId());
         maladieDs.setLibelle(maladie.getLibelle());
         maladieDs.setCreateDate(maladie.getCreateDate());
-        maladieDs.setActif(maladie.getActif());
+        maladieDs.setActif(maladie.isActif());
         return maladieDs;
+    }
+
+    public Maladie assembleMaladieFromDs(MaladieDs maladieDs) {
+        Maladie maladie = new Maladie();
+        maladie.setId(maladieDs.getId());
+        maladie.setLibelle(maladieDs.getLibelle());
+        maladie.setCreateDate(maladieDs.getCreateDate());
+        maladie.setActif(maladieDs.isActif());
+        return maladie;
     }
 }

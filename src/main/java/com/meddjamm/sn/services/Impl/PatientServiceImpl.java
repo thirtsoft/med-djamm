@@ -3,6 +3,8 @@ package com.meddjamm.sn.services.Impl;
 import com.meddjamm.sn.entity.Patient;
 import com.meddjamm.sn.repository.PatientRepository;
 import com.meddjamm.sn.services.PatientService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -62,6 +64,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public Patient findByIndex(String index) {
+        return patientRepository.findPatientByIndex(index);
+    }
+
+    @Override
     public List<Patient> findAllPatients() {
         return patientRepository.findAll();
     }
@@ -71,5 +78,10 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = patientRepository.findPatientById(id);
         patient.setActif(false);
         patientRepository.save(patient);
+    }
+
+    @Override
+    public Page<Patient> findAllPatients(Integer pageNumber, Integer pageSize) {
+        return patientRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
 }

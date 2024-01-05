@@ -1,6 +1,10 @@
 package com.meddjamm.sn.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,14 +47,15 @@ public class Patient implements Serializable {
     private Date dateInscription;
     private int actif;
 
-    public Patient(Long id, String prenom, String nom, String civilite, String address, String numeroTelephone, int actif) {
-        this.id = id;
+    public Patient(String id, String prenom, String nom, String civilite, String address, String numeroTelephone, int actif) {
+        this.index = id;
         this.prenom = prenom;
         this.nom = nom;
         this.civilite = civilite;
         this.address = address;
         this.numeroTelephone = numeroTelephone;
         this.actif = actif;
+        this.dateInscription = new Date();
     }
 
     public boolean isActif() {
