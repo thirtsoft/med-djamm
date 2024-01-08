@@ -16,4 +16,8 @@ public interface DiagnosticPrincipalRepository extends JpaRepository<DiagnosticP
 
     @Query("SELECT DISTINCT p from DiagnosticPrincipal p where p.actif=1")
     List<DiagnosticPrincipal> findAllDiagnosticPrincipal();
+
+    @Query("SELECT DISTINCT p from DiagnosticPrincipal p where p.indexPatient=:indexPatient and p.actif=1 order by p.id desc")
+    List<DiagnosticPrincipal> findDiagnosticPrincipalsByPatient(@Param("indexPatient") String indexPatient);
+
 }

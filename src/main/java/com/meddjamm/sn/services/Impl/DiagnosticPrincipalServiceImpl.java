@@ -41,6 +41,11 @@ public class DiagnosticPrincipalServiceImpl implements DiagnosticPrincipalServic
     }
 
     @Override
+    public List<DiagnosticPrincipal> findDiagnosticPrincipalsByPatient(String indexPatient) {
+        return diagnosticPrincipalRepository.findDiagnosticPrincipalsByPatient(indexPatient);
+    }
+
+    @Override
     public void deleteDiagnosticPrincipal(Long id) {
         DiagnosticPrincipal diagnosticPrincipal = diagnosticPrincipalRepository.findDiagnosticPrincipalById(id);
         diagnosticPrincipal.setActif(false);
