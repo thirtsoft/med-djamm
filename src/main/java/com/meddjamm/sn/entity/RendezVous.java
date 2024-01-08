@@ -22,6 +22,17 @@ public class RendezVous implements Serializable {
     @Column(columnDefinition = "int default 0", unique = true)
     private int numeroRendezVous;
 
+    /*
+    @ManyToOne
+    @JoinColumn(name="patient_id")
+    private Patient patient;*/
+
+    @Column(name="patient_id")
+    private String index;
+
+    @Column(name = "date_rendez_vous")
+    private Date dateRendezVous;
+
     private String heure;
 
     private Date createDate;

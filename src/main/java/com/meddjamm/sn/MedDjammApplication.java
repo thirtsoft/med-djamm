@@ -32,6 +32,7 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
         Classification cl1 = classificationRepository.save(new Classification(1L, "PCR", new Date(), 1));
         Classification cl2 = classificationRepository.save(new Classification(2L, "POR", new Date(), 1));
         Classification cl3 = classificationRepository.save(new Classification(3L, "ABC", new Date(), 1));
@@ -48,5 +49,7 @@ public class MedDjammApplication implements CommandLineRunner {
         Patient p3 = patientRepository.save(new Patient("3L", "Binta", "Diallo", "Me", "Mariste", "779440310", 1));
         Patient p4 = patientRepository.save(new Patient("4L", "Aicha", "Diallo", "Me", "Mariste", "779440310", 1));
         Patient p5 = patientRepository.save(new Patient("5L", "Lama", "Diallo", "Mr", "Mariste", "779440310", 1));
+
+        */
     }
 }
