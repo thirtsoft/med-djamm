@@ -19,4 +19,28 @@ public class DiagnosticAssocie implements Serializable {
     private Long id;
 
     private String libelle;
+
+    /*
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;*/
+
+    @JoinColumn(name = "patient_id")
+    private String indexPatient;
+
+    private int actif;
+
+    public boolean isActif() {
+        if (actif == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public void setActif(boolean actif) {
+        if (actif == true)
+            this.actif = 1;
+        else
+            this.actif = 0;
+    }
 }

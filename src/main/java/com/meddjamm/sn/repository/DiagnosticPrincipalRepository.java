@@ -6,9 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface DiagnosticPrincipalRepository extends JpaRepository<DiagnosticPrincipal, Long> {
 
     @Query("SELECT DISTINCT p from DiagnosticPrincipal p where p.id=:id and p.actif=1")
     DiagnosticPrincipal findDiagnosticPrincipalById(@Param("id") Long id);
+
+    @Query("SELECT DISTINCT p from DiagnosticPrincipal p where p.actif=1")
+    List<DiagnosticPrincipal> findAllDiagnosticPrincipal();
 }

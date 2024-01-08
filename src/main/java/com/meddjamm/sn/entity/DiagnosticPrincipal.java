@@ -23,6 +23,9 @@ public class DiagnosticPrincipal implements Serializable {
 
     private Long scoreObtenu;
 
+    @Column(name="patient_id")
+    private String index;
+
     @ManyToOne
     private Maladie maladie;
 
