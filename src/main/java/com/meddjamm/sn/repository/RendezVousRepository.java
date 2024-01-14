@@ -14,7 +14,7 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     @Query("SELECT DISTINCT p from RendezVous p where p.id=:id and p.actif=1")
     RendezVous findRendezVousById(@Param("id") Long id);
 
-    @Query("SELECT DISTINCT p from RendezVous p where p.actif=1")
+    @Query("SELECT DISTINCT p from RendezVous p where p.actif=1 order by p.id desc")
     List<RendezVous> findAllRendezVous();
 
 }
