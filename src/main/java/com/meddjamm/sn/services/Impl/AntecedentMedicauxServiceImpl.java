@@ -36,7 +36,7 @@ public class AntecedentMedicauxServiceImpl implements AntecedentMedicauxService 
 
     @Override
     public List<AntecedentMedicaux> findAllAntecedentMedicauxByPatient(String indexPatient) {
-        return antecedentMedicauxRepository.findAllAntecedentMedicauxByPatient(indexPatient);
+        return null;
     }
 
     @Override

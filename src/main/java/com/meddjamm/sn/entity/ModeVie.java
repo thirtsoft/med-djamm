@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "mode-de-vie")
@@ -19,10 +20,18 @@ public class ModeVie implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /*
     private String libelle;
 
     @Column(name = "patient_id")
     private String indexPatient;
+    */
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "modeVies_patient_par_mode_de_vie",
+            joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "modeVies_patient")
+    private Set<String> modeViesPatient;
 
     private Date createdDate;
 

@@ -21,9 +21,6 @@ public interface AntecedentGynecologieApi {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<AntecedentGynecologieDs> findById(@PathVariable Long id);
 
-    @GetMapping(value = "/patient/{indexPatient}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<AntecedentGynecologieDs>> findAntecedentGynecologiesByPatient(@PathVariable("indexPatient") String indexPatient);
-
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteAntecedentGynecologie(@PathVariable Long id);
 

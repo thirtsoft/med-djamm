@@ -15,7 +15,7 @@ public class AntecedentMedicauxDs implements Serializable {
 
     private Long id;
 
-    private String indexPatient;
+  //  private String indexPatient;
 
     private List<String> maladiesAntecedents;
 

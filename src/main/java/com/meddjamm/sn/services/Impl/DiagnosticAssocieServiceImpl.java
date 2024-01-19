@@ -1,11 +1,11 @@
 package com.meddjamm.sn.services.Impl;
 
 import com.meddjamm.sn.entity.DiagnosticAssocie;
-import com.meddjamm.sn.entity.Patient;
 import com.meddjamm.sn.repository.DiagnosticAssocieRepository;
 import com.meddjamm.sn.services.DiagnosticAssocieService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -32,8 +32,10 @@ public class DiagnosticAssocieServiceImpl implements DiagnosticAssocieService {
         if (diagnosticAssocieResult == null) {
             throw new Exception("This DiagnosticAssocie is not found");
         }
+        /*
         diagnosticAssocieResult.setLibelle(diagnosticAssocie.getLibelle());
-        diagnosticAssocieResult.setIndexPatient(diagnosticAssocie.getIndexPatient());
+        diagnosticAssocieResult.setIndexPatient(diagnosticAssocie.getIndexPatient());*/
+        diagnosticAssocieResult.setLibellesDiagnostic(new HashSet<>(diagnosticAssocie.getLibellesDiagnostic()));
         diagnosticAssocieRepository.save(diagnosticAssocieResult);
     }
 
@@ -49,7 +51,7 @@ public class DiagnosticAssocieServiceImpl implements DiagnosticAssocieService {
 
     @Override
     public List<DiagnosticAssocie> findAllDiagnosticAssocieByPatient(String indexPatient) {
-        return diagnosticAssocieRepository.findAllDiagnosticAssociesByPatient(indexPatient);
+        return null;
     }
 
     @Override

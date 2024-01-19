@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "diagnostic_associe")
@@ -18,15 +19,16 @@ public class DiagnosticAssocie implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /*
     private String libelle;
 
-    /*
-    @ManyToOne
     @JoinColumn(name = "patient_id")
-    private Patient patient;*/
+    private String indexPatient;*/
 
-    @JoinColumn(name = "patient_id")
-    private String indexPatient;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "libelles_diagnostic_par_diagnostic_associe", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "libelles_diagnostic")
+    private Set<String> libellesDiagnostic;
 
     private int actif;
 

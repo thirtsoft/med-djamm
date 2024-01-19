@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ public class ModeVieDs implements Serializable {
     private Long id;
     private String libelle;
     private String indexPatient;
+    private List<String> modeViesPatient;
     private Date createdDate;
     private int actif;
 

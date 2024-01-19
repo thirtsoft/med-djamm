@@ -46,13 +46,6 @@ public class AntecedentFamilialController implements AntecedentFamilialApi {
     }
 
     @Override
-    public ResponseEntity<List<AntecedentFamilialDs>> findAntecedentFamilialsByPatient(String indexPatient) {
-        return new ResponseEntity<>(antecedentFamilialAssembler
-                .assembleEntitiesFrom(antecedentFamilialService.findAllAntecedentFamilialByPatient(indexPatient)),
-                HttpStatus.OK);
-    }
-
-    @Override
     public void deleteAntecedentFamilialDs(Long id) {
         antecedentFamilialService.deleteAntecedentFamilial(id);
     }

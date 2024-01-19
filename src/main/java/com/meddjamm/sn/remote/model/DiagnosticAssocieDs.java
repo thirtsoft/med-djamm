@@ -1,10 +1,13 @@
 package com.meddjamm.sn.remote.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -12,6 +15,7 @@ import java.io.Serializable;
 public class DiagnosticAssocieDs implements Serializable {
     private String libelle;
     private String indexPatient;
+    private List<String> libellesDiagnostic;
 
     private int actif;
 

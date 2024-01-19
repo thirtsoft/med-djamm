@@ -21,9 +21,6 @@ public interface ModeVieApi {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ModeVieDs> findById(@PathVariable Long id);
 
-    @GetMapping(value = "/patient/{indexPatient}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ModeVieDs>> findModeViesByPatient(@PathVariable("indexPatient") String indexPatient);
-
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteModeVie(@PathVariable Long id);
 }

@@ -13,8 +13,4 @@ public interface HistoireMaladieRepository extends JpaRepository<HistoireMaladie
 
     @Query("SELECT DISTINCT p from HistoireMaladie p where p.id=:id and p.actif=1")
     HistoireMaladie findHistoireMaladieById(@Param("id") Long id);
-
-    @Query("SELECT DISTINCT p from HistoireMaladie p where p.indexPatient=:indexPatient and p.actif=1 order by p.id desc")
-    List<HistoireMaladie> findHistoireMaladiesByPatient(@Param("indexPatient") String indexPatient);
-
 }

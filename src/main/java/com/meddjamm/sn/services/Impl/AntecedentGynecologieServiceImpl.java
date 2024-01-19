@@ -6,6 +6,7 @@ import com.meddjamm.sn.services.AntecedentGynecologieService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -33,7 +34,8 @@ public class AntecedentGynecologieServiceImpl implements AntecedentGynecologieSe
         if (antecedentGynecologieResult == null) {
             throw new Exception("This AntecedentGynecologie is not found");
         }
-        antecedentGynecologieResult.setLibelle(antecedentGynecologie.getLibelle());
+     //   antecedentGynecologieResult.setLibelle(antecedentGynecologie.getLibelle());
+        antecedentGynecologieResult.setGynecologiquesAntecedent(new HashSet<>(antecedentGynecologie.getGynecologiquesAntecedent()));
         antecedentGynecologieRepository.save(antecedentGynecologieResult);
     }
 
@@ -44,7 +46,7 @@ public class AntecedentGynecologieServiceImpl implements AntecedentGynecologieSe
 
     @Override
     public List<AntecedentGynecologie> findAllAntecedentGynecologieByPatient(String indexPatient) {
-        return antecedentGynecologieRepository.findAllAntecedentGynecologiesByPatient(indexPatient);
+        return null;
     }
 
     @Override

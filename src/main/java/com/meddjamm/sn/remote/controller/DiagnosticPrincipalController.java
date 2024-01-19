@@ -51,14 +51,6 @@ public class DiagnosticPrincipalController implements DiagnosticPrincipalApi {
     }
 
     @Override
-    public ResponseEntity<List<DiagnosticPrincipalDetailDs>> findDiagnosticAssociesByPatient(String indexPatient) {
-        return new ResponseEntity<>(diagnosticPrincipalAssembler.assembleEntitiesFrom(
-                diagnosticPrincipalService.findDiagnosticPrincipalsByPatient(indexPatient)),
-                HttpStatus.OK
-        );
-    }
-
-    @Override
     public void deleteDiagnosticPrincipal(Long id) {
         diagnosticPrincipalService.deleteDiagnosticPrincipal(id);
     }

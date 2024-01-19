@@ -31,7 +31,7 @@ public class HistoireMaladieAssembler {
     public HistoireMaladieDs assembleEntityToDs(HistoireMaladie histoireMaladie) {
         HistoireMaladieDs histoireMaladieDs = new HistoireMaladieDs();
         histoireMaladieDs.setId(histoireMaladie.getId());
-        histoireMaladieDs.setIndexPatient(histoireMaladie.getIndexPatient());
+      //  histoireMaladieDs.setIndexPatient(histoireMaladie.getIndexPatient());
         histoireMaladieDs.setAge(histoireMaladie.getAge());
         histoireMaladieDs.setCirconstance(histoireMaladie.getCirconstance());
         histoireMaladieDs.setInfoComplementaire(histoireMaladie.getInfoComplementaire());
@@ -64,7 +64,7 @@ public class HistoireMaladieAssembler {
     public HistoireMaladie assembleHistoireMaladieFromDs(HistoireMaladieDs histoireMaladieDs) {
         HistoireMaladie histoireMaladie = new HistoireMaladie();
         histoireMaladieDs.setId(histoireMaladie.getId());
-        histoireMaladie.setIndexPatient(histoireMaladieDs.getIndexPatient());
+    //    histoireMaladie.setIndexPatient(histoireMaladieDs.getIndexPatient());
         histoireMaladie.setAge(histoireMaladieDs.getAge());
         histoireMaladie.setCirconstance(histoireMaladieDs.getCirconstance());
         histoireMaladie.setInfoComplementaire(histoireMaladieDs.getInfoComplementaire());

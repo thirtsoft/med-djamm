@@ -48,13 +48,6 @@ public class AntecedentGynecologieController implements AntecedentGynecologieApi
     }
 
     @Override
-    public ResponseEntity<List<AntecedentGynecologieDs>> findAntecedentGynecologiesByPatient(String indexPatient) {
-        return new ResponseEntity<>(antecedentGynecologieAssembler
-                .assembleEntitiesFrom(antecedentGynecologieService.findAllAntecedentGynecologieByPatient(indexPatient)),
-                HttpStatus.OK);
-    }
-
-    @Override
     public void deleteAntecedentGynecologie(Long id) {
         antecedentGynecologieService.deleteAntecedentGynecologie(id);
     }

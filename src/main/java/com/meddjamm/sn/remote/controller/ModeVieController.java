@@ -45,13 +45,6 @@ public class ModeVieController implements ModeVieApi {
     }
 
     @Override
-    public ResponseEntity<List<ModeVieDs>> findModeViesByPatient(String indexPatient) {
-        return new ResponseEntity<>(modeVieAssembler
-                .assembleEntitiesFrom(modeVieService.findAllModeVieByPatient(indexPatient)),
-                HttpStatus.OK);
-    }
-
-    @Override
     public void deleteModeVie(Long id) {
         modeVieService.deleteModeVie(id);
     }

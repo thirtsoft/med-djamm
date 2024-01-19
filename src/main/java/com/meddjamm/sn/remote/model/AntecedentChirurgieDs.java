@@ -6,14 +6,19 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AntecedentChirurgieDs implements Serializable {
     private Long id;
+    /*
     private String libelle;
-    private String indexPatient;
+    private String indexPatient;*/
+  //  private List<String> produitServiceDTOs;
+    private List<String> chirurgiesAntecedent;
     private Date createdDate;
     private int actif;
 

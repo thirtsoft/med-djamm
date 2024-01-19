@@ -13,8 +13,4 @@ public interface AntecedentFamilialRepository extends JpaRepository<AntecedentFa
 
     @Query("SELECT DISTINCT p from AntecedentFamilial p where p.id=:id and p.actif=1")
     AntecedentFamilial findAntecedentFamilialById(@Param("id") Long id);
-
-    @Query("SELECT DISTINCT p from AntecedentFamilial p where p.indexPatient=:indexPatient and p.actif=1 order by p.id desc")
-    List<AntecedentFamilial> findAllAntecedentFamilialsByPatient(@Param("indexPatient") String indexPatient);
-
 }

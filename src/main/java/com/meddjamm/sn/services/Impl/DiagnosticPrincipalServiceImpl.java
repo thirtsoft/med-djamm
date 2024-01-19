@@ -42,7 +42,7 @@ public class DiagnosticPrincipalServiceImpl implements DiagnosticPrincipalServic
 
     @Override
     public List<DiagnosticPrincipal> findDiagnosticPrincipalsByPatient(String indexPatient) {
-        return diagnosticPrincipalRepository.findDiagnosticPrincipalsByPatient(indexPatient);
+        return null;
     }
 
     @Override

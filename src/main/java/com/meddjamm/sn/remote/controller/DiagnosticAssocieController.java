@@ -54,13 +54,6 @@ public class DiagnosticAssocieController implements DiagnosticAssocieApi {
     }
 
     @Override
-    public ResponseEntity<List<DiagnosticAssocieDetailDs>> findDiagnosticAssociesByPatient(String indexPatient) {
-        List<DiagnosticAssocieDetailDs> diagnosticAssocieDetailDs = diagnosticAssocieAssembler
-                .assembleEntitiesFrom(diagnosticAssocieService.findAllDiagnosticAssocieByPatient(indexPatient));
-        return new ResponseEntity<>(diagnosticAssocieDetailDs, HttpStatus.OK);
-    }
-
-    @Override
     public void deleteDiagnosticPrincipal(Long id) {
         diagnosticAssocieService.deleteDiagnosticAssocie(id);
     }

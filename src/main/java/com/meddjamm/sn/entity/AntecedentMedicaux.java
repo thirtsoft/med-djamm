@@ -19,8 +19,9 @@ public class AntecedentMedicaux implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
+    /*
     @Column(name = "patient_id")
-    private String indexPatient;
+    private String indexPatient;*/
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "maladie_antecedent_par_antecedent_medicaux",

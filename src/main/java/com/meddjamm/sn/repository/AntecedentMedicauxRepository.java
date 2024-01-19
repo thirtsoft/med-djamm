@@ -14,7 +14,4 @@ public interface AntecedentMedicauxRepository extends JpaRepository<AntecedentMe
 
     @Query("SELECT DISTINCT p from AntecedentMedicaux p where p.id=:id and p.actif=1")
     AntecedentMedicaux findAntecedentMedicauxById(@Param("id") Long id);
-
-    @Query("SELECT DISTINCT p from AntecedentMedicaux p where p.indexPatient=:indexPatient and p.actif=1 order by p.id desc")
-    List<AntecedentMedicaux> findAllAntecedentMedicauxByPatient(@Param("indexPatient") String indexPatient);
 }

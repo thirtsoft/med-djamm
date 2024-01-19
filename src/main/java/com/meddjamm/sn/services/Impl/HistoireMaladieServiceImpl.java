@@ -49,7 +49,7 @@ public class HistoireMaladieServiceImpl implements HistoireMaladieService {
 
     @Override
     public List<HistoireMaladie> findHistoireMaladiesByPatient(String indexPatient) {
-        return histoireMaladieRepository.findHistoireMaladiesByPatient(indexPatient);
+        return null;
     }
 
     @Override

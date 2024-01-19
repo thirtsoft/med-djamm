@@ -6,6 +6,7 @@ import com.meddjamm.sn.services.ModeVieService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -33,7 +34,8 @@ public class ModeVieServiceImpl implements ModeVieService {
         if (modeVieResult == null) {
             new Exception("This ModeVie is not exist");
         }
-        modeVieResult.setLibelle(modeVie.getLibelle());
+     //   modeVieResult.setLibelle(modeVie.getLibelle());
+        modeVieResult.setModeViesPatient(new HashSet<>(modeVie.getModeViesPatient()));
         modeVieRepository.save(modeVieResult);
     }
 
@@ -44,7 +46,7 @@ public class ModeVieServiceImpl implements ModeVieService {
 
     @Override
     public List<ModeVie> findAllModeVieByPatient(String indexPatient) {
-        return modeVieRepository.findAllModeViesByPatient(indexPatient);
+        return null;
     }
 
     @Override

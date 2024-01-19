@@ -25,10 +25,6 @@ public interface DiagnosticPrincipalApi {
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<DiagnosticPrincipalDetailDs>> findAllDiagnosticPrincipals();
 
-    @GetMapping(value = "/patient/{indexPatient}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<DiagnosticPrincipalDetailDs>> findDiagnosticAssociesByPatient(@PathVariable("indexPatient") String indexPatient);
-
-
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteDiagnosticPrincipal(@PathVariable Long id);
 }

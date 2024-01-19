@@ -18,7 +18,7 @@ public class AntecedentMedicauxAssembler {
     public AntecedentMedicauxDs assembleEntityToDs(AntecedentMedicaux antecedentMedicaux) {
         AntecedentMedicauxDs antecedentMedicauxDs = new AntecedentMedicauxDs();
         antecedentMedicauxDs.setId(antecedentMedicaux.getId());
-        antecedentMedicauxDs.setIndexPatient(antecedentMedicaux.getIndexPatient());
+      //  antecedentMedicauxDs.setIndexPatient(antecedentMedicaux.getIndexPatient());
         antecedentMedicauxDs.setMaladiesAntecedents(new ArrayList<>(antecedentMedicaux.getMaladiesAntecedent()));
         antecedentMedicauxDs.setCreateDate(antecedentMedicaux.getCreateDate());
         antecedentMedicauxDs.setActif(antecedentMedicaux.isActif());
@@ -28,7 +28,7 @@ public class AntecedentMedicauxAssembler {
     public AntecedentMedicaux assembleAntecedentMedicauxFromDs(AntecedentMedicauxDs antecedentMedicauxDs) {
         AntecedentMedicaux antecedentMedicaux = new AntecedentMedicaux();
         antecedentMedicaux.setId(antecedentMedicauxDs.getId());
-        antecedentMedicaux.setIndexPatient(antecedentMedicauxDs.getIndexPatient());
+    //    antecedentMedicaux.setIndexPatient(antecedentMedicauxDs.getIndexPatient());
         antecedentMedicaux.setMaladiesAntecedent(new HashSet<>(antecedentMedicauxDs.getMaladiesAntecedents()));
         antecedentMedicaux.setCreateDate(antecedentMedicauxDs.getCreateDate());
         antecedentMedicaux.setActif(antecedentMedicauxDs.isActif());

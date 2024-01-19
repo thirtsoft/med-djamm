@@ -4,6 +4,8 @@ import com.meddjamm.sn.entity.AntecedentGynecologie;
 import com.meddjamm.sn.remote.model.AntecedentGynecologieDs;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Component
@@ -16,8 +18,10 @@ public class AntecedentGynecologieAssembler {
     public AntecedentGynecologieDs assembleEntityToDs(AntecedentGynecologie antecedentGynecologie) {
         AntecedentGynecologieDs antecedentGynecologieDs = new AntecedentGynecologieDs();
         antecedentGynecologieDs.setId(antecedentGynecologie.getId());
+        /*
         antecedentGynecologieDs.setLibelle(antecedentGynecologie.getLibelle());
-        antecedentGynecologieDs.setIndexPatient(antecedentGynecologie.getIndexPatient());
+        antecedentGynecologieDs.setIndexPatient(antecedentGynecologie.getIndexPatient());*/
+        antecedentGynecologieDs.setGynecologiquesAntecedent(new ArrayList<>(antecedentGynecologie.getGynecologiquesAntecedent()));
         antecedentGynecologieDs.setCreatedDate(antecedentGynecologie.getCreatedDate());
         antecedentGynecologieDs.setActif(antecedentGynecologie.isActif());
         return antecedentGynecologieDs;
@@ -26,8 +30,10 @@ public class AntecedentGynecologieAssembler {
     public AntecedentGynecologie assembleAntecedentGynecologieFromDs(AntecedentGynecologieDs antecedentGynecologieDs) {
         AntecedentGynecologie antecedentGynecologie = new AntecedentGynecologie();
         antecedentGynecologie.setId(antecedentGynecologieDs.getId());
+        /*
         antecedentGynecologie.setLibelle(antecedentGynecologieDs.getLibelle());
-        antecedentGynecologie.setIndexPatient(antecedentGynecologieDs.getIndexPatient());
+        antecedentGynecologie.setIndexPatient(antecedentGynecologieDs.getIndexPatient());*/
+        antecedentGynecologie.setGynecologiquesAntecedent(new HashSet<>(antecedentGynecologieDs.getGynecologiquesAntecedent()));
         antecedentGynecologie.setCreatedDate(antecedentGynecologieDs.getCreatedDate());
         antecedentGynecologie.setActif(antecedentGynecologieDs.isActif());
         return antecedentGynecologie;

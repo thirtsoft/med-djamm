@@ -45,13 +45,6 @@ public class AntecedentMedicauxController implements AntecedentMedicauxApi {
     }
 
     @Override
-    public ResponseEntity<List<AntecedentMedicauxDs>> findAntecedentMedicauxDsByPatient(String indexPatient) {
-        return new ResponseEntity<>(antecedentMedicauxAssembler
-                .assembleEntitiesFrom(antecedentMedicauxService.findAllAntecedentMedicauxByPatient(indexPatient)),
-                HttpStatus.OK);
-    }
-
-    @Override
     public void deleteAntecedentMedicauxDs(Long id) {
         antecedentMedicauxService.deleteAntecedentMedicaux(id);
     }

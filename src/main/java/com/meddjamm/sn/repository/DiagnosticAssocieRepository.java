@@ -17,6 +17,4 @@ public interface DiagnosticAssocieRepository extends JpaRepository<DiagnosticAss
     @Query("SELECT DISTINCT p from DiagnosticAssocie p where p.actif=1")
     List<DiagnosticAssocie> findAllDiagnosticAssocies();
 
-    @Query("SELECT DISTINCT p from DiagnosticAssocie p where p.indexPatient=:indexPatient and p.actif=1 order by p.id desc")
-    List<DiagnosticAssocie> findAllDiagnosticAssociesByPatient(@Param("indexPatient") String indexPatient);
 }

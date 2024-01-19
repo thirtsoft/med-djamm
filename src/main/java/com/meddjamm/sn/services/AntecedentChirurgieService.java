@@ -12,7 +12,5 @@ public interface AntecedentChirurgieService {
 
     AntecedentChirurgie findById(Long id);
 
-    List<AntecedentChirurgie> findAllAntecedentChirurgieByPatient(String indexPatient);
-
     void deleteAntecedentChirurgie(Long id);
 }

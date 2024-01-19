@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ public class DiagnosticAssocieDetailDs implements Serializable {
     private String libelle;
     private String indexPatient;
     private PatientDetailDs patient;
+    private List<String> libellesDiagnostic;
     private int actif;
 
     public boolean isActif() {

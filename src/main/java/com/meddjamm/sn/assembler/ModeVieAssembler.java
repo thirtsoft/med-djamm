@@ -4,6 +4,8 @@ import com.meddjamm.sn.entity.ModeVie;
 import com.meddjamm.sn.remote.model.ModeVieDs;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Component
@@ -16,8 +18,10 @@ public class ModeVieAssembler {
     public ModeVieDs assembleEntityToDs(ModeVie modeVie) {
         ModeVieDs modeVieDs = new ModeVieDs();
         modeVieDs.setId(modeVie.getId());
+        modeVieDs.setModeViesPatient(new ArrayList<>(modeVie.getModeViesPatient()));
+        /*
         modeVieDs.setLibelle(modeVie.getLibelle());
-        modeVieDs.setIndexPatient(modeVie.getIndexPatient());
+        modeVieDs.setIndexPatient(modeVie.getIndexPatient());*/
         modeVieDs.setCreatedDate(modeVie.getCreatedDate());
         modeVieDs.setActif(modeVie.isActif());
         return modeVieDs;
@@ -26,8 +30,10 @@ public class ModeVieAssembler {
     public ModeVie assembleModeVieFromDs(ModeVieDs modeVieDs) {
         ModeVie modeVie = new ModeVie();
         modeVie.setId(modeVieDs.getId());
+        modeVie.setModeViesPatient(new HashSet<>(modeVieDs.getModeViesPatient()));
+        /*
         modeVie.setLibelle(modeVieDs.getLibelle());
-        modeVie.setIndexPatient(modeVieDs.getIndexPatient());
+        modeVie.setIndexPatient(modeVieDs.getIndexPatient());*/
         modeVie.setCreatedDate(modeVieDs.getCreatedDate());
         modeVie.setActif(modeVieDs.isActif());
         return modeVie;

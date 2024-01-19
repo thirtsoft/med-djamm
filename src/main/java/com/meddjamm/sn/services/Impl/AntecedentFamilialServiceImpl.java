@@ -6,6 +6,7 @@ import com.meddjamm.sn.services.AntecedentFamilialService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -34,9 +35,14 @@ public class AntecedentFamilialServiceImpl implements AntecedentFamilialService 
         if (antecedentFamilialResult == null) {
             throw new Exception("Antecedent not found");
         }
+        /*
         antecedentFamilialResult.setAntecedentAscendant(antecedentFamilial.getAntecedentAscendant());
         antecedentFamilialResult.setAntecedentCollateral(antecedentFamilial.getAntecedentCollateral());
-        antecedentFamilialResult.setAntecedentDescendant(antecedentFamilial.getAntecedentDescendant());
+        antecedentFamilialResult.setAntecedentDescendant(antecedentFamilial.getAntecedentDescendant());*/
+
+        antecedentFamilialResult.setFamilialsAntecedentAscendant(new HashSet<>(antecedentFamilial.getFamilialsAntecedentAscendant()));
+        antecedentFamilialResult.setFamilialsAntecedentCollateral(new HashSet<>(antecedentFamilial.getFamilialsAntecedentCollateral()));
+        antecedentFamilialResult.setFamilialsAntecedentDescendant(new HashSet<>(antecedentFamilial.getFamilialsAntecedentDescendant()));
         antecedentFamilialRepository.save(antecedentFamilialResult);
     }
 
@@ -47,7 +53,7 @@ public class AntecedentFamilialServiceImpl implements AntecedentFamilialService 
 
     @Override
     public List<AntecedentFamilial> findAllAntecedentFamilialByPatient(String indexPatient) {
-        return antecedentFamilialRepository.findAllAntecedentFamilialsByPatient(indexPatient);
+        return null;
     }
 
     @Override

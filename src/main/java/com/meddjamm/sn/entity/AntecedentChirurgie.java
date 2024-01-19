@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "antecedent-chirurgie")
@@ -19,10 +20,17 @@ public class AntecedentChirurgie implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /*
     private String libelle;
 
     @Column(name = "patient_id")
-    private String indexPatient;
+    private String indexPatient;*/
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "chirurgie_antecedent_par_antecedent_chirurgical",
+            joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "chirurgies_antecedent")
+    private Set<String> chirurgiesAntecedent;
 
     private Date createdDate;
 

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +15,7 @@ public class AntecedentFamilialDs implements Serializable {
 
     private Long id;
 
+    /*
     private String antecedentAscendant;
 
     private String antecedentCollateral;
@@ -21,6 +23,13 @@ public class AntecedentFamilialDs implements Serializable {
     private String antecedentDescendant;
 
     private String indexPatient;
+    */
+
+    private List<String> familialsAntecedentAscendant;
+
+    private List<String> familialsAntecedentCollateral;
+
+    private List<String> familialsAntecedentDescendant;
 
     private Date createdDate;
 

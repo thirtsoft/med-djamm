@@ -20,8 +20,9 @@ public class HistoireMaladie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /*
     @Column(name = "patient_id")
-    private String indexPatient;
+    private String indexPatient;*/
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "antecedent_precedent_hisotire_maladie", joinColumns = @JoinColumn(name = "hisotire_maladie_uid"))

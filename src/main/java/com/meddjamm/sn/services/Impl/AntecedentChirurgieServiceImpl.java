@@ -7,6 +7,7 @@ import com.meddjamm.sn.services.AntecedentChirurgieService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -34,18 +35,14 @@ public class AntecedentChirurgieServiceImpl implements AntecedentChirurgieServic
         if (antecedentChirurgieResult == null) {
             throw new Exception("This AntecedentChirurgie is not found");
         }
-        antecedentChirurgieResult.setLibelle(antecedentChirurgie.getLibelle());
+      //  antecedentChirurgieResult.setLibelle(antecedentChirurgie.getLibelle());
+        antecedentChirurgieResult.setChirurgiesAntecedent(new HashSet<>(antecedentChirurgie.getChirurgiesAntecedent()));
         antecedentChirurgieRepository.save(antecedentChirurgieResult);
     }
 
     @Override
     public AntecedentChirurgie findById(Long id) {
         return antecedentChirurgieRepository.findAntecedentChirurgieById(id);
-    }
-
-    @Override
-    public List<AntecedentChirurgie> findAllAntecedentChirurgieByPatient(String indexPatient) {
-        return antecedentChirurgieRepository.findAllAntecedentChirurgiesByPatient(indexPatient);
     }
 
     @Override

@@ -13,8 +13,4 @@ public interface ModeVieRepository extends JpaRepository<ModeVie, Long> {
 
     @Query("SELECT DISTINCT p from ModeVie p where p.id=:id and p.actif=1")
     ModeVie findModeVieById(@Param("id") Long id);
-
-    @Query("SELECT DISTINCT p from ModeVie p where p.indexPatient=:indexPatient and p.actif=1 order by p.id desc")
-    List<ModeVie> findAllModeViesByPatient(@Param("indexPatient") String indexPatient);
-
 }

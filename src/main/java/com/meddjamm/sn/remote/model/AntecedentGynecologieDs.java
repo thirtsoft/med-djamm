@@ -1,11 +1,14 @@
 package com.meddjamm.sn.remote.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -13,8 +16,10 @@ import java.util.Date;
 public class AntecedentGynecologieDs implements Serializable {
 
     private Long id;
+    /*
     private String libelle;
-    private String indexPatient;
+    private String indexPatient;*/
+    private List<String> gynecologiquesAntecedent;
     private Date createdDate;
     private int actif;
 

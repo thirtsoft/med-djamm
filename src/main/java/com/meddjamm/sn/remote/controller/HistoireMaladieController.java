@@ -45,13 +45,6 @@ public class HistoireMaladieController implements HistoireMaladieApi {
     }
 
     @Override
-    public ResponseEntity<List<HistoireMaladieDs>> findHistoireMaladiesByPatient(String indexPatient) {
-        return new ResponseEntity<>(histoireMaladieAssembler
-                .assembleEntitiesFrom(histoireMaladieService.findHistoireMaladiesByPatient(indexPatient)),
-                HttpStatus.OK);
-    }
-
-    @Override
     public void deleteHistoireMaladie(Long id) {
         histoireMaladieService.deleteHistoireMaladie(id);
     }

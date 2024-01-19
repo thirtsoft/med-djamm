@@ -21,9 +21,6 @@ public interface AntecedentFamilialApi {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<AntecedentFamilialDs> findById(@PathVariable Long id);
 
-    @GetMapping(value = "/patient/{indexPatient}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<AntecedentFamilialDs>> findAntecedentFamilialsByPatient(@PathVariable("indexPatient") String indexPatient);
-
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteAntecedentFamilialDs(@PathVariable Long id);
 }
