@@ -20,7 +20,7 @@ public interface RendezVousApi {
     ResponseEntity<RendezVousDetailDs> updateRendezVousDs(@PathVariable Long id, @RequestBody RendezVousDs rendezVousDs) throws Exception;
 
     @GetMapping(value = "/{id}")
-    ResponseEntity<RendezVousDs> findById(@PathVariable Long id);
+    ResponseEntity<RendezVousDetailDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/list")
     ResponseEntity<List<RendezVousDetailDs>> findAllRendezVous();

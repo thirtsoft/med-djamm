@@ -1,5 +1,6 @@
-package com.meddjamm.sn.remote.model;
+package com.meddjamm.sn.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,21 +8,21 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "atteinte")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RendezVousDetailDs implements Serializable {
+public class Atteinte implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int numeroRendezVous;
-    private Date dateRendezVous;
-    private String heure;
-    private Date createDate;
-    private String libelleEtat;
-    private int actif;
-    private int etat;
-    private String index;
-    private PatientDetailDs patient;
 
+    private String libelle;
+
+    private Date createDate;
+
+    private int actif;
 
     public boolean isActif() {
         if (actif == 1)
@@ -37,3 +38,4 @@ public class RendezVousDetailDs implements Serializable {
             this.actif = 0;
     }
 }
+

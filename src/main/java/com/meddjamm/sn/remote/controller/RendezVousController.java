@@ -41,8 +41,8 @@ public class RendezVousController implements RendezVousApi {
     }
 
     @Override
-    public ResponseEntity<RendezVousDs> findById(Long id) {
-        RendezVousDs rendezVousResult = rendezVousAssembler.assembleEntityToDs(rendezVousService.findById(id));
+    public ResponseEntity<RendezVousDetailDs> findById(Long id) {
+        RendezVousDetailDs rendezVousResult = rendezVousAssembler.assembleEntitiesToDs(rendezVousService.findById(id));
         return new ResponseEntity<>(rendezVousResult, HttpStatus.OK);
     }
 
