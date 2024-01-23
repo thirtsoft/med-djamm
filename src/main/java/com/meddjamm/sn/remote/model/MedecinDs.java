@@ -25,9 +25,25 @@ public class MedecinDs {
 
     private String telephone;
 
-    private String specialite;
+    private Long speciality;
 
     private String email;
 
     private Date dateRecrutement;
+
+    private int actif;
+
+    public boolean isActif() {
+        if (actif == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public void setActif(boolean actif) {
+        if (actif == true)
+            this.actif = 1;
+        else
+            this.actif = 0;
+    }
 }

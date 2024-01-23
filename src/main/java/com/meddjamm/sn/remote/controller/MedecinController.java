@@ -3,6 +3,7 @@ package com.meddjamm.sn.remote.controller;
 import com.meddjamm.sn.assembler.MedecinAssembler;
 import com.meddjamm.sn.entity.Medecin;
 import com.meddjamm.sn.remote.controller.api.MedecinApi;
+import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.remote.model.MedecinDs;
 import com.meddjamm.sn.services.MedecinService;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class MedecinController implements MedecinApi {
 
     private final MedecinService medecinService;
@@ -40,15 +41,15 @@ public class MedecinController implements MedecinApi {
     }
 
     @Override
-    public ResponseEntity<MedecinDs> findById(Long id) {
-        return new ResponseEntity<>(medecinAssembler.assembleEntityToDs(
+    public ResponseEntity<MedecinDetailDs> findById(Long id) {
+        return new ResponseEntity<>(medecinAssembler.assembleEntitiesToDs(
                 medecinService.findById(id)
         ), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<MedecinDs>> findAllMedecins() {
-        List<MedecinDs> medecinList = medecinAssembler.assembleEntitiesFrom(medecinService.findAllMedecins());
+    public ResponseEntity<List<MedecinDetailDs>> findAllMedecins() {
+        List<MedecinDetailDs> medecinList = medecinAssembler.assembleEntitiesFrom(medecinService.findAllMedecins());
         return new ResponseEntity<>(medecinList, HttpStatus.OK);
     }
 

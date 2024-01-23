@@ -1,7 +1,10 @@
 package com.meddjamm.sn.assembler;
 
 import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.entity.Specialite;
+import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.remote.model.MedecinDs;
+import com.meddjamm.sn.services.SpecialiteService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,8 +12,18 @@ import java.util.List;
 @Component
 public class MedecinAssembler {
 
-    public List<MedecinDs> assembleEntitiesFrom(List<Medecin> Medecins) {
-        return Medecins.stream().map(this::assembleEntityToDs).toList();
+    private final SpecialiteAssembler specialiteAssembler;
+
+    private final SpecialiteService specialiteService;
+
+    public MedecinAssembler(SpecialiteAssembler specialiteAssembler,
+                            SpecialiteService specialiteService) {
+        this.specialiteAssembler = specialiteAssembler;
+        this.specialiteService = specialiteService;
+    }
+
+    public List<MedecinDetailDs> assembleEntitiesFrom(List<Medecin> medecins) {
+        return medecins.stream().map(this::assembleEntitiesToDs).toList();
     }
 
     public MedecinDs assembleEntityToDs(Medecin medecin) {
@@ -23,8 +36,9 @@ public class MedecinAssembler {
         medecinDs.setCivilite(medecin.getCivilite());
         medecinDs.setTelephone(medecin.getTelephone());
         medecinDs.setEmail(medecin.getEmail());
-        medecinDs.setSpecialite(medecin.getSpecialite());
+        medecinDs.setSpeciality(medecin.getSpeciality());
         medecinDs.setDateRecrutement(medecin.getDateRecrutement());
+        medecinDs.setActif(medecin.isActif());
         return medecinDs;
     }
 
@@ -38,8 +52,28 @@ public class MedecinAssembler {
         medecin.setCivilite(medecinDs.getCivilite());
         medecin.setTelephone(medecinDs.getTelephone());
         medecin.setEmail(medecinDs.getEmail());
-        medecin.setSpecialite(medecinDs.getSpecialite());
+        medecin.setSpeciality(medecinDs.getSpeciality());
         medecin.setDateRecrutement(medecinDs.getDateRecrutement());
+        medecin.setActif(medecinDs.isActif());
         return medecin;
+    }
+
+    public MedecinDetailDs assembleEntitiesToDs(Medecin medecin) {
+        MedecinDetailDs medecinDs = new MedecinDetailDs();
+        medecinDs.setId(medecin.getId());
+        medecinDs.setMatricule(medecin.getMatricule());
+        medecinDs.setPrenom(medecin.getPrenom());
+        medecinDs.setNom(medecin.getNom());
+        medecinDs.setSexe(medecin.getSexe());
+        medecinDs.setCivilite(medecin.getCivilite());
+        medecinDs.setTelephone(medecin.getTelephone());
+        medecinDs.setEmail(medecin.getEmail());
+        medecinDs.setActif(medecin.isActif());
+        if (medecin.getSpeciality() != null) {
+            Specialite specialite = specialiteService.findById(medecin.getSpeciality());
+            medecinDs.setSpecialiteDs(specialiteAssembler.assembleSpecialiteFrom(specialite));
+        }
+        medecinDs.setDateRecrutement(medecin.getDateRecrutement());
+        return medecinDs;
     }
 }

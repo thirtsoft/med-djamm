@@ -21,6 +21,7 @@ public class MedecinServiceImpl implements MedecinService {
 
     @Override
     public Medecin saveMedecin(Medecin medecin) {
+        medecin.setActif(true);
         medecin.setDateRecrutement(new Date());
         return medecinRepository.save(medecin);
     }
@@ -42,6 +43,8 @@ public class MedecinServiceImpl implements MedecinService {
 
     @Override
     public void deleteMedecin(Long id) {
+        Medecin medecin = findById(id);
+        medecin.setActif(false);
         medecinRepository.deleteById(id);
     }
 }

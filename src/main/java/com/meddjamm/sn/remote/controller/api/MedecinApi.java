@@ -1,5 +1,6 @@
 package com.meddjamm.sn.remote.controller.api;
 
+import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.remote.model.MedecinDs;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,10 @@ public interface MedecinApi {
     ResponseEntity<MedecinDs> updateMedecin(@PathVariable Long id, @RequestBody MedecinDs medecinDs) throws Exception;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<MedecinDs> findById(@PathVariable Long id);
+    ResponseEntity<MedecinDetailDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<MedecinDs>> findAllMedecins();
+    ResponseEntity<List<MedecinDetailDs>> findAllMedecins();
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteMedecin(@PathVariable Long id);

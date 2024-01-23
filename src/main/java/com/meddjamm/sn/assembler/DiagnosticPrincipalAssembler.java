@@ -69,13 +69,6 @@ public class DiagnosticPrincipalAssembler {
         diagnosticAssocieDetailDs.setScoreObtenu(diagnosticPrincipal.getScoreObtenu());
    //     diagnosticAssocieDetailDs.setIndexPatient(diagnosticPrincipal.getIndexPatient());
         diagnosticAssocieDetailDs.setCreateDate(diagnosticPrincipal.getCreateDate());
-        /*
-        if (diagnosticPrincipal.getIndexPatient() != null) {
-            Patient patient = patientService.findByIndex(diagnosticPrincipal.getIndexPatient());
-            PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
-            diagnosticAssocieDetailDs.setIndexPatient(patient.getIndex());
-            diagnosticAssocieDetailDs.setPatientDetailDs(patientDetailDs);
-        }*/
         diagnosticAssocieDetailDs.setActif(diagnosticPrincipal.isActif());
         diagnosticAssocieDetailDs.setClassificationDs(classificationAssembler.assembleEntityToDs(diagnosticPrincipal.getClassification()));
         diagnosticAssocieDetailDs.setMaladieDs(maladieAssembler.assembleEntityToDs(diagnosticPrincipal.getMaladie()));
