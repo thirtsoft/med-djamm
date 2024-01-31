@@ -14,7 +14,7 @@ public class DossierPatientDetailDs implements Serializable {
 
     private Long id;
 
-    private Long numeroDossier;
+    private String numeroDossier;
 
     private String indexPatient;
 

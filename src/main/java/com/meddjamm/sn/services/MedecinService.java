@@ -12,6 +12,8 @@ public interface MedecinService {
 
     Medecin findById(Long id);
 
+    Medecin findByMatricule(String matricule);
+
     List<Medecin> findAllMedecins();
 
     void deleteMedecin(Long id);

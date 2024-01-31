@@ -21,6 +21,10 @@ public class DossierPatientServiceImpl implements DossierPatientService {
     public void saveDossierPatient(DossierPatient dossierPatient) {
         dossierPatient.setActif(true);
         dossierPatient.setCreateDate(new Date());
+        if (dossierPatient.getNumeroDossier() == 0) {
+            dossierPatient.setNumeroDossier(createNumeroDossier());
+        }
+        //    dossierPatient.setNumeroDossier(UtilString.formatNumeroDossierPatient(dossierPatient.getNumeroDossier()));
         dossierPatientRepository.save(dossierPatient);
 
     }
@@ -50,5 +54,15 @@ public class DossierPatientServiceImpl implements DossierPatientService {
         DossierPatient dossierPatient = findById(id);
         dossierPatient.setActif(false);
         dossierPatientRepository.save(dossierPatient);
+    }
+
+    public synchronized int createNumeroDossier() {
+        int nbr = 0;
+        try {
+            nbr = dossierPatientRepository.maxNumeroDossier();
+
+        } catch (Exception e) {
+        }
+        return (nbr + 1);
     }
 }

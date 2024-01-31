@@ -36,8 +36,8 @@ public class HistoireMaladieServiceImpl implements HistoireMaladieService {
         histoireMaladieResult.setAge(histoireMaladie.getAge());
         histoireMaladieResult.setDateDiagnostic(histoireMaladie.getDateDiagnostic());
         histoireMaladieResult.setCirconstance(histoireMaladie.getCirconstance());
-        histoireMaladieResult.setAntecedentPrecedents(histoireMaladie.getAntecedentPrecedents());
-        histoireMaladieResult.setAntecedentActuels(histoireMaladie.getAntecedentActuels());
+        histoireMaladieResult.setAtteintePrecedents(histoireMaladie.getAtteintePrecedents());
+        histoireMaladieResult.setAtteinteActuels(histoireMaladie.getAtteinteActuels());
         histoireMaladieResult.setInfoComplementaire(histoireMaladie.getInfoComplementaire());
         histoireMaladieRepository.save(histoireMaladieResult);
     }

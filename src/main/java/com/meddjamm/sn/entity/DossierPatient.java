@@ -19,8 +19,8 @@ public class DossierPatient implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
-    private Long numeroDossier;
+    @Column(name = "numero_dossier", nullable = true, unique = true)
+    private int numeroDossier;
 
     @Column(name = "patient_id")
     private String indexPatient;

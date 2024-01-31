@@ -37,6 +37,11 @@ public class MedecinServiceImpl implements MedecinService {
     }
 
     @Override
+    public Medecin findByMatricule(String matricule) {
+        return medecinRepository.findMedecinMatricule(matricule);
+    }
+
+    @Override
     public List<Medecin> findAllMedecins() {
         return medecinRepository.findAll();
     }

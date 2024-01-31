@@ -6,7 +6,9 @@ import com.meddjamm.sn.remote.controller.api.DossierPatientApi;
 import com.meddjamm.sn.remote.model.DossierPatientDetailDs;
 import com.meddjamm.sn.remote.model.DossierPatientDs;
 import com.meddjamm.sn.remote.model.DossierPatientListDs;
+import com.meddjamm.sn.repository.DossierPatientRepository;
 import com.meddjamm.sn.services.DossierPatientService;
+import com.meddjamm.sn.utils.UtilString;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,10 +24,14 @@ public class DossierPatientController implements DossierPatientApi {
 
     private final DossierPatientAssembler dossierPatientAssembler;
 
+    private final DossierPatientRepository dossierPatientRepository;
+
     public DossierPatientController(DossierPatientService dossierPatientService,
-                                    DossierPatientAssembler dossierPatientAssembler) {
+                                    DossierPatientAssembler dossierPatientAssembler,
+                                    DossierPatientRepository dossierPatientRepository) {
         this.dossierPatientService = dossierPatientService;
         this.dossierPatientAssembler = dossierPatientAssembler;
+        this.dossierPatientRepository = dossierPatientRepository;
     }
 
     @Override
@@ -70,5 +76,15 @@ public class DossierPatientController implements DossierPatientApi {
     @Override
     public void deleteDossierPatient(Long id) {
         dossierPatientService.deleteDossierPatient(id);
+    }
+
+    public synchronized int createNumeroDossier(){
+        int nbr =0;
+        try{
+            nbr = dossierPatientRepository.maxNumeroDossier();
+
+        } catch (Exception e) {
+        }
+        return (nbr +1);
     }
 }

@@ -13,7 +13,7 @@ public class DossierPatientListDs {
 
     private Long id;
 
-    private Long numeroDossier;
+    private String numeroDossier;
 
     private String patient;
 

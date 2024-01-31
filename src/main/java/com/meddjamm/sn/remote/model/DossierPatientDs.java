@@ -1,10 +1,5 @@
 package com.meddjamm.sn.remote.model;
 
-import com.meddjamm.sn.entity.*;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +14,7 @@ public class DossierPatientDs implements Serializable {
 
     private Long id;
 
-    private Long numeroDossier;
+    private String numeroDossier;
 
     private String indexPatient;
 

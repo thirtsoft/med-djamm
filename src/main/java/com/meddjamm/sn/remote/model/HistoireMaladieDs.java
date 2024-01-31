@@ -17,11 +17,9 @@ public class HistoireMaladieDs implements Serializable {
 
     private String indexPatient;
 
-    private List<MaladieDs> antecedentPrecedents;
-    //  private Set<Long> antecedentPrecedents;
+    private List<AtteinteDs> atteintePrecedents;
 
-    private List<MaladieDs> antecedentActuels;
-    //   private Set<Long> antecedentActuels;
+    private List<AtteinteDs> atteinteActuels;
 
     private int age;
 

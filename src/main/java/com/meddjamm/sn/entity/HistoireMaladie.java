@@ -20,19 +20,15 @@ public class HistoireMaladie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /*
-    @Column(name = "patient_id")
-    private String indexPatient;*/
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "atteinte_precedent_hisotire_maladie", joinColumns = @JoinColumn(name = "hisotire_maladie_uid"))
+    @Column(name = "atteinte_precedent_uid")
+    private Set<Long> atteintePrecedents;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "antecedent_precedent_hisotire_maladie", joinColumns = @JoinColumn(name = "hisotire_maladie_uid"))
-    @Column(name = "antecedent_precedent_uid")
-    private Set<Long> antecedentPrecedents;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "antecedent_actuel_hisotire_maladie", joinColumns = @JoinColumn(name = "hisotire_maladie_uid"))
-    @Column(name = "antecedent_actuel_uid")
-    private Set<Long> antecedentActuels;
+    @CollectionTable(name = "atteinte_actuel_hisotire_maladie", joinColumns = @JoinColumn(name = "hisotire_maladie_uid"))
+    @Column(name = "atteinte_actuel_uid")
+    private Set<Long> atteinteActuels;
 
     private int age;
 
