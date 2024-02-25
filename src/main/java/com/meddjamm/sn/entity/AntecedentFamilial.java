@@ -20,15 +20,11 @@ public class AntecedentFamilial implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-  //  private String antecedentAscendant;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "familial_antecedent_ascendant_par_antecedent_familial",
             joinColumns = @JoinColumn(name = "id"))
     @Column(name = "familials_antecedent_ascendant")
     private Set<String> familialsAntecedentAscendant;
-
- //   private String antecedentCollateral;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "familial_antecedent_collateral_par_antecedent_familial",

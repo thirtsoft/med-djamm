@@ -1,12 +1,13 @@
 package com.meddjamm.sn.assembler;
 
+import com.meddjamm.sn.dossiermedical.assembler.PatientAssembler;
 import com.meddjamm.sn.entity.DossierPatient;
-import com.meddjamm.sn.entity.Patient;
+import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.remote.model.DossierPatientDetailDs;
 import com.meddjamm.sn.remote.model.DossierPatientDs;
 import com.meddjamm.sn.remote.model.DossierPatientListDs;
-import com.meddjamm.sn.remote.model.PatientDetailDs;
-import com.meddjamm.sn.services.PatientService;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
+import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
 
@@ -110,7 +111,6 @@ public class DossierPatientAssembler {
         DossierPatientDetailDs dossierPatientDetailDs = new DossierPatientDetailDs();
         dossierPatientDetailDs.setId(dossierPatient.getId());
         dossierPatientDetailDs.setIndexPatient(dossierPatient.getIndexPatient());
-        //    dossierPatientDetailDs.setNumeroDossier(dossierPatient.getNumeroDossier());
         dossierPatientDetailDs.setNumeroDossier(
                 UtilString.createNumeroDossierPatient(dossierPatient.getNumeroDossier())
         );
@@ -126,9 +126,9 @@ public class DossierPatientAssembler {
         dossierPatientDetailDs.setModeVieDs(modeVieAssembler.assembleEntityToDs(dossierPatient.getModeVie()));
         dossierPatientDetailDs.setCreateDate(dossierPatient.getCreateDate());
         if (dossierPatient.getIndexPatient() != null) {
-            Patient patient = patientService.findByIndex(dossierPatient.getIndexPatient());
+            Patient patient = patientService.findByCode(dossierPatient.getIndexPatient());
             PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
-            dossierPatientDetailDs.setIndexPatient(patient.getIndex());
+            dossierPatientDetailDs.setIndexPatient(patient.getCode());
             dossierPatientDetailDs.setPatientDetailDs(patientDetailDs);
         }
         return dossierPatientDetailDs;
@@ -141,7 +141,7 @@ public class DossierPatientAssembler {
         dto.setNumeroDossier(UtilString.createNumeroDossierPatient(dossierPatient.getNumeroDossier()));
         dto.setCreateDate(dossierPatient.getCreateDate());
         if (dossierPatient.getIndexPatient() != null) {
-            Patient patient = patientService.findByIndex(dossierPatient.getIndexPatient());
+            Patient patient = patientService.findByCode(dossierPatient.getIndexPatient());
             dto.setPatient(patient.getPrenom() + " " + patient.getNom());
         }
         return dto;

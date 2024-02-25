@@ -1,10 +1,11 @@
 package com.meddjamm.sn.assembler;
 
 import com.meddjamm.sn.entity.Medecin;
-import com.meddjamm.sn.entity.Specialite;
+import com.meddjamm.sn.rh.assembler.SpecialiteAssembler;
+import com.meddjamm.sn.rh.entity.Specialite;
 import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.remote.model.MedecinDs;
-import com.meddjamm.sn.services.SpecialiteService;
+import com.meddjamm.sn.rh.services.SpecialiteService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

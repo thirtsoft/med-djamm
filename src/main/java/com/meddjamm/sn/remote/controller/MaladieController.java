@@ -4,7 +4,7 @@ import com.meddjamm.sn.assembler.MaladieAssembler;
 import com.meddjamm.sn.entity.Maladie;
 import com.meddjamm.sn.remote.controller.api.MaladieApi;
 import com.meddjamm.sn.remote.model.MaladieDs;
-import com.meddjamm.sn.services.MaladieService;
+import com.meddjamm.sn.rh.services.MaladieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

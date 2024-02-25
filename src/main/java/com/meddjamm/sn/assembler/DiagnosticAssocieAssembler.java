@@ -1,11 +1,10 @@
 package com.meddjamm.sn.assembler;
 
+import com.meddjamm.sn.dossiermedical.assembler.PatientAssembler;
 import com.meddjamm.sn.entity.DiagnosticAssocie;
-import com.meddjamm.sn.entity.Patient;
 import com.meddjamm.sn.remote.model.DiagnosticAssocieDetailDs;
 import com.meddjamm.sn.remote.model.DiagnosticAssocieDs;
-import com.meddjamm.sn.remote.model.PatientDetailDs;
-import com.meddjamm.sn.services.PatientService;
+import com.meddjamm.sn.dossiermedical.services.PatientService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

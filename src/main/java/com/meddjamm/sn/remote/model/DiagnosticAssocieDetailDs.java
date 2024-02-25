@@ -1,5 +1,6 @@
 package com.meddjamm.sn.remote.model;
 
+import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,16 +1,11 @@
 package com.meddjamm.sn;
 
-import com.meddjamm.sn.entity.Classification;
-import com.meddjamm.sn.entity.Maladie;
-import com.meddjamm.sn.entity.Patient;
 import com.meddjamm.sn.repository.ClassificationRepository;
-import com.meddjamm.sn.repository.MaladieRepository;
-import com.meddjamm.sn.repository.PatientRepository;
+import com.meddjamm.sn.rh.repository.MaladieRepository;
+import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class MedDjammApplication implements CommandLineRunner {

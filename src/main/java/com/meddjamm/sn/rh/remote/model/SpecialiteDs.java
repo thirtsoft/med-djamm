@@ -1,6 +1,5 @@
-package com.meddjamm.sn.remote.model;
+package com.meddjamm.sn.rh.remote.model;
 
-import com.meddjamm.sn.rh.remote.model.SpecialiteDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,29 +9,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedecinDetailDs {
+public class SpecialiteDs {
 
     private Long id;
 
-    private String matricule;
+    private String designation;
 
-    private String civilite;
-
-    private String nom;
-
-    private String prenom;
-
-    private String sexe;
-
-    private String telephone;
-
-    private Long speciality;
-
-    private SpecialiteDs specialiteDs;
-
-    private String email;
-
-    private Date dateRecrutement;
+    private Date dateCreated;
 
     private int actif;
 

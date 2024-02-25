@@ -4,8 +4,6 @@ import com.meddjamm.sn.assembler.ClassificationAssembler;
 import com.meddjamm.sn.entity.Classification;
 import com.meddjamm.sn.remote.controller.api.ClassificationApi;
 import com.meddjamm.sn.remote.model.ClassificationDs;
-import com.meddjamm.sn.remote.model.MaladieDs;
-import com.meddjamm.sn.remote.model.PatientMinDs;
 import com.meddjamm.sn.services.ClassificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

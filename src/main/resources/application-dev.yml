@@ -5,6 +5,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/med-djamm
     username: postgres
     password: Windev2018
+  main:
+    allow-circular-references: true
   jpa:
     show-sql: true
     hibernate:

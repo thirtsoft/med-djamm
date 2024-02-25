@@ -3,9 +3,8 @@ package com.meddjamm.sn.assembler;
 import com.meddjamm.sn.entity.HistoireMaladie;
 import com.meddjamm.sn.remote.model.AtteinteDs;
 import com.meddjamm.sn.remote.model.HistoireMaladieDs;
-import com.meddjamm.sn.remote.model.MaladieDs;
 import com.meddjamm.sn.services.AtteinteService;
-import com.meddjamm.sn.services.MaladieService;
+import com.meddjamm.sn.rh.services.MaladieService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
