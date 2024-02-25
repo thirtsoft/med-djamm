@@ -4,7 +4,7 @@ import com.meddjamm.sn.assembler.MaladieAssembler;
 import com.meddjamm.sn.entity.Maladie;
 import com.meddjamm.sn.remote.controller.api.MaladieApi;
 import com.meddjamm.sn.remote.model.MaladieDs;
-import com.meddjamm.sn.services.MaladieService;
+import com.meddjamm.sn.rh.services.MaladieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,15 +25,15 @@ public class MaladieController implements MaladieApi {
     }
 
     @Override
-    public ResponseEntity<Maladie> creerMaladie(Maladie maladie) {
-        Maladie maladieResult = maladieService.saveMaladie(maladie);
-        return new ResponseEntity<>(maladieResult, HttpStatus.CREATED);
+    public ResponseEntity<MaladieDs> creerMaladie(MaladieDs maladieDs) {
+        Maladie maladieAjouter = maladieAssembler.assembleMaladieFromDs(maladieDs);
+        return new ResponseEntity<>(maladieAssembler.assembleEntityToDs(maladieService.saveMaladie(maladieAjouter)), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Maladie> updateMaladie(Long id, Maladie maladie) throws Exception {
-        Maladie maladieResult = maladieService.updateMaladie(id, maladie);
-        return new ResponseEntity<>(maladieResult, HttpStatus.OK);
+    public ResponseEntity<MaladieDs> updateMaladie(Long id, MaladieDs maladieDs) throws Exception {
+        Maladie maladieModifier = maladieAssembler.assembleMaladieFromDs(maladieDs);
+        return new ResponseEntity<>(maladieAssembler.assembleEntityToDs(maladieService.updateMaladie(id, maladieModifier)), HttpStatus.OK);
     }
 
     @Override

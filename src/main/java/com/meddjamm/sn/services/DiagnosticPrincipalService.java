@@ -14,5 +14,7 @@ public interface DiagnosticPrincipalService {
 
     List<DiagnosticPrincipal> findAllDiagnosticPrincipals();
 
+    List<DiagnosticPrincipal> findDiagnosticPrincipalsByPatient(String indexPatient);
+
     void deleteDiagnosticPrincipal(Long id);
 }

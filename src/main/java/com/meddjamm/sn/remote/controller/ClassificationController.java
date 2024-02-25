@@ -25,15 +25,15 @@ public class ClassificationController implements ClassificationApi {
     }
 
     @Override
-    public ResponseEntity<Classification> creerClassification(Classification classification) {
-        Classification classificationResult = classificationService.saveClassification(classification);
-        return new ResponseEntity<>(classificationResult, HttpStatus.CREATED);
+    public ResponseEntity<ClassificationDs> creerClassification(ClassificationDs classificationDs) {
+        Classification classificationAjouter = classificationAssembler.assembleClassificationFromDs(classificationDs);
+        return new ResponseEntity<>(classificationAssembler.assembleEntityToDs(classificationService.saveClassification(classificationAjouter)), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Classification> updateClassification(Long id, Classification classification) throws Exception {
-        Classification classificationResult = classificationService.updateClassification(id, classification);
-        return new ResponseEntity<>(classificationResult, HttpStatus.OK);
+    public ResponseEntity<ClassificationDs> updateClassification(Long id, ClassificationDs classificationDs) throws Exception {
+        Classification classificationModifier = classificationAssembler.assembleClassificationFromDs(classificationDs);
+        return new ResponseEntity<>(classificationAssembler.assembleEntityToDs(classificationService.updateClassification(id, classificationModifier)), HttpStatus.OK);
     }
 
     @Override
@@ -44,8 +44,7 @@ public class ClassificationController implements ClassificationApi {
 
     @Override
     public ResponseEntity<List<ClassificationDs>> findAllClassifications() {
-        List<ClassificationDs> classificationList = classificationService.findAllClassifications().stream()
-                .map(classificationAssembler::assembleEntityToDs).toList();
+        List<ClassificationDs> classificationList = classificationAssembler.assembleEntitiesFrom(classificationService.findAllClassifications());
         return new ResponseEntity<>(classificationList, HttpStatus.OK);
     }
 

@@ -14,10 +14,10 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface ClassificationApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Classification> creerClassification(@RequestBody Classification classification);
+    ResponseEntity<ClassificationDs> creerClassification(@RequestBody ClassificationDs classificationDs);
 
     @PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Classification> updateClassification(@PathVariable Long id, @RequestBody Classification classification) throws Exception;
+    ResponseEntity<ClassificationDs> updateClassification(@PathVariable Long id, @RequestBody ClassificationDs classificationDs) throws Exception;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ClassificationDs> findById(@PathVariable Long id);
