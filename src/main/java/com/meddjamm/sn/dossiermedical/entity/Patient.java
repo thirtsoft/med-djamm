@@ -46,8 +46,8 @@ public class Patient implements Serializable {
     @Column(name = "is_circuit_generated", columnDefinition = "int default 0")
     private int isCircuitGenerated;
 
-    @Column(name = "est_accompagne", columnDefinition = "int default 0")
-    private int isNotSingle;
+    @Column(name = "est_accompagne")
+    private boolean est_accompagne;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private PersonneConfiance personneConfiance;

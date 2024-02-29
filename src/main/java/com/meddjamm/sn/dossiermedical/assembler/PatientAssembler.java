@@ -17,7 +17,8 @@ public class PatientAssembler {
 
     public PatientDetailDs assemblePatientDetails(Patient patient) {
         PatientDetailDs patientDetailDs = new PatientDetailDs();
-        patientDetailDs.setCode(patient.getCode());
+        if (patient.getCode() != null)
+            patientDetailDs.setCode(patient.getCode());
         patientDetailDs.setDateAdmission(patient.getDateAdmission());
         patientDetailDs.setNom(patient.getNom());
         patientDetailDs.setPrenom(patient.getPrenom());
@@ -44,6 +45,7 @@ public class PatientAssembler {
         if (patient.getPersonneConfiance() != null)
             patientDetailDs.setPersonneConfianceDs(assembleDsFromEntity(patient.getPersonneConfiance()));
         patientDetailDs.setIsCircuitGenerated(patient.getIsCircuitGenerated());
+        patientDetailDs.setEst_accompagne(patient.isEst_accompagne());
         return patientDetailDs;
     }
 
@@ -76,6 +78,7 @@ public class PatientAssembler {
             patient.setPersonneConfiance(assembleEntityFromDs(patientDetailDs.getPersonneConfianceDs()));
         patient.setIsCircuitGenerated(patientDetailDs.getIsCircuitGenerated());
         patient.setCreatedBy(patientDetailDs.getCreatedBy());
+       patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
         return patient;
     }
 
@@ -89,6 +92,7 @@ public class PatientAssembler {
         patientMinDs.setAge(patient.getAge());
         patientMinDs.setIsCircuitGenerated(patient.getIsCircuitGenerated());
         patientMinDs.setCreatedBy(patient.getCreatedBy());
+        patientMinDs.setEst_accompagne(patient.isEst_accompagne());
         return patientMinDs;
     }
     //

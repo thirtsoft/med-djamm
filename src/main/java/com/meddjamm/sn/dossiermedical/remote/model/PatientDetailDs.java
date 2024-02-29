@@ -11,7 +11,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDetailDs implements Serializable {
-
     private String code;
     private String prenom;
     private String nom;
@@ -38,4 +37,5 @@ public class PatientDetailDs implements Serializable {
     private PersonneConfianceDs personneConfianceDs;
     private int isCircuitGenerated;
     private Long createdBy;
+    private boolean est_accompagne;
 }
