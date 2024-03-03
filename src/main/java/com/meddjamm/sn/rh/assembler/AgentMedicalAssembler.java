@@ -1,9 +1,9 @@
 package com.meddjamm.sn.rh.assembler;
 
-import com.meddjamm.sn.assembler.UtilisateurAssembler;
-import com.meddjamm.sn.rh.entity.AgentMedical;
+import com.meddjamm.sn.config.assembler.UtilisateurAssembler;
+import com.meddjamm.sn.config.entity.AgentMedical;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.rh.remote.model.AgentMedicalDs;
-import com.meddjamm.sn.services.UtilisateurService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

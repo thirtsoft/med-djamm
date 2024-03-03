@@ -1,6 +1,6 @@
 package com.meddjamm.sn.rh.assembler;
 
-import com.meddjamm.sn.rh.entity.AgentMedical;
+import com.meddjamm.sn.config.entity.AgentMedical;
 import com.meddjamm.sn.rh.entity.Planification;
 import com.meddjamm.sn.rh.remote.model.PlanificationDetailDs;
 import com.meddjamm.sn.rh.remote.model.PlanificationDs;

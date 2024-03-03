@@ -1,6 +1,6 @@
 package com.meddjamm.sn.rh.services;
 
-import com.meddjamm.sn.rh.entity.AgentMedical;
+import com.meddjamm.sn.config.entity.AgentMedical;
 
 import java.util.List;
 
