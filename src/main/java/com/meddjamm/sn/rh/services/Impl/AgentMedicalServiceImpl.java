@@ -1,6 +1,6 @@
 package com.meddjamm.sn.rh.services.Impl;
 
-import com.meddjamm.sn.rh.entity.AgentMedical;
+import com.meddjamm.sn.config.entity.AgentMedical;
 import com.meddjamm.sn.rh.repository.AgentMedicalRepository;
 import com.meddjamm.sn.rh.services.AgentMedicalService;
 import lombok.extern.slf4j.Slf4j;
