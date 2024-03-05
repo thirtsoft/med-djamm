@@ -1,6 +1,6 @@
 package com.meddjamm.sn.rh.remote.model;
 
-import com.meddjamm.sn.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

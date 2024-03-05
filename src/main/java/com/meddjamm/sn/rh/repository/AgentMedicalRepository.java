@@ -1,6 +1,6 @@
 package com.meddjamm.sn.rh.repository;
 
-import com.meddjamm.sn.rh.entity.AgentMedical;
+import com.meddjamm.sn.config.entity.AgentMedical;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -50,10 +50,44 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.flywaydb</groupId>-->
+		<!--			<artifactId>flyway-core</artifactId>-->
+		<!--		</dependency>-->
+
 		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
@@ -68,6 +102,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.12.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.3</version>
 		</dependency>
 	</dependencies>
 
@@ -85,6 +124,46 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<!--			<plugin>-->
+			<!--				<groupId>com.github.kongchen</groupId>-->
+			<!--				<artifactId>swagger-maven-plugin</artifactId>-->
+			<!--				<version>3.1.8</version>-->
+			<!--				<configuration>-->
+			<!--					<apiSources>-->
+			<!--						<apiSource>-->
+			<!--							<springmvc>true</springmvc>-->
+			<!--							<locations>-->
+			<!--								<location>com.meddjamm.sn.config.remote.controller</location>-->
+			<!--							</locations>-->
+			<!--							<basePath>http://localhost:8090</basePath>-->
+			<!--							<info>-->
+			<!--								<title>Swagger Api Documentation for Gestion de stock application</title>-->
+			<!--								<version>${project.version}</version>-->
+			<!--								<description>Swagger Api documentation for Gestion de stock application</description>-->
+			<!--&lt;!&ndash;								<contact>&ndash;&gt;-->
+			<!--&lt;!&ndash;									<email>bouali.social@gmail.com</email>&ndash;&gt;-->
+			<!--&lt;!&ndash;									<name>Ali Bouali</name>&ndash;&gt;-->
+			<!--&lt;!&ndash;									<url>https://www.udemy.com/user/bouali-ali/</url>&ndash;&gt;-->
+			<!--&lt;!&ndash;								</contact>&ndash;&gt;-->
+			<!--							</info>-->
+			<!--							<outputPath>${project.build.directory}</outputPath>-->
+			<!--							<outputFormats>json</outputFormats>-->
+			<!--							<swaggerApiReader>com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader</swaggerApiReader>-->
+			<!--							<swaggerDirectory>${project.build.directory}</swaggerDirectory>-->
+			<!--						</apiSource>-->
+			<!--					</apiSources>-->
+			<!--				</configuration>-->
+			<!--				<executions>-->
+			<!--					<execution>-->
+			<!--						<phase>install</phase>-->
+			<!--						<goals>-->
+			<!--							<goal>generate</goal>-->
+			<!--						</goals>-->
+			<!--					</execution>-->
+			<!--				</executions>-->
+			<!--			</plugin>-->
+
 		</plugins>
 	</build>
 

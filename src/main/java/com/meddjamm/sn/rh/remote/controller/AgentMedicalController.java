@@ -1,7 +1,7 @@
 package com.meddjamm.sn.rh.remote.controller;
 
+import com.meddjamm.sn.config.entity.AgentMedical;
 import com.meddjamm.sn.rh.assembler.AgentMedicalAssembler;
-import com.meddjamm.sn.rh.entity.AgentMedical;
 import com.meddjamm.sn.rh.remote.controller.api.AgentMedicalApi;
 import com.meddjamm.sn.rh.remote.model.AgentMedicalDs;
 import com.meddjamm.sn.rh.services.AgentMedicalService;
