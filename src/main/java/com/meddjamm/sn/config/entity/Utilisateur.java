@@ -38,7 +38,7 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
             sequenceName = "matriculeGenerator"
     )
     @GeneratedValue(generator = "matriculeGenerator", strategy = GenerationType.SEQUENCE)
-    private Long matricule;
+    private String matricule;
 
     @Column(name = "codeUtilisateur")
     private String codeUtilisateur;

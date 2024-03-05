@@ -1,9 +1,12 @@
 package com.meddjamm.sn.config.service.auth;
 
+import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.entity.Token;
 import com.meddjamm.sn.config.entity.TokenType;
 import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.remote.model.ActionListResponse;
 import com.meddjamm.sn.config.remote.model.AuthenticationResponse;
+import com.meddjamm.sn.config.remote.model.ProfilReponse;
 import com.meddjamm.sn.config.remote.model.RegisterRequest;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.TokenRepository;
@@ -15,6 +18,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,7 +63,21 @@ public class AuthenticationService {
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
+                .id(user.getId())
+                .matricule(user.getMatricule())
+                .email(user.getEmail())
+                .profilReponse(getProfile(user.getProfil()))
                 .build();
+    }
+
+    private ProfilReponse getProfile(Profil profil) {
+        return new ProfilReponse(profil.getCode(), getActionReponse(profil));
+    }
+
+    private List<ActionListResponse> getActionReponse(Profil profil) {
+        return profil.getAction().stream()
+                .map(action -> new ActionListResponse(action.getCode(), action.getLibelle()))
+                .toList();
     }
 
     private void saveUserToken(Utilisateur user, String jwtToken) {

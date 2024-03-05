@@ -20,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 import java.util.Set;
 
+import static com.meddjamm.sn.utils.UtilString.genererMatricule;
+
 @SpringBootApplication
 //        (exclude = {
 //                SecurityAutoConfiguration.class
@@ -67,6 +69,7 @@ public class MedDjammApplication implements CommandLineRunner {
                 .email("root@test")
                 .prenom("root")
                 .nom("root")
+                .matricule(genererMatricule())
                 .motdepasse(passwordEncoder.encode("root"))
                 .profil(profileAdmin)
                 .actif(true)
