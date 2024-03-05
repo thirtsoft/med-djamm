@@ -1,6 +1,8 @@
 package com.meddjamm.sn.utils;
 
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class UtilString {
 
@@ -18,7 +20,6 @@ public class UtilString {
         return numero;
     }
 
-    //
     public static String createNumeroCircuitPatient(int poz) {
         String numero = "";
         DecimalFormat numFormat = new DecimalFormat("00000");
@@ -32,8 +33,6 @@ public class UtilString {
         numero = Integer.parseInt(s);
         return numero;
     }
-
-    //
 
     public static String createNumeroPassagePatient(int poz) {
         String numero = "";
@@ -62,7 +61,11 @@ public class UtilString {
         numero = Integer.parseInt(s);
         return numero;
     }
-    //
+
+    public static String genererMatricule() {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("ddMMyyHHmmss");
+        return "MAT_" + df.format(LocalDateTime.now());
+    }
 
     public static String createNumeroExamenPhysique(int poz) {
         String numero = "";
@@ -78,7 +81,6 @@ public class UtilString {
         return numero;
     }
 
-    //
     public static String createNumeroDossierMedical(int poz) {
         String numero = "";
         DecimalFormat numFormat = new DecimalFormat("00000");

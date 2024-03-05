@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -33,7 +34,7 @@ public class UtilisateurController implements UtilisateurApi {
     public ResponseEntity<UtilisateurDs> creerUtilisateur(UtilisateurDs utilisateurDs) throws Exception {
         Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurFromDs(utilisateurDs);
         return new ResponseEntity<>(utilisateurAssembler
-                .assembleUtilisateurDsFromEntity(utilisateurService.saveUtilisateur(utilisateur)), OK);
+                .assembleUtilisateurDsFromEntity(utilisateurService.saveUtilisateur(utilisateur)), CREATED);
     }
 
     @Override
