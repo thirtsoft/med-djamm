@@ -2,9 +2,11 @@ package com.meddjamm.sn.config.remote.controller;
 
 import com.meddjamm.sn.config.assembler.ActionAssembler;
 import com.meddjamm.sn.config.entity.Action;
+import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.controller.api.ActionApi;
 import com.meddjamm.sn.config.remote.model.ActionListDs;
 import com.meddjamm.sn.config.service.ActionService;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +24,12 @@ public class ActionController implements ActionApi {
 
     private final ActionAssembler actionAssembler;
 
-    public ActionController(ActionService actionService, ActionAssembler actionAssembler) {
+    private final UtilisateurService utilisateurService;
+
+    public ActionController(ActionService actionService, ActionAssembler actionAssembler, UtilisateurService utilisateurService) {
         this.actionService = actionService;
         this.actionAssembler = actionAssembler;
+        this.utilisateurService = utilisateurService;
     }
 
     @Override
@@ -89,5 +94,13 @@ public class ActionController implements ActionApi {
     @Override
     public void deleteAction(Long id) {
         actionService.deleteAction(id);
+    }
+
+    @Override
+    public ResponseEntity<List<ActionListDs>> canDo(Long userId) {
+        Utilisateur utilisateur = utilisateurService.findUtilisateurById(userId);
+        return new ResponseEntity<>(actionAssembler.assembleEntitiesFrom(
+                actionService.getListActionByProfil(utilisateur.getProfil().getCode())
+        ), HttpStatus.OK);
     }
 }

@@ -48,4 +48,7 @@ public interface ActionApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteAction(@PathVariable Long id);
+
+    @GetMapping(value = "/users/{userId}/actions")
+    ResponseEntity<List<ActionListDs>> canDo(@PathVariable Long userId);
 }

@@ -24,6 +24,7 @@ public class AntecedentAssembler {
         antecedentDs.setAntecedentsFamilialsAscendant(new ArrayList<>(antecedent.getAntecedentsFamilialsAscendant()));
         antecedentDs.setAntecedentsFamilialsCollateral(new ArrayList<>(antecedent.getAntecedentsFamilialsCollateral()));
         antecedentDs.setAntecedentsFamilialsDescendant(new ArrayList<>(antecedent.getAntecedentsFamilialsDescendant()));
+        antecedentDs.setModeVies(new ArrayList<>(antecedent.getModeVies()));
         antecedentDs.setActif(antecedent.isActif());
         antecedentDs.setCreateDate(antecedent.getCreateDate());
         return antecedentDs;
@@ -40,6 +41,7 @@ public class AntecedentAssembler {
         antecedent.setAntecedentsFamilialsAscendant(new HashSet<>(antecedentDs.getAntecedentsFamilialsAscendant()));
         antecedent.setAntecedentsFamilialsCollateral(new HashSet<>(antecedentDs.getAntecedentsFamilialsCollateral()));
         antecedent.setAntecedentsFamilialsDescendant(new HashSet<>(antecedentDs.getAntecedentsFamilialsDescendant()));
+        antecedent.setModeVies(new HashSet<>(antecedentDs.getModeVies()));
         return antecedent;
     }
 }

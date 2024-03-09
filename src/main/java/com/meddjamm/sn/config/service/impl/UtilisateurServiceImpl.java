@@ -1,6 +1,8 @@
 package com.meddjamm.sn.config.service.impl;
 
+import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.UtilisateurrRepository;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final ValidationService validationService;
 
+    private final ProfilRepository profilRepository;
+
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) throws Exception {
         if (utilisateur == null) {
@@ -40,10 +44,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Utilisateur findUtilisateurById(Long utilisateurId) throws Exception {
+    public Utilisateur findUtilisateurById(Long utilisateurId) {
         if (utilisateurId == null)
             return null;
-        return utilisateurrRepository.findUtilisateurById(utilisateurId);
+        Utilisateur utilisateur = utilisateurrRepository.findUtilisateurById(utilisateurId);
+        Profil profil = profilRepository.findProfilById(utilisateur.getProfil().getId());
+        utilisateur.setProfil(profil);
+        return utilisateur;
     }
 
     @Override
@@ -105,21 +112,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public void updateUserPass(Utilisateur utilisateur) throws Exception {
         utilisateurrRepository.save(utilisateur);
-     //   utilsRepositoryCustom.sendMailUpdatePass(utilisateur);
+        //   utilsRepositoryCustom.sendMailUpdatePass(utilisateur);
     }
 
     @Override
     public void resetUserPass(Utilisateur utilisateur) throws Exception {
         utilisateurrRepository.save(utilisateur);
-     //   utilsRepositoryCustom.sendMailForgotPass(utilisateur, utilisateurDTO.getNewPass());
+        //   utilsRepositoryCustom.sendMailForgotPass(utilisateur, utilisateurDTO.getNewPass());
     }
 
     @Override
     public String findNomComplet(Long id) {
         Utilisateur utilisateur = utilisateurrRepository.findUtilisateurById(id);
-        if(utilisateur == null)
+        if (utilisateur == null)
             return "";
-        return utilisateur.getPrenom() + " " +utilisateur.getNom();
+        return utilisateur.getPrenom() + " " + utilisateur.getNom();
     }
 
     @Override

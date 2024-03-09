@@ -1,6 +1,9 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
-import com.meddjamm.sn.assembler.*;
+import com.meddjamm.sn.assembler.AntecedentChirurgieAssembler;
+import com.meddjamm.sn.assembler.AntecedentFamilialAssembler;
+import com.meddjamm.sn.assembler.AntecedentGynecologieAssembler;
+import com.meddjamm.sn.assembler.AntecedentMedicauxAssembler;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.remote.model.ObservationCliniqueDs;
 import org.springframework.stereotype.Component;
@@ -20,8 +23,6 @@ public class ObservationCliniqueAssembler {
 
     private final AntecedentFamilialAssembler antecedentFamilialAssembler;
 
-    private final ModeVieAssembler modeVieAssembler;
-
     private final ExamenPhysiqueAssembler examenPhysiqueAssembler;
 
     private final AntecedentAssembler antecedentAssembler;
@@ -30,14 +31,12 @@ public class ObservationCliniqueAssembler {
                                         AntecedentChirurgieAssembler antecedentChirurgieAssembler,
                                         AntecedentGynecologieAssembler antecedentGynecologieAssembler,
                                         AntecedentFamilialAssembler antecedentFamilialAssembler,
-                                        ModeVieAssembler modeVieAssembler,
                                         ExamenPhysiqueAssembler examenPhysiqueAssembler,
                                         AntecedentAssembler antecedentAssembler) {
         this.antecedentMedicauxAssembler = antecedentMedicauxAssembler;
         this.antecedentChirurgieAssembler = antecedentChirurgieAssembler;
         this.antecedentGynecologieAssembler = antecedentGynecologieAssembler;
         this.antecedentFamilialAssembler = antecedentFamilialAssembler;
-        this.modeVieAssembler = modeVieAssembler;
         this.examenPhysiqueAssembler = examenPhysiqueAssembler;
         this.antecedentAssembler = antecedentAssembler;
     }

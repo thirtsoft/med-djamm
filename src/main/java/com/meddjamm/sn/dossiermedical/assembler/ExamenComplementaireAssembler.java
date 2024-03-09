@@ -1,17 +1,14 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.assembler.MedecinAssembler;
-import com.meddjamm.sn.dossiermedical.assembler.PatientAssembler;
-import com.meddjamm.sn.entity.Examen;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
-import com.meddjamm.sn.remote.model.ExamenDs;
-import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.services.MedecinService;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
 
 @Component
 public class ExamenComplementaireAssembler {
@@ -98,40 +95,6 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
         examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
         return examenComplementaireDs;
-    }
-
-    public List<ExamenDs> createListExamenDs(Set<Examen> examenSet) {
-        if (examenSet == null)
-            return Collections.emptyList();
-        List<ExamenDs> dtos = new ArrayList<>();
-        for (Examen examen : examenSet) {
-            dtos.add(assembleEntityToDs(examen));
-        }
-        return dtos;
-    }
-
-    public Set<Examen> createSetExamens(List<ExamenDs> examenDs) {
-        if (examenDs == null)
-            return null;
-        Set<Examen> actions = new HashSet<>();
-        for (ExamenDs dto : examenDs)
-            if (dto != null)
-                actions.add(assembleExamenFromDs(dto));
-        return actions;
-    }
-
-    public ExamenDs assembleEntityToDs(Examen examen) {
-        ExamenDs examenDs = new ExamenDs();
-        examenDs.setId(examen.getId());
-        examenDs.setLibelle(examen.getLibelle());
-        return examenDs;
-    }
-
-    public Examen assembleExamenFromDs(ExamenDs examenDs) {
-        Examen examen = new Examen();
-        examen.setId(examenDs.getId());
-        examen.setLibelle(examenDs.getLibelle());
-        return examen;
     }
 
 }

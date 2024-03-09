@@ -34,8 +34,6 @@ public class DossierPatientDs implements Serializable {
 
     private AntecedentFamilialDs antecedentFamilialDs;
 
-    private ModeVieDs modeVieDs;
-
     private Date createDate;
 
     private int actif;

@@ -1,13 +1,13 @@
 package com.meddjamm.sn.assembler;
 
 import com.meddjamm.sn.dossiermedical.assembler.PatientAssembler;
-import com.meddjamm.sn.entity.DossierPatient;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
+import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.entity.DossierPatient;
 import com.meddjamm.sn.remote.model.DossierPatientDetailDs;
 import com.meddjamm.sn.remote.model.DossierPatientDs;
 import com.meddjamm.sn.remote.model.DossierPatientListDs;
-import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
-import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +34,6 @@ public class DossierPatientAssembler {
 
     private final AntecedentFamilialAssembler antecedentFamilialAssembler;
 
-    private final ModeVieAssembler modeVieAssembler;
-
     public DossierPatientAssembler(PatientService patientService,
                                    PatientAssembler patientAssembler,
                                    DiagnosticPrincipalAssembler diagnosticPrincipalAssembler,
@@ -44,8 +42,8 @@ public class DossierPatientAssembler {
                                    AntecedentMedicauxAssembler antecedentMedicauxAssembler,
                                    AntecedentChirurgieAssembler antecedentChirurgieAssembler,
                                    AntecedentGynecologieAssembler antecedentGynecologieAssembler,
-                                   AntecedentFamilialAssembler antecedentFamilialAssembler,
-                                   ModeVieAssembler modeVieAssembler) {
+                                   AntecedentFamilialAssembler antecedentFamilialAssembler
+    ) {
         this.patientService = patientService;
         this.patientAssembler = patientAssembler;
         this.diagnosticPrincipalAssembler = diagnosticPrincipalAssembler;
@@ -55,7 +53,6 @@ public class DossierPatientAssembler {
         this.antecedentChirurgieAssembler = antecedentChirurgieAssembler;
         this.antecedentGynecologieAssembler = antecedentGynecologieAssembler;
         this.antecedentFamilialAssembler = antecedentFamilialAssembler;
-        this.modeVieAssembler = modeVieAssembler;
     }
 
 
@@ -79,7 +76,6 @@ public class DossierPatientAssembler {
         dossierPatientDs.setAntecedentChirurgieDs(antecedentChirurgieAssembler.assembleEntityToDs(dossierPatient.getAntecedentChirurgie()));
         dossierPatientDs.setAntecedentGynecologieDs(antecedentGynecologieAssembler.assembleEntityToDs(dossierPatient.getAntecedentGynecologie()));
         dossierPatientDs.setAntecedentFamilialDs(antecedentFamilialAssembler.assembleEntityToDs(dossierPatient.getAntecedentFamilial()));
-        dossierPatientDs.setModeVieDs(modeVieAssembler.assembleEntityToDs(dossierPatient.getModeVie()));
         dossierPatientDs.setCreateDate(dossierPatient.getCreateDate());
         return dossierPatientDs;
     }
@@ -90,11 +86,6 @@ public class DossierPatientAssembler {
         dossierPatient.setActif(dossierPatient.isActif());
         dossierPatient.setIndexMedecin(dossierPatientDs.getIndexPatient());
         dossierPatient.setIndexPatient(dossierPatientDs.getIndexPatient());
-        //    dossierPatient.setNumeroDossier(dossierPatientDs.getNumeroDossier());
-        /*
-        dossierPatient.setNumeroDossier(
-                UtilString.formatNumeroDossierPatient(dossierPatientDs.getNumeroDossier())
-        );*/
         dossierPatient.setDiagnosticPrincipal(diagnosticPrincipalAssembler.assembleDiagnosticPrincipalFromDs(dossierPatientDs.getDiagnosticPrincipalDs()));
         dossierPatient.setDiagnosticAssocie(diagnosticAssocieAssembler.assembleDiagnosticAssocieFromDs(dossierPatientDs.getDiagnosticAssocieDs()));
         dossierPatient.setHistoireMaladie(histoireMaladieAssembler.assembleHistoireMaladieFromDs(dossierPatientDs.getHistoireMaladieDs()));
@@ -102,7 +93,6 @@ public class DossierPatientAssembler {
         dossierPatient.setAntecedentChirurgie(antecedentChirurgieAssembler.assembleAntecedentChirurgieFromDs(dossierPatientDs.getAntecedentChirurgieDs()));
         dossierPatient.setAntecedentGynecologie(antecedentGynecologieAssembler.assembleAntecedentGynecologieFromDs(dossierPatientDs.getAntecedentGynecologieDs()));
         dossierPatient.setAntecedentFamilial(antecedentFamilialAssembler.assembleAntecedentFamilialFromDs(dossierPatientDs.getAntecedentFamilialDs()));
-        dossierPatient.setModeVie(modeVieAssembler.assembleModeVieFromDs(dossierPatientDs.getModeVieDs()));
         dossierPatient.setCreateDate(dossierPatient.getCreateDate());
         return dossierPatient;
     }
@@ -123,7 +113,6 @@ public class DossierPatientAssembler {
         dossierPatientDetailDs.setAntecedentChirurgieDs(antecedentChirurgieAssembler.assembleEntityToDs(dossierPatient.getAntecedentChirurgie()));
         dossierPatientDetailDs.setAntecedentGynecologieDs(antecedentGynecologieAssembler.assembleEntityToDs(dossierPatient.getAntecedentGynecologie()));
         dossierPatientDetailDs.setAntecedentFamilialDs(antecedentFamilialAssembler.assembleEntityToDs(dossierPatient.getAntecedentFamilial()));
-        dossierPatientDetailDs.setModeVieDs(modeVieAssembler.assembleEntityToDs(dossierPatient.getModeVie()));
         dossierPatientDetailDs.setCreateDate(dossierPatient.getCreateDate());
         if (dossierPatient.getIndexPatient() != null) {
             Patient patient = patientService.findByCode(dossierPatient.getIndexPatient());

@@ -1,11 +1,14 @@
 package com.meddjamm.sn.config.service.impl;
 
 import com.meddjamm.sn.config.entity.Action;
+import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.repository.ActionRepository;
+import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.service.ActionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -16,8 +19,11 @@ public class ActionServiceImpl implements ActionService {
 
     private final ActionRepository actionRepository;
 
-    public ActionServiceImpl(ActionRepository actionRepository) {
+    private final ProfilRepository profilRepository;
+
+    public ActionServiceImpl(ActionRepository actionRepository, ProfilRepository profilRepository) {
         this.actionRepository = actionRepository;
+        this.profilRepository = profilRepository;
     }
 
     @Override
@@ -70,5 +76,12 @@ public class ActionServiceImpl implements ActionService {
     @Override
     public void deleteAction(Long id) {
         actionRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Action> getListActionByProfil(String codeProfil) {
+        Profil profil = profilRepository.findByCodeFromAction(codeProfil);
+        List<Action> actionList = new ArrayList<>(profil.getAction());
+        return actionList;
     }
 }

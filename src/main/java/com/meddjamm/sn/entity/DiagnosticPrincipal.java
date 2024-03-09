@@ -1,14 +1,18 @@
 package com.meddjamm.sn.entity;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "diagnostic_principal")
@@ -23,20 +27,9 @@ public class DiagnosticPrincipal implements Serializable {
 
     private Long scoreObtenu;
 
-    /*
-    @Column(name = "patient_id")
-    private String indexPatient;*/
-
     @ManyToOne
     private Maladie maladie;
 
-    @ManyToOne
-    private Classification classification;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "critere_utilise_par_diagnostic", joinColumns = @JoinColumn(name = "diagnostic_uid"),
-            inverseJoinColumns = @JoinColumn(name = "critere_utilise_uid"))
-    private Set<CritereUtilise> critereUtilises;
 
     private Date createDate;
 

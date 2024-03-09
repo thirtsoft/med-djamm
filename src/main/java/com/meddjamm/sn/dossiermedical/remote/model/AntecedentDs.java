@@ -26,6 +26,8 @@ public class AntecedentDs {
 
     private List<String> antecedentsFamilialsDescendant;
 
+    private List<String> modeVies;
+
     private Date createDate;
 
     private int actif;
