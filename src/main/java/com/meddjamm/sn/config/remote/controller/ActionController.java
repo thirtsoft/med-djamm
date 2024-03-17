@@ -6,6 +6,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.controller.api.ActionApi;
 import com.meddjamm.sn.config.remote.model.ActionListDs;
 import com.meddjamm.sn.config.service.ActionService;
+import lombok.AllArgsConstructor;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,10 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
 @Transactional
+@AllArgsConstructor
 public class ActionController implements ActionApi {
 
     private final ActionService actionService;
-
     private final ActionAssembler actionAssembler;
 
     private final UtilisateurService utilisateurService;
@@ -34,8 +35,7 @@ public class ActionController implements ActionApi {
 
     @Override
     public void creerAction(ActionListDs actionListDs) {
-        Action action = actionAssembler.assembleActionFromDs(actionListDs);
-        actionService.saveAction(action);
+        actionService.saveAction(actionAssembler.assembleActionFromDs(actionListDs));
     }
 
     @Override
@@ -46,23 +46,17 @@ public class ActionController implements ActionApi {
 
     @Override
     public ResponseEntity<ActionListDs> findById(Long id) {
-        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(
-                actionService.findById(id)
-        ), HttpStatus.OK);
+        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(actionService.findById(id)), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<ActionListDs> findByCode(String code) {
-        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(
-                actionService.findByCode(code)
-        ), HttpStatus.OK);
+        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(actionService.findByCode(code)), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<ActionListDs> findByLibelle(String libelle) {
-        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(
-                actionService.findByLibelle(libelle)
-        ), HttpStatus.OK);
+        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(actionService.findByLibelle(libelle)), HttpStatus.OK);
     }
 
     @Override
@@ -72,9 +66,7 @@ public class ActionController implements ActionApi {
 
     @Override
     public ResponseEntity<ActionListDs> findByLibelleAndProfil(String libelle, Long typeProfil) {
-        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(
-                actionService.findByLibelle(libelle, typeProfil)
-        ), HttpStatus.OK);
+        return new ResponseEntity<>(actionAssembler.assembleEntityToDs(actionService.findByLibelle(libelle, typeProfil)), HttpStatus.OK);
     }
 
     @Override

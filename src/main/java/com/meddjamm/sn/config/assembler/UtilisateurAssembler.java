@@ -59,6 +59,7 @@ public class UtilisateurAssembler {
         utilisateurDs.setResteValidite(utilisateur.getResteValidite());
         utilisateurDs.setProfilId(utilisateur.getProfilId());
         utilisateurDs.setActivation(utilisateur.getActivation());
+        utilisateurDs.setMatricule(utilisateur.getMatricule());
         return utilisateurDs;
     }
 }

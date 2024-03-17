@@ -26,6 +26,7 @@ public class UtilisateurDs {
     private String email;
     @NotNull
     private String profileCode;
+    private String matricule;
 
     private Long id;
     private String motdepasseprecedent;

@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static com.meddjamm.sn.config.security.URL.WHITE_LIST_URL;
+import static org.springframework.http.HttpMethod.GET;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +34,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(ar -> ar.requestMatchers(WHITE_LIST_URL).permitAll())
+                .authorizeHttpRequests(ar -> ar.requestMatchers(GET, "/med-dalaljamm/v1/utilisateur/activation").permitAll())
                 .authorizeHttpRequests(ar -> ar.anyRequest().authenticated())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
