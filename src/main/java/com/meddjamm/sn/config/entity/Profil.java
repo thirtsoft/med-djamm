@@ -20,11 +20,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class Profil extends AbstractAuditableEntity {
 
-    /*
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;*/
-    
     private String code;
     private String libelle;
 

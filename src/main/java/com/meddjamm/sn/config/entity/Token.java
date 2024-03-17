@@ -24,7 +24,7 @@ public class Token extends AbstractAuditableEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public Utilisateur utilisateur;
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition = "TEXT")
     private String token;
     @Enumerated(EnumType.STRING)
     private TokenType tokenType;
