@@ -11,7 +11,9 @@ public interface UtilisateurService {
 
     Utilisateur findUtilisateurByCode(String code) throws Exception;
 
-    Utilisateur findUtilisateurById(Long utilisateurId) throws Exception;
+    Utilisateur findUtilisateurById(Long utilisateurId);
+
+    Utilisateur findUserById(Long utilisateurId);
 
     List<Utilisateur> findAllUtilisateurs();
 

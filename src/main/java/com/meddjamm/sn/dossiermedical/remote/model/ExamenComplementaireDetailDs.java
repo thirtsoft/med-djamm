@@ -35,6 +35,8 @@ public class ExamenComplementaireDetailDs {
 
     private Date createdDate;
 
+    private String nomCompletAgent;
+
     private int actif;
 
     public boolean isActif() {

@@ -1,10 +1,8 @@
 package com.meddjamm.sn.remote.controller;
 
 import com.meddjamm.sn.assembler.DiagnosticAssocieAssembler;
-import com.meddjamm.sn.entity.Classification;
 import com.meddjamm.sn.entity.DiagnosticAssocie;
 import com.meddjamm.sn.remote.controller.api.DiagnosticAssocieApi;
-import com.meddjamm.sn.remote.model.ClassificationDs;
 import com.meddjamm.sn.remote.model.DiagnosticAssocieDetailDs;
 import com.meddjamm.sn.remote.model.DiagnosticAssocieDs;
 import com.meddjamm.sn.services.DiagnosticAssocieService;

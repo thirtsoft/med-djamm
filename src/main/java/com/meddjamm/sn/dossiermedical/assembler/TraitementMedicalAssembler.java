@@ -1,5 +1,7 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
 import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalDs;
 import org.springframework.stereotype.Component;
@@ -11,8 +13,16 @@ public class TraitementMedicalAssembler {
 
     private final OrdonnanceItemAssembler ordonnanceItemAssembler;
 
-    public TraitementMedicalAssembler(OrdonnanceItemAssembler ordonnanceItemAssembler) {
+    private final TraitementMedicalItemAssembler traitementMedicalItemAssembler;
+
+    private final UtilisateurService utilisateurService;
+
+    public TraitementMedicalAssembler(OrdonnanceItemAssembler ordonnanceItemAssembler,
+                                      TraitementMedicalItemAssembler traitementMedicalItemAssembler,
+                                      UtilisateurService utilisateurService) {
         this.ordonnanceItemAssembler = ordonnanceItemAssembler;
+        this.traitementMedicalItemAssembler = traitementMedicalItemAssembler;
+        this.utilisateurService = utilisateurService;
     }
 
     public List<TraitementMedicalDs> assembleEntitiesFrom(List<TraitementMedical> traitementMedicals) {
@@ -26,7 +36,7 @@ public class TraitementMedicalAssembler {
     public TraitementMedicalDs assembleEntityToDs(TraitementMedical traitementMedical) {
         TraitementMedicalDs traitementMedicalDs = new TraitementMedicalDs();
         traitementMedicalDs.setId(traitementMedical.getId());
-        traitementMedicalDs.setOrdonnanceItemDs(ordonnanceItemAssembler.createListOrdonnanceItemDs(traitementMedical.getOrdonnanceItems()));
+        traitementMedicalDs.setTraitementMedicalItemDs(traitementMedicalItemAssembler.createListTraitementMedicalItemDs(traitementMedical.getTraitementMedicalItems()));
         traitementMedicalDs.setCreatedDate(traitementMedical.getCreatedDate());
         traitementMedicalDs.setActif(traitementMedical.isActif());
         traitementMedicalDs.setCreatedBy(traitementMedical.getCreatedBy());
@@ -35,13 +45,18 @@ public class TraitementMedicalAssembler {
         traitementMedicalDs.setProtocoleFileName(traitementMedical.getProtocoleFileName());
         traitementMedicalDs.setCircuitPatientId(traitementMedical.getCircuitPatientId());
         traitementMedicalDs.setCreatedBy(traitementMedical.getCreatedBy());
+        if (traitementMedical.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(traitementMedical.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            traitementMedicalDs.setNomCompletAgent(nomAgent);
+        }
         return traitementMedicalDs;
     }
 
     public TraitementMedical assembleTraitementMedicalFromDs(TraitementMedicalDs traitementMedicalDs) {
         TraitementMedical traitementMedical = new TraitementMedical();
         traitementMedical.setId(traitementMedicalDs.getId());
-        traitementMedical.setOrdonnanceItems(ordonnanceItemAssembler.createSetOrdonnanceItem(traitementMedicalDs.getOrdonnanceItemDs()));
+        traitementMedical.setTraitementMedicalItems(traitementMedicalItemAssembler.createSetTraitementMedicalItem(traitementMedicalDs.getTraitementMedicalItemDs()));
         traitementMedical.setCreatedDate(traitementMedicalDs.getCreatedDate());
         traitementMedical.setActif(traitementMedicalDs.isActif());
         traitementMedical.setCreatedBy(traitementMedicalDs.getCreatedBy());

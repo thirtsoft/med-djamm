@@ -15,4 +15,5 @@ public class Action extends AbstractAuditableEntity {
 
     private String code;
     private String libelle;
+
 }

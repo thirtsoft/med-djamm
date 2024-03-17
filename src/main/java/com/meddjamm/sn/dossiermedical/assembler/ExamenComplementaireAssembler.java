@@ -1,17 +1,16 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.assembler.MedecinAssembler;
-import com.meddjamm.sn.dossiermedical.assembler.PatientAssembler;
-import com.meddjamm.sn.entity.Examen;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
-import com.meddjamm.sn.remote.model.ExamenDs;
-import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.services.MedecinService;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
 
 @Component
 public class ExamenComplementaireAssembler {
@@ -20,15 +19,18 @@ public class ExamenComplementaireAssembler {
     private final PatientAssembler patientAssembler;
     private final MedecinService medecinService;
     private final MedecinAssembler medecinAssembler;
+    private final UtilisateurService utilisateurService;
 
     public ExamenComplementaireAssembler(PatientService patientService,
                                          PatientAssembler patientAssembler,
                                          MedecinService medecinService,
-                                         MedecinAssembler medecinAssembler) {
+                                         MedecinAssembler medecinAssembler,
+                                         UtilisateurService utilisateurService) {
         this.patientService = patientService;
         this.patientAssembler = patientAssembler;
         this.medecinService = medecinService;
         this.medecinAssembler = medecinAssembler;
+        this.utilisateurService = utilisateurService;
     }
 
     public List<ExamenComplementaireDetailDs> assembleEntitiesFrom(List<ExamenComplementaire> examenComplementaires) {
@@ -59,6 +61,11 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setAnatomopathologieFileName(examenComplementaire.getAnatomopathologieFileName());
         examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
         examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
+        if (examenComplementaire.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(examenComplementaire.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            examenComplementaireDs.setNomCompletAgent(nomAgent);
+        }
         return examenComplementaireDs;
     }
 
@@ -97,41 +104,12 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setAnatomopathologieFileName(examenComplementaire.getAnatomopathologieFileName());
         examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
         examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
-        return examenComplementaireDs;
-    }
-
-    public List<ExamenDs> createListExamenDs(Set<Examen> examenSet) {
-        if (examenSet == null)
-            return Collections.emptyList();
-        List<ExamenDs> dtos = new ArrayList<>();
-        for (Examen examen : examenSet) {
-            dtos.add(assembleEntityToDs(examen));
+        if (examenComplementaire.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(examenComplementaire.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            examenComplementaireDs.setNomCompletAgent(nomAgent);
         }
-        return dtos;
-    }
-
-    public Set<Examen> createSetExamens(List<ExamenDs> examenDs) {
-        if (examenDs == null)
-            return null;
-        Set<Examen> actions = new HashSet<>();
-        for (ExamenDs dto : examenDs)
-            if (dto != null)
-                actions.add(assembleExamenFromDs(dto));
-        return actions;
-    }
-
-    public ExamenDs assembleEntityToDs(Examen examen) {
-        ExamenDs examenDs = new ExamenDs();
-        examenDs.setId(examen.getId());
-        examenDs.setLibelle(examen.getLibelle());
-        return examenDs;
-    }
-
-    public Examen assembleExamenFromDs(ExamenDs examenDs) {
-        Examen examen = new Examen();
-        examen.setId(examenDs.getId());
-        examen.setLibelle(examenDs.getLibelle());
-        return examen;
+        return examenComplementaireDs;
     }
 
 }

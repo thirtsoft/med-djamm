@@ -1,7 +1,5 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
-import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
-import com.meddjamm.sn.dossiermedical.remote.model.OrdonnanceItemDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +22,11 @@ public class TraitementMedicalDs {
 
     private String protocoleFileName;
 
-    private List<OrdonnanceItemDs> ordonnanceItemDs;
+    private List<TraitementMedicalItemDs> traitementMedicalItemDs;
 
     private Date createdDate;
+
+    private String nomCompletAgent;
 
     private Long createdBy;
 

@@ -1,6 +1,15 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,6 +64,12 @@ public class Antecedent implements Serializable {
             joinColumns = @JoinColumn(name = "id"))
     @Column(name = "antecedents_familials_descendant")
     private Set<String> antecedentsFamilialsDescendant;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "mode_de_vie_par_antecedent",
+            joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "modes_de_vie")
+    private Set<String> modeVies;
 
     private Date createDate;
 

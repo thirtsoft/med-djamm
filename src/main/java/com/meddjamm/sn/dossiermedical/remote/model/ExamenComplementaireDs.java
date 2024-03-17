@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,6 +34,8 @@ public class ExamenComplementaireDs {
     private String anatomopathologieFileName;
 
     private Date createdDate;
+
+    private String nomCompletAgent;
 
     private int actif;
 

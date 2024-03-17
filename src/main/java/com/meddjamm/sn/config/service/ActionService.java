@@ -23,4 +23,6 @@ public interface ActionService {
     List<Action> findByTypeProfil(Long typeProfil);
 
     void deleteAction(Long id);
+
+    List<Action> getListActionByProfil(String codeProfil);
 }

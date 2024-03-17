@@ -1,15 +1,17 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.assembler.MedecinAssembler;
-import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.entity.RendezVous;
-import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.RendezVousDs;
-import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.remote.model.MedecinDetailDs;
+import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.utils.Constants;
 import org.springframework.stereotype.Component;
 
@@ -24,14 +26,18 @@ public class RendezVousAssembler {
 
     private final MedecinAssembler medecinAssembler;
 
+    private final UtilisateurService utilisateurService;
+
     public RendezVousAssembler(PatientService patientService,
                                PatientAssembler patientAssembler,
                                MedecinService medecinService,
-                               MedecinAssembler medecinAssembler) {
+                               MedecinAssembler medecinAssembler,
+                               UtilisateurService utilisateurService) {
         this.patientService = patientService;
         this.patientAssembler = patientAssembler;
         this.medecinService = medecinService;
         this.medecinAssembler = medecinAssembler;
+        this.utilisateurService = utilisateurService;
     }
 
     public RendezVousDs assembleEntityToDs(RendezVous rendezVous) {
@@ -45,6 +51,11 @@ public class RendezVousAssembler {
         rendezVousDs.setHeure(rendezVous.getHeure());
         rendezVousDs.setCreateDate(rendezVous.getCreateDate());
         rendezVousDs.setActif(rendezVous.isActif());
+        if (rendezVous.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(rendezVous.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            rendezVousDs.setNomCompletAgent(nomAgent);
+        }
         return rendezVousDs;
     }
 
@@ -81,6 +92,11 @@ public class RendezVousAssembler {
             Medecin medecin = medecinService.findByMatricule(rendezVous.getMatricule());
             MedecinDetailDs medecinDetailDs = medecinAssembler.assembleEntitiesToDs(medecin);
             rendezVousDs.setMedecinDetailDs(medecinDetailDs);
+        }
+        if (rendezVous.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(rendezVous.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            rendezVousDs.setNomCompletAgent(nomAgent);
         }
         rendezVousDs.setEtat(rendezVous.getEtat());
         rendezVousDs.setLibelleEtat(getLibelleEtat(rendezVous.getEtat()));

@@ -1,6 +1,14 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +27,18 @@ public class ExamenPhysique implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "examen_general")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "observation_clinique_uid")
+    private ObservationClinique observationClinique;
+
+    private Long observationCliniqueId;
+
+    private Long createdBy;
+
+    @Column(name = "examen_general", columnDefinition = "TEXT")
     private String examenGeneral;
 
-    @Column(name = "examen_appareil")
+    @Column(name = "examen_appareil", columnDefinition = "TEXT")
     private String examenAppareil;
 
     @Column(name = "pression_arterielle_systolique")
@@ -56,22 +72,21 @@ public class ExamenPhysique implements Serializable {
     @Column(name = "tour_hanche")
     private float tourHanche;
 
+    private int glycemie;
+
     private Date createdDate;
 
     private int actif;
 
     public boolean isActif() {
-        if (actif == 1)
-            return true;
-        else
-            return false;
+        if (actif == 1) return true;
+        else return false;
     }
 
     public void setActif(boolean actif) {
-        if (actif == true)
-            this.actif = 1;
-        else
-            this.actif = 0;
+        if (actif == true) this.actif = 1;
+        else this.actif = 0;
     }
+
 
 }

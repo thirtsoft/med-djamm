@@ -1,6 +1,8 @@
 package com.meddjamm.sn.config.service.impl;
 
+import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.UtilisateurrRepository;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final ValidationService validationService;
 
+    private final ProfilRepository profilRepository;
+
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) throws Exception {
         if (utilisateur == null) {
@@ -34,15 +38,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur findUtilisateurByCode(String code) throws Exception {
-        if (code == null && "".equals(code))
-            return null;
+        if (code == null && "".equals(code)) return null;
         return utilisateurrRepository.findByCodeUtilisateur(code);
     }
 
     @Override
-    public Utilisateur findUtilisateurById(Long utilisateurId) throws Exception {
-        if (utilisateurId == null)
-            return null;
+    public Utilisateur findUtilisateurById(Long utilisateurId) {
+        if (utilisateurId == null) return null;
+        Utilisateur utilisateur = utilisateurrRepository.findUtilisateurById(utilisateurId);
+        Profil profil = profilRepository.findProfilById(utilisateur.getProfil().getId());
+        utilisateur.setProfil(profil);
+        return utilisateur;
+    }
+
+    @Override
+    public Utilisateur findUserById(Long utilisateurId) {
         return utilisateurrRepository.findUtilisateurById(utilisateurId);
     }
 
@@ -63,27 +73,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public boolean checkValiditePass(String mdp) throws Exception {
-        if (mdp.length() < 8)
-            throw new Exception("Le mot de passe doit comporter au moins 8 caractères");
+        if (mdp.length() < 8) throw new Exception("Le mot de passe doit comporter au moins 8 caractères");
         boolean maj = false, chif = false;
         for (int i = 0; i < mdp.length(); i++) {
             Character c = mdp.charAt(i);
-            if (Character.isDigit(c))
-                chif = true;
-            if (Character.isUpperCase(c))
-                maj = true;
+            if (Character.isDigit(c)) chif = true;
+            if (Character.isUpperCase(c)) maj = true;
         }
-        if (!chif)
-            throw new Exception("Le mot de passe doit comporter au moins un chiffre");
-        if (!maj)
-            throw new Exception("Le mot de passe doit comporter au moins une majuscule");
+        if (!chif) throw new Exception("Le mot de passe doit comporter au moins un chiffre");
+        if (!maj) throw new Exception("Le mot de passe doit comporter au moins une majuscule");
         return true;
     }
 
     @Override
     public Utilisateur findUtilisateurByEmail(String mail) throws Exception {
-        if (mail != null && "".equals(mail))
-            return null;
+        if (mail != null && "".equals(mail)) return null;
         return utilisateurrRepository.findByMail(mail);
     }
 
@@ -105,21 +109,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public void updateUserPass(Utilisateur utilisateur) throws Exception {
         utilisateurrRepository.save(utilisateur);
-     //   utilsRepositoryCustom.sendMailUpdatePass(utilisateur);
+        //   utilsRepositoryCustom.sendMailUpdatePass(utilisateur);
     }
 
     @Override
     public void resetUserPass(Utilisateur utilisateur) throws Exception {
         utilisateurrRepository.save(utilisateur);
-     //   utilsRepositoryCustom.sendMailForgotPass(utilisateur, utilisateurDTO.getNewPass());
+        //   utilsRepositoryCustom.sendMailForgotPass(utilisateur, utilisateurDTO.getNewPass());
     }
 
     @Override
     public String findNomComplet(Long id) {
         Utilisateur utilisateur = utilisateurrRepository.findUtilisateurById(id);
-        if(utilisateur == null)
-            return "";
-        return utilisateur.getPrenom() + " " +utilisateur.getNom();
+        if (utilisateur == null) return "";
+        return utilisateur.getPrenom() + " " + utilisateur.getNom();
     }
 
     @Override
@@ -128,8 +131,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         if (Instant.now().isAfter(validation.getExpiration())) {
             return;
         }
-        Utilisateur utilisateur = utilisateurrRepository.findById(validation.getUtilisateur().getId())
-                .orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
+        Utilisateur utilisateur = utilisateurrRepository.findById(validation.getUtilisateur().getId()).orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
         utilisateur.setActif(true);
     }
 }

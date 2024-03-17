@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,10 +15,6 @@ public class HistoireMaladieDs implements Serializable {
     private Long id;
 
     private String indexPatient;
-
-    private List<AtteinteDs> atteintePrecedents;
-
-    private List<AtteinteDs> atteinteActuels;
 
     private int age;
 

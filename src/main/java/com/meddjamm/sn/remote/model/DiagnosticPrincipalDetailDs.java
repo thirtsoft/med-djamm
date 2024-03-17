@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,9 +23,6 @@ public class DiagnosticPrincipalDetailDs implements Serializable {
 
     private MaladieDs maladieDs;
 
-    private ClassificationDs classificationDs;
-
-    private List<CritereUtiliseDs> critereUtiliseDsList;
 
     private Date createDate;
 

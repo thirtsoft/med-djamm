@@ -26,6 +26,8 @@ public class RendezVousDs implements Serializable {
 
     private Date createDate;
 
+    private String nomCompletAgent;
+
     private int actif;
 
     private int etat;
