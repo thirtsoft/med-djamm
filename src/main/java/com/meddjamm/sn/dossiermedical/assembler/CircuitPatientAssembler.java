@@ -1,16 +1,20 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.assembler.MedecinAssembler;
+import com.meddjamm.sn.config.assembler.UtilisateurAssembler;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
+import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
-import com.meddjamm.sn.entity.Medecin;
-import com.meddjamm.sn.dossiermedical.entity.Patient;
-import com.meddjamm.sn.remote.model.*;
-import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.remote.model.MedecinDetailDs;
+import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
 
@@ -22,25 +26,46 @@ public class CircuitPatientAssembler {
     private final ObservationCliniqueAssembler observationCliniqueAssembler;
     private final ExamenComplementaireAssembler examenComplementaireAssembler;
     private final TraitementMedicalAssembler traitementMedicalAssembler;
+    private final ConsultationAssembler consultationAssembler;
+    private final OrdonnanceAssembler ordonnanceAssembler;
+    private final AvisSpecialisteAssembler avisSpecialisteAssembler;
+    private final SyntheseAssembler syntheseAssembler;
+    private final ExamenBiologiqueAssembler examenBiologiqueAssembler;
     private final PatientAssembler patientAssembler;
     private final PatientService patientService;
     private final MedecinAssembler medecinAssembler;
     private final MedecinService medecinService;
+    private final UtilisateurService utilisateurService;
+    private final UtilisateurAssembler utilisateurAssembler;
 
     public CircuitPatientAssembler(ObservationCliniqueAssembler observationCliniqueAssembler,
                                    ExamenComplementaireAssembler examenComplementaireAssembler,
                                    TraitementMedicalAssembler traitementMedicalAssembler,
+                                   ConsultationAssembler consultationAssembler,
+                                   OrdonnanceAssembler ordonnanceAssembler,
+                                   AvisSpecialisteAssembler avisSpecialisteAssembler,
+                                   SyntheseAssembler syntheseAssembler,
+                                   ExamenBiologiqueAssembler examenBiologiqueAssembler,
                                    PatientAssembler patientAssembler,
                                    PatientService patientService,
                                    MedecinAssembler medecinAssembler,
-                                   MedecinService medecinService) {
+                                   MedecinService medecinService,
+                                   UtilisateurService utilisateurService,
+                                   UtilisateurAssembler utilisateurAssembler) {
         this.observationCliniqueAssembler = observationCliniqueAssembler;
         this.examenComplementaireAssembler = examenComplementaireAssembler;
         this.traitementMedicalAssembler = traitementMedicalAssembler;
+        this.consultationAssembler = consultationAssembler;
+        this.ordonnanceAssembler = ordonnanceAssembler;
+        this.avisSpecialisteAssembler = avisSpecialisteAssembler;
+        this.syntheseAssembler = syntheseAssembler;
+        this.examenBiologiqueAssembler = examenBiologiqueAssembler;
         this.patientAssembler = patientAssembler;
         this.patientService = patientService;
         this.medecinAssembler = medecinAssembler;
         this.medecinService = medecinService;
+        this.utilisateurService = utilisateurService;
+        this.utilisateurAssembler = utilisateurAssembler;
     }
 
     public List<CircuitPatientListDs> assembleEntitiesFrom(List<CircuitPatient> circuitPatients) {
@@ -68,6 +93,11 @@ public class CircuitPatientAssembler {
             String nomMedecin = medecin.getPrenom() + ' ' + medecin.getNom();
             circuitPatientDs.setNomCompletMedecin(nomMedecin);
         }
+        if (circuitPatient.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(circuitPatient.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            circuitPatientDs.setNomCompletAgent(nomAgent);
+        }
         return circuitPatientDs;
     }
 
@@ -85,6 +115,11 @@ public class CircuitPatientAssembler {
         circuitPatientDs.setCreatedBy(circuitPatient.getCreatedBy());
         circuitPatientDs.setNumeroCircuit(
                 UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        if (circuitPatient.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(circuitPatient.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            circuitPatientDs.setNomCompletAgent(nomAgent);
+        }
         return circuitPatientDs;
     }
 
@@ -99,9 +134,9 @@ public class CircuitPatientAssembler {
         circuitPatient.setType(circuitPatientDs.getType());
         circuitPatient.setCreateDate(circuitPatientDs.getCreateDate());
         circuitPatient.setCreatedBy(circuitPatientDs.getCreatedBy());
-       // circuitPatient.setObservationCliniqueList(observationCliniqueAssembler.assembleEntitiesFromDs(circuitPatientDs.getO))
-      //  circuitPatient.setExamenComplementaires(examenComplementaireAssembler.assembleEntitiesFromDs(circuitPatientDs.getExamenComplementaireDs()));
-      //  circuitPatient.setTraitementMedicals(traitementMedicalAssembler.assembleEntitiesFromDs(circuitPatientDs.getTraitementMedicalDs()));
+        // circuitPatient.setObservationCliniqueList(observationCliniqueAssembler.assembleEntitiesFromDs(circuitPatientDs.getO))
+        //  circuitPatient.setExamenComplementaires(examenComplementaireAssembler.assembleEntitiesFromDs(circuitPatientDs.getExamenComplementaireDs()));
+        //  circuitPatient.setTraitementMedicals(traitementMedicalAssembler.assembleEntitiesFromDs(circuitPatientDs.getTraitementMedicalDs()));
         return circuitPatient;
     }
 
@@ -118,6 +153,11 @@ public class CircuitPatientAssembler {
         circuitPatientDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntitiesFrom(circuitPatient.getObservationCliniqueList()));
         circuitPatientDs.setExamenComplementaireDs(examenComplementaireAssembler.assembleEntitiesFromEntities(circuitPatient.getExamenComplementaires()));
         circuitPatientDs.setTraitementMedicalDs(traitementMedicalAssembler.assembleEntitiesFrom(circuitPatient.getTraitementMedicals()));
+        circuitPatientDs.setConsultationDs(consultationAssembler.assembleEntitiesFrom(circuitPatient.getConsultations()));
+        circuitPatientDs.setOrdonnanceDs(ordonnanceAssembler.assembleEntitiesFrom(circuitPatient.getOrdonnances()));
+        circuitPatientDs.setAvisSpecialisteDs(avisSpecialisteAssembler.assembleEntitiesFrom(circuitPatient.getAvisSpecialistes()));
+        circuitPatientDs.setExamenBiologiqueDs(examenBiologiqueAssembler.assembleEntitiesFrom(circuitPatient.getExamenBiologiques()));
+        circuitPatientDs.setSyntheseDs(syntheseAssembler.assembleEntitiesFrom(circuitPatient.getSyntheseList()));
         circuitPatientDs.setNumeroCircuit(
                 UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
         if (circuitPatient.getCode() != null) {
@@ -129,6 +169,13 @@ public class CircuitPatientAssembler {
             Medecin medecin = medecinService.findByMatricule(circuitPatient.getMatricule());
             MedecinDetailDs medecinDetailDs = medecinAssembler.assembleEntitiesToDs(medecin);
             circuitPatientDs.setMedecinDetailDs(medecinDetailDs);
+        }
+        if (circuitPatient.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(circuitPatient.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            circuitPatientDs.setNomCompletAgent(nomAgent);
+            UtilisateurDs utilisateurDetailDs = utilisateurAssembler.assembleUtilisateurDsFromEntity(utilisateur);
+            circuitPatientDs.setUtilisateurDetailDs(utilisateurDetailDs);
         }
         return circuitPatientDs;
     }

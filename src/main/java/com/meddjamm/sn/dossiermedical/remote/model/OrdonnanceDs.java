@@ -1,6 +1,5 @@
-package com.meddjamm.sn.remote.model;
+package com.meddjamm.sn.dossiermedical.remote.model;
 
-import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,19 +10,21 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConsultationDetailDs {
+public class OrdonnanceDs {
 
     private Long id;
 
-    private String resume;
+    private Long circuitPatientId;
 
-    private PatientDetailDs patientDetailDs;
+    private CircuitPatientDs circuitPatientDs;
 
-    private MedecinDetailDs medecinDetailDs;
-
-    private List<DocumentDs> documentDs;
+    private List<OrdonnanceItemDs> ordonnanceItemDs;
 
     private Date createdDate;
+
+    private Long createdBy;
+
+    private String nomCompletAgent;
 
     private int actif;
 

@@ -1,11 +1,9 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -43,7 +41,13 @@ public class ExamenPhysiqueDs {
 
     private float tourHanche;
 
+    private int glycemie;
+
     private Date createdDate;
+
+    private Long createdBy;
+
+    private String nomCompletAgent;
 
     private int actif;
 

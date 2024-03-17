@@ -1,8 +1,5 @@
-package com.meddjamm.sn.remote.model;
+package com.meddjamm.sn.dossiermedical.remote.model;
 
-import com.meddjamm.sn.dossiermedical.remote.model.OrdonnanceItemDs;
-import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
-import com.meddjamm.sn.rh.remote.model.MedicamentDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,19 +14,15 @@ public class OrdonnanceDetailDs {
 
     private Long id;
 
-    private MedicamentDs medicamentDs;
+    private Long circuitPatientId;
 
-    private PatientDetailDs patientDetailDs;
-
-    private MedecinDetailDs medecinDetailDs;
+    private CircuitPatientDs circuitPatientDs;
 
     private List<OrdonnanceItemDs> ordonnanceItemDs;
 
-    private String psologie;
-
-    private String nbrePrise;
-
     private Date createdDate;
+
+    private Long createdBy;
 
     private int actif;
 

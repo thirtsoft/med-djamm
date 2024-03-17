@@ -20,27 +20,27 @@ public class ObservationCliniqueDs {
 
     private AntecedentDs antecedentDs;
 
-    private ExamenPhysiqueDs examenPhysiqueDs;
+    //  private ExamenPhysiqueDs examenPhysiqueDs;
+
+    private List<ExamenPhysiqueDs> examenPhysiqueDs;
 
     private Long circuitPatientId;
 
     private Long createdBy;
+
+    private String nomCompletAgent;
 
     private Date createdDate;
 
     private int actif;
 
     public boolean isActif() {
-        if (actif == 1)
-            return true;
-        else
-            return false;
+        if (actif == 1) return true;
+        else return false;
     }
 
     public void setActif(boolean actif) {
-        if (actif == true)
-            this.actif = 1;
-        else
-            this.actif = 0;
+        if (actif == true) this.actif = 1;
+        else this.actif = 0;
     }
 }

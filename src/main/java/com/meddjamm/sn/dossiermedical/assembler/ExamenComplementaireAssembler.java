@@ -1,6 +1,8 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.assembler.MedecinAssembler;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
@@ -17,15 +19,18 @@ public class ExamenComplementaireAssembler {
     private final PatientAssembler patientAssembler;
     private final MedecinService medecinService;
     private final MedecinAssembler medecinAssembler;
+    private final UtilisateurService utilisateurService;
 
     public ExamenComplementaireAssembler(PatientService patientService,
                                          PatientAssembler patientAssembler,
                                          MedecinService medecinService,
-                                         MedecinAssembler medecinAssembler) {
+                                         MedecinAssembler medecinAssembler,
+                                         UtilisateurService utilisateurService) {
         this.patientService = patientService;
         this.patientAssembler = patientAssembler;
         this.medecinService = medecinService;
         this.medecinAssembler = medecinAssembler;
+        this.utilisateurService = utilisateurService;
     }
 
     public List<ExamenComplementaireDetailDs> assembleEntitiesFrom(List<ExamenComplementaire> examenComplementaires) {
@@ -56,6 +61,11 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setAnatomopathologieFileName(examenComplementaire.getAnatomopathologieFileName());
         examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
         examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
+        if (examenComplementaire.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(examenComplementaire.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            examenComplementaireDs.setNomCompletAgent(nomAgent);
+        }
         return examenComplementaireDs;
     }
 
@@ -94,6 +104,11 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setAnatomopathologieFileName(examenComplementaire.getAnatomopathologieFileName());
         examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
         examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
+        if (examenComplementaire.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(examenComplementaire.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            examenComplementaireDs.setNomCompletAgent(nomAgent);
+        }
         return examenComplementaireDs;
     }
 

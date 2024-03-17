@@ -1,6 +1,6 @@
-package com.meddjamm.sn.services;
+package com.meddjamm.sn.dossiermedical.services;
 
-import com.meddjamm.sn.entity.Ordonnance;
+import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
 
 import java.util.List;
 
@@ -15,4 +15,6 @@ public interface OrdonnanceService {
     List<Ordonnance> findAllOrdonnances();
 
     void deleteOrdonnance(Long id);
+
+    List<Ordonnance> findOrdonnancesByPatientId(String code);
 }

@@ -13,6 +13,8 @@ public interface UtilisateurService {
 
     Utilisateur findUtilisateurById(Long utilisateurId);
 
+    Utilisateur findUserById(Long utilisateurId);
+
     List<Utilisateur> findAllUtilisateurs();
 
     List<Utilisateur> findAllActives();

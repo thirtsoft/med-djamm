@@ -38,4 +38,7 @@ public interface UtilisateurApi {
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteUtilisateur(@PathVariable Long id);
 
+    @GetMapping(value = "/monprofil/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<UtilisateurDs> findUtilisateurProfil(@PathVariable Long id) throws Exception;
+
 }

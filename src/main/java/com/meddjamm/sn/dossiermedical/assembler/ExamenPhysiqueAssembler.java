@@ -1,22 +1,55 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenPhysique;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenPhysiqueDs;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class ExamenPhysiqueAssembler {
+
+    private final UtilisateurService utilisateurService;
+
+    public ExamenPhysiqueAssembler(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
+    }
 
     public List<ExamenPhysiqueDs> assembleEntitiesFrom(List<ExamenPhysique> examenPhysiques) {
         return examenPhysiques.stream().map(this::assembleEntityToDs).toList();
     }
 
+    public List<ExamenPhysique> listeEntitiesFromDs(List<ExamenPhysiqueDs> examenPhysiqueDs) {
+        return examenPhysiqueDs.stream().map(this::assembleExamenPhysiqueFromDs).toList();
+    }
+
+    //
+    public List<ExamenPhysiqueDs> createListExamenPhysiqueDs(Set<ExamenPhysique> examenPhysiques) {
+        if (examenPhysiques == null) return Collections.emptyList();
+        List<ExamenPhysiqueDs> dtos = new ArrayList<>();
+        for (ExamenPhysique examenPhysique : examenPhysiques) {
+            dtos.add(assembleEntityToDs(examenPhysique));
+        }
+        return dtos;
+    }
+
+    public Set<ExamenPhysique> createSetExamenPhysique(List<ExamenPhysiqueDs> examenPhysiqueDs) {
+        if (examenPhysiqueDs == null) return null;
+        Set<ExamenPhysique> examenPhysiques = new HashSet<>();
+        for (ExamenPhysiqueDs dto : examenPhysiqueDs)
+            if (dto != null) examenPhysiques.add(assembleExamenPhysiqueFromDs(dto));
+        return examenPhysiques;
+    }
+
     public ExamenPhysiqueDs assembleEntityToDs(ExamenPhysique examenPhysique) {
         ExamenPhysiqueDs examenPhysiqueDs = new ExamenPhysiqueDs();
-        if (examenPhysique.getId() != null)
-            examenPhysiqueDs.setId(examenPhysique.getId());
+        if (examenPhysique.getId() != null) examenPhysiqueDs.setId(examenPhysique.getId());
         examenPhysiqueDs.setActif(examenPhysique.isActif());
         examenPhysiqueDs.setCreatedDate(examenPhysique.getCreatedDate());
         examenPhysiqueDs.setExamenGeneral(examenPhysique.getExamenGeneral());
@@ -33,6 +66,12 @@ public class ExamenPhysiqueAssembler {
         examenPhysiqueDs.setImc(examenPhysique.getImc());
         examenPhysiqueDs.setTourTaille(examenPhysique.getTourTaille());
         examenPhysiqueDs.setTourHanche(examenPhysique.getTourHanche());
+        examenPhysiqueDs.setGlycemie(examenPhysique.getGlycemie());
+        if (examenPhysique.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(examenPhysique.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            examenPhysiqueDs.setNomCompletAgent(nomAgent);
+        }
         return examenPhysiqueDs;
     }
 
@@ -55,6 +94,7 @@ public class ExamenPhysiqueAssembler {
         examenPhysique.setImc(examenPhysiqueDs.getImc());
         examenPhysique.setTourTaille(examenPhysiqueDs.getTourTaille());
         examenPhysique.setTourHanche(examenPhysiqueDs.getTourHanche());
+        examenPhysique.setGlycemie(examenPhysiqueDs.getGlycemie());
         return examenPhysique;
     }
 

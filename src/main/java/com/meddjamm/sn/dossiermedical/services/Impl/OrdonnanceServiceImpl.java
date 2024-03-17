@@ -1,8 +1,10 @@
-package com.meddjamm.sn.services.Impl;
+package com.meddjamm.sn.dossiermedical.services.Impl;
 
-import com.meddjamm.sn.entity.Ordonnance;
-import com.meddjamm.sn.repository.OrdonnanceRepository;
-import com.meddjamm.sn.services.OrdonnanceService;
+import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
+import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
+import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
+import com.meddjamm.sn.dossiermedical.repository.OrdonnanceRepository;
+import com.meddjamm.sn.dossiermedical.services.OrdonnanceService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,14 +15,22 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
 
     private final OrdonnanceRepository ordonnanceRepository;
 
-    public OrdonnanceServiceImpl(OrdonnanceRepository ordonnanceRepository) {
+    private final CircuitPatientRepository circuitPatientRepository;
+
+    public OrdonnanceServiceImpl(OrdonnanceRepository ordonnanceRepository,
+                                 CircuitPatientRepository circuitPatientRepository) {
         this.ordonnanceRepository = ordonnanceRepository;
+        this.circuitPatientRepository = circuitPatientRepository;
     }
+
 
     @Override
     public Ordonnance saveOrdonnance(Ordonnance ordonnance) {
         ordonnance.setActif(true);
         ordonnance.setCreatedDate(new Date());
+        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(ordonnance.getCircuitPatientId());
+        ordonnance.setCircuitPatientId(circuitPatient.getId());
+        ordonnance.setCircuitPatient(circuitPatient);
         return ordonnanceRepository.save(ordonnance);
     }
 
@@ -35,7 +45,7 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
 
     @Override
     public Ordonnance findById(Long id) {
-        return ordonnanceRepository.findById(id).orElseThrow(()-> new RuntimeException(
+        return ordonnanceRepository.findById(id).orElseThrow(() -> new RuntimeException(
                 "This ordonnance that id is " + id + "not found"
         ));
     }
@@ -50,5 +60,10 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
         Ordonnance ordonnance = findById(id);
         ordonnance.setActif(false);
         ordonnanceRepository.save(ordonnance);
+    }
+
+    @Override
+    public List<Ordonnance> findOrdonnancesByPatientId(String code) {
+        return ordonnanceRepository.findOrdonnanceByPatientId(code);
     }
 }

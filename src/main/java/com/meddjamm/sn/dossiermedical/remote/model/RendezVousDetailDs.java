@@ -23,6 +23,7 @@ public class RendezVousDetailDs implements Serializable {
     private Date createDate;
     private String libelleEtat;
     private Long createdBy;
+    private String nomCompletAgent;
     private int actif;
     private int etat;
 

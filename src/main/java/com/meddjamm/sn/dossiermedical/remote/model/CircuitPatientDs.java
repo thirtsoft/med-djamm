@@ -25,6 +25,8 @@ public class CircuitPatientDs {
 
     private Long createdBy;
 
+    private String nomCompletAgent;
+
     /*
     private ObservationCliniqueDs observationCliniqueDs;
 

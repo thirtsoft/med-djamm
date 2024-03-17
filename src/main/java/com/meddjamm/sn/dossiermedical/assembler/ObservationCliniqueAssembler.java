@@ -1,9 +1,7 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
-import com.meddjamm.sn.assembler.AntecedentChirurgieAssembler;
-import com.meddjamm.sn.assembler.AntecedentFamilialAssembler;
-import com.meddjamm.sn.assembler.AntecedentGynecologieAssembler;
-import com.meddjamm.sn.assembler.AntecedentMedicauxAssembler;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.remote.model.ObservationCliniqueDs;
 import org.springframework.stereotype.Component;
@@ -15,30 +13,18 @@ import java.util.List;
 @Component
 public class ObservationCliniqueAssembler {
 
-    private final AntecedentMedicauxAssembler antecedentMedicauxAssembler;
-
-    private final AntecedentChirurgieAssembler antecedentChirurgieAssembler;
-
-    private final AntecedentGynecologieAssembler antecedentGynecologieAssembler;
-
-    private final AntecedentFamilialAssembler antecedentFamilialAssembler;
-
     private final ExamenPhysiqueAssembler examenPhysiqueAssembler;
 
     private final AntecedentAssembler antecedentAssembler;
 
-    public ObservationCliniqueAssembler(AntecedentMedicauxAssembler antecedentMedicauxAssembler,
-                                        AntecedentChirurgieAssembler antecedentChirurgieAssembler,
-                                        AntecedentGynecologieAssembler antecedentGynecologieAssembler,
-                                        AntecedentFamilialAssembler antecedentFamilialAssembler,
-                                        ExamenPhysiqueAssembler examenPhysiqueAssembler,
-                                        AntecedentAssembler antecedentAssembler) {
-        this.antecedentMedicauxAssembler = antecedentMedicauxAssembler;
-        this.antecedentChirurgieAssembler = antecedentChirurgieAssembler;
-        this.antecedentGynecologieAssembler = antecedentGynecologieAssembler;
-        this.antecedentFamilialAssembler = antecedentFamilialAssembler;
+    private final UtilisateurService utilisateurService;
+
+    public ObservationCliniqueAssembler(ExamenPhysiqueAssembler examenPhysiqueAssembler,
+                                        AntecedentAssembler antecedentAssembler,
+                                        UtilisateurService utilisateurService) {
         this.examenPhysiqueAssembler = examenPhysiqueAssembler;
         this.antecedentAssembler = antecedentAssembler;
+        this.utilisateurService = utilisateurService;
     }
 
 
@@ -52,28 +38,33 @@ public class ObservationCliniqueAssembler {
 
     public ObservationCliniqueDs assembleEntityToDs(ObservationClinique observationClinique) {
         ObservationCliniqueDs observationCliniqueDs = new ObservationCliniqueDs();
-        if (observationClinique.getId() != null)
-            observationCliniqueDs.setId(observationClinique.getId());
+        if (observationClinique.getId() != null) observationCliniqueDs.setId(observationClinique.getId());
         observationCliniqueDs.setActif(observationClinique.isActif());
         observationCliniqueDs.setMotifsHospitalisation(new ArrayList<>(observationClinique.getMotifsHospitalisation()));
         observationCliniqueDs.setHistoireMaladie(observationClinique.getHistoireMaladie());
         observationCliniqueDs.setCreatedDate(observationClinique.getCreatedDate());
         observationCliniqueDs.setAntecedentDs(antecedentAssembler.assembleEntityToDs(observationClinique.getAntecedent()));
-        observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.assembleEntityToDs(observationClinique.getExamenPhysique()));
+        observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.assembleEntitiesFrom(observationClinique.getExamenPhysiqueList()));
+        // observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.createListExamenPhysiqueDs(observationClinique.getExamenPhysiqueList()));
         observationCliniqueDs.setCircuitPatientId(observationClinique.getCircuitPatientId());
         observationCliniqueDs.setCreatedBy(observationClinique.getCreatedBy());
+        if (observationClinique.getCreatedBy() != null) {
+            Utilisateur utilisateur = utilisateurService.findUserById(observationClinique.getCreatedBy());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            observationCliniqueDs.setNomCompletAgent(nomAgent);
+        }
         return observationCliniqueDs;
     }
 
     public ObservationClinique assembleObservationCliniqueFromDs(ObservationCliniqueDs observationCliniqueDs) {
         ObservationClinique observationClinique = new ObservationClinique();
-        if (observationCliniqueDs.getId() != null)
-            observationClinique.setId(observationCliniqueDs.getId());
+        if (observationCliniqueDs.getId() != null) observationClinique.setId(observationCliniqueDs.getId());
         observationClinique.setActif(observationCliniqueDs.isActif());
         observationClinique.setMotifsHospitalisation(new HashSet<>(observationCliniqueDs.getMotifsHospitalisation()));
         observationClinique.setHistoireMaladie(observationCliniqueDs.getHistoireMaladie());
         observationClinique.setCreatedDate(observationCliniqueDs.getCreatedDate());
-        observationClinique.setExamenPhysique(examenPhysiqueAssembler.assembleExamenPhysiqueFromDs(observationCliniqueDs.getExamenPhysiqueDs()));
+        observationClinique.setExamenPhysiqueList(examenPhysiqueAssembler.listeEntitiesFromDs(observationCliniqueDs.getExamenPhysiqueDs()));
+        // observationClinique.setExamenPhysiqueList(examenPhysiqueAssembler.createSetExamenPhysique(observationCliniqueDs.getExamenPhysiqueDs()));
         observationClinique.setAntecedent(antecedentAssembler.assembleAntecedentFromDs(observationCliniqueDs.getAntecedentDs()));
         observationClinique.setCircuitPatientId(observationCliniqueDs.getCircuitPatientId());
         observationClinique.setCreatedBy(observationCliniqueDs.getCreatedBy());

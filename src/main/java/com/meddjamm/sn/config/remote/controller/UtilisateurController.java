@@ -63,4 +63,10 @@ public class UtilisateurController implements UtilisateurApi {
     @Override
     public void deleteUtilisateur(Long id) {
     }
+
+    @Override
+    public ResponseEntity<UtilisateurDs> findUtilisateurProfil(Long id) throws Exception {
+        return new ResponseEntity<>(utilisateurAssembler
+                .assembleUtilisateurDsFromEntity(utilisateurService.findUserById(id)), OK);
+    }
 }
