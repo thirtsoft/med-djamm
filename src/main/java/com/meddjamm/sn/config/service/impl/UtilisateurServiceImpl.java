@@ -3,17 +3,29 @@ package com.meddjamm.sn.config.service.impl;
 import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.repository.ProfilRepository;
+import com.meddjamm.sn.config.event.RegistrationCompleteEvent;
+import com.meddjamm.sn.config.event.listener.RegistrationCompleteEventListener;
+import com.meddjamm.sn.config.motdepasse.service.TokenMotDePasseService;
 import com.meddjamm.sn.config.repository.UtilisateurrRepository;
 import com.meddjamm.sn.config.service.UtilisateurService;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
+
+import static com.meddjamm.sn.utils.UtilString.genererMatricule;
+import static java.util.Collections.emptyList;
 
 @AllArgsConstructor
 @Service
@@ -21,23 +33,25 @@ import java.util.List;
 public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurrRepository utilisateurrRepository;
-
     private final ValidationService validationService;
+    private final ApplicationEventPublisher publisher;
+    private final TokenMotDePasseService tokenMotDePasseService;
+    private final PasswordEncoder passwordEncoder;
+    private final RegistrationCompleteEventListener eventListener;
 
     private final ProfilRepository profilRepository;
 
     @Override
-    public Utilisateur saveUtilisateur(Utilisateur utilisateur) throws Exception {
-        if (utilisateur == null) {
-            throw new RuntimeException("L'objet à sauvegarder est nul");
-        }
+    public Utilisateur saveUtilisateur(Utilisateur utilisateur, String url) {
+        utilisateur.setMatricule(genererMatricule());
         var savedUser = utilisateurrRepository.saveAndFlush(utilisateur);
-        validationService.enregistrer(savedUser);
+        publisher.publishEvent(new RegistrationCompleteEvent(savedUser, url));
         return savedUser;
     }
 
     @Override
     public Utilisateur findUtilisateurByCode(String code) throws Exception {
+        Assert.notNull(code, "Ne doit pas etre null");
         if (code == null && "".equals(code)) return null;
         return utilisateurrRepository.findByCodeUtilisateur(code);
     }
@@ -67,13 +81,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public boolean deleteUtilisateur(Utilisateur Utilisateur) throws Exception {
+    public boolean deleteUtilisateur(Utilisateur utilisateur) throws Exception {
         return false;
     }
 
     @Override
     public boolean checkValiditePass(String mdp) throws Exception {
-        if (mdp.length() < 8) throw new Exception("Le mot de passe doit comporter au moins 8 caractères");
+        if (mdp.length() < 8) throw new IllegalArgumentException("Le mot de passe doit comporter au moins 8 caractères");
         boolean maj = false, chif = false;
         for (int i = 0; i < mdp.length(); i++) {
             Character c = mdp.charAt(i);
@@ -86,14 +100,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Utilisateur findUtilisateurByEmail(String mail) throws Exception {
-        if (mail != null && "".equals(mail)) return null;
-        return utilisateurrRepository.findByMail(mail);
+    public Utilisateur findUtilisateurByEmail(String mail) {
+        return utilisateurrRepository.findByEmail(mail)
+                .orElseThrow();
     }
 
     @Override
     public List<Utilisateur> getListeUsers(List<Utilisateur> userDTOs, int page, int ligneParPage) {
-        return null;
+        return emptyList();
     }
 
     @Override
@@ -133,5 +147,54 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
         Utilisateur utilisateur = utilisateurrRepository.findById(validation.getUtilisateur().getId()).orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
         utilisateur.setActif(true);
+    }
+
+    @Override
+    public void regenererMotDePassePourUtilisateur() {
+
+    }
+
+    @Override
+    public String validatePasswordResetToken(String token) {
+        return tokenMotDePasseService.validatePasswordResetToken(token);
+    }
+
+    @Override
+    public Utilisateur findUserByPasswordToken(String token) {
+        return tokenMotDePasseService.findUserByPasswordToken(token).orElseThrow();
+    }
+
+    @Override
+    public void changePassword(Utilisateur theUser, String newPassword) {
+        theUser.setMotdepasse(passwordEncoder.encode(newPassword));
+        utilisateurrRepository.save(theUser);
+    }
+
+    @Override
+    public boolean oldPasswordIsValid(Utilisateur user, String ancienMotDePasse) {
+        return passwordEncoder.matches(ancienMotDePasse, user.getPassword());
+    }
+
+    @Override
+    public void createPasswordResetTokenForUser(Utilisateur user, String passwordResetToken) {
+        tokenMotDePasseService.createPasswordResetTokenForUser(user, passwordResetToken);
+    }
+
+    @Override
+    public String demandeChangerMotDePasse(String email, String url) {
+        Utilisateur utilisateur = this.findUtilisateurByEmail(email);
+        String token = UUID.randomUUID().toString();
+        this.createPasswordResetTokenForUser(utilisateur, token);
+        try {
+            return passwordResetEmailLink(url.concat(token));
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String passwordResetEmailLink(String applicationUrl) throws MessagingException, UnsupportedEncodingException {
+        eventListener.sendPasswordResetVerificationEmail(applicationUrl);
+        log.info("Click the link to reset your password :  {}", applicationUrl);
+        return applicationUrl;
     }
 }

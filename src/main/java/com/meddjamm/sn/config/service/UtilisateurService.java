@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UtilisateurService {
 
-    Utilisateur saveUtilisateur(Utilisateur utilisateur) throws Exception;
+    Utilisateur saveUtilisateur(Utilisateur utilisateur, String url);
 
     Utilisateur findUtilisateurByCode(String code) throws Exception;
 
@@ -23,7 +23,7 @@ public interface UtilisateurService {
 
     boolean checkValiditePass(String mdp) throws Exception;
 
-    Utilisateur findUtilisateurByEmail(String mail) throws Exception;
+    Utilisateur findUtilisateurByEmail(String mail);
 
     //  List<Utilisateur> getListeUser(SearchDTO criteres) throws Exception;
 
@@ -42,4 +42,19 @@ public interface UtilisateurService {
     String findNomComplet(Long id);
 
     void lireEnFonctionDuCode(String code);
+
+    void regenererMotDePassePourUtilisateur();
+
+    String validatePasswordResetToken(String token);
+
+    Utilisateur findUserByPasswordToken(String token);
+
+    void changePassword(Utilisateur theUser, String newPassword);
+
+    boolean oldPasswordIsValid(Utilisateur user, String ancienMotDePasse);
+
+    void createPasswordResetTokenForUser(Utilisateur user, String passwordResetToken);
+
+    String demandeChangerMotDePasse(String email, String url);
+
 }

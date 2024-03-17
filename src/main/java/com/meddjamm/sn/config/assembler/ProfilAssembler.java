@@ -21,7 +21,7 @@ public class ProfilAssembler {
 
     public ProfilDs assembleEntityToDs(Profil profil) {
         ProfilDs profilDs = new ProfilDs();
-        profilDs.setId(profil.getId());
+//        profilDs.setId(profil.getId());
         profilDs.setCode(profil.getCode());
         profilDs.setLibelle(profil.getLibelle());
         profilDs.setActif(profil.isActif());
@@ -31,7 +31,7 @@ public class ProfilAssembler {
 
     public Profil assembleProfilFromDs(ProfilDs profilDs) {
         Profil profil = new Profil();
-        profil.setId(profilDs.getId());
+//        profil.setId(profilDs.getId());
         profil.setCode(profilDs.getCode());
         profil.setLibelle(profilDs.getLibelle());
         profil.setActif(profilDs.isActif());

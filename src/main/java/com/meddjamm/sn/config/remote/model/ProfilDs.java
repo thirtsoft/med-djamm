@@ -12,12 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ProfilDs {
 
-    private Long id;
     private String code;
     private String libelle;
     private List<ActionListDs> actionListDs;
-    private Date createdDate;
-
     private int actif;
 
     public boolean isActif() {
