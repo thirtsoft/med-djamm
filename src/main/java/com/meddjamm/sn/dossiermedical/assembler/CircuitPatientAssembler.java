@@ -12,8 +12,6 @@ import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
-import com.meddjamm.sn.entity.Medecin;
-import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
@@ -89,8 +87,8 @@ public class CircuitPatientAssembler {
             circuitPatientDs.setNomCompletPatient(nomPatient);
         }
         if (circuitPatient.getMatricule() != null) {
-            Medecin medecin = medecinService.findByMatricule(circuitPatient.getMatricule());
-            String nomMedecin = medecin.getPrenom() + ' ' + medecin.getNom();
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getMatricule());
+            String nomMedecin = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             circuitPatientDs.setNomCompletMedecin(nomMedecin);
         }
         if (circuitPatient.getCreatedBy() != null) {
@@ -119,6 +117,11 @@ public class CircuitPatientAssembler {
             Utilisateur utilisateur = utilisateurService.findUserById(circuitPatient.getCreatedBy());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             circuitPatientDs.setNomCompletAgent(nomAgent);
+        }
+        if (circuitPatient.getMatricule() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getMatricule());
+            String nomMedecin = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            circuitPatientDs.setNomCompletAgent(nomMedecin);
         }
         return circuitPatientDs;
     }
@@ -166,9 +169,9 @@ public class CircuitPatientAssembler {
             circuitPatientDs.setPatientDetailDs(patientDetailDs);
         }
         if (circuitPatient.getMatricule() != null) {
-            Medecin medecin = medecinService.findByMatricule(circuitPatient.getMatricule());
-            MedecinDetailDs medecinDetailDs = medecinAssembler.assembleEntitiesToDs(medecin);
-            circuitPatientDs.setMedecinDetailDs(medecinDetailDs);
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getMatricule());
+            UtilisateurDs utilisateurDs = utilisateurAssembler.assembleUtilisateurDsFromEntity(utilisateur);
+            circuitPatientDs.setUtilisateurDetailDs(utilisateurDs);
         }
         if (circuitPatient.getCreatedBy() != null) {
             Utilisateur utilisateur = utilisateurService.findUserById(circuitPatient.getCreatedBy());

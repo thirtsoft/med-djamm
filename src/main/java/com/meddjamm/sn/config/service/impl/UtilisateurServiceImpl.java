@@ -2,10 +2,10 @@ package com.meddjamm.sn.config.service.impl;
 
 import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.entity.Utilisateur;
-import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.event.RegistrationCompleteEvent;
 import com.meddjamm.sn.config.event.listener.RegistrationCompleteEventListener;
 import com.meddjamm.sn.config.motdepasse.service.TokenMotDePasseService;
+import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.UtilisateurrRepository;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import jakarta.mail.MessagingException;
@@ -87,7 +87,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public boolean checkValiditePass(String mdp) throws Exception {
-        if (mdp.length() < 8) throw new IllegalArgumentException("Le mot de passe doit comporter au moins 8 caractères");
+        if (mdp.length() < 8)
+            throw new IllegalArgumentException("Le mot de passe doit comporter au moins 8 caractères");
         boolean maj = false, chif = false;
         for (int i = 0; i < mdp.length(); i++) {
             Character c = mdp.charAt(i);
@@ -190,6 +191,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         } catch (MessagingException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Utilisateur findUtilisateurByMatricule(String matricule) {
+        return utilisateurrRepository.findUtilisateurByMatricule(matricule);
     }
 
     private String passwordResetEmailLink(String applicationUrl) throws MessagingException, UnsupportedEncodingException {
