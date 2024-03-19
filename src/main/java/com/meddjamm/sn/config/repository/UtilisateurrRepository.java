@@ -61,4 +61,7 @@ public interface UtilisateurrRepository extends JpaRepository<Utilisateur, Long>
 //    List<Utilisateur> findListUsersByCreatedBy(@Param("userId") Long userId);
 
     Optional<Utilisateur> findByEmail(String email);
+
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.matricule=:matricule")
+    Utilisateur findUtilisateurByMatricule(@Param("matricule") String matricule);
 }

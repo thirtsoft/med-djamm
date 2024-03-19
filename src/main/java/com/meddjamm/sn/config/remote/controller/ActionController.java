@@ -6,7 +6,6 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.controller.api.ActionApi;
 import com.meddjamm.sn.config.remote.model.ActionListDs;
 import com.meddjamm.sn.config.service.ActionService;
-import lombok.AllArgsConstructor;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,6 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
 @Transactional
-@AllArgsConstructor
 public class ActionController implements ActionApi {
 
     private final ActionService actionService;

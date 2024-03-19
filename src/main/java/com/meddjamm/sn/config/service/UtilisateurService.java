@@ -57,4 +57,6 @@ public interface UtilisateurService {
 
     String demandeChangerMotDePasse(String email, String url);
 
+    Utilisateur findUtilisateurByMatricule(String matricule);
+
 }
