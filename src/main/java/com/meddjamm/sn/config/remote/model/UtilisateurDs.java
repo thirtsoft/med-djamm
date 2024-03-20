@@ -16,7 +16,7 @@ public class UtilisateurDs {
 
     @NotNull
     private String codeUtilisateur;
-    @NotNull
+//    @NotNull
     private String motDePasse;
     @NotNull
     private String nom;
@@ -27,12 +27,15 @@ public class UtilisateurDs {
     @NotNull
     private String profileCode;
     private String matricule;
+    private String civilite;
+    private String sexe;
+    private String telephone;
+    private Date dateRecrutement;
 
     private Long id;
     private String motdepasseprecedent;
     private int est_valide;
     private int mdpamodifier;
-    private String telephone;
     private Date dateCreation;
     private Date dateModPass;
     private int resteValidite;

@@ -1,6 +1,13 @@
 package com.meddjamm.sn.entity;
 
-import jakarta.persistence.*;
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,11 +20,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DiagnosticAssocie implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class DiagnosticAssocie extends AbstractAuditableEntity implements Serializable {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "libelles_diagnostic_par_diagnostic_associe", joinColumns = @JoinColumn(name = "id"))

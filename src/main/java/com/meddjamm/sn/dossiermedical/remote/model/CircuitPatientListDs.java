@@ -29,6 +29,8 @@ public class CircuitPatientListDs {
 
     private Date createDate;
 
+    private String createdByUser;
+
     private int actif;
 
     public boolean isActif() {

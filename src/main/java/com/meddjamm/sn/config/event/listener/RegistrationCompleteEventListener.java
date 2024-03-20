@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
@@ -24,6 +25,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
     //    private final UtilisateurService utilisateurService;
     private final JavaMailSender mailSender;
     private final ValidationService validationService;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${spring.mail.username}")
     private String configEmail;
@@ -49,10 +51,11 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String subject = "Email de Verification";
         String senderName = "Service Enregistrement";
         String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
-                "<p>Merci de nous avoir rejoint," + " " +
+                "<p>Merci de nous avoir rejoint," + " <br>" +
                 "Cliquer sur le lien ci-dessous pour valider votre compte.</p>" +
                 "<a href=\"" + url + "\">Vérifier vos emails pour activer votre compte</a>" +
-                "<p> Cordialement <br> Service d'enregistrement";
+                "<p>Votre mot de passe: " + utilisateur.getMotdepasseprecedent() + "</p>" +
+                "<p> Cordialement <br> Service d'enregistrement</p>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
         messageHelper.setFrom(configEmail, senderName);

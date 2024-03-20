@@ -2,6 +2,7 @@ package com.meddjamm.sn.utils;
 
 import com.meddjamm.sn.config.entity.Utilisateur;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -126,5 +127,21 @@ public class UtilString {
         return url + "" + token;
     }
 
+
+    public static String generateCommonsLang3Password() {
+        String upperCaseLetters = RandomStringUtils.random(1, 65, 90, true, true);
+        String lowerCaseLetters = RandomStringUtils.random(4, 97, 122, true, true);
+        String numbers = RandomStringUtils.randomNumeric(2);
+        String specialChar = RandomStringUtils.random(2, 33, 47, false, false);
+        String totalChars = RandomStringUtils.randomAlphanumeric(2);
+        //        List<Character> pwdChars = combinedChars.chars()
+//                .mapToObj(c -> (char) c)
+//                .toList();
+//        Collections.shuffle(pwdChars);
+        return upperCaseLetters.concat(lowerCaseLetters)
+                .concat(numbers)
+                .concat(specialChar)
+                .concat(totalChars);
+    }
 
 }

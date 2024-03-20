@@ -3,14 +3,14 @@ package com.meddjamm.sn.config.assembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.service.ProfilService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UtilisateurAssembler {
 
     private final ProfilService profilService;
@@ -26,7 +26,6 @@ public class UtilisateurAssembler {
             utilisateur.setId(utilisateurDs.getId());
         }
         utilisateur.setCodeUtilisateur(utilisateurDs.getCodeUtilisateur());
-        utilisateur.setMotdepasse(passwordEncoder.encode(utilisateurDs.getMotDePasse()));
         utilisateur.setMotdepasseprecedent(utilisateurDs.getMotdepasseprecedent());
         utilisateur.setEst_valide(utilisateurDs.isEst_valide());
         utilisateur.setMdpamodifier(utilisateurDs.isMdpamodifier());

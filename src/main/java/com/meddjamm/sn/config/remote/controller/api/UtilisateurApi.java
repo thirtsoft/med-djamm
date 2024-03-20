@@ -19,7 +19,10 @@ import java.util.List;
 
 import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 
-@RequestMapping(value = APP_ROOT + "/utilisateur")
+@RequestMapping(value = {
+        APP_ROOT + "/utilisateur",
+        APP_ROOT + "/medecin"
+})
 public interface UtilisateurApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)

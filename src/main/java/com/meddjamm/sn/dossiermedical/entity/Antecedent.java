@@ -1,5 +1,6 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -23,11 +24,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Antecedent implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Antecedent extends AbstractAuditableEntity implements Serializable {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "antecedents_medicaux_par_antecedent",

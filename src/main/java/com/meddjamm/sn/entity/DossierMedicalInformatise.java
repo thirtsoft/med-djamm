@@ -1,9 +1,14 @@
 package com.meddjamm.sn.entity;
 
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +22,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DossierMedicalInformatise implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class DossierMedicalInformatise extends AbstractAuditableEntity implements Serializable {
 
     @Column(name = "numero_dossier_medical", nullable = true, unique = true)
     private int numeroDossierMedical;

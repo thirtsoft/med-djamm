@@ -35,6 +35,7 @@ public class CircuitPatientDetailDs {
     private int etat;
 
     private Long createdBy;
+    private String createdByUser;
 
     private List<ObservationCliniqueDs> observationCliniqueDs;
 

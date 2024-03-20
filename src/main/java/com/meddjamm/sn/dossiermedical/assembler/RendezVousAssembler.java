@@ -9,7 +9,7 @@ import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.RendezVousDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
-import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.config.entity.Medecin;
 import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.utils.Constants;

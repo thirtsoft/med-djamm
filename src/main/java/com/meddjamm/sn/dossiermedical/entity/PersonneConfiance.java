@@ -1,6 +1,8 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
-import jakarta.persistence.*;
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +14,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonneConfiance implements Serializable {
+public class PersonneConfiance extends AbstractAuditableEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String prenom;
     private String nom;
     private String telephone;

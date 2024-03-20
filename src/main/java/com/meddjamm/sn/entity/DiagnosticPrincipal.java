@@ -1,10 +1,8 @@
 package com.meddjamm.sn.entity;
 
 
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,11 +17,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DiagnosticPrincipal implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class DiagnosticPrincipal extends AbstractAuditableEntity implements Serializable {
 
     private Long scoreObtenu;
 

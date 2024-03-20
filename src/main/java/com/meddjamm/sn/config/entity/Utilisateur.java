@@ -18,6 +18,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -38,11 +41,13 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
             sequenceName = "matriculeGenerator"
     )
     @GeneratedValue(generator = "matriculeGenerator", strategy = GenerationType.SEQUENCE)
+    @Column(unique = true)
     private String matricule;
 
     @Column(name = "codeUtilisateur")
     private String codeUtilisateur;
     @Column(name = "motdepasse")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[@#$%^&+=]).{8,}$")
     private String motdepasse;
     @Column(name = "motdepasseprecedent")
     private String motdepasseprecedent;
@@ -52,6 +57,9 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
     private int mdpamodifier;
     private String nom;
     private String prenom;
+    @Column(unique = true)
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
+    @NotEmpty(message = "Email cannot be empty")
     private String email;
     private String telephone;
     @Column(name = "datemodpass")

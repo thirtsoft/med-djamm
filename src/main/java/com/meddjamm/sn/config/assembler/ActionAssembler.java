@@ -2,16 +2,21 @@ package com.meddjamm.sn.config.assembler;
 
 import com.meddjamm.sn.config.entity.Action;
 import com.meddjamm.sn.config.remote.model.ActionListDs;
+import com.meddjamm.sn.config.service.ActionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class ActionAssembler {
+
+    private final ActionService actionService;
 
     public List<ActionListDs> assembleEntitiesFrom(List<Action> actions) {
         return actions.stream().map(this::assembleEntityToDs).toList();
@@ -47,12 +52,11 @@ public class ActionAssembler {
     }
 
     public Set<Action> createSetAction(List<ActionListDs> actionListDs) {
-        if (actionListDs == null)
-            return null;
-        Set<Action> actions = new HashSet<>();
-        for (ActionListDs dto : actionListDs)
-            if (dto != null)
-                actions.add(assembleActionFromDs(dto));
-        return actions;
+        if (actionListDs == null) {
+            return Collections.emptySet();
+        }
+        return actionListDs.stream()
+                .map(actionDs -> actionService.findById(actionDs.getId()))
+                .collect(Collectors.toSet());
     }
 }

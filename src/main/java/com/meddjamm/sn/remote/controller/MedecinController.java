@@ -1,10 +1,10 @@
 package com.meddjamm.sn.remote.controller;
 
 import com.meddjamm.sn.assembler.MedecinAssembler;
-import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.config.entity.Medecin;
 import com.meddjamm.sn.remote.controller.api.MedecinApi;
 import com.meddjamm.sn.remote.model.MedecinDetailDs;
-import com.meddjamm.sn.remote.model.MedecinDs;
+import com.meddjamm.sn.config.remote.model.MedecinDs;
 import com.meddjamm.sn.services.MedecinService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

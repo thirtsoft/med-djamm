@@ -1,6 +1,9 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
-import jakarta.persistence.*;
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrdonnanceItem implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class OrdonnanceItem extends AbstractAuditableEntity implements Serializable {
 
     @Column(name = "medicament_uid")
     private String code;

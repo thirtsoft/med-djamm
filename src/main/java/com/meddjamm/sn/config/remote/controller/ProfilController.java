@@ -7,13 +7,14 @@ import com.meddjamm.sn.config.remote.model.ProfilDs;
 import com.meddjamm.sn.config.service.ProfilService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
+@Transactional
 public class ProfilController implements ProfilApi {
 
     private final ProfilService profilService;

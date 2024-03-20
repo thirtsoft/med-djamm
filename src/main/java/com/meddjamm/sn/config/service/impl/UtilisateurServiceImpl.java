@@ -24,6 +24,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+import static com.meddjamm.sn.utils.UtilString.generateCommonsLang3Password;
 import static com.meddjamm.sn.utils.UtilString.genererMatricule;
 import static java.util.Collections.emptyList;
 
@@ -44,7 +45,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur, String url) {
         utilisateur.setMatricule(genererMatricule());
+        String defaultPassword = generateCommonsLang3Password();
+        utilisateur.setMotdepasse(passwordEncoder.encode(defaultPassword));
         var savedUser = utilisateurrRepository.saveAndFlush(utilisateur);
+        savedUser.setMotdepasseprecedent(defaultPassword);
         publisher.publishEvent(new RegistrationCompleteEvent(savedUser, url));
         return savedUser;
     }

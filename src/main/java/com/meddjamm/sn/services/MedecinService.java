@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services;
 
-import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.config.entity.Medecin;
 
 import java.util.List;
 

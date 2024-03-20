@@ -12,7 +12,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
+
+import static jakarta.persistence.CascadeType.DETACH;
+import static jakarta.persistence.CascadeType.MERGE;
 
 @EqualsAndHashCode
 @Entity
@@ -25,11 +29,19 @@ public class Profil extends AbstractAuditableEntity {
     private String code;
     private String libelle;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
+            MERGE, DETACH
+    })
     @JoinTable(name = "actions_par_profil",
             joinColumns = @JoinColumn(name = "profil_uid"),
             inverseJoinColumns = @JoinColumn(name = "action_uid"))
-    private Set<Action> action;
+    private Set<Action> action = new HashSet<>();
+
+//    public Profil(String code, String libelle, int actif) {
+//        this.code = code;
+//        this.libelle = libelle;
+//        this.actif = actif;
+//    }
 
     @Column(name = "actif")
     private int actif;

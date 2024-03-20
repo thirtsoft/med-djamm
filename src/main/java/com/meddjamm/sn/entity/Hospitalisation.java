@@ -1,6 +1,14 @@
 package com.meddjamm.sn.entity;
 
-import jakarta.persistence.*;
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,11 +22,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Hospitalisation implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Hospitalisation extends AbstractAuditableEntity implements Serializable {
 
     @Column(name = "patient_uid")
     private String indexPatient;

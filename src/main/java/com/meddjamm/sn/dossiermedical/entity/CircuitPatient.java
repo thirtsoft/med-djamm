@@ -1,19 +1,15 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,10 +20,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CircuitPatient implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CircuitPatient extends AbstractAuditableEntity implements Serializable {
 
     @Column(name = "numero_circuit", nullable = true, unique = true)
     private int numeroCircuit;
@@ -66,9 +59,9 @@ public class CircuitPatient implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "circuitPatient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Synthese> syntheseList;
 
-    @CreatedBy
+    //    @CreatedBy
     private Long createdBy;
-    @CreatedDate
+    //    @CreatedDate
     private Date createDate;
 
     private int estTransfere;

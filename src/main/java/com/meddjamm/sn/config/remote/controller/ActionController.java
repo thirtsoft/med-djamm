@@ -7,29 +7,23 @@ import com.meddjamm.sn.config.remote.controller.api.ActionApi;
 import com.meddjamm.sn.config.remote.model.ActionListDs;
 import com.meddjamm.sn.config.service.ActionService;
 import com.meddjamm.sn.config.service.UtilisateurService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 @Transactional
+@RequiredArgsConstructor
 public class ActionController implements ActionApi {
 
     private final ActionService actionService;
     private final ActionAssembler actionAssembler;
 
     private final UtilisateurService utilisateurService;
-
-    public ActionController(ActionService actionService, ActionAssembler actionAssembler, UtilisateurService utilisateurService) {
-        this.actionService = actionService;
-        this.actionAssembler = actionAssembler;
-        this.utilisateurService = utilisateurService;
-    }
 
     @Override
     public void creerAction(ActionListDs actionListDs) {

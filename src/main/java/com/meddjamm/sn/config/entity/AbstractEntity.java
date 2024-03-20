@@ -21,7 +21,6 @@ public class AbstractEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "GenerationDeSequence")
     @SequenceGenerator(name = "GenerationDeSequence", sequenceName = "GEN_SEG_GEN", allocationSize = 1)
-//    @Column(columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private Long id;
     @Version
     private Long version;

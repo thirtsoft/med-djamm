@@ -1,6 +1,6 @@
 package com.meddjamm.sn.services.Impl;
 
-import com.meddjamm.sn.entity.Medecin;
+import com.meddjamm.sn.config.entity.Medecin;
 import com.meddjamm.sn.repository.MedecinRepository;
 import com.meddjamm.sn.services.MedecinService;
 import lombok.extern.slf4j.Slf4j;

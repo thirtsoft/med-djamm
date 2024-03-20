@@ -1,4 +1,4 @@
-package com.meddjamm.sn.remote.model;
+package com.meddjamm.sn.config.remote.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,6 @@ public class MedecinDs {
     private String civilite;
 
     private String nom;
-
     private String prenom;
 
     private String sexe;

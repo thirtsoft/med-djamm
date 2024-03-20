@@ -1,16 +1,14 @@
 package com.meddjamm.sn.remote.controller.api;
 
 import com.meddjamm.sn.remote.model.MedecinDetailDs;
-import com.meddjamm.sn.remote.model.MedecinDs;
+import com.meddjamm.sn.config.remote.model.MedecinDs;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
-
-@RequestMapping(value = APP_ROOT + "/medecin")
+//@RequestMapping(value = APP_ROOT + "/medecin")
 public interface MedecinApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -25,6 +25,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
             return of("root");
         }
         Utilisateur userPrincipal = (Utilisateur) authentication.getPrincipal();
-        return ofNullable(userPrincipal.getUsername());
+        return ofNullable(userPrincipal.getMatricule());
     }
 }
