@@ -99,6 +99,7 @@ public class CircuitPatientAssembler {
         circuitPatient.setType(circuitPatientDs.getType());
         circuitPatient.setCreateDate(circuitPatientDs.getCreateDate());
         circuitPatient.setCreatedBy(circuitPatientDs.getCreatedBy());
+        circuitPatient.setActif(circuitPatientDs.isActif());
         // circuitPatient.setObservationCliniqueList(observationCliniqueAssembler.assembleEntitiesFromDs(circuitPatientDs.getO))
         //  circuitPatient.setExamenComplementaires(examenComplementaireAssembler.assembleEntitiesFromDs(circuitPatientDs.getExamenComplementaireDs()));
         //  circuitPatient.setTraitementMedicals(traitementMedicalAssembler.assembleEntitiesFromDs(circuitPatientDs.getTraitementMedicalDs()));
