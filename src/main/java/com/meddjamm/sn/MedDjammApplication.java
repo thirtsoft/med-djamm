@@ -1,5 +1,9 @@
 package com.meddjamm.sn;
 
+import com.meddjamm.sn.config.entity.Action;
+import com.meddjamm.sn.config.entity.Profil;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.remote.model.RegisterRequest;
 import com.meddjamm.sn.config.repository.ActionRepository;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.UtilisateurrRepository;
@@ -11,6 +15,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
+import java.util.Set;
+
+import static com.meddjamm.sn.utils.UtilString.genererMatricule;
 
 @SpringBootApplication
 //        (exclude = {
@@ -34,7 +43,6 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
         action1.setCreatedByUser("root");
         Action action2 = new Action("ADD_AG", "Ajouter/Modifier un agent medicale");
@@ -63,9 +71,7 @@ public class MedDjammApplication implements CommandLineRunner {
 
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
-
-
-         */
+        
 
     }
 }
