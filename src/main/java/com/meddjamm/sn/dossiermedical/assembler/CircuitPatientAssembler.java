@@ -5,8 +5,12 @@ import com.meddjamm.sn.config.assembler.UtilisateurAssembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
+import com.meddjamm.sn.dossiermedical.entity.AvisSpecialiste;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
+import com.meddjamm.sn.dossiermedical.entity.Consultation;
+import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
+import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
@@ -141,20 +145,48 @@ public class CircuitPatientAssembler {
         return circuitPatientDs;
     }
 
-    /*
-    public CircuitPatient assembleCircuitPatientFromDetailDs(CircuitPatientDetailDs circuitPatientDs) {
-        CircuitPatient circuitPatient = new CircuitPatient();
-        circuitPatient.setId(circuitPatientDs.getId());
-        circuitPatient.setCode(circuitPatientDs.getCode());
-        circuitPatient.setMatricule(circuitPatientDs.getMatricule());
-        circuitPatient.setEtat(circuitPatientDs.getEtat());
-        circuitPatient.setActif(circuitPatientDs.isActif());
-        circuitPatient.setType(circuitPatientDs.getType());
-        circuitPatient.setCreateDate(circuitPatientDs.getCreateDate());
-        circuitPatient.setCreatedBy(circuitPatientDs.getCreatedBy());
-        circuitPatient.setObservationCliniqueList(observationCliniqueAssembler.assembleEntitiesFromDs(circuitPatientDs.getObservationCliniqueDs()));
-        circuitPatient.setExamenComplementaires(examenComplementaireAssembler.assembleEntitiesFromDs(circuitPatientDs.getExamenComplementaireDs()));
-        circuitPatient.setTraitementMedicals(traitementMedicalAssembler.assembleEntitiesFromDs(circuitPatientDs.getTraitementMedicalDs()));
-        return circuitPatient;
-    }*/
+    public List<AllCircuitPatientDs> assembleAllCircuitsDsFromAllCircuits(List<CircuitPatient> circuitPatients) {
+        return circuitPatients.stream().map(this::createAllCircuitDs).toList();
+    }
+
+    public AllCircuitPatientDs createAllCircuitDs(CircuitPatient circuitPatient) {
+        if (circuitPatient == null)
+            return null;
+        AllCircuitPatientDs circuitPatientDs = new AllCircuitPatientDs();
+        circuitPatientDs.setId(circuitPatient.getId());
+        circuitPatientDs.setCode(circuitPatient.getCode());
+        circuitPatientDs.setEtat(circuitPatient.getEtat());
+        circuitPatientDs.setActif(circuitPatient.isActif());
+        circuitPatientDs.setCreateDate(circuitPatient.getCreateDate());
+        circuitPatientDs.setNumeroCircuit(
+                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        if (circuitPatient.getCode() != null) {
+            Patient patient = patientService.findByCode(circuitPatient.getCode());
+            String nomPatient = patient.getPrenom() + ' ' + patient.getNom();
+            circuitPatientDs.setNomCompletPatient(nomPatient);
+        }
+        if (circuitPatient.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getCreatedByUser());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            circuitPatientDs.setNomCompletAgent(nomAgent);
+        }
+        if (!circuitPatient.getConsultations().isEmpty()) {
+            for (Consultation consultation : circuitPatient.getConsultations()) {
+                circuitPatientDs.setType("Consultation");
+            }
+        }
+        if (!circuitPatient.getOrdonnances().isEmpty()) {
+            for (Ordonnance ordonnance : circuitPatient.getOrdonnances()) {
+                circuitPatientDs.setType("Ordonnance");
+            }
+        }
+        if (!circuitPatient.getAvisSpecialistes().isEmpty()) {
+            for (AvisSpecialiste avisSpecialiste : circuitPatient.getAvisSpecialistes()) {
+                circuitPatientDs.setType("Avis spécialiste");
+            }
+        }
+        return circuitPatientDs;
+    }
+
+
 }
