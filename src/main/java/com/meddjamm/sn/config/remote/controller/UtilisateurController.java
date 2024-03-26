@@ -5,6 +5,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.motdepasse.ChangerMotDePasseRequest;
 import com.meddjamm.sn.config.remote.controller.api.UtilisateurApi;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.config.service.impl.ValidationService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -68,9 +69,9 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-    public ResponseEntity<UtilisateurDs> findUtilisateurProfil(Long id) throws Exception {
+    public ResponseEntity<UtilisateurProfilDs> findUtilisateurProfil(Long id) throws Exception {
         return new ResponseEntity<>(utilisateurAssembler
-                .assembleUtilisateurDsFromEntity(utilisateurService.findUserById(id)), OK);
+                .assembleUtilisateurProfilDsFromEntity(utilisateurService.findUserById(id)), OK);
     }
 
     @Override

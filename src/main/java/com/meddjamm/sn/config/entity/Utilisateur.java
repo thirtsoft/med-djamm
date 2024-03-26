@@ -69,6 +69,15 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
     @Column(name = "profil_id")
     private Long profilId;
 
+    private String sexe;
+
+    private String civilite;
+
+    private String fonction;
+
+    private String adresse;
+
+    private String typeUtilisateur;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_uid")

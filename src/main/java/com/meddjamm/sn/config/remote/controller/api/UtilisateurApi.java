@@ -2,6 +2,7 @@ package com.meddjamm.sn.config.remote.controller.api;
 
 import com.meddjamm.sn.config.motdepasse.ChangerMotDePasseRequest;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public interface UtilisateurApi {
     void deleteUtilisateur(@PathVariable Long id);
 
     @GetMapping(value = "/monprofil/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UtilisateurDs> findUtilisateurProfil(@PathVariable Long id) throws Exception;
+    ResponseEntity<UtilisateurProfilDs> findUtilisateurProfil(@PathVariable Long id) throws Exception;
 
     @PostMapping("/password-reset-request")
     ResponseEntity<String> changerMotDePasseRequest(@RequestBody ChangerMotDePasseRequest changerMotDePasseRequest, HttpServletRequest request);
