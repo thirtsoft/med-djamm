@@ -16,7 +16,7 @@ public class UtilisateurDs {
 
     @NotNull
     private String codeUtilisateur;
-//    @NotNull
+    //    @NotNull
     private String motDePasse;
     @NotNull
     private String nom;
@@ -42,6 +42,15 @@ public class UtilisateurDs {
     private Long profilId;
     private String activation;
     private Long createdBy;
+
+    @NotNull
+    private String fonction;
+
+    private String adresse;
+
+    @NotNull
+    private String typeUtilisateur;
+
 
     public boolean isEst_valide() {
         if (est_valide == 1)

@@ -2,6 +2,7 @@ package com.meddjamm.sn.config.assembler;
 
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import com.meddjamm.sn.config.service.ProfilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -59,6 +60,25 @@ public class UtilisateurAssembler {
         utilisateurDs.setProfilId(utilisateur.getProfilId());
         utilisateurDs.setActivation(utilisateur.getActivation());
         utilisateurDs.setMatricule(utilisateur.getMatricule());
+        return utilisateurDs;
+    }
+
+    public UtilisateurProfilDs assembleUtilisateurProfilDsFromEntity(Utilisateur utilisateur) {
+        UtilisateurProfilDs utilisateurDs = new UtilisateurProfilDs();
+        if (utilisateur.getId() != null)
+            utilisateurDs.setId(utilisateur.getId());
+        utilisateurDs.setCodeUtilisateur(utilisateur.getCodeUtilisateur());
+        utilisateurDs.setPrenom(utilisateur.getPrenom());
+        utilisateurDs.setNom(utilisateur.getNom());
+        utilisateurDs.setEmail(utilisateur.getEmail());
+        utilisateurDs.setTelephone(utilisateur.getTelephone());
+        utilisateurDs.setProfileCode(utilisateur.getProfil().getLibelle());
+        utilisateurDs.setMatricule(utilisateur.getMatricule());
+        utilisateurDs.setCivilite(utilisateur.getCivilite());
+        utilisateurDs.setSexe(utilisateur.getSexe());
+        utilisateurDs.setFonction(utilisateur.getFonction());
+        utilisateurDs.setAdresse(utilisateur.getAdresse());
+        utilisateurDs.setTypeUtilisateur(utilisateur.getTypeUtilisateur());
         return utilisateurDs;
     }
 }
