@@ -5,6 +5,7 @@ import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.repository.ActionRepository;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.service.ActionService;
+import com.meddjamm.sn.exception.ActionAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,12 +28,13 @@ public class ActionServiceImpl implements ActionService {
     public void saveAction(Action action) {
         if (findByCode(action.getCode()) != null) {
             log.info("This action exist");
+            throw new ActionAlreadyExistException(action.getCode() + " action already exist");
         }
         actionRepository.save(action);
     }
 
     @Override
-    public void updateAction(Long id, Action action) throws Exception {
+    public void updateAction(Long id, Action action) {
         actionRepository.findById(id)
                 .ifPresent(ac -> {
                     ac.setCode(action.getCode());
@@ -72,6 +74,7 @@ public class ActionServiceImpl implements ActionService {
 
     @Override
     public void deleteAction(Long id) {
+//        this.removeAllProfilFromAction(id);
         actionRepository.deleteById(id);
     }
 
@@ -81,4 +84,36 @@ public class ActionServiceImpl implements ActionService {
         List<Action> actionList = new ArrayList<>(profil.getAction());
         return actionList;
     }
+
+//    @Override
+//    public Action removeAllProfilFromAction(Long roleId) {
+//        Optional<Action> role = actionRepository.findById(roleId);
+//        role.ifPresent(Action::removeAllProfilesFromAction);
+//        return actionRepository.save(role.get());
+//    }
+//
+//    @Override
+//    public Profil assignProfilToAction(Long profilId, Long actionId) {
+//        Optional<Profil> profil = profilRepository.findById(profilId);
+//        Optional<Action> action = actionRepository.findById(actionId);
+//        if (profil.isPresent() && profil.get().getAction().contains(action.get())) {
+//            throw new ProfilAlreadyExistsException(profil.get().getCode() +
+//                    " is already assigned to the " + action.get().getCode() + " action");
+//        }
+//        action.ifPresent(theRole -> theRole.assignProfileToAction(profil.get()));
+//        actionRepository.save(action.get());
+//        return profil.get();
+//    }
+//
+//    @Override
+//    public Profil removeProfilFromAction(Long profilId, Long actionId) {
+//        Optional<Profil> user = profilRepository.findById(profilId);
+//        Optional<Action> role = actionRepository.findById(actionId);
+//        if (role.isPresent() && role.get().getProfils().contains(user.get())) {
+//            role.get().removeProfileToAction(user.get());
+//            actionRepository.save(role.get());
+//            return user.get();
+//        }
+//        throw new ProfilNotFoundException("Profil not found!");
+//    }
 }

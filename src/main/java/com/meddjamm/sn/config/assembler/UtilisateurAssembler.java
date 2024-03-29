@@ -15,7 +15,6 @@ import java.util.List;
 public class UtilisateurAssembler {
 
     private final ProfilService profilService;
-    private final PasswordEncoder passwordEncoder;
 
     public List<UtilisateurDs> assembleEntitiesFrom(List<Utilisateur> utilisateurs) {
         return utilisateurs.stream().map(this::assembleUtilisateurDsFromEntity).toList();
