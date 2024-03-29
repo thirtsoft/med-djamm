@@ -1,6 +1,6 @@
 package com.meddjamm.sn.config.security;
 
-import com.meddjamm.sn.config.repository.UtilisateurrRepository;
+import com.meddjamm.sn.config.repository.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ import static java.util.Collections.singletonList;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final UtilisateurrRepository repository;
+    private final UtilisateurRepository repository;
 
     @Bean
     public UserDetailsService userDetailsService() {

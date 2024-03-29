@@ -8,7 +8,7 @@ public interface ActionService {
 
     void saveAction(Action action);
 
-    void updateAction(Long id, Action action) throws Exception;
+    void updateAction(Long id, Action action);
 
     Action findById(Long id);
 
@@ -25,4 +25,10 @@ public interface ActionService {
     void deleteAction(Long id);
 
     List<Action> getListActionByProfil(String codeProfil);
+
+//    Action removeAllProfilFromAction(Long roleId);
+//
+//    Profil assignProfilToAction(Long profilId, Long actionId);
+//
+//    Profil removeProfilFromAction(Long profilId, Long actionId);
 }

@@ -9,7 +9,7 @@ public interface UtilisateurService {
 
     Utilisateur saveUtilisateur(Utilisateur utilisateur, String url);
 
-    Utilisateur findUtilisateurByCode(String code) throws Exception;
+    Utilisateur findUtilisateurByCode(String code);
 
     Utilisateur findUtilisateurById(Long utilisateurId);
 
@@ -19,31 +19,21 @@ public interface UtilisateurService {
 
     List<Utilisateur> findAllActives();
 
-    boolean deleteUtilisateur(Utilisateur Utilisateur) throws Exception;
-
-    boolean checkValiditePass(String mdp) throws Exception;
+    boolean checkValiditePass(String mdp);
 
     Utilisateur findUtilisateurByEmail(String mail);
-
-    //  List<Utilisateur> getListeUser(SearchDTO criteres) throws Exception;
 
     List<Utilisateur> getListeUsers(List<Utilisateur> userDTOs, int page, int ligneParPage);
 
     public byte[] generateNewKey() throws NoSuchAlgorithmException;
 
-    //  TokenUser findDataByToken(String token);
+    void updateUserPass(Utilisateur utilisateur);
 
-    void updateUserPass(Utilisateur Utilisateur) throws Exception;
-
-    void resetUserPass(Utilisateur Utilisateur) throws Exception;
-
-    // ResponseEntity<ActivationDTO> findForActivation(String code);
+    void resetUserPass(Utilisateur utilisateur);
 
     String findNomComplet(Long id);
 
-    void lireEnFonctionDuCode(String code);
-
-    void regenererMotDePassePourUtilisateur();
+    String lireEnFonctionDuCode(String code);
 
     String validatePasswordResetToken(String token);
 
@@ -59,4 +49,5 @@ public interface UtilisateurService {
 
     Utilisateur findUtilisateurByMatricule(String matricule);
 
+    void deleteUtilisateur(String email);
 }

@@ -1,6 +1,5 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
-import com.meddjamm.sn.assembler.MedecinAssembler;
 import com.meddjamm.sn.config.assembler.UtilisateurAssembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
@@ -16,7 +15,6 @@ import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
-import com.meddjamm.sn.services.MedecinService;
 import com.meddjamm.sn.utils.UtilString;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -37,8 +35,6 @@ public class CircuitPatientAssembler {
     private final ExamenBiologiqueAssembler examenBiologiqueAssembler;
     private final PatientAssembler patientAssembler;
     private final PatientService patientService;
-    private final MedecinAssembler medecinAssembler;
-    private final MedecinService medecinService;
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
 
@@ -104,9 +100,6 @@ public class CircuitPatientAssembler {
         circuitPatient.setCreateDate(circuitPatientDs.getCreateDate());
         circuitPatient.setCreatedBy(circuitPatientDs.getCreatedBy());
         circuitPatient.setActif(circuitPatientDs.isActif());
-        // circuitPatient.setObservationCliniqueList(observationCliniqueAssembler.assembleEntitiesFromDs(circuitPatientDs.getO))
-        //  circuitPatient.setExamenComplementaires(examenComplementaireAssembler.assembleEntitiesFromDs(circuitPatientDs.getExamenComplementaireDs()));
-        //  circuitPatient.setTraitementMedicals(traitementMedicalAssembler.assembleEntitiesFromDs(circuitPatientDs.getTraitementMedicalDs()));
         return circuitPatient;
     }
 
@@ -187,6 +180,4 @@ public class CircuitPatientAssembler {
         }
         return circuitPatientDs;
     }
-
-
 }

@@ -2,7 +2,7 @@ package com.meddjamm.sn;
 
 import com.meddjamm.sn.config.repository.ActionRepository;
 import com.meddjamm.sn.config.repository.ProfilRepository;
-import com.meddjamm.sn.config.repository.UtilisateurrRepository;
+import com.meddjamm.sn.config.repository.UtilisateurRepository;
 import com.meddjamm.sn.config.service.auth.AuthenticationService;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.rh.repository.MaladieRepository;
@@ -21,7 +21,7 @@ public class MedDjammApplication implements CommandLineRunner {
 
     private final MaladieRepository maladieRepository;
     private final PatientRepository patientRepository;
-    private final UtilisateurrRepository utilisateurrRepository;
+    private final UtilisateurRepository utilisateurRepository;
     private final ActionRepository actionRepository;
     private final ProfilRepository profilRepository;
     private final AuthenticationService authenticationService;

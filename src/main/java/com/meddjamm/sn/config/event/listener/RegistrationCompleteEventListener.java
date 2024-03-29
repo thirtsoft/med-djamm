@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
@@ -22,10 +21,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RegistrationCompleteEventListener implements ApplicationListener<RegistrationCompleteEvent> {
 
-    //    private final UtilisateurService utilisateurService;
     private final JavaMailSender mailSender;
     private final ValidationService validationService;
-    private final PasswordEncoder passwordEncoder;
 
     @Value("${spring.mail.username}")
     private String configEmail;
@@ -75,7 +72,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
                 "<p> Users Registration Portal Service";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
-        messageHelper.setFrom("dailycodework@gmail.com", senderName);
+        messageHelper.setFrom(configEmail, senderName);
         messageHelper.setTo(utilisateur.getEmail());
         messageHelper.setSubject(subject);
         messageHelper.setText(mailContent, true);

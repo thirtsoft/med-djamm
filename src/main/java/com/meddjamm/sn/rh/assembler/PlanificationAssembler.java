@@ -1,10 +1,8 @@
 package com.meddjamm.sn.rh.assembler;
 
-import com.meddjamm.sn.config.entity.AgentMedical;
 import com.meddjamm.sn.rh.entity.Planification;
 import com.meddjamm.sn.rh.remote.model.PlanificationDetailDs;
 import com.meddjamm.sn.rh.remote.model.PlanificationDs;
-import com.meddjamm.sn.rh.services.AgentMedicalService;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -12,12 +10,6 @@ import java.util.List;
 
 @Component
 public class PlanificationAssembler {
-
-    private final AgentMedicalService agentMedicalService;
-
-    public PlanificationAssembler(AgentMedicalService agentMedicalService) {
-        this.agentMedicalService = agentMedicalService;
-    }
 
     public List<PlanificationDs> assembleEntitiesFrom(List<Planification> planifications) {
         return planifications.stream().map(this::assembleEntityToDs).toList();
@@ -61,10 +53,7 @@ public class PlanificationAssembler {
         planificationDetailDs.setActif(planification.isActif());
         planificationDetailDs.setLibelle(planification.getLibelle());
         if (planification.getAgentMedical() != null) {
-            AgentMedical agentMedical = agentMedicalService.findById(planification.getAgentMedical());
-            String nomAgent = agentMedical.getUtilisateur().getPrenom() + ' ' + agentMedical.getUtilisateur().getNom();
             planificationDetailDs.setAgentMedical(planification.getAgentMedical());
-            planificationDetailDs.setNomCompletAgent(nomAgent);
         }
         return planificationDetailDs;
     }
