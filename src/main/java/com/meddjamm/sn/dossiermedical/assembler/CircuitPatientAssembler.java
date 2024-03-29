@@ -41,6 +41,7 @@ public class CircuitPatientAssembler {
     private final MedecinService medecinService;
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
+    private final DiscussionAssembler discussionAssembler;
 
     public List<CircuitPatientListDs> assembleEntitiesFrom(List<CircuitPatient> circuitPatients) {
         return circuitPatients.stream().map(this::assembleEntityToListDs).toList();
@@ -128,6 +129,7 @@ public class CircuitPatientAssembler {
         circuitPatientDs.setAvisSpecialisteDs(avisSpecialisteAssembler.assembleEntitiesFrom(circuitPatient.getAvisSpecialistes()));
         circuitPatientDs.setExamenBiologiqueDs(examenBiologiqueAssembler.assembleEntitiesFrom(circuitPatient.getExamenBiologiques()));
         circuitPatientDs.setSyntheseDs(syntheseAssembler.assembleEntitiesFrom(circuitPatient.getSyntheseList()));
+        circuitPatientDs.setDiscussionDs(discussionAssembler.assembleEntitiesFrom(circuitPatient.getDiscussions()));
         circuitPatientDs.setNumeroCircuit(
                 UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
         if (circuitPatient.getCode() != null) {

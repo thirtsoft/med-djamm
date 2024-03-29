@@ -53,6 +53,8 @@ public class CircuitPatientDetailDs {
 
     private List<ExamenBiologiqueDs> examenBiologiqueDs;
 
+    private List<DiscussionDs> discussionDs;
+
     private Date createDate;
 
     private int actif;
