@@ -34,38 +34,27 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
+/*
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
-        action1.setCreatedByUser("root");
         Action action2 = new Action("ADD_AG", "Ajouter/Modifier un agent medicale");
-        action2.setCreatedByUser("root");
         Action action3 = new Action("LST_PAT", "Lister les patients");
-        action3.setCreatedByUser("root");
         Action action4 = new Action("LST_AG", "Lister les agents du service");
-        action4.setCreatedByUser("root");
         Action action5 = new Action("ADD_RV", "Ajouter/Modifier un rendez-vous");
-        action5.setCreatedByUser("root");
         Action action6 = new Action("ADD_CIR", "Générer un circuit d'un patient");
-        action6.setCreatedByUser("root");
         Profil profileAdmin = new Profil("ADMIN", "Administrateur", Set.of(action1, action2, action3, action4, action5, action6), 1);
-        profileAdmin.setCreatedByUser("root");
         Profil profileUser = new Profil("USER", "Utilisateur", Set.of(action1, action4, action6), 1);
-        profileUser.setCreatedByUser("root");
 
         actionRepository.saveAll(List.of(action1, action2, action3, action4, action5, action6));
         profilRepository.saveAll(List.of(profileAdmin, profileUser));
 
         Utilisateur utilisateur = Utilisateur.builder().email("root@test").prenom("root").nom("root").matricule(genererMatricule()).motdepasse(passwordEncoder.encode("root")).profil(profileAdmin).actif(true).build();
-        utilisateurrRepository.save(utilisateur);
+        utilisateurRepository.save(utilisateur);
 
         var admin = RegisterRequest.builder().firstname("Admin").prenom("Admin").email("admin@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Admin token: " + authenticationService.register(admin).getAccessToken());
 
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
-        System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
-
-
-         */
+        System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());*/
 
     }
 }

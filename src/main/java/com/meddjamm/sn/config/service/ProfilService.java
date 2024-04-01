@@ -3,7 +3,6 @@ package com.meddjamm.sn.config.service;
 import com.meddjamm.sn.config.entity.Profil;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProfilService {
 
@@ -19,7 +18,7 @@ public interface ProfilService {
 
     Profil findByLibelle(String libelle);
 
-    Optional<Profil> findByProfilCode(String code);
+    Profil findByProfilCode(String code);
 
     Profil findByCodeFromAction(String code);
 

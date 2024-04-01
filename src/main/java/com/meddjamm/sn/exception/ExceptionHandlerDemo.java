@@ -1,37 +1,48 @@
 package com.meddjamm.sn.exception;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
-public class ExceptionHandlerDemo {
+public class ExceptionHandlerDemo extends ResponseEntityExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ProfilAlreadyExistsException.class)
-    public Map<String, String> profilAlreadyExists(ProfilAlreadyExistsException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return error;
+    public ResponseEntity<ErrorDto> profilAlreadyExists(ProfilAlreadyExistsException ex, WebRequest webRequest) {
+        return new ResponseEntity<>(ErrorDto.builder()
+                .httpCode(BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .build(), BAD_REQUEST);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ProfilNotFoundException.class)
-    public Map<String, String> profilNotFound(ProfilNotFoundException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return error;
+    public ResponseEntity<ErrorDto> profilNotFound(ProfilNotFoundException ex, WebRequest webRequest) {
+        return new ResponseEntity<>(ErrorDto.builder()
+                .httpCode(NOT_FOUND.value())
+                .message(ex.getMessage())
+                .build(), NOT_FOUND);
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UtilisateurNotFoundException.class)
-    public Map<String, String> userNotFound(UtilisateurNotFoundException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return error;
+    public ResponseEntity<ErrorDto> userNotFound(UtilisateurNotFoundException ex, WebRequest webRequest) {
+        return new ResponseEntity<>(ErrorDto.builder()
+                .httpCode(NOT_FOUND.value())
+                .message(ex.getMessage())
+                .build(), NOT_FOUND);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorDto> userNotFound(BadCredentialsException ex, WebRequest webRequest) {
+        return new ResponseEntity<>(ErrorDto.builder()
+                .httpCode(FORBIDDEN.value())
+                .message(ex.getMessage())
+                .build(), FORBIDDEN);
     }
 }

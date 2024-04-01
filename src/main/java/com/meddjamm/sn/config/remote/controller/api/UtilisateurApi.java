@@ -28,8 +28,8 @@ public interface UtilisateurApi {
     @GetMapping(value = "/activation")
     ResponseEntity<String> activation(@RequestParam("code") String code);
 
-    @PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UtilisateurDs> updateUtilisateur(@PathVariable Long id, @RequestBody UtilisateurDs utilisateurDs);
+    @PutMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<UtilisateurDs> updateUtilisateur(@RequestBody UtilisateurDs utilisateurDs);
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UtilisateurDs> findUtilisateurById(@PathVariable Long id);

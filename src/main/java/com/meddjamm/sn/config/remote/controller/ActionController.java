@@ -31,7 +31,7 @@ public class ActionController implements ActionApi {
     }
 
     @Override
-    public void updateAction(Long id, ActionListDs actionListDs) throws Exception {
+    public void updateAction(Long id, ActionListDs actionListDs) {
         Action action = actionAssembler.assembleActionFromDs(actionListDs);
         actionService.updateAction(id, action);
     }
