@@ -123,8 +123,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public void updateUserPass(Utilisateur utilisateur) {
-        utilisateurRepository.save(utilisateur);
+    public Utilisateur updateUserPass(Utilisateur utilisateur) {
+        return utilisateurRepository.save(utilisateur);
     }
 
     @Override

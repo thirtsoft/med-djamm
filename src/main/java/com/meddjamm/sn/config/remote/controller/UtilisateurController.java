@@ -17,7 +17,6 @@ import java.util.Optional;
 
 import static com.meddjamm.sn.utils.UtilString.getUrl;
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -42,8 +41,10 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-    public ResponseEntity<UtilisateurDs> updateUtilisateur(Long id, UtilisateurDs utilisateurDs) {
-        return null;
+    public ResponseEntity<UtilisateurDs> updateUtilisateur(UtilisateurDs utilisateurDs) {
+        Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurForUpdateDs(utilisateurDs);
+        return new ResponseEntity<>(utilisateurAssembler
+                .assembleUtilisateurDsFromEntity(utilisateurService.updateUserPass(utilisateur)), OK);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class UtilisateurController implements UtilisateurApi {
     @Override
     public ResponseEntity<List<UtilisateurDs>> findAllUtilisateurs() {
         return new ResponseEntity<>(utilisateurAssembler
-                .assembleEntitiesFrom(utilisateurService.findAllUtilisateurs()), FOUND);
+                .assembleEntitiesFrom(utilisateurService.findAllUtilisateurs()), OK);
     }
 
     @Override

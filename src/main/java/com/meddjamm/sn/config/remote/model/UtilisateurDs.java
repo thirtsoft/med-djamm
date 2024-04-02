@@ -36,12 +36,6 @@ public class UtilisateurDs {
     private String motdepasseprecedent;
     private int est_valide;
     private int mdpamodifier;
-    private Date dateCreation;
-    private Date dateModPass;
-    private int resteValidite;
-    private Long profilId;
-    private String activation;
-    private Long createdBy;
 
     @NotNull
     private String fonction;

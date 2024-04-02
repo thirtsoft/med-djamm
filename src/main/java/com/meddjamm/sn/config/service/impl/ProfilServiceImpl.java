@@ -3,11 +3,11 @@ package com.meddjamm.sn.config.service.impl;
 import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.service.ProfilService;
+import com.meddjamm.sn.exception.ProfilNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -58,8 +58,9 @@ public class ProfilServiceImpl implements ProfilService {
     }
 
     @Override
-    public Optional<Profil> findByProfilCode(String code) {
-        return profilRepository.findByProfilCode(code);
+    public Profil findByProfilCode(String code) {
+        return profilRepository.findByProfilCode(code)
+                .orElseThrow(() -> new ProfilNotFoundException("Profil inconnu"));
     }
 
     @Override

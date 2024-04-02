@@ -27,7 +27,7 @@ public interface UtilisateurService {
 
     public byte[] generateNewKey() throws NoSuchAlgorithmException;
 
-    void updateUserPass(Utilisateur utilisateur);
+    Utilisateur updateUserPass(Utilisateur utilisateur);
 
     void resetUserPass(Utilisateur utilisateur);
 
