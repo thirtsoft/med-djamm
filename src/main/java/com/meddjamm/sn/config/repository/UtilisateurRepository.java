@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UtilisateurrRepository extends JpaRepository<Utilisateur, Long> {
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
     @Query("Select DISTINCT u from Utilisateur u where u.est_valide=1 and u.id!=1 and " +
             "u.profilId!=4 and u.profilId!=10 and u.profilId!=11 order by u.nom")
@@ -50,18 +50,9 @@ public interface UtilisateurrRepository extends JpaRepository<Utilisateur, Long>
 
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.activation=:code")
     Utilisateur findUtilisateurByActivation(@Param("code") String code);
-
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.codeUtilisateur=:code and u.profilId!=4")
     Utilisateur findAdepmeByCodeUtilisateur(@Param("code") String code);
-
-//    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.email=:email and u.profilId!=4")
-//    Utilisateur findAdepmeByMail(@Param("email") String email);
-
-//    @Query("Select DISTINCT u from Utilisateur u where u.est_valide=1 and u.id != 1 and u.createdBy = :userId and u.profilId!=4 and u.profilId!=10 and u.profilId!=11 order by u.nom")
-//    List<Utilisateur> findListUsersByCreatedBy(@Param("userId") Long userId);
-
     Optional<Utilisateur> findByEmail(String email);
-
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.matricule=:matricule")
     Utilisateur findUtilisateurByMatricule(@Param("matricule") String matricule);
 }

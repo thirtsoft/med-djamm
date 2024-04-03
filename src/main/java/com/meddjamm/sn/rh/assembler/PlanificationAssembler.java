@@ -19,7 +19,6 @@ public class PlanificationAssembler {
         this.utilisateurService = utilisateurService;
     }
 
-
     public List<PlanificationDs> assembleEntitiesFrom(List<Planification> planifications) {
         return planifications.stream().map(this::assembleEntityToDs).toList();
     }
@@ -66,6 +65,9 @@ public class PlanificationAssembler {
             String nomAgent = agentMedical.getPrenom() + ' ' + agentMedical.getNom();
             planificationDetailDs.setAgentMedical(planification.getMatricule());
             planificationDetailDs.setNomCompletAgent(nomAgent);
+            if (planification.getMatricule() != null) {
+                planificationDetailDs.setAgentMedical(planification.getMatricule());
+            }
         }
         return planificationDetailDs;
     }

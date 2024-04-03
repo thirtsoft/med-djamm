@@ -1,37 +1,20 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
-import com.meddjamm.sn.assembler.MedecinAssembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
-import com.meddjamm.sn.dossiermedical.services.PatientService;
-import com.meddjamm.sn.services.MedecinService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ExamenComplementaireAssembler {
 
-    private final PatientService patientService;
-    private final PatientAssembler patientAssembler;
-    private final MedecinService medecinService;
-    private final MedecinAssembler medecinAssembler;
     private final UtilisateurService utilisateurService;
-
-    public ExamenComplementaireAssembler(PatientService patientService,
-                                         PatientAssembler patientAssembler,
-                                         MedecinService medecinService,
-                                         MedecinAssembler medecinAssembler,
-                                         UtilisateurService utilisateurService) {
-        this.patientService = patientService;
-        this.patientAssembler = patientAssembler;
-        this.medecinService = medecinService;
-        this.medecinAssembler = medecinAssembler;
-        this.utilisateurService = utilisateurService;
-    }
 
     public List<ExamenComplementaireDetailDs> assembleEntitiesFrom(List<ExamenComplementaire> examenComplementaires) {
         return examenComplementaires.stream().map(this::assembleEntitiesToDs).toList();

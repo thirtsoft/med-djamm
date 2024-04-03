@@ -10,7 +10,7 @@ import com.meddjamm.sn.config.remote.model.ProfilReponse;
 import com.meddjamm.sn.config.remote.model.RegisterRequest;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.TokenRepository;
-import com.meddjamm.sn.config.repository.UtilisateurrRepository;
+import com.meddjamm.sn.config.repository.UtilisateurRepository;
 import com.meddjamm.sn.config.security.auth.AuthenticationRequest;
 import com.meddjamm.sn.config.security.utils.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UtilisateurrRepository repository;
+    private final UtilisateurRepository repository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;

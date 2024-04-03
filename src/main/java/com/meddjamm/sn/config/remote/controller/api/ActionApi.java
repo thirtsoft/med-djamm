@@ -22,7 +22,7 @@ public interface ActionApi {
     void creerAction(@RequestBody ActionListDs actionListDs);
 
     @PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    void updateAction(@PathVariable Long id, @RequestBody ActionListDs actionListDs) throws Exception;
+    void updateAction(@PathVariable Long id, @RequestBody ActionListDs actionListDs);
 
     @GetMapping(value = "/byid/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ActionListDs> findById(@PathVariable Long id);
