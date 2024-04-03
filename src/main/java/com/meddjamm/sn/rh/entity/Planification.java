@@ -21,7 +21,7 @@ public class Planification extends AbstractAuditableEntity implements Serializab
     private String libelle;
 
     @Column(name = "agent_medical_uid")
-    private Long agentMedical;
+    private String matricule;
 
     private Date dateService;
 

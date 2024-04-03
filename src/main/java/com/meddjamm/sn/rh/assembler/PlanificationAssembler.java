@@ -1,10 +1,10 @@
 package com.meddjamm.sn.rh.assembler;
 
-import com.meddjamm.sn.config.entity.AgentMedical;
+import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.rh.entity.Planification;
 import com.meddjamm.sn.rh.remote.model.PlanificationDetailDs;
 import com.meddjamm.sn.rh.remote.model.PlanificationDs;
-import com.meddjamm.sn.rh.services.AgentMedicalService;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,11 +13,12 @@ import java.util.List;
 @Component
 public class PlanificationAssembler {
 
-    private final AgentMedicalService agentMedicalService;
+    private final UtilisateurService utilisateurService;
 
-    public PlanificationAssembler(AgentMedicalService agentMedicalService) {
-        this.agentMedicalService = agentMedicalService;
+    public PlanificationAssembler(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
     }
+
 
     public List<PlanificationDs> assembleEntitiesFrom(List<Planification> planifications) {
         return planifications.stream().map(this::assembleEntityToDs).toList();
@@ -27,7 +28,7 @@ public class PlanificationAssembler {
         PlanificationDs planificationDs = new PlanificationDs();
         if (planification.getId() != null)
             planificationDs.setId(planification.getId());
-        planificationDs.setAgentMedical(planification.getAgentMedical());
+        planificationDs.setAgentMedical(planification.getMatricule());
         planificationDs.setDateService(planification.getDateService());
         planificationDs.setCreatedDate(new Date());
         planificationDs.setActif(planification.isActif());
@@ -39,7 +40,7 @@ public class PlanificationAssembler {
         Planification planification = new Planification();
         if (planificationDs.getId() != null)
             planification.setId(planificationDs.getId());
-        planification.setAgentMedical(planificationDs.getAgentMedical());
+        planification.setMatricule(planificationDs.getAgentMedical());
         planification.setDateService(planificationDs.getDateService());
         planification.setCreatedDate(new Date());
         planification.setActif(planificationDs.isActif());
@@ -60,10 +61,10 @@ public class PlanificationAssembler {
         planificationDetailDs.setCreatedDate(new Date());
         planificationDetailDs.setActif(planification.isActif());
         planificationDetailDs.setLibelle(planification.getLibelle());
-        if (planification.getAgentMedical() != null) {
-            AgentMedical agentMedical = agentMedicalService.findById(planification.getAgentMedical());
-            String nomAgent = agentMedical.getUtilisateur().getPrenom() + ' ' + agentMedical.getUtilisateur().getNom();
-            planificationDetailDs.setAgentMedical(planification.getAgentMedical());
+        if (planification.getMatricule() != null) {
+            Utilisateur agentMedical = utilisateurService.findUtilisateurByMatricule(planification.getMatricule());
+            String nomAgent = agentMedical.getPrenom() + ' ' + agentMedical.getNom();
+            planificationDetailDs.setAgentMedical(planification.getMatricule());
             planificationDetailDs.setNomCompletAgent(nomAgent);
         }
         return planificationDetailDs;

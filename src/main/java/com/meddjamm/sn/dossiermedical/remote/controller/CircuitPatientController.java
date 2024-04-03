@@ -3,6 +3,7 @@ package com.meddjamm.sn.dossiermedical.remote.controller;
 import com.meddjamm.sn.dossiermedical.assembler.CircuitPatientAssembler;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.remote.controller.api.CircuitPatientApi;
+import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
@@ -65,5 +66,10 @@ public class CircuitPatientController implements CircuitPatientApi {
     @Override
     public void deleteCircuitPatient(Long id) {
         circuitPatientService.deleteCircuitPatient(id);
+    }
+
+    @Override
+    public ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(String code) {
+        return null;
     }
 }

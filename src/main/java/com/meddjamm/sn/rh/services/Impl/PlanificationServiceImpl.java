@@ -46,7 +46,7 @@ public class PlanificationServiceImpl implements PlanificationService {
     }
 
     @Override
-    public List<Planification> findAllPlanificationsByAgent(Long agent) {
+    public List<Planification> findAllPlanificationsByAgent(String agent) {
         return planificationRepository.findPlanificationByAgent(agent);
     }
 

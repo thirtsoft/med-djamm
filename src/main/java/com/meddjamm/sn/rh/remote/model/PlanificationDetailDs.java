@@ -16,10 +16,8 @@ public class PlanificationDetailDs {
 
     private String libelle;
 
-    private Long agentMedical;
-
- //   private AgentMedicalDs agentMedicalDs;
-
+    private String agentMedical;
+    
     private String nomCompletAgent;
 
     private Date dateService;
