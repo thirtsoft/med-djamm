@@ -46,28 +46,30 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
 
     @Column(name = "codeUtilisateur")
     private String codeUtilisateur;
+
     @Column(name = "motdepasse")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[@#$%^&+=]).{8,}$")
     private String motdepasse;
+
     @Column(name = "motdepasseprecedent")
     private String motdepasseprecedent;
+
     @Column(name = "est_valide")
     private int est_valide;
-    @Column(name = "mdpamodifier")
-    private int mdpamodifier;
+
     private String nom;
+
     private String prenom;
+
     @Column(unique = true)
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
     @NotEmpty(message = "Email cannot be empty")
     private String email;
+
     private String telephone;
-    @Column(name = "datemodpass")
-    private Date dateModPass;
+
     @Column(name = "validite")
     private int resteValidite;
-    @Column(name = "profil_id")
-    private Long profilId;
 
     private String sexe;
 
@@ -82,6 +84,15 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_uid")
     private Profil profil;
+
+    private String education;
+
+    private String experience;
+
+    private String speciality;
+
+    private Date dateRecrutement;
+
     private boolean actif;
 
     @Column(unique = true)
@@ -100,21 +111,7 @@ public class Utilisateur extends AbstractAuditableEntity implements UserDetails 
         else
             this.est_valide = 0;
     }
-
-    public boolean isMdpamodifier() {
-        if (mdpamodifier == 1)
-            return true;
-        else
-            return false;
-    }
-
-    public void setMdpamodifier(boolean mdpamodifier) {
-        if (mdpamodifier == true)
-            this.mdpamodifier = 1;
-        else
-            this.mdpamodifier = 0;
-    }
-
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.getProfil()

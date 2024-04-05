@@ -5,9 +5,12 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.motdepasse.ChangerMotDePasseRequest;
 import com.meddjamm.sn.config.remote.controller.api.UtilisateurApi;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
+import com.meddjamm.sn.utils.ApiUrlAccess;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,12 +35,18 @@ public class UtilisateurController implements UtilisateurApi {
         Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurFromDs(utilisateurDs);
         return new ResponseEntity<>(utilisateurAssembler
                 .assembleUtilisateurDsFromEntity(utilisateurService.
-                        saveUtilisateur(utilisateur, getUrl(request))), CREATED);
+                        saveUtilisateur(utilisateur, getUrl(request))), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<String> activation(String code) {
-        return new ResponseEntity<>(utilisateurService.lireEnFonctionDuCode(code), OK);
+    public String activation(String code) {
+        String FormConnexionFrontend =
+                "<h1>Votre compte a bien été activié.,</h1>" + " <br>" +
+                        "<h2> Veuillez cliquez sur le lien ci-dessous pour vous connectez.</h2>" +
+                        "<h2> Avec votre email et le mot de passe que vous avez reçu par émail.</h2>" +
+                        "<a href=\"" + ApiUrlAccess.HOST_FRONT + "\">Se connecter</a>";
+        utilisateurService.lireEnFonctionDuCode(code);
+        return FormConnexionFrontend;
     }
 
     @Override
@@ -66,9 +75,9 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-    public ResponseEntity<UtilisateurDs> findUtilisateurProfil(Long id) {
+    public ResponseEntity<UtilisateurProfilDs> findUtilisateurProfil(Long id) {
         return new ResponseEntity<>(utilisateurAssembler
-                .assembleUtilisateurDsFromEntity(utilisateurService.findUserById(id)), OK);
+                .assembleUtilisateurProfilDsFromEntity(utilisateurService.findUserById(id)), OK);
     }
 
     @Override
@@ -93,13 +102,13 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-    public String changePassword(ChangerMotDePasseRequest requestUtil) {
+    public ResponseEntity<String> changePassword(ChangerMotDePasseRequest requestUtil) {
         Utilisateur user = utilisateurService.findUtilisateurByEmail(requestUtil.getEmail());
         if (!utilisateurService.oldPasswordIsValid(user, requestUtil.getAncienMotDePasse())) {
-            return "Incorrect old password";
+            return new ResponseEntity<>("Incorrect old password", HttpStatus.BAD_REQUEST);
         }
         utilisateurService.changePassword(user, requestUtil.getNouveauMotDePasse());
-        return "Password changed successfully";
+        return new ResponseEntity<>("Password changed successfully", CREATED);
     }
 
 }

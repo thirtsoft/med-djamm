@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -27,4 +28,11 @@ public class UtilisateurProfilDs {
     private String fonction;
     private String adresse;
     private String typeUtilisateur;
+    private String education;
+    private String experience;
+    private String speciality;
+    private LocalDateTime creationDate;
+    private LocalDateTime lastModifiedDate;
+    private String createdByUser;
+    private String lastModifiedBy;
 }

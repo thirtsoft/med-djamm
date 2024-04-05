@@ -36,13 +36,7 @@ public class Profil extends AbstractAuditableEntity {
             joinColumns = @JoinColumn(name = "profil_uid"),
             inverseJoinColumns = @JoinColumn(name = "action_uid"))
     private Set<Action> action = new HashSet<>();
-
-//    public Profil(String code, String libelle, int actif) {
-//        this.code = code;
-//        this.libelle = libelle;
-//        this.actif = actif;
-//    }
-
+    
     @Column(name = "actif")
     private int actif;
 
