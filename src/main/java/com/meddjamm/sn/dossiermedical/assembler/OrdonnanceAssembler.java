@@ -3,7 +3,9 @@ package com.meddjamm.sn.dossiermedical.assembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
+import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.OrdonnanceDs;
+import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -54,5 +56,27 @@ public class OrdonnanceAssembler {
         Ordonnance.setCreatedBy(OrdonnanceDs.getCreatedBy());
         Ordonnance.setCircuitPatientId(OrdonnanceDs.getCircuitPatientId());
         return Ordonnance;
+    }
+
+    public List<AllCircuitPatientDs> assembleAllCircuitPatientEntitiesFrom(List<Ordonnance> ordonnances) {
+        return ordonnances.stream().map(this::assembleAllCircuitPatientDsFromEntity).toList();
+    }
+
+    public AllCircuitPatientDs assembleAllCircuitPatientDsFromEntity(Ordonnance ordonnance) {
+        AllCircuitPatientDs allCircuitPatientDs = new AllCircuitPatientDs();
+        if (ordonnance.getId() != null)
+            allCircuitPatientDs.setId(ordonnance.getId());
+        allCircuitPatientDs.setActif(ordonnance.isActif());
+        allCircuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(
+                ordonnance.getCircuitPatient().getNumeroCircuit()));
+        allCircuitPatientDs.setCreateDate(ordonnance.getCreatedDate());
+        allCircuitPatientDs.setType("Ordonnance");
+        allCircuitPatientDs.setCode(ordonnance.getCircuitPatient().getMatricule());
+        if (ordonnance.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(ordonnance.getCreatedByUser());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            allCircuitPatientDs.setNomCompletAgent(nomAgent);
+        }
+        return allCircuitPatientDs;
     }
 }

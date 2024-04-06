@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDetailDs implements Serializable {
+    private Long id;
     private String code;
     private String prenom;
     private String nom;
@@ -38,4 +39,5 @@ public class PatientDetailDs implements Serializable {
     private int isCircuitGenerated;
     private Long createdBy;
     private boolean est_accompagne;
+    private DiagnosticDs diagnosticDs;
 }

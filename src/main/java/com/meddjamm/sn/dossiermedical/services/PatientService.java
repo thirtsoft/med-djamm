@@ -21,4 +21,6 @@ public interface PatientService {
 
     Page<Patient> findAllPatients(Integer pageNumber, Integer pageSize);
 
+    long countActivePatient();
+
 }

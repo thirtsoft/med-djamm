@@ -1,31 +1,34 @@
-package com.meddjamm.sn.rh.entity;
+package com.meddjamm.sn.dossiermedical.entity;
 
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
-@Table(name = "planification")
+@Table(name = "discussion")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Planification extends AbstractAuditableEntity implements Serializable {
+public class Discussion extends AbstractAuditableEntity implements Serializable {
 
-    private String libelle;
+    @Column(columnDefinition = "TEXT")
+    private String resume;
 
-    @Column(name = "agent_medical_uid")
-    private String matricule;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "circuit_patient_uid")
+    private CircuitPatient circuitPatient;
 
-    private Date dateService;
-
-    private Date createdDate;
+    @JoinColumn(name = "circuit_patient_id")
+    private Long circuitPatientId;
 
     private int actif;
 
@@ -42,5 +45,4 @@ public class Planification extends AbstractAuditableEntity implements Serializab
         else
             this.actif = 0;
     }
-
 }

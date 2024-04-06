@@ -197,9 +197,26 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         utilisateur.setActif(false);
     }
 
+    @Override
+    public List<Utilisateur> findAllMedecins() {
+        return utilisateurRepository.findAllMedecins();
+    }
+
     private String passwordResetEmailLink(String applicationUrl) throws MessagingException, UnsupportedEncodingException {
         eventListener.sendPasswordResetVerificationEmail(applicationUrl);
         log.info("Click the link to reset your password :  {}", applicationUrl);
         return applicationUrl;
+    }
+
+    @Override
+    public void activatedAccount(String matricule) {
+        var utilisateur = this.findUtilisateurByMatricule(matricule);
+        utilisateur.setActif(true);
+    }
+
+    @Override
+    public void deactivatedAccount(String matricule) {
+        var utilisateur = this.findUtilisateurByMatricule(matricule);
+        utilisateur.setActif(false);
     }
 }

@@ -59,6 +59,9 @@ public class CircuitPatient extends AbstractAuditableEntity implements Serializa
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "circuitPatient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Synthese> syntheseList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "circuitPatient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Discussion> discussions;
+
     //    @CreatedBy
     private Long createdBy;
     //    @CreatedDate

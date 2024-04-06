@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ProfilRepository extends JpaRepository<Profil, Long> {
 
-    @Query("Select DISTINCT act from  Profil act where act.actif=1 and act.id != 4 and act.id != 10 and act.id != 11 order by act.code")
+    @Query("Select DISTINCT act from  Profil act where act.actif=1 order by act.code")
     List<Profil> findAllActive();
 
     @Query("Select DISTINCT act from  Profil act where act.id=:id")

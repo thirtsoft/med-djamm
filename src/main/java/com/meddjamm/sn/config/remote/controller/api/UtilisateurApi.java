@@ -2,6 +2,7 @@ package com.meddjamm.sn.config.remote.controller.api;
 
 import com.meddjamm.sn.config.motdepasse.ChangerMotDePasseRequest;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public interface UtilisateurApi {
     ResponseEntity<UtilisateurDs> creerUtilisateur(@RequestBody @Valid UtilisateurDs utilisateurDs, HttpServletRequest request);
 
     @GetMapping(value = "/activation")
-    ResponseEntity<String> activation(@RequestParam("code") String code);
+    String activation(@RequestParam("code") String code);
 
     @PutMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UtilisateurDs> updateUtilisateur(@RequestBody UtilisateurDs utilisateurDs);
@@ -41,7 +42,7 @@ public interface UtilisateurApi {
     ResponseEntity<Void> deleteUtilisateur(@PathVariable String email);
 
     @GetMapping(value = "/monprofil/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UtilisateurDs> findUtilisateurProfil(@PathVariable Long id);
+    ResponseEntity<UtilisateurProfilDs> findUtilisateurProfil(@PathVariable Long id);
 
     @PostMapping("/password-reset-request")
     ResponseEntity<String> changerMotDePasseRequest(@RequestBody ChangerMotDePasseRequest changerMotDePasseRequest, HttpServletRequest request);
@@ -50,5 +51,15 @@ public interface UtilisateurApi {
     String resetPassword(@RequestBody ChangerMotDePasseRequest changerMotDePasseRequest, @RequestParam("token") String token);
 
     @PostMapping("/change-password")
-    String changePassword(@RequestBody ChangerMotDePasseRequest requestUtil);
+    ResponseEntity<String> changePassword(@RequestBody ChangerMotDePasseRequest requestUtil);
+
+    @GetMapping(value = "/medecins", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<UtilisateurDs>> findAllMedecins();
+
+    @GetMapping(value = "/activated/{matricule}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> activatedAccount(@PathVariable String matricule);
+
+    @GetMapping(value = "/deactivated/{matricule}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> deactivatedAccount(@PathVariable String matricule);
+
 }

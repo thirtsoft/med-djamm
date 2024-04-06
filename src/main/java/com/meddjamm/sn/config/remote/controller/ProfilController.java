@@ -6,6 +6,7 @@ import com.meddjamm.sn.config.remote.controller.api.ProfilApi;
 import com.meddjamm.sn.config.remote.model.ProfilDs;
 import com.meddjamm.sn.config.service.ProfilService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -67,7 +67,9 @@ public class ProfilController implements ProfilApi {
 
     @Override
     public ResponseEntity<List<ProfilDs>> findAllProfils() {
-        return new ResponseEntity<>(profilAssembler.assembleEntitiesFrom(profilService.findAllActive()), FOUND);
+        return new ResponseEntity<>(profilAssembler.assembleEntitiesFrom(
+                profilService.findAllActive()
+        ), HttpStatus.OK);
     }
 
     @Override

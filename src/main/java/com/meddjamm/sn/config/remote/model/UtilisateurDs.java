@@ -45,6 +45,12 @@ public class UtilisateurDs {
     @NotNull
     private String typeUtilisateur;
 
+    private String education;
+
+    private String experience;
+
+    private String speciality;
+
 
     public boolean isEst_valide() {
         if (est_valide == 1)

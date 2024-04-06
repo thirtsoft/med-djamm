@@ -1,26 +1,23 @@
-package com.meddjamm.sn.rh.remote.model;
+package com.meddjamm.sn.dossiermedical.remote.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlanificationDs {
-
+public class DiscussionDs {
     private Long id;
 
-    private String libelle;
+    private String resume;
 
-    private String agentMedical;
+    private Long circuitPatientId;
 
-    private Date dateService;
+    private CircuitPatientDs circuitPatientDs;
 
-    private Date createdDate;
-
+    private String nomCompletAgent;
+    
     private int actif;
 
     public boolean isActif() {

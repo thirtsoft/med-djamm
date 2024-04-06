@@ -84,4 +84,9 @@ public class PatientServiceImpl implements PatientService {
     public Page<Patient> findAllPatients(Integer pageNumber, Integer pageSize) {
         return patientRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
+
+    @Override
+    public long countActivePatient() {
+        return patientRepository.countActivePatient();
+    }
 }
