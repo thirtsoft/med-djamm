@@ -50,4 +50,10 @@ public interface UtilisateurService {
     Utilisateur findUtilisateurByMatricule(String matricule);
 
     void deleteUtilisateur(String email);
+
+    List<Utilisateur> findAllMedecins();
+
+    void activatedAccount(String matricule);
+
+    void deactivatedAccount(String matricule);
 }

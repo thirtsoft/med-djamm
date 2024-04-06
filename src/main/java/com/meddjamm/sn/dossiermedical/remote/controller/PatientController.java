@@ -6,6 +6,7 @@ import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.remote.controller.api.PatientApi;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.services.ReportPdfService;
 import com.meddjamm.sn.utils.CSVSupport;
@@ -52,8 +53,8 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<PatientDetailDs> updatePatient(Long id, PatientDetailDs patientDetailDs) throws Exception {
-        Patient patientModifier = patientAssembler.assemblePatientFromDs(patientDetailDs);
+    public ResponseEntity<PatientDetailDs> updatePatient(Long id, PatientUpdateDs patientUpdateDs) throws Exception {
+        Patient patientModifier = patientAssembler.assembleUpdatePatient(patientUpdateDs);
         return new ResponseEntity<>(patientAssembler.assemblePatientDetails(patientService.updatePatient(id, patientModifier)), HttpStatus.OK);
     }
 

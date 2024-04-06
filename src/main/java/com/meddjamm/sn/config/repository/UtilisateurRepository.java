@@ -57,4 +57,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.matricule=:matricule")
     Utilisateur findUtilisateurByMatricule(@Param("matricule") String matricule);
+
+    @Query("Select DISTINCT u from Utilisateur u where u.actif=true and u.typeUtilisateur='Medecin' order by u.nom")
+    List<Utilisateur> findAllMedecins();
 }

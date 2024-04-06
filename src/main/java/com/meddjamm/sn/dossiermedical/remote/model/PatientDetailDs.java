@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,21 +11,15 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDetailDs implements Serializable {
-    @NotNull
+    private Long id;
     private String code;
-    @NotNull
     private String prenom;
-    @NotNull
     private String nom;
-    @NotNull
     private String sexe;
     private String civilite;
     private String address;
-    @NotNull
     private Date dateNaissance;
-    @NotNull
     private int age;
-    @NotNull
     private String numeroTelephone;
     private String profession;
     private String situationMatrimonial;
@@ -46,4 +39,5 @@ public class PatientDetailDs implements Serializable {
     private int isCircuitGenerated;
     private Long createdBy;
     private boolean est_accompagne;
+    private DiagnosticDs diagnosticDs;
 }

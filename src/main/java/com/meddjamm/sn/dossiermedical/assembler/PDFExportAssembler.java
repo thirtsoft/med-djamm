@@ -37,7 +37,7 @@ public class PDFExportAssembler {
                 String.join(DELIMITER, String.valueOf(patientMinDs.getDateAdmission())),
                 String.join(DELIMITER, patientMinDs.getPrenom()),
                 String.join(DELIMITER, patientMinDs.getNom()),
-                String.join(DELIMITER, patientMinDs.getSexe()),
-                String.join(DELIMITER, String.valueOf(patientMinDs.getAge())));
+                String.join(DELIMITER, String.valueOf(patientMinDs.getDateNaissance())),
+                String.join(DELIMITER, String.valueOf(patientMinDs.getTelephone())));
     }
 }

@@ -2,6 +2,7 @@ package com.meddjamm.sn.dossiermedical.remote.controller.api;
 
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public interface PatientApi {
     ResponseEntity<PatientDetailDs> creerDossierPatient(@RequestBody PatientDetailDs patientDetailDs);
 
     @PutMapping(value = "/edit/{id}")
-    ResponseEntity<PatientDetailDs> updatePatient(@PathVariable Long id, @RequestBody PatientDetailDs patientDetailDs) throws Exception;
+    ResponseEntity<PatientDetailDs> updatePatient(@PathVariable Long id, @RequestBody PatientUpdateDs patientUpdateDs) throws Exception;
 
     @GetMapping(value = "/{id}")
     ResponseEntity<PatientDetailDs> findById(@PathVariable Long id);

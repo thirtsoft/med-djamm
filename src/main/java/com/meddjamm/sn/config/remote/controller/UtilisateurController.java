@@ -111,4 +111,22 @@ public class UtilisateurController implements UtilisateurApi {
         return new ResponseEntity<>("Password changed successfully", CREATED);
     }
 
+    @Override
+    public ResponseEntity<List<UtilisateurDs>> findAllMedecins() {
+        return new ResponseEntity<>(utilisateurAssembler
+                .assembleEntitiesFrom(utilisateurService.findAllMedecins()), OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> activatedAccount(String matricule) {
+        utilisateurService.activatedAccount(matricule);
+        return new ResponseEntity<>(OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> deactivatedAccount(String matricule) {
+        utilisateurService.deactivatedAccount(matricule);
+        return new ResponseEntity<>(OK);
+    }
+
 }

@@ -52,4 +52,14 @@ public interface UtilisateurApi {
 
     @PostMapping("/change-password")
     ResponseEntity<String> changePassword(@RequestBody ChangerMotDePasseRequest requestUtil);
+
+    @GetMapping(value = "/medecins", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<UtilisateurDs>> findAllMedecins();
+
+    @GetMapping(value = "/activated/{matricule}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> activatedAccount(@PathVariable String matricule);
+
+    @GetMapping(value = "/deactivated/{matricule}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> deactivatedAccount(@PathVariable String matricule);
+
 }

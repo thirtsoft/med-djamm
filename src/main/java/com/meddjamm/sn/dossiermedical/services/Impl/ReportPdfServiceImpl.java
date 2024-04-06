@@ -89,10 +89,10 @@ public class ReportPdfServiceImpl extends ReportAbstract implements ReportPdfSer
             table.addCell(cell);
 
 //            String blocked = item.getBlocked() == 1 ? "Blocked" : "Non Blocked";
-            cell.setPhrase(new Phrase(item.getSexe(), getFontContent()));
+            cell.setPhrase(new Phrase(valueOf(item.getDateNaissance()), getFontContent()));
             table.addCell(cell);
 
-            cell.setPhrase(new Phrase(valueOf(item.getAge()), getFontContent()));
+            cell.setPhrase(new Phrase(valueOf(item.getTelephone()), getFontContent()));
             table.addCell(cell);
         }
 
