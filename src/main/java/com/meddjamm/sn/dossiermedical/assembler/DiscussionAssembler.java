@@ -21,6 +21,10 @@ public class DiscussionAssembler {
         return discussions.stream().map(this::assembleEntityToDs).toList();
     }
 
+    public List<Discussion> assembleEntitiesFromDs(List<DiscussionDs> discussions) {
+        return discussions.stream().map(this::assembleDiscussionFromDs).toList();
+    }
+
     public DiscussionDs assembleEntityToDs(Discussion discussion) {
         DiscussionDs discussionDs = new DiscussionDs();
         if (discussionDs.getId() == null)

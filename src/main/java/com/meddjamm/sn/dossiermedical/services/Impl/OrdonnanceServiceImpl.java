@@ -29,6 +29,8 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
         ordonnance.setActif(true);
         ordonnance.setCreatedDate(new Date());
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(ordonnance.getCircuitPatientId());
+        circuitPatient.setType("Ordonnance");
+        circuitPatientRepository.save(circuitPatient);
         ordonnance.setCircuitPatientId(circuitPatient.getId());
         ordonnance.setCircuitPatient(circuitPatient);
         return ordonnanceRepository.save(ordonnance);

@@ -13,14 +13,11 @@ public class PatientUpdateDs {
     private String nom;
     private String sexe;
     private String civilite;
-    private String address;
-    private String telephone;
     private String profession;
-    private String photo;
+    private String situationMatrimonial;
     private String race;
     private String ethnie;
     private String origine;
-    private String nationalite;
     private String originePere;
     private String origineMere;
     private String prototype;

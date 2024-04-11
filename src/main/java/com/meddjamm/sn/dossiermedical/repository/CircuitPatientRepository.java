@@ -24,4 +24,7 @@ public interface CircuitPatientRepository extends JpaRepository<CircuitPatient, 
     @Query("SELECT DISTINCT max(act.numeroCircuit) FROM CircuitPatient act")
     int maxNumeroCircuitPatient();
 
+    @Query("SELECT DISTINCT p from CircuitPatient p where p.code=:code and p.actif=1 order by p.id desc")
+    List<CircuitPatient> findAllCircuitPatientsByPatient(@Param("code") String code);
+
 }

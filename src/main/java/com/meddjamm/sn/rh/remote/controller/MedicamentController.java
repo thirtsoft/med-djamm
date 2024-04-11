@@ -7,13 +7,11 @@ import com.meddjamm.sn.rh.remote.model.MedicamentDs;
 import com.meddjamm.sn.rh.services.MedicamentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 public class MedicamentController implements MedicamentApi {
 
     private final MedicamentService medicamentService;
@@ -53,7 +51,7 @@ public class MedicamentController implements MedicamentApi {
     public ResponseEntity<List<MedicamentDs>> findAllMedicaments() {
         return new ResponseEntity<>(medicamentAssembler.assembleEntitiesFrom(
                 medicamentService.findAllMedicaments()
-        ),HttpStatus.OK);
+        ), HttpStatus.OK);
     }
 
     @Override

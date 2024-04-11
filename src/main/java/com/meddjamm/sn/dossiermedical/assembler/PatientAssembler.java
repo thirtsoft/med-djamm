@@ -1,7 +1,9 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
+import com.meddjamm.sn.dossiermedical.entity.Diagnostic;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.entity.PersonneConfiance;
+import com.meddjamm.sn.dossiermedical.remote.model.DiagnosticDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
@@ -90,11 +92,14 @@ public class PatientAssembler {
         patient.setIsCircuitGenerated(patientDetailDs.getIsCircuitGenerated());
         patient.setCreatedBy(patientDetailDs.getCreatedBy());
         patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
+        if (patientDetailDs.getDiagnosticDs() != null)
+            patient.setDiagnostic(assembleDiagnosticEntityFromDiagnosticDs(patientDetailDs.getDiagnosticDs()));
         return patient;
     }
 
     public PatientMinDs assembleMinFrom(Patient patient) {
         PatientMinDs patientMinDs = new PatientMinDs();
+        patientMinDs.setId(patient.getId());
         patientMinDs.setCode(patient.getCode());
         patientMinDs.setDateAdmission(patient.getDateAdmission());
         patientMinDs.setNom(patient.getNom());
@@ -138,11 +143,11 @@ public class PatientAssembler {
         patient.setNom(patientUpdateDs.getNom());
         patient.setSexe(patientUpdateDs.getSexe());
         patient.setCivilite(patientUpdateDs.getCivilite());
-        patient.setAddress(patientUpdateDs.getAddress());
-        patient.setNumeroTelephone(patientUpdateDs.getTelephone());
         patient.setProfession(patientUpdateDs.getProfession());
+        patient.setSituationMatrimonial(patientUpdateDs.getSituationMatrimonial());
         patient.setRace(patientUpdateDs.getRace());
         patient.setEthnie(patientUpdateDs.getEthnie());
+        patient.setOrigine(patientUpdateDs.getOrigine());
         patient.setOrigineMere(patientUpdateDs.getOrigineMere());
         patient.setOriginePere(patientUpdateDs.getOriginePere());
         patient.setPrototype(patientUpdateDs.getPrototype());
@@ -150,5 +155,14 @@ public class PatientAssembler {
         patient.setNiveauSocialEconomique(patientUpdateDs.getNiveauSocialEconomique());
         patient.setRegimeAlimentaire(patientUpdateDs.getRegimeAlimentaire());
         return patient;
+    }
+
+    public Diagnostic assembleDiagnosticEntityFromDiagnosticDs(DiagnosticDs diagnosticDs) {
+        Diagnostic diagnostic = new Diagnostic();
+        if (diagnosticDs.getId() != null)
+            diagnostic.setId(diagnosticDs.getId());
+        diagnostic.setDiagnostic_principal(diagnosticDs.getDiagnostic_principal());
+        diagnostic.setDiagnostic_associe(diagnosticDs.getDiagnostic_associe());
+        return diagnostic;
     }
 }

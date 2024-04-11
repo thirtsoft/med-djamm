@@ -1,7 +1,6 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
 import com.meddjamm.sn.remote.model.DocumentDs;
-import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +18,6 @@ public class ConsultationDetailDs {
     private String resume;
 
     private PatientDetailDs patientDetailDs;
-
-    private MedecinDetailDs medecinDetailDs;
 
     private List<DocumentDs> documentDs;
 

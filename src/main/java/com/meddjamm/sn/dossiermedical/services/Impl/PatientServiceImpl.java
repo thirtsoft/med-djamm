@@ -43,19 +43,38 @@ public class PatientServiceImpl implements PatientService {
         patientResult.setCivilite(patient.getCivilite());
         patientResult.setDateNaissance(patient.getDateNaissance());
         patientResult.setAge(patient.getAge());
-        patientResult.setConsanguinite(patient.getConsanguinite());
-        patientResult.setEthnie(patient.getEthnie());
         patientResult.setNationalite(patient.getNationalite());
-        patientResult.setNiveauSocialEconomique(patient.getNiveauSocialEconomique());
-        patientResult.setPhoto(patient.getPhoto());
+        patientResult.setProfession(patient.getProfession());
+        patientResult.setSituationMatrimonial(patient.getSituationMatrimonial());
+        patientResult.setPersonneConfiance(patient.getPersonneConfiance());
+        return patientRepository.save(patientResult);
+    }
+
+    @Override
+    public void updatePatientByMedeccin(Long id, Patient patient) throws Exception {
+        if (!patientRepository.existsById(id)) {
+            throw new Exception("This Patient is not found");
+        }
+        Patient patientResult = patientRepository.findPatientById(id);
+        if (patientResult == null) {
+            throw new Exception("This Patient is not found");
+        }
+        patientResult.setPrenom(patient.getPrenom());
+        patientResult.setNom(patient.getNom());
+        patientResult.setSexe(patient.getSexe());
+        patientResult.setCivilite(patient.getCivilite());
+        patientResult.setProfession(patient.getProfession());
+        patientResult.setSituationMatrimonial(patient.getSituationMatrimonial());
+        patientResult.setRace(patient.getRace());
+        patientResult.setEthnie(patient.getEthnie());
         patientResult.setOrigine(patient.getOrigine());
         patientResult.setOrigineMere(patient.getOrigineMere());
         patientResult.setOriginePere(patient.getOriginePere());
-        patientResult.setRace(patient.getRace());
-        patientResult.setProfession(patient.getProfession());
+        patientResult.setPrototype(patient.getPrototype());
+        patientResult.setConsanguinite(patient.getConsanguinite());
+        patientResult.setNiveauSocialEconomique(patient.getNiveauSocialEconomique());
         patientResult.setRegimeAlimentaire(patient.getRegimeAlimentaire());
-        patientResult.setSituationMatrimonial(patient.getSituationMatrimonial());
-        return patientRepository.save(patientResult);
+        patientRepository.save(patientResult);
     }
 
     @Override

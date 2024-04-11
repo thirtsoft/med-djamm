@@ -11,6 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientMinDs implements Serializable {
+
+    private Long id;
     private String code;
     private Date dateAdmission;
     private String prenom;

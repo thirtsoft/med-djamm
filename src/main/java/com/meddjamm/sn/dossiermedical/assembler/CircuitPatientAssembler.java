@@ -114,15 +114,15 @@ public class CircuitPatientAssembler {
         circuitPatientDs.setType(circuitPatient.getType());
         circuitPatientDs.setCreateDate(circuitPatient.getCreateDate());
         circuitPatientDs.setCreatedBy(circuitPatient.getCreatedBy());
-        circuitPatientDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntitiesFrom(circuitPatient.getObservationCliniqueList()));
-        circuitPatientDs.setExamenComplementaireDs(examenComplementaireAssembler.assembleEntitiesFromEntities(circuitPatient.getExamenComplementaires()));
-        circuitPatientDs.setTraitementMedicalDs(traitementMedicalAssembler.assembleEntitiesFrom(circuitPatient.getTraitementMedicals()));
-        circuitPatientDs.setConsultationDs(consultationAssembler.assembleEntitiesFrom(circuitPatient.getConsultations()));
+//        circuitPatientDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntitiesFrom(circuitPatient.getObservationCliniqueList()));
+//        circuitPatientDs.setExamenComplementaireDs(examenComplementaireAssembler.assembleEntitiesFromEntities(circuitPatient.getExamenComplementaires()));
+//        circuitPatientDs.setTraitementMedicalDs(traitementMedicalAssembler.assembleEntitiesFrom(circuitPatient.getTraitementMedicals()));
+//        circuitPatientDs.setConsultationDs(consultationAssembler.assembleEntitiesFrom(circuitPatient.getConsultations()));
         circuitPatientDs.setOrdonnanceDs(ordonnanceAssembler.assembleEntitiesFrom(circuitPatient.getOrdonnances()));
         circuitPatientDs.setAvisSpecialisteDs(avisSpecialisteAssembler.assembleEntitiesFrom(circuitPatient.getAvisSpecialistes()));
         circuitPatientDs.setExamenBiologiqueDs(examenBiologiqueAssembler.assembleEntitiesFrom(circuitPatient.getExamenBiologiques()));
-        circuitPatientDs.setSyntheseDs(syntheseAssembler.assembleEntitiesFrom(circuitPatient.getSyntheseList()));
-        circuitPatientDs.setDiscussionDs(discussionAssembler.assembleEntitiesFrom(circuitPatient.getDiscussions()));
+//        circuitPatientDs.setSyntheseDs(syntheseAssembler.assembleEntitiesFrom(circuitPatient.getSyntheseList()));
+//        circuitPatientDs.setDiscussionDs(discussionAssembler.assembleEntitiesFrom(circuitPatient.getDiscussions()));
         circuitPatientDs.setNumeroCircuit(
                 UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
         if (circuitPatient.getCode() != null) {

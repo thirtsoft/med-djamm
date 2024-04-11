@@ -30,6 +30,7 @@ public class ExamenBiologiqueServiceImpl implements ExamenBiologiqueService {
         examen.setActif(true);
         examen.setCreatedDate(new Date());
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(examen.getCircuitPatientId());
+        circuitPatient.setType("Examen biologie");
         examen.setCircuitPatientId(circuitPatient.getId());
         examen.setCircuitPatient(circuitPatient);
         return examenBiologiqueRepository.save(examen);

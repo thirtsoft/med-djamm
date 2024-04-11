@@ -30,6 +30,8 @@ public class SyntheseServiceImpl implements SyntheseService {
         synthese.setActif(true);
         synthese.setCreatedDate(new Date());
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(synthese.getCircuitPatientId());
+        circuitPatient.setType("Synthese");
+        circuitPatientRepository.save(circuitPatient);
         synthese.setCircuitPatientId(circuitPatient.getId());
         synthese.setCircuitPatient(circuitPatient);
         return syntheseRepository.save(synthese);

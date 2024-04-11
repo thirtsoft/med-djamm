@@ -68,6 +68,11 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
     }
 
     @Override
+    public List<CircuitPatient> findAllCircuitPatientsByPatient(String code) {
+        return circuitPatientRepository.findAllCircuitPatientsByPatient(code);
+    }
+
+    @Override
     public void deleteCircuitPatient(Long id) {
         CircuitPatient circuitPatient = findById(id);
         circuitPatient.setActif(false);

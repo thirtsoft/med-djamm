@@ -1,12 +1,11 @@
-package com.meddjamm.sn.services.Impl;
+package com.meddjamm.sn.dossiermedical.services.Impl;
 
-import com.meddjamm.sn.entity.Hospitalisation;
-import com.meddjamm.sn.repository.HospitalisationRepository;
-import com.meddjamm.sn.services.HospitalisationService;
+import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
+import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
+import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,14 +21,16 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     @Override
     public Hospitalisation saveHospitalisation(Hospitalisation hospitalisation) {
         hospitalisation.setActif(true);
-        hospitalisation.setCreatedDate(new Date());
+        if (hospitalisation.getNumeroHospitalisation() == 0) {
+            hospitalisation.setNumeroHospitalisation(createNumeroHospitalisation());
+        }
         return hospitalisationRepository.save(hospitalisation);
     }
 
     @Override
-    public Hospitalisation updateHospitalisation(Long id, Hospitalisation hospitalisation) throws Exception {
+    public Hospitalisation updateHospitalisation(Long id, Hospitalisation hospitalisation) {
         if (!hospitalisationRepository.existsById(id)) {
-            log.info("Hospitalisation that id " + id + "is not found");
+            log.info("Hospitalisation that id is " + id + "is not found");
         }
         hospitalisation.setId(id);
         return hospitalisationRepository.save(hospitalisation);
@@ -46,9 +47,24 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
+    public List<Hospitalisation> findAllByPatient(String code) {
+        return hospitalisationRepository.findAllByPatient(code);
+    }
+
+    @Override
     public void deleteHospitalisation(Long id) {
         Hospitalisation hospitalisation = findById(id);
         hospitalisation.setActif(false);
         hospitalisationRepository.save(hospitalisation);
+    }
+
+    private synchronized int createNumeroHospitalisation() {
+        int nbr = 0;
+        try {
+            nbr = hospitalisationRepository.maxNumeroHospitalisation();
+
+        } catch (Exception e) {
+        }
+        return (nbr + 1);
     }
 }

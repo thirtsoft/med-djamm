@@ -36,10 +36,13 @@ public interface CircuitPatientApi {
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatients();
 
+    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatientsByPatient(@PathVariable("code") String code);
+
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteCircuitPatient(@PathVariable Long id);
 
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/by-patientsss/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(@PathVariable String code);
 
 }

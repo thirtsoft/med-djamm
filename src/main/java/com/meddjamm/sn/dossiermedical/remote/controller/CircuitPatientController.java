@@ -10,13 +10,11 @@ import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
 import com.meddjamm.sn.dossiermedical.services.CircuitPatientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(value = "http://localhost:4200/")
 public class CircuitPatientController implements CircuitPatientApi {
 
     private final CircuitPatientAssembler circuitPatientAssembler;
@@ -60,6 +58,13 @@ public class CircuitPatientController implements CircuitPatientApi {
     public ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatients() {
         return new ResponseEntity<>(circuitPatientAssembler.assembleEntitiesFrom(
                 circuitPatientService.findAllCircuitPatients()
+        ), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatientsByPatient(String code) {
+        return new ResponseEntity<>(circuitPatientAssembler.assembleEntitiesFrom(
+                circuitPatientService.findAllCircuitPatientsByPatient(code)
         ), HttpStatus.OK);
     }
 

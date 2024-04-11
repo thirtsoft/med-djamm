@@ -11,6 +11,8 @@ public interface PatientService {
 
     Patient updatePatient(Long id, Patient patient) throws Exception;
 
+    void updatePatientByMedeccin(Long id, Patient patient) throws Exception;
+
     Patient findById(Long id);
 
     Patient findByCode(String code);

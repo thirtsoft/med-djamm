@@ -12,20 +12,6 @@ import java.time.format.DateTimeFormatter;
 
 public class UtilString {
 
-    public static String createNumeroDossierPatient(int poz) {
-        String numero = "";
-        DecimalFormat numFormat = new DecimalFormat("00000");
-        numero = "D0SSIER_" + numFormat.format(poz);
-        return numero;
-    }
-
-    public static int formatNumeroDossierPatient(String poz) {
-        int numero = 0;
-        String s = poz.substring(3);
-        numero = Integer.parseInt(s);
-        return numero;
-    }
-
     public static String createNumeroCircuitPatient(int poz) {
         String numero = "";
         DecimalFormat numFormat = new DecimalFormat("00000");
@@ -40,14 +26,14 @@ public class UtilString {
         return numero;
     }
 
-    public static String createNumeroPassagePatient(int poz) {
+    public static String createNumeroHospitalisation(int poz) {
         String numero = "";
         DecimalFormat numFormat = new DecimalFormat("00000");
-        numero = "PASSAGE_" + numFormat.format(poz);
+        numero = "HOSTPITALISATION_" + numFormat.format(poz);
         return numero;
     }
 
-    public static int formatNumeroPassagePatient(String poz) {
+    public static int formatNumeroHospitalisation(String poz) {
         int numero = 0;
         String s = poz.substring(3);
         numero = Integer.parseInt(s);
@@ -81,20 +67,6 @@ public class UtilString {
     }
 
     public static int formatNumeroExamenPhysique(String poz) {
-        int numero = 0;
-        String s = poz.substring(3);
-        numero = Integer.parseInt(s);
-        return numero;
-    }
-
-    public static String createNumeroDossierMedical(int poz) {
-        String numero = "";
-        DecimalFormat numFormat = new DecimalFormat("00000");
-        numero = "DOSSIER_MEDICAL" + numFormat.format(poz);
-        return numero;
-    }
-
-    public static int formatNumeroDossierMedical(String poz) {
         int numero = 0;
         String s = poz.substring(3);
         numero = Integer.parseInt(s);

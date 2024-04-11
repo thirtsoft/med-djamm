@@ -27,6 +27,8 @@ public class DiscussionServiceImpl implements DiscussionService {
     public Discussion saveDiscussion(Discussion discussion) {
         discussion.setActif(true);
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(discussion.getCircuitPatientId());
+        circuitPatient.setType("Discussion");
+        circuitPatientRepository.save(circuitPatient);
         discussion.setCircuitPatientId(circuitPatient.getId());
         discussion.setCircuitPatient(circuitPatient);
         return discussionRepository.save(discussion);

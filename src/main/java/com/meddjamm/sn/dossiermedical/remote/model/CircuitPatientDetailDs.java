@@ -1,7 +1,6 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
-import com.meddjamm.sn.remote.model.MedecinDetailDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,9 +22,7 @@ public class CircuitPatientDetailDs {
     private PatientDetailDs patientDetailDs;
 
     private String matricule;
-
-    private MedecinDetailDs medecinDetailDs;
-
+    
     private UtilisateurDs utilisateurDetailDs;
 
     private String nomCompletAgent;

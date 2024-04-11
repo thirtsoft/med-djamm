@@ -1,21 +1,17 @@
-package com.meddjamm.sn.entity;
+package com.meddjamm.sn.dossiermedical.entity;
 
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "hospitalisation")
@@ -24,28 +20,33 @@ import java.util.Set;
 @AllArgsConstructor
 public class Hospitalisation extends AbstractAuditableEntity implements Serializable {
 
+    @Column(name = "numero_hospisatisation", nullable = true, unique = true)
+    private int numeroHospitalisation;
+
     @Column(name = "patient_uid")
-    private String indexPatient;
+    private String code;
 
     @Column(name = "medecin_uid")
     private String matricule;
 
-  /*  @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "passage_patient_uid")
-    private PassagePatient passagePatient;*/
-
-    @JoinColumn(name = "passage_patient_uid")
-    private Long passagePatientId;
-
     private String resume;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "document_par_hospitalisation",
-            joinColumns = @JoinColumn(name = "hospitalisation_uid"),
-            inverseJoinColumns = @JoinColumn(name = "document_uid"))
-    private Set<Document> documents;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<ObservationClinique> observationCliniqueList;
 
-    private Date createdDate;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ExamenComplementaire> examenComplementaires;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<TraitementMedical> traitementMedicals;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Discussion> discussions;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Synthese> syntheseList;
+
+    private int est_Transfer;
 
     private int actif;
 

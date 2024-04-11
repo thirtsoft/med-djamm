@@ -31,6 +31,8 @@ public class ConsultationServiceImpl implements ConsultationService {
         consultation.setActif(true);
         consultation.setCreatedDate(new Date());
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(consultation.getCircuitPatientId());
+        circuitPatient.setType("Consultation");
+        circuitPatientRepository.save(circuitPatient);
         consultation.setCircuitPatientId(circuitPatient.getId());
         consultation.setCircuitPatient(circuitPatient);
         return consultationRepository.save(consultation);

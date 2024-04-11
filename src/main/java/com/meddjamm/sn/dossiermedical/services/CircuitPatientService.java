@@ -18,5 +18,7 @@ public interface CircuitPatientService {
 
     List<CircuitPatient> findAllCircuitPatients();
 
+    List<CircuitPatient> findAllCircuitPatientsByPatient(String code);
+
     void deleteCircuitPatient(Long id);
 }

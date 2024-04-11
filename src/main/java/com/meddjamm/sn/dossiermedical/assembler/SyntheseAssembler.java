@@ -21,6 +21,10 @@ public class SyntheseAssembler {
         return syntheseList.stream().map(this::assembleEntityToDs).toList();
     }
 
+    public List<Synthese> assembleEntitiesFromDs(List<SyntheseDs> syntheseList) {
+        return syntheseList.stream().map(this::assembleSyntheseFromDs).toList();
+    }
+
     public SyntheseDs assembleEntityToDs(Synthese synthese) {
         SyntheseDs syntheseDs = new SyntheseDs();
         if (synthese.getId() != null)
