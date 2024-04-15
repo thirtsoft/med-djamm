@@ -1,6 +1,8 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
+import com.meddjamm.sn.config.assembler.UtilisateurAssembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.entity.RendezVous;
@@ -12,6 +14,8 @@ import com.meddjamm.sn.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class RendezVousAssembler {
@@ -19,6 +23,11 @@ public class RendezVousAssembler {
     private final PatientService patientService;
     private final PatientAssembler patientAssembler;
     private final UtilisateurService utilisateurService;
+    private final UtilisateurAssembler utilisateurAssembler;
+
+    public List<RendezVousDetailDs> assembleEntitiesFrom(List<RendezVous> rendezVous) {
+        return rendezVous.stream().map(this::assembleEntitiesToDs).toList();
+    }
 
     public RendezVousDs assembleEntityToDs(RendezVous rendezVous) {
         RendezVousDs rendezVousDs = new RendezVousDs();
@@ -63,6 +72,7 @@ public class RendezVousAssembler {
         rendezVousDs.setCreateDate(rendezVous.getCreateDate());
         rendezVousDs.setActif(rendezVous.isActif());
         rendezVousDs.setCode(rendezVous.getCode());
+        rendezVousDs.setMatricule(rendezVous.getMatricule());
         if (rendezVous.getCode() != null) {
             Patient patient = patientService.findByCode(rendezVous.getCode());
             PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
@@ -72,6 +82,11 @@ public class RendezVousAssembler {
             Utilisateur utilisateur = utilisateurService.findUserById(rendezVous.getCreatedBy());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             rendezVousDs.setNomCompletAgent(nomAgent);
+        }
+        if (rendezVous.getMatricule() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(rendezVous.getMatricule());
+            UtilisateurDs utilisateurDs = utilisateurAssembler.assembleUtilisateurDsFromEntity(utilisateur);
+            rendezVousDs.setUtilisateurDs(utilisateurDs);
         }
         rendezVousDs.setEtat(rendezVous.getEtat());
         rendezVousDs.setLibelleEtat(getLibelleEtat(rendezVous.getEtat()));

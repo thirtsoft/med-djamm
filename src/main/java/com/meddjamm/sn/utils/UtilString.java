@@ -15,7 +15,7 @@ public class UtilString {
     public static String createNumeroCircuitPatient(int poz) {
         String numero = "";
         DecimalFormat numFormat = new DecimalFormat("00000");
-        numero = "CIRCUIT_" + numFormat.format(poz);
+        numero = "DMI_" + numFormat.format(poz);
         return numero;
     }
 

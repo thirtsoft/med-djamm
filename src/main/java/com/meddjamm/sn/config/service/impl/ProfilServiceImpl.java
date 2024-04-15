@@ -33,8 +33,14 @@ public class ProfilServiceImpl implements ProfilService {
         if (!profilRepository.existsById(id)) {
             log.info("This profil that id is " + id + "not found");
         }
-        profil.setId(id);
-        return profilRepository.save(profil);
+        Profil profilResult = profilRepository.findProfilById(id);
+        if (profilResult == null) {
+            throw new Exception("This Profil is not found");
+        }
+        profilResult.setCode(profil.getCode());
+        profilResult.setLibelle(profil.getLibelle());
+        profilResult.setAction(profil.getAction());
+        return profilRepository.save(profilResult);
     }
 
     @Override

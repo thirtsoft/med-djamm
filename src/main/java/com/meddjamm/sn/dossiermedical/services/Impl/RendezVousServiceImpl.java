@@ -57,7 +57,7 @@ public class RendezVousServiceImpl implements RendezVousService {
     }
 
     @Override
-    public List<RendezVous> findRendezVousByDoctorId(String matricule) {
-        return rendezVousRepository.findRendezVousByDoctorId(matricule);
+    public List<RendezVous> findAllRendezVousByDoctorId(String matricule) {
+        return rendezVousRepository.findRendezVousByDoctorMatricule(matricule);
     }
 }

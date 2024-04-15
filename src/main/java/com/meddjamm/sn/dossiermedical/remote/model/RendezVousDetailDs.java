@@ -1,5 +1,6 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
+import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class RendezVousDetailDs implements Serializable {
     private String code;
     private PatientDetailDs patient;
     private String matricule;
+    private UtilisateurDs utilisateurDs;
     private Date dateRendezVous;
     private String heure;
     private Date createDate;

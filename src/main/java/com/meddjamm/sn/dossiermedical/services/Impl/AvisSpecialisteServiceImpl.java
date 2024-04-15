@@ -40,8 +40,12 @@ public class AvisSpecialisteServiceImpl implements AvisSpecialisteService {
         if (!avisSpecialisteRepository.existsById(id)) {
             log.info("Avis specialiste that this id " + id + "not found");
         }
-        avisSpecialiste.setId(id);
-        return avisSpecialisteRepository.save(avisSpecialiste);
+        AvisSpecialiste avisSpecialisteResult = avisSpecialisteRepository.findAvisSpecialisteById(id);
+        if (avisSpecialisteResult == null) {
+            throw new Exception("This Avis specialiste is not found");
+        }
+        avisSpecialisteResult.setResume(avisSpecialiste.getResume());
+        return avisSpecialisteRepository.save(avisSpecialisteResult);
     }
 
     @Override

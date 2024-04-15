@@ -30,15 +30,21 @@ public class MedicamentServiceImpl implements MedicamentService {
 
     @Override
     public Medicament updateMedicament(Long id, Medicament medicament) throws Exception {
-        if (findById(id) != null)
-            log.info("This code exiist");
-        medicament.setId(id);
-        return medicamentRepository.save(medicament);
+        if (!medicamentRepository.existsById(id)) {
+            log.info("This Medicament that id is " + id + "not found");
+        }
+        Medicament medicamentResult = medicamentRepository.findMedicamentById(id);
+        if (medicamentResult == null) {
+            throw new Exception("This Medicament is not found");
+        }
+        medicamentResult.setCode(medicament.getCode());
+        medicamentResult.setLibelle(medicament.getLibelle());
+        return medicamentRepository.save(medicamentResult);
     }
 
     @Override
     public Medicament findById(Long id) {
-        return medicamentRepository.findById(id).orElseThrow(()-> new RuntimeException("This medicament that id " + id + "is not found"));
+        return medicamentRepository.findById(id).orElseThrow(() -> new RuntimeException("This medicament that id " + id + "is not found"));
     }
 
     @Override

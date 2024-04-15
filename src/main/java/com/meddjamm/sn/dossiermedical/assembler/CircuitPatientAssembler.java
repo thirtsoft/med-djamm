@@ -6,7 +6,7 @@ import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.AvisSpecialiste;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
-import com.meddjamm.sn.dossiermedical.entity.Consultation;
+import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
 import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
@@ -38,6 +38,7 @@ public class CircuitPatientAssembler {
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
     private final DiscussionAssembler discussionAssembler;
+    private final ConsultationMedicalAssembler consultationMedicalAssembler;
 
     public List<CircuitPatientListDs> assembleEntitiesFrom(List<CircuitPatient> circuitPatients) {
         return circuitPatients.stream().map(this::assembleEntityToListDs).toList();
@@ -117,10 +118,11 @@ public class CircuitPatientAssembler {
 //        circuitPatientDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntitiesFrom(circuitPatient.getObservationCliniqueList()));
 //        circuitPatientDs.setExamenComplementaireDs(examenComplementaireAssembler.assembleEntitiesFromEntities(circuitPatient.getExamenComplementaires()));
 //        circuitPatientDs.setTraitementMedicalDs(traitementMedicalAssembler.assembleEntitiesFrom(circuitPatient.getTraitementMedicals()));
-//        circuitPatientDs.setConsultationDs(consultationAssembler.assembleEntitiesFrom(circuitPatient.getConsultations()));
+        //    circuitPatientDs.setConsultationDs(consultationAssembler.assembleEntitiesFrom(circuitPatient.getConsultations()));
+        circuitPatientDs.setConsultationMedicalDs(consultationMedicalAssembler.assembleEntitiesFrom(circuitPatient.getConsultationMedicals()));
         circuitPatientDs.setOrdonnanceDs(ordonnanceAssembler.assembleEntitiesFrom(circuitPatient.getOrdonnances()));
         circuitPatientDs.setAvisSpecialisteDs(avisSpecialisteAssembler.assembleEntitiesFrom(circuitPatient.getAvisSpecialistes()));
-        circuitPatientDs.setExamenBiologiqueDs(examenBiologiqueAssembler.assembleEntitiesFrom(circuitPatient.getExamenBiologiques()));
+        //   circuitPatientDs.setExamenBiologiqueDs(examenBiologiqueAssembler.assembleEntitiesFrom(circuitPatient.getExamenBiologiques()));
 //        circuitPatientDs.setSyntheseDs(syntheseAssembler.assembleEntitiesFrom(circuitPatient.getSyntheseList()));
 //        circuitPatientDs.setDiscussionDs(discussionAssembler.assembleEntitiesFrom(circuitPatient.getDiscussions()));
         circuitPatientDs.setNumeroCircuit(
@@ -165,8 +167,8 @@ public class CircuitPatientAssembler {
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             circuitPatientDs.setNomCompletAgent(nomAgent);
         }
-        if (!circuitPatient.getConsultations().isEmpty()) {
-            for (Consultation consultation : circuitPatient.getConsultations()) {
+        if (!circuitPatient.getConsultationMedicals().isEmpty()) {
+            for (ConsultationMedical consultation : circuitPatient.getConsultationMedicals()) {
                 circuitPatientDs.setType("Consultation");
             }
         }

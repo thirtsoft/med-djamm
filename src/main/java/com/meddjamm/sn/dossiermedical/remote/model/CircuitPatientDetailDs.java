@@ -22,7 +22,7 @@ public class CircuitPatientDetailDs {
     private PatientDetailDs patientDetailDs;
 
     private String matricule;
-    
+
     private UtilisateurDs utilisateurDetailDs;
 
     private String nomCompletAgent;
@@ -51,6 +51,8 @@ public class CircuitPatientDetailDs {
     private List<ExamenBiologiqueDs> examenBiologiqueDs;
 
     private List<DiscussionDs> discussionDs;
+
+    private List<ConsultationMedicalDs> consultationMedicalDs;
 
     private Date createDate;
 

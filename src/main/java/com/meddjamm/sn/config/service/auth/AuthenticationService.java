@@ -66,6 +66,7 @@ public class AuthenticationService {
                 .id(user.getId())
                 .matricule(user.getMatricule())
                 .email(user.getEmail())
+                .typeUtilisateur(user.getTypeUtilisateur())
                 .profilReponse(getProfile(user.getProfil()))
                 .build();
     }

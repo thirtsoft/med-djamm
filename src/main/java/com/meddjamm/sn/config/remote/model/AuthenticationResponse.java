@@ -17,5 +17,6 @@ public class AuthenticationResponse {
     private Long id;
     private String matricule;
     private String nom, prenom, email;
+    private String typeUtilisateur;
     private ProfilReponse profilReponse;
 }

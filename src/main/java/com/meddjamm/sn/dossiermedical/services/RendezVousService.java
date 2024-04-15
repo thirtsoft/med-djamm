@@ -16,6 +16,6 @@ public interface RendezVousService {
 
     void deleteRendezVous(Long id);
 
-    List<RendezVous> findRendezVousByDoctorId(String matricule);
+    List<RendezVous> findAllRendezVousByDoctorId(String matricule);
 
 }
