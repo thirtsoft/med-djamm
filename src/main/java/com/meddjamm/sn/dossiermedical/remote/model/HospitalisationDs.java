@@ -19,7 +19,9 @@ public class HospitalisationDs {
 
     private String matricule;
 
-    private List<ObservationCliniqueDs> observationCliniqueDsList;
+    //   private List<ObservationCliniqueDs> observationCliniqueDsList;
+
+    private ObservationCliniqueDs observationCliniqueDs;
 
     private List<ExamenComplementaireDs> examenComplementaireDsList;
 

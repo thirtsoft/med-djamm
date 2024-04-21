@@ -4,7 +4,9 @@ import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,8 +33,12 @@ public class Hospitalisation extends AbstractAuditableEntity implements Serializ
 
     private String resume;
 
+    /*
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<ObservationClinique> observationCliniqueList;
+    private List<ObservationClinique> observationCliniqueList;*/
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    private ObservationClinique observationClinique;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<ExamenComplementaire> examenComplementaires;

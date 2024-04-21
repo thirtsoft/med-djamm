@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -40,4 +42,17 @@ public interface HospitalisationApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteHospitalisation(@PathVariable Long id);
+
+    @PutMapping("/{hospitalisationId}/add-hospitalisation-biologic-file")
+    boolean addExamBiologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile biologic) throws Exception;
+
+    @PutMapping("/{hospitalisationId}/add-hospitalisation-immunologic-file")
+    boolean addExamImmunologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile immunologic) throws Exception;
+    
+    @PutMapping("/{hospitalisationId}/add-hospitalisation-imager-file")
+    boolean addExamImagerToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile imager) throws Exception;
+
+    @PutMapping("/{hospitalisationId}/add-hospitalisation-hematologic-file")
+    boolean addExamHematologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile hematologic) throws Exception;
+
 }

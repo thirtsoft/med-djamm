@@ -9,6 +9,7 @@ import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -75,5 +76,26 @@ public class HospitalisationController implements HospitalisationApi {
     public void deleteHospitalisation(Long id) {
         hospitalisationService.deleteHospitalisation(id);
     }
+
+    @Override
+    public boolean addExamBiologicToHospitalisation(Long hospitalisationId, MultipartFile biologic) throws Exception {
+        return hospitalisationService.addExamBiologicToHospitalisation(hospitalisationId, biologic);
+    }
+
+    @Override
+    public boolean addExamImmunologicToHospitalisation(Long hospitalisationId, MultipartFile immunologic) throws Exception {
+        return hospitalisationService.addExamImmunologicToHospitalisation(hospitalisationId, immunologic);
+    }
+
+    @Override
+    public boolean addExamImagerToHospitalisation(Long hospitalisationId, MultipartFile imager) throws Exception {
+        return hospitalisationService.addExamImagerToHospitalisation(hospitalisationId, imager);
+    }
+
+    @Override
+    public boolean addExamHematologicToHospitalisation(Long hospitalisationId, MultipartFile hematologic) throws Exception {
+        return hospitalisationService.addExamHematologicToHospitalisation(hospitalisationId, hematologic);
+    }
+
 
 }

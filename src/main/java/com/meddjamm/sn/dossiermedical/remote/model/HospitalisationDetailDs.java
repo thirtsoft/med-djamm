@@ -21,7 +21,9 @@ public class HospitalisationDetailDs {
 
     private UtilisateurDs utilisateurDs;
 
-    private List<ObservationCliniqueDs> observationCliniqueDsList;
+    private ObservationCliniqueDs observationCliniqueDs;
+
+//    private List<ObservationCliniqueDs> observationCliniqueDsList;
 
     private List<ExamenComplementaireDs> examenComplementaireDsList;
 
@@ -32,6 +34,8 @@ public class HospitalisationDetailDs {
     private List<SyntheseDs> syntheseDsList;
 
     private String resume;
+
+    private String nomCompletMedecin;
 
     private int est_Transfer;
 

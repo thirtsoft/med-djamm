@@ -109,6 +109,7 @@ public class PatientAssembler {
         patientMinDs.setIsCircuitGenerated(patient.getIsCircuitGenerated());
         patientMinDs.setCreatedBy(patient.getCreatedBy());
         patientMinDs.setEst_accompagne(patient.isEst_accompagne());
+        patientMinDs.setDiagnosticDs(diagnosticAssembler.assembleEntityToDs(patient.getDiagnostic()));
         return patientMinDs;
     }
     //

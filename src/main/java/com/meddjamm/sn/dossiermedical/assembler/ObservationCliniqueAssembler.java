@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.remote.model.ObservationCliniqueDs;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 
 @Component
+@Slf4j
 public class ObservationCliniqueAssembler {
 
     private final ExamenPhysiqueAssembler examenPhysiqueAssembler;
@@ -44,8 +46,10 @@ public class ObservationCliniqueAssembler {
         observationCliniqueDs.setHistoireMaladie(observationClinique.getHistoireMaladie());
         observationCliniqueDs.setCreatedDate(observationClinique.getCreatedDate());
         observationCliniqueDs.setAntecedentDs(antecedentAssembler.assembleEntityToDs(observationClinique.getAntecedent()));
+        log.info("Examen physique", observationClinique.getExamenPhysiqueList());
         observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.assembleEntitiesFrom(observationClinique.getExamenPhysiqueList()));
-        // observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.createListExamenPhysiqueDs(observationClinique.getExamenPhysiqueList()));
+        //    observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.assembleEntitiesFrom(observationClinique.getExamenPhysiqueList()));
+        //  observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.createSetExamenPhysique(observationClinique.getExamenPhysiqueList()));
         observationCliniqueDs.setCircuitPatientId(observationClinique.getCircuitPatientId());
         observationCliniqueDs.setCreatedBy(observationClinique.getCreatedBy());
         if (observationClinique.getCreatedBy() != null) {

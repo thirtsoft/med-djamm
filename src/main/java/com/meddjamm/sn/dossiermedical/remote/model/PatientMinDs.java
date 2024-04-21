@@ -24,4 +24,6 @@ public class PatientMinDs implements Serializable {
     private boolean est_accompagne;
     private String telephone;
     private Date dateNaissance;
+
+    private DiagnosticDs diagnosticDs;
 }
