@@ -2,9 +2,9 @@ server:
   port: 8092
 spring:
   datasource:
-    url: jdbc:postgresql://roundhouse.proxy.rlwy.net:49450/railway
+    url: jdbc:postgresql://77.37.86.213:5432/senapplimed_hdj
     username: postgres
-    password: MSrKrPpRQFbQsywFWgqxKiJFcIbdwVUd
+    password: Windev2018@Snapplimed
 
   main:
     allow-circular-references: true
