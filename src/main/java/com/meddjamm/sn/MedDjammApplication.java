@@ -19,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //        })
 @AllArgsConstructor
 public class MedDjammApplication implements CommandLineRunner {
-
     private final MaladieRepository maladieRepository;
     private final PatientRepository patientRepository;
     private final UtilisateurRepository utilisateurRepository;
