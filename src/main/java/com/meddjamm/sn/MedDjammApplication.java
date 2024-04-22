@@ -36,7 +36,7 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-/*
+        /*
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
         Action action2 = new Action("ADD_AG", "Ajouter/Modifier un agent medicale");
         Action action3 = new Action("LST_PAT", "Lister les patients");
@@ -56,7 +56,9 @@ public class MedDjammApplication implements CommandLineRunner {
         System.out.println("Admin token: " + authenticationService.register(admin).getAccessToken());
 
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
-        System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());*/
+        System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
+
+        */
 
         /*
         var manager = RegisterRequest.builder().firstname("User012").prenom("User012").email("mana12ger@mail.com").password("password").profilCode("ADMIN").build();
@@ -65,9 +67,9 @@ public class MedDjammApplication implements CommandLineRunner {
         var manager = RegisterRequest.builder().firstname("Salif").prenom("Salif").email("salifger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken()); */
 
-        /*
+/*
         TypeDocument typeDocument1 = new TypeDocument(1L, "TYPE_PHOTO_PAT", "Photo du patient");
-        TypeDocument typeDocument2 = new TypeDocument(1L, "TYPE_PHOTO_PROF", "Photo profile de l\'agent");
+        TypeDocument typeDocument2 = new TypeDocument(1L, "TYPE_PHOTO_PROF", "Photo profile agent");
         TypeDocument typeDocument3 = new TypeDocument(3L, "TYPE_EXAM_CONS_BIO", "Consultation examen biologie");
         TypeDocument typeDocument4 = new TypeDocument(4L, "TYPE_EXAM_CONS_IMMUNO", "Consultation examen immunologie");
         TypeDocument typeDocument5 = new TypeDocument(5L, "TYPE_EXAM_CONS_IMG", "Consultation examen imagerie");
@@ -90,7 +92,7 @@ public class MedDjammApplication implements CommandLineRunner {
         typeDocumentList.add(typeDocument9);
         typeDocumentList.add(typeDocument10);
 
-        typeDocumentRepository.saveAllAndFlush(typeDocumentList)*/
+        typeDocumentRepository.saveAllAndFlush(typeDocumentList);*/
 
     }
 }
