@@ -6,6 +6,7 @@ import com.meddjamm.sn.config.repository.UtilisateurRepository;
 import com.meddjamm.sn.config.service.auth.AuthenticationService;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.rh.repository.MaladieRepository;
+import com.meddjamm.sn.rh.repository.TypeDocumentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +27,7 @@ public class MedDjammApplication implements CommandLineRunner {
     private final ProfilRepository profilRepository;
     private final AuthenticationService authenticationService;
     private final PasswordEncoder passwordEncoder;
+    private final TypeDocumentRepository typeDocumentRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MedDjammApplication.class, args);
@@ -62,6 +64,33 @@ public class MedDjammApplication implements CommandLineRunner {
 
         var manager = RegisterRequest.builder().firstname("Salif").prenom("Salif").email("salifger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken()); */
+
+        /*
+        TypeDocument typeDocument1 = new TypeDocument(1L, "TYPE_PHOTO_PAT", "Photo du patient");
+        TypeDocument typeDocument2 = new TypeDocument(1L, "TYPE_PHOTO_PROF", "Photo profile de l\'agent");
+        TypeDocument typeDocument3 = new TypeDocument(3L, "TYPE_EXAM_CONS_BIO", "Consultation examen biologie");
+        TypeDocument typeDocument4 = new TypeDocument(4L, "TYPE_EXAM_CONS_IMMUNO", "Consultation examen immunologie");
+        TypeDocument typeDocument5 = new TypeDocument(5L, "TYPE_EXAM_CONS_IMG", "Consultation examen imagerie");
+
+        TypeDocument typeDocument6 = new TypeDocument(6L, "TYPE_EXAM_CONS_ANA", "Consultation examen");
+        TypeDocument typeDocument7 = new TypeDocument(7L, "TYPE_EXAM_BIO_COMP", "Examen complementaire biologie");
+        TypeDocument typeDocument8 = new TypeDocument(8L, "TYPE_EXAM_IMMUNO_COMP", "Examen complementaire immunologie");
+        TypeDocument typeDocument9 = new TypeDocument(9L, "TYPE_EXAM_IMG_COMP", "Examen complementaire imagerie");
+        TypeDocument typeDocument10 = new TypeDocument(10L, "TYPE_EXAM_ANA_COMP", "Examen complementaire anatologie");
+
+        List<TypeDocument> typeDocumentList = new ArrayList<>();
+        typeDocumentList.add(typeDocument1);
+        typeDocumentList.add(typeDocument2);
+        typeDocumentList.add(typeDocument3);
+        typeDocumentList.add(typeDocument4);
+        typeDocumentList.add(typeDocument5);
+        typeDocumentList.add(typeDocument6);
+        typeDocumentList.add(typeDocument7);
+        typeDocumentList.add(typeDocument8);
+        typeDocumentList.add(typeDocument9);
+        typeDocumentList.add(typeDocument10);
+
+        typeDocumentRepository.saveAllAndFlush(typeDocumentList)*/
 
     }
 }

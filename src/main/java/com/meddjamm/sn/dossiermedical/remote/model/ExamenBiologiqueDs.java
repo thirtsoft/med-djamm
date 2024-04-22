@@ -40,14 +40,11 @@ public class ExamenBiologiqueDs {
     private int actif;
 
     public boolean isActif() {
-        if (actif == 1)
-            return true;
-        else
-            return false;
+        return actif == 1;
     }
 
     public void setActif(boolean actif) {
-        if (actif == true)
+        if (actif)
             this.actif = 1;
         else
             this.actif = 0;

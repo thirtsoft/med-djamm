@@ -2,9 +2,9 @@ server:
   port: 8092
 spring:
   datasource:
-    url: jdbc:postgresql://77.37.86.213:5432/senapplimed_hdj
+    url: jdbc:postgresql://localhost:5432/med-djamm
     username: postgres
-    password: Windev2018@Snapplimed
+    password: Windev2018
   main:
     allow-circular-references: true
   jpa:

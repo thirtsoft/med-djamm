@@ -15,6 +15,6 @@ public interface ExamenBiologiqueRepository extends JpaRepository<ExamenBiologiq
     @Query("SELECT DISTINCT p from ExamenBiologique p where p.actif=1")
     List<ExamenBiologique> findAllExamenBiologiques();
 
-    @Query("SELECT DISTINCT p from ExamenBiologique p where p.circuitPatient.code=:code and p.actif=1 order by p.id desc ")
+    @Query("SELECT DISTINCT p from ExamenBiologique p where p.circuitPatient.code=:code and p.actif=1 ORDER BY p.id DESC")
     List<ExamenBiologique> findExamenBiologiquesByPatientId(@Param("code") String code);
 }

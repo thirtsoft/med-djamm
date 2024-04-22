@@ -15,6 +15,6 @@ public interface AvisSpecialisteRepository extends JpaRepository<AvisSpecialiste
     @Query("SELECT DISTINCT p from AvisSpecialiste p where p.actif=1")
     List<AvisSpecialiste> findAllAvisSpecialistes();
 
-    @Query("SELECT DISTINCT p from AvisSpecialiste p where p.circuitPatient.code=:code and p.actif=1 order by p.id desc")
+    @Query("SELECT DISTINCT p from AvisSpecialiste p where p.circuitPatient.code=:code and p.actif=1 ORDER BY p.id DESC")
     List<AvisSpecialiste> findAvisSpecialisteByPatientId(@Param("code") String code);
 }

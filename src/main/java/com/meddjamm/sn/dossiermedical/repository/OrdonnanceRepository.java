@@ -15,6 +15,6 @@ public interface OrdonnanceRepository extends JpaRepository<Ordonnance, Long> {
     @Query("SELECT DISTINCT p from Ordonnance p where p.actif=1")
     List<Ordonnance> findAllOrdonnances();
 
-    @Query("SELECT DISTINCT p from Ordonnance p where p.circuitPatient.code=:code and p.actif=1 order by p.id desc")
+    @Query("SELECT DISTINCT p from Ordonnance p where p.circuitPatient.code=:code and p.actif=1 ORDER BY p.id DESC")
     List<Ordonnance> findOrdonnanceByPatientId(@Param("code") String code);
 }

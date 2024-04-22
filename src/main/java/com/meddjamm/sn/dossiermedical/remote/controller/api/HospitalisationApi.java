@@ -43,16 +43,16 @@ public interface HospitalisationApi {
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteHospitalisation(@PathVariable Long id);
 
-    @PutMapping("/{hospitalisationId}/add-hospitalisation-biologic-file")
+    @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-biologic-file")
     boolean addExamBiologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile biologic) throws Exception;
 
-    @PutMapping("/{hospitalisationId}/add-hospitalisation-immunologic-file")
+    @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-immunologic-file")
     boolean addExamImmunologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile immunologic) throws Exception;
-    
-    @PutMapping("/{hospitalisationId}/add-hospitalisation-imager-file")
+
+    @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-imager-file")
     boolean addExamImagerToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile imager) throws Exception;
 
-    @PutMapping("/{hospitalisationId}/add-hospitalisation-hematologic-file")
+    @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-hematologic-file")
     boolean addExamHematologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile hematologic) throws Exception;
 
 }

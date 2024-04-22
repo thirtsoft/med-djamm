@@ -12,6 +12,6 @@ public interface TraitementMedicalRepository extends JpaRepository<TraitementMed
     @Query("SELECT DISTINCT o from TraitementMedical o where o.actif=1")
     List<TraitementMedical> findAll();
 
-    @Query("SELECT DISTINCT p from TraitementMedical p where p.circuitPatient.code=:code and p.actif=1")
+    @Query("SELECT DISTINCT p from TraitementMedical p where p.circuitPatient.code=:code and p.actif=1 ORDER BY p.id DESC")
     List<TraitementMedical> findTraitementMedicalByPatientId(@Param("code") String code);
 }

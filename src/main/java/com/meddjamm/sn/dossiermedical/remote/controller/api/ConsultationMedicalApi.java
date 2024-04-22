@@ -39,16 +39,16 @@ public interface ConsultationMedicalApi {
     @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByPatientId(@PathVariable String code);
 
-    @PutMapping("/{consultationId}/add-consultation-biologic-file")
+    @PutMapping("/exam-biologic/{consultationId}/add-consultation-biologic-file")
     boolean addConsultationBiologicToConsultation(@PathVariable Long consultationId, @RequestParam(required = false) MultipartFile biologic) throws Exception;
 
-    @PutMapping("/{consultationId}/add-consultation-immunologic-file")
+    @PutMapping("/exam-biologic/{consultationId}/add-consultation-immunologic-file")
     boolean addConsultationImmunologicToConsultation(@PathVariable Long consultationId, @RequestParam(required = false) MultipartFile immunologic) throws Exception;
 
-    @PutMapping("/{consultationId}/add-consultation-imager-file")
+    @PutMapping("/exam-biologic/{consultationId}/add-consultation-imager-file")
     boolean addConsultationImagerToConsultation(@PathVariable Long consultationId, @RequestParam(required = false) MultipartFile imager) throws Exception;
 
-    @PutMapping("/{consultationId}/add-consultation-hematologic-file")
+    @PutMapping("/exam-biologic/{consultationId}/add-consultation-hematologic-file")
     boolean addConsultationHematologicToConsultation(@PathVariable Long consultationId, @RequestParam(required = false) MultipartFile hematologic) throws Exception;
 
 }

@@ -89,7 +89,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> findAllPatients() {
-        return patientRepository.findAll();
+        return patientRepository.findAllPatients();
     }
 
     @Override

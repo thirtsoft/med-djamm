@@ -107,7 +107,8 @@ public class CircuitPatientAssembler {
 
     public CircuitPatientDetailDs assembleEntityToDetailDs(CircuitPatient circuitPatient) {
         CircuitPatientDetailDs circuitPatientDs = new CircuitPatientDetailDs();
-        circuitPatientDs.setId(circuitPatient.getId());
+        if (circuitPatient.getId() != null)
+            circuitPatientDs.setId(circuitPatient.getId());
         circuitPatientDs.setCode(circuitPatient.getCode());
         circuitPatientDs.setMatricule(circuitPatient.getMatricule());
         circuitPatientDs.setEtat(circuitPatient.getEtat());

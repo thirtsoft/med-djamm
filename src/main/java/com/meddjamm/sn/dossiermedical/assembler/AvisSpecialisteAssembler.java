@@ -32,8 +32,8 @@ public class AvisSpecialisteAssembler {
         avisSpecialisteDs.setResume(avisSpecialiste.getResume());
         avisSpecialisteDs.setCreatedBy(avisSpecialiste.getCreatedBy());
         avisSpecialisteDs.setCircuitPatientId(avisSpecialiste.getCircuitPatientId());
-        if (avisSpecialiste.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(avisSpecialiste.getCreatedBy());
+        if (avisSpecialiste.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(avisSpecialiste.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             avisSpecialisteDs.setNomCompletAgent(nomAgent);
         }

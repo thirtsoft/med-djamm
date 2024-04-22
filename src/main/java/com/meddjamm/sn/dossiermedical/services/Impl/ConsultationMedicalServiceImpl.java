@@ -3,6 +3,7 @@ package com.meddjamm.sn.dossiermedical.services.Impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
+import com.meddjamm.sn.dossiermedical.entity.ExamenBiologique;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.ConsultationMedicalRepository;
 import com.meddjamm.sn.dossiermedical.services.ConsultationMedicalService;
@@ -84,12 +85,13 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
     @Override
     public boolean addConsultationBiologicToConsultation(Long biologicId, MultipartFile biologic) throws Exception {
         ConsultationMedical consultationMedical = findById(biologicId);
+        ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            if (consultationMedical != null) {
+            if (examenBiologique != null) {
                 if (biologic != null) {
                     PiecesJointes piecesJointesDTO = new PiecesJointes();
-                    piecesJointesDTO.setObjectId(consultationMedical.getId());
+                    piecesJointesDTO.setObjectId(examenBiologique.getId());
                     piecesJointesDTO.setDossier("pieces_jointes");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_BIO);
                     piecesJointesDTO.setNomFichier(biologic.getName());
@@ -108,12 +110,13 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
     @Override
     public boolean addConsultationImmunologicToConsultation(Long biologicId, MultipartFile immunologic) throws Exception {
         ConsultationMedical consultationMedical = findById(biologicId);
+        ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            if (consultationMedical != null) {
+            if (examenBiologique != null) {
                 if (immunologic != null) {
                     PiecesJointes piecesJointesDTO = new PiecesJointes();
-                    piecesJointesDTO.setObjectId(consultationMedical.getId());
+                    piecesJointesDTO.setObjectId(examenBiologique.getId());
                     piecesJointesDTO.setDossier("pieces_jointes");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_IMMUNO);
                     piecesJointesDTO.setNomFichier(immunologic.getName());
@@ -132,12 +135,13 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
     @Override
     public boolean addConsultationImagerToConsultation(Long biologicId, MultipartFile imager) throws Exception {
         ConsultationMedical consultationMedical = findById(biologicId);
+        ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            if (consultationMedical != null) {
+            if (examenBiologique != null) {
                 if (imager != null) {
                     PiecesJointes piecesJointesDTO = new PiecesJointes();
-                    piecesJointesDTO.setObjectId(consultationMedical.getId());
+                    piecesJointesDTO.setObjectId(examenBiologique.getId());
                     piecesJointesDTO.setDossier("pieces_jointes");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_IMG);
                     piecesJointesDTO.setNomFichier(imager.getName());
@@ -156,12 +160,13 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
     @Override
     public boolean addConsultationHematologicToConsultation(Long biologicId, MultipartFile hematologic) throws Exception {
         ConsultationMedical consultationMedical = findById(biologicId);
+        ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            if (consultationMedical != null) {
+            if (examenBiologique != null) {
                 if (hematologic != null) {
                     PiecesJointes piecesJointesDTO = new PiecesJointes();
-                    piecesJointesDTO.setObjectId(consultationMedical.getId());
+                    piecesJointesDTO.setObjectId(examenBiologique.getId());
                     piecesJointesDTO.setDossier("pieces_jointes");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_ANA);
                     piecesJointesDTO.setNomFichier(hematologic.getName());

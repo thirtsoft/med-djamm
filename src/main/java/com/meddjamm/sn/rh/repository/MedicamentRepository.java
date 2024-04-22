@@ -15,7 +15,7 @@ public interface MedicamentRepository extends JpaRepository<Medicament, Long> {
     @Query("SELECT DISTINCT m from Medicament m where m.code=:code and m.actif=1")
     Medicament findMedicamentByCode(@Param("code") String code);
 
-    @Query("SELECT DISTINCT m from Medicament m where m.actif=1")
+    @Query("SELECT DISTINCT m from Medicament m where m.actif=1 ORDER BY m.id DESC")
     List<Medicament> findAll();
 
 }

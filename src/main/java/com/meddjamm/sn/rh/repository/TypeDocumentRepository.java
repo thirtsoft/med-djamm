@@ -4,9 +4,11 @@ import com.meddjamm.sn.rh.entity.TypeDocument;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TypeDocumentRepository extends JpaRepository<TypeDocument, Long> {
 
     @Query("Select DISTINCT act from TypeDocument act where act.actif=1 ORDER BY act.libelle")

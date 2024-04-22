@@ -6,13 +6,11 @@ import com.meddjamm.sn.dossiermedical.remote.model.OrdonnanceDs;
 import com.meddjamm.sn.dossiermedical.services.OrdonnanceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 public class OrdonnanceController implements OrdonnanceApi {
 
     private final OrdonnanceService ordonnanceService;
