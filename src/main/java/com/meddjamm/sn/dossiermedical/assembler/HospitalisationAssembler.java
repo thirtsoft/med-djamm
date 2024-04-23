@@ -79,14 +79,18 @@ public class HospitalisationAssembler {
         hospitalisationDs.setEst_Transfer(hospitalisation.getEst_Transfer());
         hospitalisationDs.setNumeroHospitalisation(
                 UtilString.createNumeroHospitalisation(hospitalisation.getNumeroHospitalisation()));
-        hospitalisationDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntityToDs(
-                hospitalisation.getObservationClinique()
-        ));
+        if (hospitalisation.getObservationClinique() != null)
+            hospitalisationDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntityToDs(
+                    hospitalisation.getObservationClinique()));
         //    hospitalisationDs.setObservationCliniqueDsList(observationCliniqueAssembler.assembleEntitiesFrom(hospitalisation.getObservationCliniqueList()));
-        hospitalisationDs.setExamenComplementaireDsList(examenComplementaireAssembler.assembleEntitiesFromEntities(hospitalisation.getExamenComplementaires()));
-        hospitalisationDs.setTraitementMedicalDsList(traitementMedicalAssembler.assembleEntitiesFrom(hospitalisation.getTraitementMedicals()));
-        hospitalisationDs.setSyntheseDsList(syntheseAssembler.assembleEntitiesFrom(hospitalisation.getSyntheseList()));
-        hospitalisationDs.setDiscussionDsList(discussionAssembler.assembleEntitiesFrom(hospitalisation.getDiscussions()));
+        if (hospitalisation.getExamenComplementaires() != null)
+            hospitalisationDs.setExamenComplementaireDsList(examenComplementaireAssembler.assembleEntitiesFromEntities(hospitalisation.getExamenComplementaires()));
+        if (hospitalisation.getTraitementMedicals() != null)
+            hospitalisationDs.setTraitementMedicalDsList(traitementMedicalAssembler.assembleEntitiesFrom(hospitalisation.getTraitementMedicals()));
+        if (hospitalisation.getSyntheseList() != null)
+            hospitalisationDs.setSyntheseDsList(syntheseAssembler.assembleEntitiesFrom(hospitalisation.getSyntheseList()));
+        if (hospitalisation.getDiscussions() != null)
+            hospitalisationDs.setDiscussionDsList(discussionAssembler.assembleEntitiesFrom(hospitalisation.getDiscussions()));
         return hospitalisationDs;
     }
 
@@ -123,12 +127,17 @@ public class HospitalisationAssembler {
         hospitalisationDetailDs.setEst_Transfer(hospitalisation.getEst_Transfer());
         hospitalisationDetailDs.setActif(hospitalisation.isActif());
         hospitalisationDetailDs.setCreateDate(hospitalisation.getCreationDate());
-        hospitalisationDetailDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntityToDs(hospitalisation.getObservationClinique()));
+        if (hospitalisation.getObservationClinique() != null)
+            hospitalisationDetailDs.setObservationCliniqueDs(observationCliniqueAssembler.assembleEntityToDs(hospitalisation.getObservationClinique()));
         //    hospitalisationDetailDs.setObservationCliniqueDsList(observationCliniqueAssembler.assembleEntitiesFrom(hospitalisation.getObservationCliniqueList()));
-        hospitalisationDetailDs.setExamenComplementaireDsList(examenComplementaireAssembler.assembleEntitiesFromEntities(hospitalisation.getExamenComplementaires()));
-        hospitalisationDetailDs.setTraitementMedicalDsList(traitementMedicalAssembler.assembleEntitiesFrom(hospitalisation.getTraitementMedicals()));
-        hospitalisationDetailDs.setSyntheseDsList(syntheseAssembler.assembleEntitiesFrom(hospitalisation.getSyntheseList()));
-        hospitalisationDetailDs.setDiscussionDsList(discussionAssembler.assembleEntitiesFrom(hospitalisation.getDiscussions()));
+        if (hospitalisation.getExamenComplementaires() != null)
+            hospitalisationDetailDs.setExamenComplementaireDsList(examenComplementaireAssembler.assembleEntitiesFromEntities(hospitalisation.getExamenComplementaires()));
+        if (hospitalisation.getTraitementMedicals() != null)
+            hospitalisationDetailDs.setTraitementMedicalDsList(traitementMedicalAssembler.assembleEntitiesFrom(hospitalisation.getTraitementMedicals()));
+        if (hospitalisation.getSyntheseList() != null)
+            hospitalisationDetailDs.setSyntheseDsList(syntheseAssembler.assembleEntitiesFrom(hospitalisation.getSyntheseList()));
+        if (hospitalisation.getDiscussions() != null)
+            hospitalisationDetailDs.setDiscussionDsList(discussionAssembler.assembleEntitiesFrom(hospitalisation.getDiscussions()));
         hospitalisationDetailDs.setNumeroHospitalisation(
                 UtilString.createNumeroHospitalisation(hospitalisation.getNumeroHospitalisation())
         );
