@@ -48,14 +48,15 @@ public class TraitementMedicalItemAssembler {
 
     public TraitementMedicalItemDs assembleEntityToDs(TraitementMedicalItem traitementMedicalItem) {
         TraitementMedicalItemDs traitementMedicalItemDs = new TraitementMedicalItemDs();
-        traitementMedicalItemDs.setId(traitementMedicalItem.getId());
-        traitementMedicalItemDs.setCode(traitementMedicalItem.getCode());
+        if (traitementMedicalItem.getId() != null)
+            traitementMedicalItemDs.setId(traitementMedicalItem.getId());
         traitementMedicalItemDs.setPsologie(traitementMedicalItem.getPsologie());
         traitementMedicalItemDs.setNbrePrise(traitementMedicalItem.getNbrePrise());
         traitementMedicalItemDs.setAdministrePar(traitementMedicalItem.getAdministrePar());
         traitementMedicalItemDs.setEst_administre(traitementMedicalItem.getEst_administre());
-        if (traitementMedicalItem.getCode() != null) {
-            MedicamentDs medicamentDs = medicamentAssembler.assembleEntityToDs(medicamentService.findByCode(traitementMedicalItem.getCode()));
+        traitementMedicalItemDs.setMedicamendId(traitementMedicalItem.getMedicamendId());
+        if (traitementMedicalItem.getMedicamendId() != null) {
+            MedicamentDs medicamentDs = medicamentAssembler.assembleEntityToDs(medicamentService.findById(traitementMedicalItem.getMedicamendId()));
             traitementMedicalItemDs.setMedicamentDs(medicamentDs);
         }
         return traitementMedicalItemDs;
@@ -63,8 +64,9 @@ public class TraitementMedicalItemAssembler {
 
     public TraitementMedicalItem assembleTraitementMedicalItemFromDs(TraitementMedicalItemDs traitementMedicalItemDs) {
         TraitementMedicalItem traitementMedicalItem = new TraitementMedicalItem();
-        traitementMedicalItem.setId(traitementMedicalItemDs.getId());
-        traitementMedicalItem.setCode(traitementMedicalItemDs.getCode());
+        if (traitementMedicalItemDs.getId() != null)
+            traitementMedicalItem.setId(traitementMedicalItemDs.getId());
+        traitementMedicalItem.setMedicamendId(traitementMedicalItemDs.getMedicamendId());
         traitementMedicalItem.setPsologie(traitementMedicalItemDs.getPsologie());
         traitementMedicalItem.setNbrePrise(traitementMedicalItemDs.getNbrePrise());
         traitementMedicalItem.setAdministrePar(traitementMedicalItemDs.getAdministrePar());

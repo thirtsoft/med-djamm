@@ -3,6 +3,7 @@ package com.meddjamm.sn.dossiermedical.services.Impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
+import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointes;
@@ -22,10 +23,14 @@ public class HospitalisationServiceImpl implements HospitalisationService {
 
     private final PiecesJointesService piecesJointesService;
 
+    private final CircuitPatientRepository circuitPatientRepository;
+
     public HospitalisationServiceImpl(HospitalisationRepository hospitalisationRepository,
-                                      PiecesJointesService piecesJointesService) {
+                                      PiecesJointesService piecesJointesService,
+                                      CircuitPatientRepository circuitPatientRepository) {
         this.hospitalisationRepository = hospitalisationRepository;
         this.piecesJointesService = piecesJointesService;
+        this.circuitPatientRepository = circuitPatientRepository;
     }
 
     @Override
@@ -34,6 +39,9 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         if (hospitalisation.getNumeroHospitalisation() == 0) {
             hospitalisation.setNumeroHospitalisation(createNumeroHospitalisation());
         }
+//        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(hospitalisation.getCircuitPatientId());
+//        hospitalisation.setCircuitPatientId(circuitPatient.getId());
+//        hospitalisation.setCircuitPatient(circuitPatient);
         return hospitalisationRepository.save(hospitalisation);
     }
 
@@ -42,7 +50,20 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         if (!hospitalisationRepository.existsById(id)) {
             log.info("Hospitalisation that id is " + id + "is not found");
         }
-        hospitalisation.setId(id);
+        Hospitalisation hospitalisationResult = hospitalisationRepository.findHospitalisationById(id);
+        if (hospitalisationResult == null) {
+            log.info("Hospitalisation that id is " + id + "is not found");
+        }
+        assert hospitalisationResult != null;
+        hospitalisationResult.setCode(hospitalisation.getCode());
+        hospitalisationResult.setResume(hospitalisation.getResume());
+        hospitalisationResult.setEst_Transfer(hospitalisation.getEst_Transfer());
+        hospitalisationResult.setDiscussions(hospitalisation.getDiscussions());
+        hospitalisationResult.setExamenComplementaires(hospitalisation.getExamenComplementaires());
+        hospitalisationResult.setObservationClinique(hospitalisation.getObservationClinique());
+        hospitalisationResult.setSyntheseList(hospitalisation.getSyntheseList());
+        hospitalisationResult.setTraitementMedicals(hospitalisation.getTraitementMedicals());
+        hospitalisationResult.setMatricule(hospitalisation.getMatricule());
         return hospitalisationRepository.save(hospitalisation);
     }
 

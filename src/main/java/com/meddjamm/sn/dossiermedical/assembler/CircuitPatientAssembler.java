@@ -39,6 +39,7 @@ public class CircuitPatientAssembler {
     private final UtilisateurAssembler utilisateurAssembler;
     private final DiscussionAssembler discussionAssembler;
     private final ConsultationMedicalAssembler consultationMedicalAssembler;
+    private final HospitalisationAssembler hospitalisationAssembler;
 
     public List<CircuitPatientListDs> assembleEntitiesFrom(List<CircuitPatient> circuitPatients) {
         return circuitPatients.stream().map(this::assembleEntityToListDs).toList();

@@ -35,7 +35,7 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
+/*
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
         Action action2 = new Action("ADD_AG", "Ajouter/Modifier un agent medicale");
         Action action3 = new Action("LST_PAT", "Lister les patients");
@@ -57,7 +57,7 @@ public class MedDjammApplication implements CommandLineRunner {
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
 
-        */
+*/
 
         /*
         var manager = RegisterRequest.builder().firstname("User012").prenom("User012").email("mana12ger@mail.com").password("password").profilCode("ADMIN").build();

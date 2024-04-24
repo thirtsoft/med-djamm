@@ -35,7 +35,8 @@ public class TraitementMedicalAssembler {
 
     public TraitementMedicalDs assembleEntityToDs(TraitementMedical traitementMedical) {
         TraitementMedicalDs traitementMedicalDs = new TraitementMedicalDs();
-        traitementMedicalDs.setId(traitementMedical.getId());
+        if (traitementMedical.getId() != null)
+            traitementMedicalDs.setId(traitementMedical.getId());
         traitementMedicalDs.setTraitementMedicalItemDs(traitementMedicalItemAssembler.createListTraitementMedicalItemDs(traitementMedical.getTraitementMedicalItems()));
         traitementMedicalDs.setCreatedDate(traitementMedical.getCreatedDate());
         traitementMedicalDs.setActif(traitementMedical.isActif());
@@ -45,8 +46,8 @@ public class TraitementMedicalAssembler {
         traitementMedicalDs.setProtocoleFileName(traitementMedical.getProtocoleFileName());
         traitementMedicalDs.setCircuitPatientId(traitementMedical.getCircuitPatientId());
         traitementMedicalDs.setCreatedBy(traitementMedical.getCreatedBy());
-        if (traitementMedical.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(traitementMedical.getCreatedBy());
+        if (traitementMedical.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(traitementMedical.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             traitementMedicalDs.setNomCompletAgent(nomAgent);
         }

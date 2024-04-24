@@ -27,12 +27,9 @@ public class HospitalisationController implements HospitalisationApi {
     }
 
     @Override
-    public ResponseEntity<HospitalisationDetailDs> creerHospitalisation(HospitalisationDs hospitalisationDs) {
-        return new ResponseEntity<>(hospitalisationAssembler.assembleHospitalisationDetailDsFromHospitalisation(
-                hospitalisationService.saveHospitalisation(
-                        hospitalisationAssembler.assembleDsToEntity(hospitalisationDs)
-                )
-        ), HttpStatus.OK);
+    public void creerHospitalisation(HospitalisationDs hospitalisationDs) {
+        hospitalisationService.saveHospitalisation(hospitalisationAssembler.assembleDsToEntity(hospitalisationDs));
+
     }
 
     @Override

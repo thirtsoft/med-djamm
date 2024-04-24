@@ -17,8 +17,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class TraitementMedicalItem extends AbstractAuditableEntity implements Serializable {
 
+
     @Column(name = "medicament_uid")
-    private String code;
+    private Long medicamendId;
 
     private String psologie;
 

@@ -22,22 +22,22 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 @RequestMapping(value = APP_ROOT + "/hospitalisation")
 public interface HospitalisationApi {
 
-    @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<HospitalisationDetailDs> creerHospitalisation(@RequestBody HospitalisationDs hospitalisationDs);
+    @PostMapping(value = "/save")
+    void creerHospitalisation(@RequestBody HospitalisationDs hospitalisationDs);
 
-    @PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/edit/{id}")
     ResponseEntity<HospitalisationDetailDs> updateHospitalisation(@PathVariable Long id, @RequestBody HospitalisationDs hospitalisationDs) throws Exception;
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     ResponseEntity<HospitalisationDetailDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<HospitalisationListDs>> findAllHospitalisations();
 
-    @GetMapping(value = "/patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/patient/{code}")
     ResponseEntity<List<HospitalisationListDs>> getHospitalisationListByPatient(@PathVariable("code") String code);
 
-    @GetMapping(value = "/detail/patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/detail/patient/{code}")
     ResponseEntity<List<HospitalisationDetailDs>> getHospitalisationsDetailsByPatient(@PathVariable("code") String code);
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

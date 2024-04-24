@@ -12,7 +12,7 @@ public class TraitementMedicalItemDs {
 
     private Long id;
 
-    private String code;
+    private Long medicamendId;
 
     private String psologie;
 

@@ -15,7 +15,8 @@ public class MedicamentAssembler {
 
     public MedicamentDs assembleEntityToDs(Medicament medicament) {
         MedicamentDs medicamentDs = new MedicamentDs();
-        medicamentDs.setId(medicament.getId());
+        if (medicament.getId() != null)
+            medicamentDs.setId(medicament.getId());
         medicamentDs.setCode(medicament.getCode());
         medicamentDs.setLibelle(medicament.getLibelle());
         medicamentDs.setCreateDate(medicament.getCreateDate());
@@ -25,7 +26,8 @@ public class MedicamentAssembler {
 
     public Medicament assembleMedicamentFromDs(MedicamentDs medicamentDs) {
         Medicament medicament = new Medicament();
-        medicament.setId(medicamentDs.getId());
+        if (medicamentDs.getId() != null)
+            medicament.setId(medicamentDs.getId());
         medicament.setCode(medicamentDs.getCode());
         medicament.setLibelle(medicamentDs.getLibelle());
         medicament.setCreateDate(medicamentDs.getCreateDate());
