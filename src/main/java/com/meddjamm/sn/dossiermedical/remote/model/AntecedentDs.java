@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,19 +13,33 @@ public class AntecedentDs {
 
     private Long id;
 
-    private List<String> antecedentsMedicaux;
+    private String antecedentsMedicaux;
 
-    private List<String> antecedentsChirurgicaux;
+    private String antecedentsChirurgicaux;
 
-    private List<String> antecedentsGynecologiques;
+    private String antecedentsGynecologiques;
 
-    private List<String> antecedentsFamilialsAscendant;
+    private String antecedentsFamilialsAscendant;
 
-    private List<String> antecedentsFamilialsCollateral;
+    private String antecedentsFamilialsCollateral;
 
-    private List<String> antecedentsFamilialsDescendant;
+    private String antecedentsFamilialsDescendant;
 
-    private List<String> modeVies;
+    private String modeVies;
+
+//    private List<String> antecedentsMedicaux;
+//
+//    private List<String> antecedentsChirurgicaux;
+//
+//    private List<String> antecedentsGynecologiques;
+//
+//    private List<String> antecedentsFamilialsAscendant;
+//
+//    private List<String> antecedentsFamilialsCollateral;
+//
+//    private List<String> antecedentsFamilialsDescendant;
+//
+//    private List<String> modeVies;
 
     private Date createDate;
 

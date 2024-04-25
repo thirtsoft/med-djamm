@@ -51,4 +51,6 @@ public interface ConsultationMedicalApi {
     @PutMapping("/exam-biologic/{consultationId}/add-consultation-hematologic-file")
     boolean addConsultationHematologicToConsultation(@PathVariable Long consultationId, @RequestParam(required = false) MultipartFile hematologic) throws Exception;
 
+    @GetMapping(value = "/by-circuit/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByCircuitId(@PathVariable Long code);
 }

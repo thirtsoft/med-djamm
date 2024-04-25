@@ -181,4 +181,9 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<ConsultationMedical> findConsultationMedicalByCircuitId(Long circuitId) {
+        return consultationMedicalRepository.findConsultationMedicalByCircuitId(circuitId);
+    }
 }

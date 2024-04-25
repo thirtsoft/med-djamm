@@ -26,7 +26,7 @@ public interface HospitalisationApi {
     void creerHospitalisation(@RequestBody HospitalisationDs hospitalisationDs);
 
     @PutMapping(value = "/edit/{id}")
-    ResponseEntity<HospitalisationDetailDs> updateHospitalisation(@PathVariable Long id, @RequestBody HospitalisationDs hospitalisationDs) throws Exception;
+    void updateHospitalisation(@PathVariable Long id, @RequestBody HospitalisationDs hospitalisationDs) throws Exception;
 
     @GetMapping(value = "/{id}")
     ResponseEntity<HospitalisationDetailDs> findById(@PathVariable Long id);

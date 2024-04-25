@@ -1,7 +1,6 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
-import com.meddjamm.sn.dossiermedical.entity.ExamenPhysique;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.ExamenPhysiqueRepository;
@@ -38,14 +37,6 @@ public class ObservationCliniqueServiceImpl implements ObservationCliniqueServic
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(observationClinique.getCircuitPatientId());
         observationClinique.setCircuitPatientId(circuitPatient.getId());
         observationClinique.setCircuitPatient(circuitPatient);
-        List<ExamenPhysique> examenPhysiqueList = observationClinique.getExamenPhysiqueList();
-        System.out.println(examenPhysiqueList);
-        for (ExamenPhysique examenPhysique : examenPhysiqueList) {
-            examenPhysique.setActif(true);
-            examenPhysique.setCreatedDate(new Date());
-            examenPhysique.setObservationClinique(observationClinique);
-            examenPhysiqueRepository.save(examenPhysique);
-        }
         observationCliniqueRepository.save(observationClinique);
     }
 

@@ -1,25 +1,27 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "observation_clinique")
@@ -28,15 +30,19 @@ import java.util.Set;
 @AllArgsConstructor
 public class ObservationClinique extends AbstractAuditableEntity implements Serializable {
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "motifs_hospitalisation_par_observation_clinique", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "motifs_hospitalisation")
-    private Set<String> motifsHospitalisation;
+
+    @Column(name = "motifs_hospitalisation", columnDefinition = "TEXT")
+    private String motifsHospitalisation;
+
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(name = "motifs_hospitalisation_par_observation_clinique", joinColumns = @JoinColumn(name = "id"))
+//    @Column(name = "motifs_hospitalisation")
+//    private Set<String> motifsHospitalisation;
 
     @Column(name = "histoire_maladie", columnDefinition = "TEXT")
     private String histoireMaladie;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Antecedent antecedent;
 
     /*
@@ -48,8 +54,11 @@ public class ObservationClinique extends AbstractAuditableEntity implements Seri
     private List<ExamenPhysique> examenPhysiqueList;
 */
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "observationClinique", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExamenPhysique> examenPhysiqueList;
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private ExamenPhysique examenPhysique;
+
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "observationClinique", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<ExamenPhysique> examenPhysiqueList;
 
 /*
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "observationClinique", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -65,6 +74,28 @@ public class ObservationClinique extends AbstractAuditableEntity implements Seri
     private Long createdBy;
 
     private Date createdDate;
+
+    @CreatedDate
+    @Column(nullable = false,
+            updatable = false
+    )
+    @Basic(fetch = FetchType.LAZY)
+    private LocalDateTime creationDate;
+
+    @LastModifiedDate
+    @Basic(fetch = FetchType.LAZY)
+    private LocalDateTime lastModifiedDate;
+
+    @CreatedBy
+    @Column(nullable = false,
+            updatable = false
+    )
+    @Basic(fetch = FetchType.LAZY)
+    private @Size(max = 50) String createdByUser;
+
+    @LastModifiedBy
+    @Basic(fetch = FetchType.LAZY)
+    private @Size(max = 50) String lastModifiedBy;
 
     private int actif;
 

@@ -56,7 +56,8 @@ public class TraitementMedicalAssembler {
 
     public TraitementMedical assembleTraitementMedicalFromDs(TraitementMedicalDs traitementMedicalDs) {
         TraitementMedical traitementMedical = new TraitementMedical();
-        traitementMedical.setId(traitementMedicalDs.getId());
+        if (traitementMedicalDs.getId() != null)
+            traitementMedical.setId(traitementMedicalDs.getId());
         traitementMedical.setTraitementMedicalItems(traitementMedicalItemAssembler.createSetTraitementMedicalItem(traitementMedicalDs.getTraitementMedicalItemDs()));
         traitementMedical.setCreatedDate(traitementMedicalDs.getCreatedDate());
         traitementMedical.setActif(traitementMedicalDs.isActif());

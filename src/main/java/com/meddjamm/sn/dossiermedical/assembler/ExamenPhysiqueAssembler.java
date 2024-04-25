@@ -77,7 +77,8 @@ public class ExamenPhysiqueAssembler {
 
     public ExamenPhysique assembleExamenPhysiqueFromDs(ExamenPhysiqueDs examenPhysiqueDs) {
         ExamenPhysique examenPhysique = new ExamenPhysique();
-        examenPhysique.setId(examenPhysiqueDs.getId());
+        if (examenPhysiqueDs.getId() != null)
+            examenPhysique.setId(examenPhysiqueDs.getId());
         examenPhysique.setActif(examenPhysiqueDs.isActif());
         examenPhysique.setExamenGeneral(examenPhysiqueDs.getExamenGeneral());
         examenPhysique.setExamenAppareil(examenPhysiqueDs.getExamenAppareil());

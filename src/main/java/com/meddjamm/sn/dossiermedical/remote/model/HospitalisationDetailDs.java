@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -23,15 +22,26 @@ public class HospitalisationDetailDs {
 
     private ObservationCliniqueDs observationCliniqueDs;
 
-//    private List<ObservationCliniqueDs> observationCliniqueDsList;
 
-    private List<ExamenComplementaireDs> examenComplementaireDsList;
+    //  private List<ExamenComplementaireDs> examenComplementaireDsList;
 
-    private List<TraitementMedicalDs> traitementMedicalDsList;
+    private ExamenComplementaireDs examenComplementaireDs;
 
-    private List<DiscussionDs> discussionDsList;
+    //   private List<TraitementMedicalDs> traitementMedicalDsList;
 
-    private List<SyntheseDs> syntheseDsList;
+    private TraitementMedicalDs traitementMedicalDs;
+
+    //   private List<DiscussionDs> discussionDsList;
+
+    private DiscussionDs discussionDs;
+
+    //   private List<SyntheseDs> syntheseDsList;
+
+    private SyntheseDs syntheseDs;
+
+    private Long createdBy;
+
+    private Date createdDate;
 
     private String resume;
 
@@ -39,7 +49,7 @@ public class HospitalisationDetailDs {
 
     private int est_Transfer;
 
-    private LocalDateTime createDate;
+    private Date createDate;
 
     private int actif;
 

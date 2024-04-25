@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,15 +13,17 @@ public class ObservationCliniqueDs {
 
     private Long id;
 
-    private List<String> motifsHospitalisation;
+    //  private List<String> motifsHospitalisation;
+
+    private String motifsHospitalisation;
 
     private String histoireMaladie;
 
     private AntecedentDs antecedentDs;
 
-    //  private ExamenPhysiqueDs examenPhysiqueDs;
+    private ExamenPhysiqueDs examenPhysiqueDs;
 
-    private List<ExamenPhysiqueDs> examenPhysiqueDs;
+    //  private List<ExamenPhysiqueDs> examenPhysiqueDs;
 
     private Long circuitPatientId;
 

@@ -29,7 +29,7 @@ public class UtilString {
     public static String createNumeroHospitalisation(int poz) {
         String numero = "";
         DecimalFormat numFormat = new DecimalFormat("00000");
-        numero = "HOSTPITALISATION_" + numFormat.format(poz);
+        numero = "HOST_" + numFormat.format(poz);
         return numero;
     }
 

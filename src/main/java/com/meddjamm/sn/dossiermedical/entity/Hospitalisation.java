@@ -1,11 +1,11 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
-import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "hospitalisation")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Hospitalisation extends AbstractAuditableEntity implements Serializable {
+public class Hospitalisation implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "numero_hospisatisation", nullable = true, unique = true)
     private int numeroHospitalisation;
@@ -37,22 +42,41 @@ public class Hospitalisation extends AbstractAuditableEntity implements Serializ
     @OneToMany(cascade = {CascadeType.ALL})
     private List<ObservationClinique> observationCliniqueList;*/
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL})
     private ObservationClinique observationClinique;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ExamenComplementaire> examenComplementaires;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<ExamenComplementaire> examenComplementaires;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<TraitementMedical> traitementMedicals;
+    @OneToOne(cascade = {CascadeType.ALL})
+    private ExamenComplementaire examenComplementaire;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Discussion> discussions;
+    @OneToOne(cascade = {CascadeType.ALL})
+    private TraitementMedical traitementMedical;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Synthese> syntheseList;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<TraitementMedical> traitementMedicals;
 
-    private int est_Transfer;
+    @OneToOne(cascade = {CascadeType.ALL})
+//    @OneToOne(fetch = FetchType.EAGER, cascade = {
+//            MERGE
+//    })
+//    @ToString.Exclude
+    private Discussion discussion;
+
+//    @OneToMany(cascade = CascadeType.ALL )
+//    private List<Discussion> discussions;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Synthese synthese;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Synthese> syntheseList;
+
+
+    private Long createdBy;
+
+    private Date createdDate;
 
     private int actif;
 

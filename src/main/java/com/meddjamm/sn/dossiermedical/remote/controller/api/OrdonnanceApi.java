@@ -35,4 +35,7 @@ public interface OrdonnanceApi {
 
     @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByPatientId(@PathVariable String code);
+
+    @GetMapping(value = "/by-circuit/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByCircuitId(@PathVariable Long code);
 }

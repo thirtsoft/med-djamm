@@ -33,12 +33,8 @@ public class HospitalisationController implements HospitalisationApi {
     }
 
     @Override
-    public ResponseEntity<HospitalisationDetailDs> updateHospitalisation(Long id, HospitalisationDs hospitalisationDs) {
-        return new ResponseEntity<>(hospitalisationAssembler.assembleHospitalisationDetailDsFromHospitalisation(
-                hospitalisationService.updateHospitalisation(id,
-                        hospitalisationAssembler.assembleDsToEntity(hospitalisationDs)
-                )
-        ), HttpStatus.OK);
+    public void updateHospitalisation(Long id, HospitalisationDs hospitalisationDs) {
+        hospitalisationService.updateHospitalisation(id, hospitalisationAssembler.assembleDsToEntity(hospitalisationDs));
     }
 
     @Override

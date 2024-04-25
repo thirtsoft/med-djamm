@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -17,19 +17,33 @@ public class HospitalisationDs {
 
     private String code;
 
+    private String nomCompletPatient;
+
     private String matricule;
+
+    private Long createdBy;
+
+    private Date createdDate;
 
     //   private List<ObservationCliniqueDs> observationCliniqueDsList;
 
     private ObservationCliniqueDs observationCliniqueDs;
 
-    private List<ExamenComplementaireDs> examenComplementaireDsList;
+    //  private List<ExamenComplementaireDs> examenComplementaireDsList;
 
-    private List<TraitementMedicalDs> traitementMedicalDsList;
+    private ExamenComplementaireDs examenComplementaireDs;
 
-    private List<DiscussionDs> discussionDsList;
+//    private List<TraitementMedicalDs> traitementMedicalDsList;
 
-    private List<SyntheseDs> syntheseDsList;
+    private TraitementMedicalDs traitementMedicalDs;
+
+    //   private List<DiscussionDs> discussionDsList;
+
+    private DiscussionDs discussionDs;
+
+    //   private List<SyntheseDs> syntheseDsList;
+
+    private SyntheseDs syntheseDs;
 
     private String resume;
 

@@ -27,4 +27,6 @@ public interface ConsultationMedicalService {
 
     boolean addConsultationHematologicToConsultation(Long biologicId, MultipartFile hematologic) throws Exception;
 
+    List<ConsultationMedical> findConsultationMedicalByCircuitId(Long circuitId);
+
 }

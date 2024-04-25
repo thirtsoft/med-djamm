@@ -20,4 +20,6 @@ public interface OrdonnanceService {
     List<Ordonnance> findOrdonnancesByPatientId(String code);
 
     OrdonnanceItem findOrdonnanceItemById(Long id);
+
+    List<Ordonnance> findOrdonnancesByCircuitId(Long circuitId);
 }

@@ -90,4 +90,9 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
     public OrdonnanceItem findOrdonnanceItemById(Long id) {
         return ordonnanceItemRepository.findOrdonnanceItemById(id);
     }
+
+    @Override
+    public List<Ordonnance> findOrdonnancesByCircuitId(Long circuitId) {
+        return ordonnanceRepository.findOrdonnanceByCircuitId(circuitId);
+    }
 }

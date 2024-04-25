@@ -66,7 +66,13 @@ public class TraitementMedicalItemAssembler {
         TraitementMedicalItem traitementMedicalItem = new TraitementMedicalItem();
         if (traitementMedicalItemDs.getId() != null)
             traitementMedicalItem.setId(traitementMedicalItemDs.getId());
-        traitementMedicalItem.setMedicamendId(traitementMedicalItemDs.getMedicamendId());
+        /*
+        return actionListDs.stream()
+                .map(actionDs -> actionService.findById(actionDs.getId()))
+                .collect(Collectors.toSet());
+        */
+        if (traitementMedicalItemDs.getMedicamendId() != null)
+            traitementMedicalItem.setMedicamendId(traitementMedicalItemDs.getMedicamendId());
         traitementMedicalItem.setPsologie(traitementMedicalItemDs.getPsologie());
         traitementMedicalItem.setNbrePrise(traitementMedicalItemDs.getNbrePrise());
         traitementMedicalItem.setAdministrePar(traitementMedicalItemDs.getAdministrePar());

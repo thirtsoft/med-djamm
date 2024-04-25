@@ -9,13 +9,16 @@ import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointes;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
 import com.meddjamm.sn.utils.ConstantSigps;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 @Slf4j
 public class HospitalisationServiceImpl implements HospitalisationService {
 
@@ -36,6 +39,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     @Override
     public Hospitalisation saveHospitalisation(Hospitalisation hospitalisation) {
         hospitalisation.setActif(true);
+        hospitalisation.setCreatedDate(new Date());
         if (hospitalisation.getNumeroHospitalisation() == 0) {
             hospitalisation.setNumeroHospitalisation(createNumeroHospitalisation());
         }
@@ -55,16 +59,14 @@ public class HospitalisationServiceImpl implements HospitalisationService {
             log.info("Hospitalisation that id is " + id + "is not found");
         }
         assert hospitalisationResult != null;
-        hospitalisationResult.setCode(hospitalisation.getCode());
         hospitalisationResult.setResume(hospitalisation.getResume());
-        hospitalisationResult.setEst_Transfer(hospitalisation.getEst_Transfer());
-        hospitalisationResult.setDiscussions(hospitalisation.getDiscussions());
-        hospitalisationResult.setExamenComplementaires(hospitalisation.getExamenComplementaires());
+        hospitalisationResult.setDiscussion(hospitalisation.getDiscussion());
+        hospitalisationResult.setExamenComplementaire(hospitalisation.getExamenComplementaire());
         hospitalisationResult.setObservationClinique(hospitalisation.getObservationClinique());
-        hospitalisationResult.setSyntheseList(hospitalisation.getSyntheseList());
-        hospitalisationResult.setTraitementMedicals(hospitalisation.getTraitementMedicals());
+        hospitalisationResult.setSynthese(hospitalisation.getSynthese());
+        hospitalisationResult.setTraitementMedical(hospitalisation.getTraitementMedical());
         hospitalisationResult.setMatricule(hospitalisation.getMatricule());
-        return hospitalisationRepository.save(hospitalisation);
+        return hospitalisationRepository.saveAndFlush(hospitalisation);
     }
 
     @Override
@@ -95,21 +97,18 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
-                for (ExamenComplementaire examenComplementaire : hospitalisation.getExamenComplementaires()) {
-                    if (biologic != null) {
-                        PiecesJointes piecesJointesDTO = new PiecesJointes();
-                        piecesJointesDTO.setObjectId(examenComplementaire.getId());
-                        piecesJointesDTO.setDossier("pieces_jointes");
-                        piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_BIO_COMP);
-                        piecesJointesDTO.setNomFichier(biologic.getName());
-                        piecesJointesService.savePiecesJointes(biologic, objectMapper.writeValueAsString(piecesJointesDTO));
-                        return true;
-                    } else {
-                        throw new Exception("La consultation n'existe pas.");
-                    }
-
+                ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
+                if (biologic != null) {
+                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    piecesJointesDTO.setObjectId(examenComplementaire.getId());
+                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_BIO_COMP);
+                    piecesJointesDTO.setNomFichier(biologic.getName());
+                    piecesJointesService.savePiecesJointes(biologic, objectMapper.writeValueAsString(piecesJointesDTO));
+                    return true;
+                } else {
+                    throw new Exception("La consultation n'existe pas.");
                 }
-
             }
             return true;
         } catch (Exception e) {
@@ -123,21 +122,18 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
-                for (ExamenComplementaire examenComplementaire : hospitalisation.getExamenComplementaires()) {
-                    if (immunologicExamId != null) {
-                        PiecesJointes piecesJointesDTO = new PiecesJointes();
-                        piecesJointesDTO.setObjectId(examenComplementaire.getId());
-                        piecesJointesDTO.setDossier("pieces_jointes");
-                        piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_IMMUNO_COMP);
-                        piecesJointesDTO.setNomFichier(immunologic.getName());
-                        piecesJointesService.savePiecesJointes(immunologic, objectMapper.writeValueAsString(piecesJointesDTO));
-                        return true;
-                    } else {
-                        throw new Exception("Hospitalisation n'existe pas.");
-                    }
-
+                ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
+                if (immunologicExamId != null) {
+                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    piecesJointesDTO.setObjectId(examenComplementaire.getId());
+                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_IMMUNO_COMP);
+                    piecesJointesDTO.setNomFichier(immunologic.getName());
+                    piecesJointesService.savePiecesJointes(immunologic, objectMapper.writeValueAsString(piecesJointesDTO));
+                    return true;
+                } else {
+                    throw new Exception("Hospitalisation n'existe pas.");
                 }
-
             }
             return true;
         } catch (Exception e) {
@@ -151,21 +147,18 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
-                for (ExamenComplementaire examenComplementaire : hospitalisation.getExamenComplementaires()) {
-                    if (imager != null) {
-                        PiecesJointes piecesJointesDTO = new PiecesJointes();
-                        piecesJointesDTO.setObjectId(examenComplementaire.getId());
-                        piecesJointesDTO.setDossier("pieces_jointes");
-                        piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_IMG_COMP);
-                        piecesJointesDTO.setNomFichier(imager.getName());
-                        piecesJointesService.savePiecesJointes(imager, objectMapper.writeValueAsString(piecesJointesDTO));
-                        return true;
-                    } else {
-                        throw new Exception("La hospitalisation n'existe pas.");
-                    }
-
+                ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
+                if (imager != null) {
+                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    piecesJointesDTO.setObjectId(examenComplementaire.getId());
+                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_IMG_COMP);
+                    piecesJointesDTO.setNomFichier(imager.getName());
+                    piecesJointesService.savePiecesJointes(imager, objectMapper.writeValueAsString(piecesJointesDTO));
+                    return true;
+                } else {
+                    throw new Exception("La hospitalisation n'existe pas.");
                 }
-
             }
             return true;
         } catch (Exception e) {
@@ -179,22 +172,20 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
-                for (ExamenComplementaire examenComplementaire : hospitalisation.getExamenComplementaires()) {
-                    if (hematologic != null) {
-                        PiecesJointes piecesJointesDTO = new PiecesJointes();
-                        piecesJointesDTO.setObjectId(examenComplementaire.getId());
-                        piecesJointesDTO.setDossier("pieces_jointes");
-                        piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_ANA_COMP);
-                        piecesJointesDTO.setNomFichier(hematologic.getName());
-                        piecesJointesService.savePiecesJointes(hematologic, objectMapper.writeValueAsString(piecesJointesDTO));
-                        return true;
-                    } else {
-                        throw new Exception("L'hospitalisation n'existe pas.");
-                    }
-
+                ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
+                if (hematologic != null) {
+                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    piecesJointesDTO.setObjectId(examenComplementaire.getId());
+                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_ANA_COMP);
+                    piecesJointesDTO.setNomFichier(hematologic.getName());
+                    piecesJointesService.savePiecesJointes(hematologic, objectMapper.writeValueAsString(piecesJointesDTO));
+                    return true;
+                } else {
+                    throw new Exception("L'hospitalisation n'existe pas.");
                 }
-
             }
+
             return true;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

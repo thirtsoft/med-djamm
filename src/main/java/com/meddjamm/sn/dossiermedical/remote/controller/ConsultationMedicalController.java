@@ -87,4 +87,11 @@ public class ConsultationMedicalController implements ConsultationMedicalApi {
     public boolean addConsultationHematologicToConsultation(Long consultationId, MultipartFile hematologic) throws Exception {
         return consultationMedicalService.addConsultationHematologicToConsultation(consultationId, hematologic);
     }
+
+    @Override
+    public ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByCircuitId(Long code) {
+        return new ResponseEntity<>(consultationMedicalAssembler.assembleEntitiesFrom(
+                consultationMedicalService.findConsultationMedicalByCircuitId(code)
+        ), HttpStatus.OK);
+    }
 }
