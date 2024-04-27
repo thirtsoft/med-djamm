@@ -2,9 +2,12 @@ package com.meddjamm.sn.dossiermedical.services.Impl;
 
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
+import com.meddjamm.sn.dossiermedical.entity.TraitementMedicalItem;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
+import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalItemRepository;
 import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalRepository;
 import com.meddjamm.sn.dossiermedical.services.TraitementMedicalService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +16,14 @@ import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class TraitementMedicalServiceImpl implements TraitementMedicalService {
 
     private final TraitementMedicalRepository traitementMedicalRepository;
 
     private final CircuitPatientRepository circuitPatientRepository;
 
-    public TraitementMedicalServiceImpl(TraitementMedicalRepository traitementMedicalRepository,
-                                        CircuitPatientRepository circuitPatientRepository) {
-        this.traitementMedicalRepository = traitementMedicalRepository;
-        this.circuitPatientRepository = circuitPatientRepository;
-    }
+    private final TraitementMedicalItemRepository traitementMedicalItemRepository;
 
     @Override
     public TraitementMedical saveTraitementMedical(TraitementMedical traitementMedical) {
@@ -64,4 +64,16 @@ public class TraitementMedicalServiceImpl implements TraitementMedicalService {
     public List<TraitementMedical> findTraitementMedicalByPatientId(String code) {
         return traitementMedicalRepository.findTraitementMedicalByPatientId(code);
     }
+
+    @Override
+    public TraitementMedicalItem findTraitementMedicalItemById(Long id) {
+        return traitementMedicalItemRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public TraitementMedicalItem saveTraitementMedicalItem(TraitementMedicalItem traitementMedicalItem) {
+        return traitementMedicalItemRepository.save(traitementMedicalItem);
+    }
+
+
 }

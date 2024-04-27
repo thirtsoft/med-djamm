@@ -22,4 +22,8 @@ public interface OrdonnanceService {
     OrdonnanceItem findOrdonnanceItemById(Long id);
 
     List<Ordonnance> findOrdonnancesByCircuitId(Long circuitId);
+
+    OrdonnanceItem saveOrdonnanceItem(OrdonnanceItem ordonnanceItem);
+
+
 }

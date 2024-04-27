@@ -95,4 +95,9 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
     public List<Ordonnance> findOrdonnancesByCircuitId(Long circuitId) {
         return ordonnanceRepository.findOrdonnanceByCircuitId(circuitId);
     }
+
+    @Override
+    public OrdonnanceItem saveOrdonnanceItem(OrdonnanceItem ordonnanceItem) {
+        return ordonnanceItemRepository.save(ordonnanceItem);
+    }
 }

@@ -139,11 +139,10 @@ public class HospitalisationAssembler {
             hospitalisation.setExamenComplementaire(examenComplementaireAssembler
                     .assembleUpdateExamenComplementaireFromDs(hospitalisation.getExamenComplementaire(), hospitalisationDs.getExamenComplementaireDs()));
 
-        /*
         if (hospitalisationDs.getTraitementMedicalDs() != null)
             hospitalisation.setTraitementMedical(traitementMedicalAssembler
                     .assembleUpdateTraitementMedicalFromDs(hospitalisation.getTraitementMedical(), hospitalisationDs.getTraitementMedicalDs()));
-        */
+
         if (hospitalisationDs.getSyntheseDs() != null)
             hospitalisation.setSynthese(syntheseAssembler
                     .assembleUpdateSyntheseFromDs(hospitalisation.getSynthese(), hospitalisationDs.getSyntheseDs()));

@@ -3,9 +3,11 @@ package com.meddjamm.sn.dossiermedical.assembler;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedicalItem;
 import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalItemDs;
 import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalItemRepository;
+import com.meddjamm.sn.dossiermedical.services.TraitementMedicalService;
 import com.meddjamm.sn.rh.assembler.MedicamentAssembler;
 import com.meddjamm.sn.rh.remote.model.MedicamentDs;
 import com.meddjamm.sn.rh.services.MedicamentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@RequiredArgsConstructor
 public class TraitementMedicalItemAssembler {
 
     private final MedicamentService medicamentService;
@@ -23,12 +26,8 @@ public class TraitementMedicalItemAssembler {
 
     private final TraitementMedicalItemRepository traitementMedicalItemRepository;
 
-    public TraitementMedicalItemAssembler(MedicamentService medicamentService, MedicamentAssembler medicamentAssembler,
-                                          TraitementMedicalItemRepository traitementMedicalItemRepository) {
-        this.medicamentService = medicamentService;
-        this.medicamentAssembler = medicamentAssembler;
-        this.traitementMedicalItemRepository = traitementMedicalItemRepository;
-    }
+    private final TraitementMedicalService traitementMedicalService;
+
 
     public List<TraitementMedicalItemDs> assembleEntitiesFrom(List<TraitementMedicalItem> traitementMedicalItemList) {
         return traitementMedicalItemList.stream().map(this::assembleEntityToDs).toList();
@@ -71,11 +70,6 @@ public class TraitementMedicalItemAssembler {
         TraitementMedicalItem traitementMedicalItem = new TraitementMedicalItem();
         if (traitementMedicalItemDs.getId() != null)
             traitementMedicalItem.setId(traitementMedicalItemDs.getId());
-        /*
-        return actionListDs.stream()
-                .map(actionDs -> actionService.findById(actionDs.getId()))
-                .collect(Collectors.toSet());
-        */
         if (traitementMedicalItemDs.getMedicamendId() != null)
             traitementMedicalItem.setMedicamendId(traitementMedicalItemDs.getMedicamendId());
         traitementMedicalItem.setPsologie(traitementMedicalItemDs.getPsologie());
@@ -88,19 +82,27 @@ public class TraitementMedicalItemAssembler {
     public Set<TraitementMedicalItem> createUpdateSetTraitementMedicalItem(List<TraitementMedicalItemDs> traitementMedicalItemDs) {
         if (traitementMedicalItemDs == null) return null;
         Set<TraitementMedicalItem> actions = new HashSet<>();
-        for (TraitementMedicalItemDs dto : traitementMedicalItemDs)
-            if (dto != null) actions.add(assembleUpdateTraitementMedicalItemFromDs(dto));
+        for (TraitementMedicalItemDs dto : traitementMedicalItemDs) {
+            actions.add(assembleUpdateTraitementMedicalItemFromDs(dto));
+        }
         return actions;
     }
 
     public TraitementMedicalItem assembleUpdateTraitementMedicalItemFromDs(TraitementMedicalItemDs traitementMedicalItemDs) {
-        TraitementMedicalItem traitementMedicalItem = traitementMedicalItemRepository.findById(traitementMedicalItemDs.getId()).get();
-        if (traitementMedicalItemDs.getMedicamendId() != null)
+
+        if (traitementMedicalItemDs.getId() == null) {
+            return traitementMedicalService.saveTraitementMedicalItem(this.assembleTraitementMedicalItemFromDs(traitementMedicalItemDs));
+        }
+        TraitementMedicalItem traitementMedicalItem = traitementMedicalService.findTraitementMedicalItemById(traitementMedicalItemDs.getId());
+
+        if (traitementMedicalItemDs.getMedicamendId() != null) {
             traitementMedicalItem.setMedicamendId(traitementMedicalItemDs.getMedicamendId());
+        }
         traitementMedicalItem.setPsologie(traitementMedicalItemDs.getPsologie());
         traitementMedicalItem.setNbrePrise(traitementMedicalItemDs.getNbrePrise());
         traitementMedicalItem.setAdministrePar(traitementMedicalItemDs.getAdministrePar());
         traitementMedicalItem.setEst_administre(traitementMedicalItemDs.getEst_administre());
+
         return traitementMedicalItem;
     }
 
