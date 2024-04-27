@@ -61,7 +61,6 @@ public class HospitalisationServiceImpl implements HospitalisationService {
             log.info("Hospitalisation that id is " + id + "is not found");
         }
         assert hospitalisationResult != null;
-        hospitalisationResult.setResume(hospitalisation.getResume());
         hospitalisationResult.setDiscussion(hospitalisation.getDiscussion());
         hospitalisationResult.setExamenComplementaire(hospitalisation.getExamenComplementaire());
         hospitalisationResult.setObservationClinique(hospitalisation.getObservationClinique());
