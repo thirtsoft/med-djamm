@@ -55,7 +55,6 @@ public class HospitalisationAssembler {
         if (hospitalisation.getId() != null)
             hospitalisationListDs.setId(hospitalisation.getId());
         hospitalisationListDs.setActif(hospitalisation.isActif());
-        hospitalisationListDs.setResume(hospitalisation.getResume());
         hospitalisationListDs.setCreateDate(hospitalisation.getCreatedDate());
         //  hospitalisationListDs.setCreatedByUser(hospitalisation.getCreatedByUser());
         hospitalisationListDs.setNumeroHospitalisation(
@@ -80,7 +79,6 @@ public class HospitalisationAssembler {
             hospitalisationDs.setId(hospitalisation.getId());
         hospitalisationDs.setCode(hospitalisation.getCode());
         hospitalisationDs.setMatricule(hospitalisation.getMatricule());
-        hospitalisationDs.setResume(hospitalisation.getResume());
         hospitalisationDs.setActif(hospitalisation.isActif());
         hospitalisationDs.setCreatedDate(hospitalisation.getCreatedDate());
         hospitalisationDs.setCreatedBy(hospitalisation.getCreatedBy());
@@ -109,7 +107,6 @@ public class HospitalisationAssembler {
             hospitalisation.setId(hospitalisationDs.getId());
         hospitalisation.setCode(hospitalisationDs.getCode());
         hospitalisation.setMatricule(hospitalisationDs.getMatricule());
-        hospitalisation.setResume(hospitalisationDs.getResume());
         hospitalisation.setActif(hospitalisationDs.isActif());
         hospitalisation.setCreatedDate(hospitalisationDs.getCreatedDate());
         hospitalisation.setCreatedBy(hospitalisationDs.getCreatedBy());
@@ -159,7 +156,6 @@ public class HospitalisationAssembler {
         HospitalisationDetailDs hospitalisationDetailDs = new HospitalisationDetailDs();
         if (hospitalisation.getId() != null)
             hospitalisationDetailDs.setId(hospitalisation.getId());
-        hospitalisationDetailDs.setResume(hospitalisation.getResume());
         hospitalisationDetailDs.setActif(hospitalisation.isActif());
         hospitalisationDetailDs.setCreateDate(hospitalisation.getCreatedDate());
         hospitalisationDetailDs.setCreatedBy(hospitalisation.getCreatedBy());
