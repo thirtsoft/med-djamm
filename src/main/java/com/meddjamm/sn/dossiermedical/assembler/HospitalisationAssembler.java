@@ -10,6 +10,8 @@ import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationListDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
+import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
+import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.utils.UtilString;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,11 @@ public class HospitalisationAssembler {
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
     private final DiscussionAssembler discussionAssembler;
+    ;
+
+    private final HospitalisationRepository hospitalisationRepository;
+
+    private final HospitalisationService hospitalisationService;
 
     public List<HospitalisationListDs> assembleEntitiesFrom(List<Hospitalisation> hospitalisationList) {
         return hospitalisationList.stream().map(this::assembleEntityToListDs).toList();
@@ -118,6 +125,34 @@ public class HospitalisationAssembler {
             hospitalisation.setDiscussion(discussionAssembler.assembleDiscussionFromDs(hospitalisationDs.getDiscussionDs()));
         return hospitalisation;
     }
+
+
+    public Hospitalisation assembleUpdateHospitalisation(HospitalisationDs hospitalisationDs) {
+        Hospitalisation hospitalisation = hospitalisationService.findById(hospitalisationDs.getId());
+
+        if (hospitalisationDs.getObservationCliniqueDs() != null)
+            hospitalisation.setObservationClinique(observationCliniqueAssembler.
+                    assembleUpdateObservationCliniqueFromDs
+                            (hospitalisation.getObservationClinique(), hospitalisationDs.getObservationCliniqueDs()));
+
+        if (hospitalisationDs.getExamenComplementaireDs() != null)
+            hospitalisation.setExamenComplementaire(examenComplementaireAssembler
+                    .assembleUpdateExamenComplementaireFromDs(hospitalisation.getExamenComplementaire(), hospitalisationDs.getExamenComplementaireDs()));
+
+        /*
+        if (hospitalisationDs.getTraitementMedicalDs() != null)
+            hospitalisation.setTraitementMedical(traitementMedicalAssembler
+                    .assembleUpdateTraitementMedicalFromDs(hospitalisation.getTraitementMedical(), hospitalisationDs.getTraitementMedicalDs()));
+        */
+        if (hospitalisationDs.getSyntheseDs() != null)
+            hospitalisation.setSynthese(syntheseAssembler
+                    .assembleUpdateSyntheseFromDs(hospitalisation.getSynthese(), hospitalisationDs.getSyntheseDs()));
+        if (hospitalisationDs.getDiscussionDs() != null)
+            hospitalisation.setDiscussion(discussionAssembler
+                    .assembleUpdateDiscussionFromDs(hospitalisation.getDiscussion(), hospitalisationDs.getDiscussionDs()));
+        return hospitalisation;
+    }
+
 
     public HospitalisationDetailDs assembleHospitalisationDetailDsFromHospitalisation(Hospitalisation hospitalisation) {
         if (hospitalisation == null)

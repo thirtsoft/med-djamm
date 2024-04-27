@@ -34,7 +34,7 @@ public class HospitalisationController implements HospitalisationApi {
 
     @Override
     public void updateHospitalisation(Long id, HospitalisationDs hospitalisationDs) {
-        hospitalisationService.updateHospitalisation(id, hospitalisationAssembler.assembleDsToEntity(hospitalisationDs));
+        hospitalisationService.updateHospitalisation(id, hospitalisationAssembler.assembleUpdateHospitalisation(hospitalisationDs));
     }
 
     @Override

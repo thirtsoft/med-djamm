@@ -2,12 +2,19 @@ package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.dossiermedical.entity.Antecedent;
 import com.meddjamm.sn.dossiermedical.remote.model.AntecedentDs;
+import com.meddjamm.sn.dossiermedical.repository.AntecedentRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class AntecedentAssembler {
+
+    private final AntecedentRepository antecedentRepository;
+
+    public AntecedentAssembler(AntecedentRepository antecedentRepository) {
+        this.antecedentRepository = antecedentRepository;
+    }
 
     public List<AntecedentDs> assembleEntitiesFrom(List<Antecedent> antecedents) {
         return antecedents.stream().map(this::assembleEntityToDs).toList();
@@ -49,14 +56,17 @@ public class AntecedentAssembler {
         antecedent.setAntecedentsFamilialsCollateral(antecedentDs.getAntecedentsFamilialsCollateral());
         antecedent.setAntecedentsFamilialsDescendant(antecedentDs.getAntecedentsFamilialsDescendant());
         antecedent.setModeVies(antecedentDs.getModeVies());
+        return antecedent;
+    }
 
-//        antecedent.setAntecedentsMedicaux(new HashSet<>(antecedentDs.getAntecedentsMedicaux()));
-//        antecedent.setAntecedentsChirurgicaux(new HashSet<>(antecedentDs.getAntecedentsChirurgicaux()));
-//        antecedent.setAntecedentsGynecologiques(new HashSet<>(antecedentDs.getAntecedentsGynecologiques()));
-//        antecedent.setAntecedentsFamilialsAscendant(new HashSet<>(antecedentDs.getAntecedentsFamilialsAscendant()));
-//        antecedent.setAntecedentsFamilialsCollateral(new HashSet<>(antecedentDs.getAntecedentsFamilialsCollateral()));
-//        antecedent.setAntecedentsFamilialsDescendant(new HashSet<>(antecedentDs.getAntecedentsFamilialsDescendant()));
-//        antecedent.setModeVies(new HashSet<>(antecedentDs.getModeVies()));
+    public Antecedent assembleUpdateAntecedentFromDs(Antecedent antecedent, AntecedentDs antecedentDs) {
+        antecedent.setAntecedentsMedicaux(antecedentDs.getAntecedentsMedicaux());
+        antecedent.setAntecedentsChirurgicaux(antecedentDs.getAntecedentsChirurgicaux());
+        antecedent.setAntecedentsGynecologiques(antecedentDs.getAntecedentsGynecologiques());
+        antecedent.setAntecedentsFamilialsAscendant(antecedentDs.getAntecedentsFamilialsAscendant());
+        antecedent.setAntecedentsFamilialsCollateral(antecedentDs.getAntecedentsFamilialsCollateral());
+        antecedent.setAntecedentsFamilialsDescendant(antecedentDs.getAntecedentsFamilialsDescendant());
+        antecedent.setModeVies(antecedentDs.getModeVies());
         return antecedent;
     }
 }

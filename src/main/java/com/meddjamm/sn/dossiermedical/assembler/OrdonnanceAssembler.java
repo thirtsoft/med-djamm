@@ -5,6 +5,7 @@ import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
 import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.OrdonnanceDs;
+import com.meddjamm.sn.dossiermedical.services.OrdonnanceService;
 import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +17,14 @@ public class OrdonnanceAssembler {
     private final OrdonnanceItemAssembler ordonnanceItemAssembler;
     private final UtilisateurService utilisateurService;
 
+    private final OrdonnanceService ordonnanceService;
+
     public OrdonnanceAssembler(OrdonnanceItemAssembler ordonnanceItemAssembler,
-                               UtilisateurService utilisateurService) {
+                               UtilisateurService utilisateurService,
+                               OrdonnanceService ordonnanceService) {
         this.ordonnanceItemAssembler = ordonnanceItemAssembler;
         this.utilisateurService = utilisateurService;
+        this.ordonnanceService = ordonnanceService;
     }
 
     public List<OrdonnanceDs> assembleEntitiesFrom(List<Ordonnance> Ordonnances) {
@@ -56,6 +61,12 @@ public class OrdonnanceAssembler {
         Ordonnance.setCreatedBy(OrdonnanceDs.getCreatedBy());
         Ordonnance.setCircuitPatientId(OrdonnanceDs.getCircuitPatientId());
         return Ordonnance;
+    }
+
+    public Ordonnance assembleUpdateOrdonnanceFromDs(OrdonnanceDs ordonnanceDs) {
+        Ordonnance ordonnance = ordonnanceService.findById(ordonnanceDs.getId());
+        ordonnance.setOrdonnanceItems(ordonnanceItemAssembler.createSetOrdonnanceItem(ordonnanceDs.getOrdonnanceItemDs()));
+        return ordonnance;
     }
 
     public List<AllCircuitPatientDs> assembleAllCircuitPatientEntitiesFrom(List<Ordonnance> ordonnances) {

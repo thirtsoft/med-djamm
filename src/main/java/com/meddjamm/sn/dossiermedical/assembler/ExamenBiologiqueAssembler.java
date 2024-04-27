@@ -63,4 +63,16 @@ public class ExamenBiologiqueAssembler {
         examenBiologique.setCreatedBy(examenBiologiqueDs.getCreatedBy());
         return examenBiologique;
     }
+
+    public ExamenBiologique assembleUpdateExamenBiologiqueFromDs(ExamenBiologique examenBiologique, ExamenBiologiqueDs examenBiologiqueDs) {
+        examenBiologique.setBiologie(examenBiologiqueDs.getBiologie());
+        examenBiologique.setBiologieFileName(examenBiologiqueDs.getBiologieFileName());
+        examenBiologique.setImmunologie(examenBiologiqueDs.getImmunologie());
+        examenBiologique.setImmunologieFileName(examenBiologiqueDs.getImmunologieFileName());
+        examenBiologique.setImagerie(examenBiologiqueDs.getImagerie());
+        examenBiologique.setImagerieFileName(examenBiologiqueDs.getImagerieFileName());
+        examenBiologique.setAnatomopathologie(examenBiologiqueDs.getAnatomopathologie());
+        examenBiologique.setAnatomopathologieFileName(examenBiologiqueDs.getAnatomopathologieFileName());
+        return examenBiologique;
+    }
 }

@@ -36,7 +36,7 @@ public class OrdonnanceController implements OrdonnanceApi {
     @Override
     public ResponseEntity<OrdonnanceDs> updateOrdonnance(Long id, OrdonnanceDs ordonnanceDs) throws Exception {
         return new ResponseEntity<>(ordonnanceAssembler.assembleEntityToDs(
-                ordonnanceService.updateOrdonnance(id, ordonnanceAssembler.assembleOrdonnanceFromDs(
+                ordonnanceService.updateOrdonnance(id, ordonnanceAssembler.assembleUpdateOrdonnanceFromDs(
                         ordonnanceDs
                 ))
         ), HttpStatus.OK);

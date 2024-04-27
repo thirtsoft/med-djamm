@@ -8,6 +8,7 @@ import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PersonneConfianceDs;
+import com.meddjamm.sn.dossiermedical.services.PatientService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,8 +18,12 @@ public class PatientAssembler {
 
     private final DiagnosticAssembler diagnosticAssembler;
 
-    public PatientAssembler(DiagnosticAssembler diagnosticAssembler) {
+    private final PatientService patientService;
+
+    public PatientAssembler(DiagnosticAssembler diagnosticAssembler,
+                            PatientService patientService) {
         this.diagnosticAssembler = diagnosticAssembler;
+        this.patientService = patientService;
     }
 
     public List<PatientMinDs> assembleEntitiesFrom(List<Patient> patients) {
@@ -97,6 +102,27 @@ public class PatientAssembler {
         return patient;
     }
 
+    public Patient assembleUpdatePatientFromDs(PatientDetailDs patientDetailDs) {
+        Patient patient = patientService.findById(patientDetailDs.getId());
+        patient.setCode(patientDetailDs.getCode());
+        patient.setDateAdmission(patientDetailDs.getDateAdmission());
+        patient.setNom(patientDetailDs.getNom());
+        patient.setPrenom(patientDetailDs.getPrenom());
+        patient.setSexe(patientDetailDs.getSexe());
+        patient.setAge(patientDetailDs.getAge());
+        patient.setCivilite(patientDetailDs.getCivilite());
+        patient.setAddress(patientDetailDs.getAddress());
+        patient.setDateNaissance(patientDetailDs.getDateNaissance());
+        patient.setNumeroTelephone(patientDetailDs.getNumeroTelephone());
+        patient.setProfession(patientDetailDs.getProfession());
+        patient.setSituationMatrimonial(patientDetailDs.getSituationMatrimonial());
+        patient.setNationalite(patientDetailDs.getNationalite());
+        if (patientDetailDs.getPersonneConfianceDs() != null)
+            patient.setPersonneConfiance(assembleUpdateEntityFromDs(patient.getPersonneConfiance(), patientDetailDs.getPersonneConfianceDs()));
+        patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
+        return patient;
+    }
+
     public PatientMinDs assembleMinFrom(Patient patient) {
         PatientMinDs patientMinDs = new PatientMinDs();
         patientMinDs.setId(patient.getId());
@@ -136,10 +162,16 @@ public class PatientAssembler {
         return personneConfiance;
     }
 
+    public PersonneConfiance assembleUpdateEntityFromDs(PersonneConfiance personneConfiance, PersonneConfianceDs personneConfianceDs) {
+        personneConfiance.setNom(personneConfianceDs.getNom());
+        personneConfiance.setPrenom(personneConfianceDs.getPrenom());
+        personneConfiance.setTelephone(personneConfianceDs.getTelephone());
+        personneConfiance.setEmail(personneConfianceDs.getEmail());
+        return personneConfiance;
+    }
+
     public Patient assembleUpdatePatient(PatientUpdateDs patientUpdateDs) {
-        Patient patient = new Patient();
-        if (patientUpdateDs.getId() != null)
-            patient.setId(patientUpdateDs.getId());
+        Patient patient = patientService.findById(patientUpdateDs.getId());
         patient.setPrenom(patientUpdateDs.getPrenom());
         patient.setNom(patientUpdateDs.getNom());
         patient.setSexe(patientUpdateDs.getSexe());
@@ -155,6 +187,8 @@ public class PatientAssembler {
         patient.setConsanguinite(patientUpdateDs.getConsanguinite());
         patient.setNiveauSocialEconomique(patientUpdateDs.getNiveauSocialEconomique());
         patient.setRegimeAlimentaire(patientUpdateDs.getRegimeAlimentaire());
+        if (patientUpdateDs.getDiagnosticDs() != null)
+            patient.setDiagnostic(diagnosticAssembler.assembleUpdateDiagnosticFromDs(patient.getDiagnostic(), patientUpdateDs.getDiagnosticDs()));
         return patient;
     }
 

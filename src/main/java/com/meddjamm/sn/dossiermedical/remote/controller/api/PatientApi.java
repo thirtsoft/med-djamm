@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,10 +29,10 @@ public interface PatientApi {
     @PostMapping(value = "/generated-dossier-patient")
     ResponseEntity<PatientDetailDs> creerDossierPatient(@RequestBody PatientDetailDs patientDetailDs);
 
-    @PatchMapping(value = "/edit/{id}")
+    @PutMapping(value = "/edit/{id}")
     void updatePatientByMedecin(@PathVariable Long id, @RequestBody PatientUpdateDs patientUpdateDs) throws Exception;
 
-    @PatchMapping(value = "/edit/by-administration/{id}")
+    @PutMapping(value = "/edit/by-administration/{id}")
     ResponseEntity<PatientMinDs> updatePatientByAdministration(@PathVariable Long id, @RequestBody PatientDetailDs patientDetailDs) throws Exception;
 
     @GetMapping(value = "/{id}")

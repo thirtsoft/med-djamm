@@ -24,4 +24,5 @@ public class PatientUpdateDs {
     private String consanguinite;
     private String niveauSocialEconomique;
     private String regimeAlimentaire;
+    private DiagnosticDs diagnosticDs;
 }

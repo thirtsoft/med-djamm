@@ -12,6 +12,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class RendezVousDs implements Serializable {
 
+    private Long id;
+    
     private String libelle;
 
     private String code;

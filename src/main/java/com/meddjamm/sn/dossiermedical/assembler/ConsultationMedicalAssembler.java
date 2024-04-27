@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
 import com.meddjamm.sn.dossiermedical.remote.model.ConsultationMedicalDs;
+import com.meddjamm.sn.dossiermedical.services.ConsultationMedicalService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,13 +16,17 @@ public class ConsultationMedicalAssembler {
 
     private final ConsultationAssembler consultationAssembler;
 
+    private final ConsultationMedicalService consultationMedicalService;
+
     private final ExamenBiologiqueAssembler examenBiologiqueAssembler;
 
     public ConsultationMedicalAssembler(UtilisateurService utilisateurService,
                                         ConsultationAssembler consultationAssembler,
+                                        ConsultationMedicalService consultationMedicalService,
                                         ExamenBiologiqueAssembler examenBiologiqueAssembler) {
         this.utilisateurService = utilisateurService;
         this.consultationAssembler = consultationAssembler;
+        this.consultationMedicalService = consultationMedicalService;
         this.examenBiologiqueAssembler = examenBiologiqueAssembler;
     }
 
@@ -58,6 +63,15 @@ public class ConsultationMedicalAssembler {
         consultationMedical.setExamenBiologique(examenBiologiqueAssembler.assembleExamenBiologiqueFromDs(consultationMedicalDs.getExamenBiologiqueDs()));
         consultationMedical.setCreatedBy(consultationMedicalDs.getCreatedBy());
         consultationMedical.setCircuitPatientId(consultationMedicalDs.getCircuitPatientId());
+        return consultationMedical;
+    }
+
+    public ConsultationMedical assembleUpdateConsultationMedicallisteFromDs(ConsultationMedicalDs consultationMedicalDs) {
+        ConsultationMedical consultationMedical = consultationMedicalService.findById(consultationMedicalDs.getId());
+        consultationMedical.setConsultation(consultationAssembler.
+                assembleUpdateConsultationFromDs(consultationMedical.getConsultation(), consultationMedicalDs.getConsultationDs()));
+        consultationMedical.setExamenBiologique(examenBiologiqueAssembler.
+                assembleUpdateExamenBiologiqueFromDs(consultationMedical.getExamenBiologique(), consultationMedicalDs.getExamenBiologiqueDs()));
         return consultationMedical;
     }
 

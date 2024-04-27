@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
 import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalDs;
+import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,17 +12,18 @@ import java.util.List;
 @Component
 public class TraitementMedicalAssembler {
 
-    private final OrdonnanceItemAssembler ordonnanceItemAssembler;
-
     private final TraitementMedicalItemAssembler traitementMedicalItemAssembler;
+
+    private final TraitementMedicalRepository traitementMedicalRepository;
 
     private final UtilisateurService utilisateurService;
 
-    public TraitementMedicalAssembler(OrdonnanceItemAssembler ordonnanceItemAssembler,
-                                      TraitementMedicalItemAssembler traitementMedicalItemAssembler,
-                                      UtilisateurService utilisateurService) {
-        this.ordonnanceItemAssembler = ordonnanceItemAssembler;
+    public TraitementMedicalAssembler(
+            TraitementMedicalItemAssembler traitementMedicalItemAssembler,
+            TraitementMedicalRepository traitementMedicalRepository,
+            UtilisateurService utilisateurService) {
         this.traitementMedicalItemAssembler = traitementMedicalItemAssembler;
+        this.traitementMedicalRepository = traitementMedicalRepository;
         this.utilisateurService = utilisateurService;
     }
 
@@ -63,6 +65,15 @@ public class TraitementMedicalAssembler {
         traitementMedical.setActif(traitementMedicalDs.isActif());
         traitementMedical.setCreatedBy(traitementMedicalDs.getCreatedBy());
         traitementMedical.setCircuitPatientId(traitementMedicalDs.getCircuitPatientId());
+        traitementMedical.setProtocole(traitementMedicalDs.getProtocole());
+        traitementMedical.setProtocoleFileName(traitementMedicalDs.getProtocoleFileName());
+        traitementMedical.setCircuitPatientId(traitementMedicalDs.getCircuitPatientId());
+        return traitementMedical;
+    }
+
+    public TraitementMedical assembleUpdateTraitementMedicalFromDs(TraitementMedical traitementMedical, TraitementMedicalDs traitementMedicalDs) {
+        traitementMedical.setTraitementMedicalItems(traitementMedicalItemAssembler
+                .createUpdateSetTraitementMedicalItem(traitementMedicalDs.getTraitementMedicalItemDs()));
         traitementMedical.setProtocole(traitementMedicalDs.getProtocole());
         traitementMedical.setProtocoleFileName(traitementMedicalDs.getProtocoleFileName());
         traitementMedical.setCircuitPatientId(traitementMedicalDs.getCircuitPatientId());

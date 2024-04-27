@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenPhysique;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenPhysiqueDs;
+import com.meddjamm.sn.dossiermedical.repository.ExamenPhysiqueRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,9 +17,12 @@ import java.util.Set;
 public class ExamenPhysiqueAssembler {
 
     private final UtilisateurService utilisateurService;
+    private final ExamenPhysiqueRepository examenPhysiqueRepository;
 
-    public ExamenPhysiqueAssembler(UtilisateurService utilisateurService) {
+    public ExamenPhysiqueAssembler(UtilisateurService utilisateurService,
+                                   ExamenPhysiqueRepository examenPhysiqueRepository) {
         this.utilisateurService = utilisateurService;
+        this.examenPhysiqueRepository = examenPhysiqueRepository;
     }
 
     public List<ExamenPhysiqueDs> assembleEntitiesFrom(List<ExamenPhysique> examenPhysiques) {
@@ -80,6 +84,26 @@ public class ExamenPhysiqueAssembler {
         if (examenPhysiqueDs.getId() != null)
             examenPhysique.setId(examenPhysiqueDs.getId());
         examenPhysique.setActif(examenPhysiqueDs.isActif());
+        examenPhysique.setExamenGeneral(examenPhysiqueDs.getExamenGeneral());
+        examenPhysique.setExamenAppareil(examenPhysiqueDs.getExamenAppareil());
+        examenPhysique.setCreatedDate(examenPhysiqueDs.getCreatedDate());
+        examenPhysique.setPressionArterielS(examenPhysiqueDs.getPressionArterielS());
+        examenPhysique.setPressionArterielD(examenPhysiqueDs.getPressionArterielD());
+        examenPhysique.setTemperature(examenPhysiqueDs.getTemperature());
+        examenPhysique.setFrequenceC(examenPhysiqueDs.getFrequenceC());
+        examenPhysique.setFrequenceR(examenPhysiqueDs.getFrequenceR());
+        examenPhysique.setSaturationOxygene(examenPhysiqueDs.getSaturationOxygene());
+        examenPhysique.setDiurese(examenPhysiqueDs.getDiurese());
+        examenPhysique.setPoids(examenPhysiqueDs.getPoids());
+        examenPhysique.setTaille(examenPhysiqueDs.getTaille());
+        examenPhysique.setImc(examenPhysiqueDs.getImc());
+        examenPhysique.setTourTaille(examenPhysiqueDs.getTourTaille());
+        examenPhysique.setTourHanche(examenPhysiqueDs.getTourHanche());
+        examenPhysique.setGlycemie(examenPhysiqueDs.getGlycemie());
+        return examenPhysique;
+    }
+
+    public ExamenPhysique assembleUpdateExamenPhysiqueFromDs(ExamenPhysique examenPhysique, ExamenPhysiqueDs examenPhysiqueDs) {
         examenPhysique.setExamenGeneral(examenPhysiqueDs.getExamenGeneral());
         examenPhysique.setExamenAppareil(examenPhysiqueDs.getExamenAppareil());
         examenPhysique.setCreatedDate(examenPhysiqueDs.getCreatedDate());

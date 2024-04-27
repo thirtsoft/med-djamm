@@ -36,7 +36,7 @@ public class AvisSpecialisteController implements AvisSpecialisteApi {
     public ResponseEntity<AvisSpecialisteDs> updateAvisSpecialiste(Long id, AvisSpecialisteDs avisSpecialisteDs) throws Exception {
         return new ResponseEntity<>(avisSpecialisteAssembler.assembleEntityToDs(
                 avisSpecialisteService.updateAvisSpecialiste(id,
-                        avisSpecialisteAssembler.assembleAvisSpecialisteFromDs(avisSpecialisteDs)
+                        avisSpecialisteAssembler.assembleUpdateAvisSpecialisteFromDs(avisSpecialisteDs)
                 )
         ), HttpStatus.OK);
     }

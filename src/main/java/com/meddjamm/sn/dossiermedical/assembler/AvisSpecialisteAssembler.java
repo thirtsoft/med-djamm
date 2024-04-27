@@ -5,6 +5,7 @@ import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.AvisSpecialiste;
 import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.AvisSpecialisteDs;
+import com.meddjamm.sn.dossiermedical.services.AvisSpecialisteService;
 import com.meddjamm.sn.utils.UtilString;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +16,12 @@ public class AvisSpecialisteAssembler {
 
     private final UtilisateurService utilisateurService;
 
-    public AvisSpecialisteAssembler(UtilisateurService utilisateurService) {
+    private final AvisSpecialisteService avisSpecialisteService;
+
+    public AvisSpecialisteAssembler(UtilisateurService utilisateurService,
+                                    AvisSpecialisteService avisSpecialisteService) {
         this.utilisateurService = utilisateurService;
+        this.avisSpecialisteService = avisSpecialisteService;
     }
 
     public List<AvisSpecialisteDs> assembleEntitiesFrom(List<AvisSpecialiste> avisSpecialisteList) {
@@ -49,6 +54,13 @@ public class AvisSpecialisteAssembler {
         avisSpecialiste.setResume(avisSpecialisteDs.getResume());
         avisSpecialiste.setCreatedBy(avisSpecialisteDs.getCreatedBy());
         avisSpecialiste.setCircuitPatientId(avisSpecialisteDs.getCircuitPatientId());
+        return avisSpecialiste;
+    }
+
+    public AvisSpecialiste assembleUpdateAvisSpecialisteFromDs(AvisSpecialisteDs avisSpecialisteDs) {
+        AvisSpecialiste avisSpecialiste = avisSpecialisteService.findById(avisSpecialisteDs.getId());
+        avisSpecialiste.setId(avisSpecialisteDs.getId());
+        avisSpecialiste.setResume(avisSpecialisteDs.getResume());
         return avisSpecialiste;
     }
 

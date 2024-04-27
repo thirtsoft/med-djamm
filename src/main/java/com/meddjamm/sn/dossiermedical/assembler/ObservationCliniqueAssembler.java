@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.remote.model.ObservationCliniqueDs;
+import com.meddjamm.sn.dossiermedical.repository.ObservationCliniqueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +20,16 @@ public class ObservationCliniqueAssembler {
 
     private final UtilisateurService utilisateurService;
 
+    private final ObservationCliniqueRepository observationCliniqueRepository;
+
     public ObservationCliniqueAssembler(ExamenPhysiqueAssembler examenPhysiqueAssembler,
                                         AntecedentAssembler antecedentAssembler,
-                                        UtilisateurService utilisateurService) {
+                                        UtilisateurService utilisateurService,
+                                        ObservationCliniqueRepository observationCliniqueRepository) {
         this.examenPhysiqueAssembler = examenPhysiqueAssembler;
         this.antecedentAssembler = antecedentAssembler;
         this.utilisateurService = utilisateurService;
+        this.observationCliniqueRepository = observationCliniqueRepository;
     }
 
 
@@ -71,6 +76,16 @@ public class ObservationCliniqueAssembler {
             observationClinique.setAntecedent(antecedentAssembler.assembleAntecedentFromDs(observationCliniqueDs.getAntecedentDs()));
         observationClinique.setCircuitPatientId(observationCliniqueDs.getCircuitPatientId());
         observationClinique.setCreatedBy(observationCliniqueDs.getCreatedBy());
+        return observationClinique;
+    }
+
+    public ObservationClinique assembleUpdateObservationCliniqueFromDs(ObservationClinique observationClinique, ObservationCliniqueDs observationCliniqueDs) {
+        observationClinique.setMotifsHospitalisation(observationCliniqueDs.getMotifsHospitalisation());
+        observationClinique.setHistoireMaladie(observationCliniqueDs.getHistoireMaladie());
+        if (observationCliniqueDs.getExamenPhysiqueDs() != null)
+            observationClinique.setExamenPhysique(examenPhysiqueAssembler.assembleUpdateExamenPhysiqueFromDs(observationClinique.getExamenPhysique(), observationCliniqueDs.getExamenPhysiqueDs()));
+        if (observationCliniqueDs.getAntecedentDs() != null)
+            observationClinique.setAntecedent(antecedentAssembler.assembleUpdateAntecedentFromDs(observationClinique.getAntecedent(), observationCliniqueDs.getAntecedentDs()));
         return observationClinique;
     }
 

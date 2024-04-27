@@ -55,7 +55,7 @@ public class Patient extends AbstractAuditableEntity implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private PersonneConfiance personneConfiance;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private Diagnostic diagnostic;
 
     private Long createdBy;

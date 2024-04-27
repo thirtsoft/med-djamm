@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Synthese;
 import com.meddjamm.sn.dossiermedical.remote.model.SyntheseDs;
+import com.meddjamm.sn.dossiermedical.repository.SyntheseRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,9 +13,12 @@ import java.util.List;
 public class SyntheseAssembler {
 
     private final UtilisateurService utilisateurService;
+    private final SyntheseRepository syntheseRepository;
 
-    public SyntheseAssembler(UtilisateurService utilisateurService) {
+    public SyntheseAssembler(UtilisateurService utilisateurService,
+                             SyntheseRepository syntheseRepository) {
         this.utilisateurService = utilisateurService;
+        this.syntheseRepository = syntheseRepository;
     }
 
     public List<SyntheseDs> assembleEntitiesFrom(List<Synthese> syntheseList) {
@@ -51,6 +55,12 @@ public class SyntheseAssembler {
         synthese.setObservation(syntheseDs.getObservation());
         synthese.setCreatedBy(syntheseDs.getCreatedBy());
         synthese.setCircuitPatientId(syntheseDs.getCircuitPatientId());
+        return synthese;
+    }
+
+    public Synthese assembleUpdateSyntheseFromDs(Synthese synthese, SyntheseDs syntheseDs) {
+        synthese.setCreatedDate(syntheseDs.getCreatedDate());
+        synthese.setObservation(syntheseDs.getObservation());
         return synthese;
     }
 }

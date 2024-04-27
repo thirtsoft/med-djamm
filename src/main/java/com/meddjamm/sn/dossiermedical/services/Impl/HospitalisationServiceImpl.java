@@ -9,16 +9,17 @@ import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointes;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
 import com.meddjamm.sn.utils.ConstantSigps;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 @Slf4j
 public class HospitalisationServiceImpl implements HospitalisationService {
 
@@ -49,6 +50,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         return hospitalisationRepository.save(hospitalisation);
     }
 
+
     @Override
     public Hospitalisation updateHospitalisation(Long id, Hospitalisation hospitalisation) {
         if (!hospitalisationRepository.existsById(id)) {
@@ -66,7 +68,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         hospitalisationResult.setSynthese(hospitalisation.getSynthese());
         hospitalisationResult.setTraitementMedical(hospitalisation.getTraitementMedical());
         hospitalisationResult.setMatricule(hospitalisation.getMatricule());
-        return hospitalisationRepository.saveAndFlush(hospitalisation);
+        return hospitalisationRepository.save(hospitalisation);
     }
 
     @Override

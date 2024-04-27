@@ -58,7 +58,7 @@ public class PatientController implements PatientApi {
 
     @Override
     public ResponseEntity<PatientMinDs> updatePatientByAdministration(Long id, PatientDetailDs patientDetailDs) throws Exception {
-        Patient patientAjouter = patientAssembler.assemblePatientFromDs(patientDetailDs);
+        Patient patientAjouter = patientAssembler.assembleUpdatePatientFromDs(patientDetailDs);
         return new ResponseEntity<>(patientAssembler.assembleMinFrom(patientService.updatePatient(id, patientAjouter)), HttpStatus.OK);
 
     }

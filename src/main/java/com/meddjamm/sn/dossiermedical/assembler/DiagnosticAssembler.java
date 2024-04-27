@@ -43,4 +43,10 @@ public class DiagnosticAssembler {
         diagnostic.setDiagnostic_associe(diagnosticDs.getDiagnostic_associe());
         return diagnostic;
     }
+
+    public Diagnostic assembleUpdateDiagnosticFromDs(Diagnostic diagnostic, DiagnosticDs diagnosticDs) {
+        diagnostic.setDiagnostic_principal(diagnosticDs.getDiagnostic_principal());
+        diagnostic.setDiagnostic_associe(diagnosticDs.getDiagnostic_associe());
+        return diagnostic;
+    }
 }

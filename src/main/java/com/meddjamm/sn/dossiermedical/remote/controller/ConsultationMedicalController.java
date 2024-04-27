@@ -37,7 +37,7 @@ public class ConsultationMedicalController implements ConsultationMedicalApi {
     public ResponseEntity<ConsultationMedicalDs> updateConsultationMedical(Long id, ConsultationMedicalDs consultationMedicalDs) throws Exception {
         return new ResponseEntity<>(consultationMedicalAssembler.assembleEntityToDs(
                 consultationMedicalService.updateConsultationMedical(id,
-                        consultationMedicalAssembler.assembleConsultationMedicallisteFromDs(consultationMedicalDs)
+                        consultationMedicalAssembler.assembleUpdateConsultationMedicallisteFromDs(consultationMedicalDs)
                 )
         ), HttpStatus.OK);
     }

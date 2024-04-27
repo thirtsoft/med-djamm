@@ -10,6 +10,7 @@ import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.RendezVousDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.dossiermedical.services.RendezVousService;
 import com.meddjamm.sn.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class RendezVousAssembler {
     private final PatientAssembler patientAssembler;
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
+    private final RendezVousService rendezVousService;
 
     public List<RendezVousDetailDs> assembleEntitiesFrom(List<RendezVous> rendezVous) {
         return rendezVous.stream().map(this::assembleEntitiesToDs).toList();
@@ -58,6 +60,17 @@ public class RendezVousAssembler {
         rendezVous.setHeure(rendezVousDs.getHeure());
         rendezVous.setCreateDate(rendezVousDs.getCreateDate());
         rendezVous.setActif(rendezVousDs.isActif());
+        return rendezVous;
+    }
+
+    public RendezVous assembleUpdateRendezVousFromDs(RendezVousDs rendezVousDs) {
+        RendezVous rendezVous = rendezVousService.findById(rendezVousDs.getId());
+        rendezVous.setCode(rendezVousDs.getCode());
+        rendezVous.setLibelle(rendezVousDs.getLibelle());
+        rendezVous.setMatricule(rendezVousDs.getMatricule());
+        rendezVous.setCreatedBy(rendezVousDs.getCreatedBy());
+        rendezVous.setDateRendezVous(rendezVousDs.getDateRendezVous());
+        rendezVous.setHeure(rendezVousDs.getHeure());
         return rendezVous;
     }
 

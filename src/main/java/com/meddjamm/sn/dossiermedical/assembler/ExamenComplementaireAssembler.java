@@ -5,6 +5,7 @@ import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
+import com.meddjamm.sn.dossiermedical.repository.ExamenComplementaireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class ExamenComplementaireAssembler {
 
     private final UtilisateurService utilisateurService;
+    private final ExamenComplementaireRepository examenComplementaireRepository;
 
     public List<ExamenComplementaireDetailDs> assembleEntitiesFrom(List<ExamenComplementaire> examenComplementaires) {
         return examenComplementaires.stream().map(this::assembleEntitiesToDs).toList();
@@ -68,6 +70,18 @@ public class ExamenComplementaireAssembler {
         examenComplementaire.setAnatomopathologieFileName(examenComplementaireDs.getAnatomopathologieFileName());
         examenComplementaire.setCircuitPatientId(examenComplementaireDs.getCircuitPatientId());
         examenComplementaire.setCreatedBy(examenComplementaireDs.getCreatedBy());
+        return examenComplementaire;
+    }
+
+    public ExamenComplementaire assembleUpdateExamenComplementaireFromDs(ExamenComplementaire examenComplementaire, ExamenComplementaireDs examenComplementaireDs) {
+        examenComplementaire.setBiologie(examenComplementaireDs.getBiologie());
+        examenComplementaire.setBiologieFileName(examenComplementaireDs.getBiologieFileName());
+        examenComplementaire.setImmunologie(examenComplementaireDs.getImmunologie());
+        examenComplementaire.setImmunologieFileName(examenComplementaireDs.getImmunologieFileName());
+        examenComplementaire.setImagerie(examenComplementaireDs.getImagerie());
+        examenComplementaire.setImagerieFileName(examenComplementaireDs.getImagerieFileName());
+        examenComplementaire.setAnatomopathologie(examenComplementaireDs.getAnatomopathologie());
+        examenComplementaire.setAnatomopathologieFileName(examenComplementaireDs.getAnatomopathologieFileName());
         return examenComplementaire;
     }
 

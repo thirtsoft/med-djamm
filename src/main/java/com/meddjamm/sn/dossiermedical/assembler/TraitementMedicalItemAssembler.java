@@ -2,6 +2,7 @@ package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedicalItem;
 import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalItemDs;
+import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalItemRepository;
 import com.meddjamm.sn.rh.assembler.MedicamentAssembler;
 import com.meddjamm.sn.rh.remote.model.MedicamentDs;
 import com.meddjamm.sn.rh.services.MedicamentService;
@@ -20,9 +21,13 @@ public class TraitementMedicalItemAssembler {
 
     private final MedicamentAssembler medicamentAssembler;
 
-    public TraitementMedicalItemAssembler(MedicamentService medicamentService, MedicamentAssembler medicamentAssembler) {
+    private final TraitementMedicalItemRepository traitementMedicalItemRepository;
+
+    public TraitementMedicalItemAssembler(MedicamentService medicamentService, MedicamentAssembler medicamentAssembler,
+                                          TraitementMedicalItemRepository traitementMedicalItemRepository) {
         this.medicamentService = medicamentService;
         this.medicamentAssembler = medicamentAssembler;
+        this.traitementMedicalItemRepository = traitementMedicalItemRepository;
     }
 
     public List<TraitementMedicalItemDs> assembleEntitiesFrom(List<TraitementMedicalItem> traitementMedicalItemList) {
@@ -79,4 +84,25 @@ public class TraitementMedicalItemAssembler {
         traitementMedicalItem.setEst_administre(traitementMedicalItemDs.getEst_administre());
         return traitementMedicalItem;
     }
+
+    public Set<TraitementMedicalItem> createUpdateSetTraitementMedicalItem(List<TraitementMedicalItemDs> traitementMedicalItemDs) {
+        if (traitementMedicalItemDs == null) return null;
+        Set<TraitementMedicalItem> actions = new HashSet<>();
+        for (TraitementMedicalItemDs dto : traitementMedicalItemDs)
+            if (dto != null) actions.add(assembleUpdateTraitementMedicalItemFromDs(dto));
+        return actions;
+    }
+
+    public TraitementMedicalItem assembleUpdateTraitementMedicalItemFromDs(TraitementMedicalItemDs traitementMedicalItemDs) {
+        TraitementMedicalItem traitementMedicalItem = traitementMedicalItemRepository.findById(traitementMedicalItemDs.getId()).get();
+        if (traitementMedicalItemDs.getMedicamendId() != null)
+            traitementMedicalItem.setMedicamendId(traitementMedicalItemDs.getMedicamendId());
+        traitementMedicalItem.setPsologie(traitementMedicalItemDs.getPsologie());
+        traitementMedicalItem.setNbrePrise(traitementMedicalItemDs.getNbrePrise());
+        traitementMedicalItem.setAdministrePar(traitementMedicalItemDs.getAdministrePar());
+        traitementMedicalItem.setEst_administre(traitementMedicalItemDs.getEst_administre());
+        return traitementMedicalItem;
+    }
+
+
 }

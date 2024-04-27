@@ -4,6 +4,7 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Discussion;
 import com.meddjamm.sn.dossiermedical.remote.model.DiscussionDs;
+import com.meddjamm.sn.dossiermedical.repository.DiscussionRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,8 +14,12 @@ public class DiscussionAssembler {
 
     private final UtilisateurService utilisateurService;
 
-    public DiscussionAssembler(UtilisateurService utilisateurService) {
+    private final DiscussionRepository discussionRepository;
+
+    public DiscussionAssembler(UtilisateurService utilisateurService,
+                               DiscussionRepository discussionRepository) {
         this.utilisateurService = utilisateurService;
+        this.discussionRepository = discussionRepository;
     }
 
     public List<DiscussionDs> assembleEntitiesFrom(List<Discussion> discussions) {
@@ -27,12 +32,11 @@ public class DiscussionAssembler {
 
     public DiscussionDs assembleEntityToDs(Discussion discussion) {
         DiscussionDs discussionDs = new DiscussionDs();
-        if (discussionDs.getId() == null)
-            return null;
-        discussionDs.setId(discussion.getId());
-        discussionDs.setResume(discussion.getResume());
+        if (discussion.getId() != null)
+            discussionDs.setId(discussion.getId());
         discussionDs.setActif(discussion.isActif());
-        discussionDs.setCircuitPatientId(discussion.getCircuitPatient().getId());
+        discussionDs.setResume(discussion.getResume());
+        discussionDs.setCircuitPatientId(discussion.getCircuitPatientId());
         if (discussion.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(discussion.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
@@ -41,6 +45,7 @@ public class DiscussionAssembler {
         return discussionDs;
     }
 
+
     public Discussion assembleDiscussionFromDs(DiscussionDs discussionDs) {
         Discussion discussion = new Discussion();
         if (discussionDs.getId() != null)
@@ -48,6 +53,11 @@ public class DiscussionAssembler {
         discussion.setResume(discussionDs.getResume());
         discussion.setActif(discussionDs.isActif());
         discussion.setCircuitPatientId(discussionDs.getCircuitPatientId());
+        return discussion;
+    }
+
+    public Discussion assembleUpdateDiscussionFromDs(Discussion discussion, DiscussionDs discussionDs) {
+        discussion.setResume(discussionDs.getResume());
         return discussion;
     }
 }

@@ -52,6 +52,11 @@ public class ConsultationAssembler {
         return consultation;
     }
 
+    public Consultation assembleUpdateConsultationFromDs(Consultation consultation, ConsultationDs consultationDs) {
+        consultation.setResume(consultationDs.getResume());
+        return consultation;
+    }
+
     public List<AllCircuitPatientDs> assembleAllCircuitPatientEntitiesFrom(List<Consultation> consultationList) {
         return consultationList.stream().map(this::assembleAllCircuitPatientDsFromEntity).toList();
     }
