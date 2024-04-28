@@ -35,7 +35,8 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-/*
+        /*
+
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
         Action action2 = new Action("ADD_AG", "Ajouter/Modifier un agent medicale");
         Action action3 = new Action("LST_PAT", "Lister les patients");
@@ -48,7 +49,7 @@ public class MedDjammApplication implements CommandLineRunner {
         actionRepository.saveAll(List.of(action1, action2, action3, action4, action5, action6));
         profilRepository.saveAll(List.of(profileAdmin, profileUser));
 
-        Utilisateur utilisateur = Utilisateur.builder().email("root@test").prenom("root").nom("root").matricule(genererMatricule()).motdepasse(passwordEncoder.encode("root")).profil(profileAdmin).actif(true).build();
+        Utilisateur utilisateur = Utilisateur.builder().email("root@test").prenom("Tairou").nom("Diallo").matricule(genererMatricule()).motdepasse(passwordEncoder.encode("root")).profil(profileAdmin).actif(true).build();
         utilisateurRepository.save(utilisateur);
 
         var admin = RegisterRequest.builder().firstname("Admin").prenom("Admin").email("admin@mail.com").password("password").profilCode("ADMIN").build();
@@ -66,20 +67,19 @@ public class MedDjammApplication implements CommandLineRunner {
         var manager = RegisterRequest.builder().firstname("Salif").prenom("Salif").email("salifger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken()); */
 
-/*
-        TypeDocument typeDocument1 = new TypeDocument(1L, "TYPE_PHOTO_PAT", "Photo du patient");
-        TypeDocument typeDocument2 = new TypeDocument(1L, "TYPE_PHOTO_PROF", "Photo profile agent");
-        TypeDocument typeDocument3 = new TypeDocument(3L, "TYPE_EXAM_CONS_BIO", "Consultation examen biologie");
-        TypeDocument typeDocument4 = new TypeDocument(4L, "TYPE_EXAM_CONS_IMMUNO", "Consultation examen immunologie");
-        TypeDocument typeDocument5 = new TypeDocument(5L, "TYPE_EXAM_CONS_IMG", "Consultation examen imagerie");
+        /*
 
-        TypeDocument typeDocument6 = new TypeDocument(6L, "TYPE_EXAM_CONS_ANA", "Consultation examen");
-        TypeDocument typeDocument7 = new TypeDocument(7L, "TYPE_EXAM_BIO_COMP", "Examen complementaire biologie");
-        TypeDocument typeDocument8 = new TypeDocument(8L, "TYPE_EXAM_IMMUNO_COMP", "Examen complementaire immunologie");
-        TypeDocument typeDocument9 = new TypeDocument(9L, "TYPE_EXAM_IMG_COMP", "Examen complementaire imagerie");
-        TypeDocument typeDocument10 = new TypeDocument(10L, "TYPE_EXAM_ANA_COMP", "Examen complementaire anatologie");
-
-        TypeDocument typeDocument11 = new TypeDocument(11L, "TYPE_PROTOCOLE_MEDIC", "Protocole médical");
+        TypeDocument typeDocument1 = new TypeDocument(1L, "TYPE_PHOTO_PAT", "Photo du patient", 1);
+        TypeDocument typeDocument2 = new TypeDocument(2L, "TYPE_PHOTO_PROF", "Photo profile agent", 1);
+        TypeDocument typeDocument3 = new TypeDocument(3L, "TYPE_EXAM_CONS_BIO", "Consultation biologie", 1);
+        TypeDocument typeDocument4 = new TypeDocument(4L, "TYPE_EXAM_CONS_IMMUNO", "Consultation immunologie", 1);
+        TypeDocument typeDocument5 = new TypeDocument(5L, "TYPE_EXAM_CONS_IMG", "Consultation imagerie", 1);
+        TypeDocument typeDocument6 = new TypeDocument(6L, "TYPE_EXAM_CONS_ANA", "Consultation anatologie", 1);
+        TypeDocument typeDocument7 = new TypeDocument(7L, "TYPE_EXAM_BIO_COMP", "Examen biologie", 1);
+        TypeDocument typeDocument8 = new TypeDocument(8L, "TYPE_EXAM_IMMUNO_COMP", "Examen immunologie", 1);
+        TypeDocument typeDocument9 = new TypeDocument(9L, "TYPE_EXAM_IMG_COMP", "Examen imagerie", 1);
+        TypeDocument typeDocument10 = new TypeDocument(10L, "TYPE_EXAM_ANA_COMP", "Examen anatologie", 1);
+        TypeDocument typeDocument11 = new TypeDocument(11L, "TYPE_PROTOCOLE_MEDIC", "Protocole médical", 1);
 
         List<TypeDocument> typeDocumentList = new ArrayList<>();
         typeDocumentList.add(typeDocument1);
@@ -95,8 +95,7 @@ public class MedDjammApplication implements CommandLineRunner {
         typeDocumentList.add(typeDocument11);
 
         typeDocumentRepository.saveAllAndFlush(typeDocumentList);
-
- */
+        */
 
 
     }
