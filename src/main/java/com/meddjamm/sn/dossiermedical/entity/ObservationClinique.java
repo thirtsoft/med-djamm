@@ -34,36 +34,15 @@ public class ObservationClinique extends AbstractAuditableEntity implements Seri
     @Column(name = "motifs_hospitalisation", columnDefinition = "TEXT")
     private String motifsHospitalisation;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(name = "motifs_hospitalisation_par_observation_clinique", joinColumns = @JoinColumn(name = "id"))
-//    @Column(name = "motifs_hospitalisation")
-//    private Set<String> motifsHospitalisation;
-
     @Column(name = "histoire_maladie", columnDefinition = "TEXT")
     private String histoireMaladie;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Antecedent antecedent;
 
-    /*
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private ExamenPhysique examenPhysique;*/
-
-    /*
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "observationClinique", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExamenPhysique> examenPhysiqueList;
-*/
-
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private ExamenPhysique examenPhysique;
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "observationClinique", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<ExamenPhysique> examenPhysiqueList;
-
-/*
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "observationClinique", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ExamenPhysique> examenPhysiqueList;*/
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "circuit_patient_uid")
     private CircuitPatient circuitPatient;

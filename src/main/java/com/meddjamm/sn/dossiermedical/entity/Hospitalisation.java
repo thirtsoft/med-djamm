@@ -20,12 +20,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class Hospitalisation extends AbstractAuditableEntity implements Serializable {
 
-    /*
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;*/
-
     @Column(name = "numero_hospisatisation", nullable = true, unique = true)
     private int numeroHospitalisation;
 
@@ -49,7 +43,7 @@ public class Hospitalisation extends AbstractAuditableEntity implements Serializ
 
     @OneToOne(cascade = {CascadeType.ALL})
     private Synthese synthese;
-    
+
     private Long createdBy;
 
     private Date createdDate;

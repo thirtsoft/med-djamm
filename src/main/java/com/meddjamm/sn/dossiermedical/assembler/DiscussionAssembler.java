@@ -4,7 +4,6 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Discussion;
 import com.meddjamm.sn.dossiermedical.remote.model.DiscussionDs;
-import com.meddjamm.sn.dossiermedical.repository.DiscussionRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,10 +13,8 @@ public class DiscussionAssembler {
 
     private final UtilisateurService utilisateurService;
 
-    public DiscussionAssembler(UtilisateurService utilisateurService,
-                               DiscussionRepository discussionRepository) {
+    public DiscussionAssembler(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
-        this.discussionRepository = discussionRepository;
     }
 
     public List<DiscussionDs> assembleEntitiesFrom(List<Discussion> discussions) {
