@@ -24,13 +24,6 @@ public class AntecedentAssembler {
         AntecedentDs antecedentDs = new AntecedentDs();
         if (antecedent.getId() != null)
             antecedentDs.setId(antecedent.getId());
-//        antecedentDs.setAntecedentsMedicaux(new ArrayList<>(antecedent.getAntecedentsMedicaux()));
-//        antecedentDs.setAntecedentsChirurgicaux(new ArrayList<>(antecedent.getAntecedentsChirurgicaux()));
-//        antecedentDs.setAntecedentsGynecologiques(new ArrayList<>(antecedent.getAntecedentsGynecologiques()));
-//        antecedentDs.setAntecedentsFamilialsAscendant(new ArrayList<>(antecedent.getAntecedentsFamilialsAscendant()));
-//        antecedentDs.setAntecedentsFamilialsCollateral(new ArrayList<>(antecedent.getAntecedentsFamilialsCollateral()));
-//        antecedentDs.setAntecedentsFamilialsDescendant(new ArrayList<>(antecedent.getAntecedentsFamilialsDescendant()));
-//        antecedentDs.setModeVies(new ArrayList<>(antecedent.getModeVies()));
         antecedentDs.setActif(antecedent.isActif());
         antecedentDs.setCreateDate(antecedent.getCreateDate());
         antecedentDs.setAntecedentsMedicaux(antecedent.getAntecedentsMedicaux());
