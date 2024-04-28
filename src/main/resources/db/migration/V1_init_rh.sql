@@ -36,8 +36,7 @@ VALUES (1, 'TYPE_PHOTO_PAT', 'Photo du patient', 1),
        (8, 'TYPE_EXAM_IMMUNO_COMP', 'Examen complementaire immunologie',1),
        (9, 'TYPE_EXAM_IMG_COMP', 'Examen complementaire imagerie',1),
        (10, 'TYPE_EXAM_ANA_COMP', 'Examen complementaire anatologie',1);
-
-
+       (11, 'TYPE_PROTOCOLE_MEDIC', 'Protocole médical',1);
 
 
 

@@ -22,4 +22,5 @@ public interface TraitementMedicalService {
     TraitementMedicalItem findTraitementMedicalItemById(Long id);
 
     TraitementMedicalItem saveTraitementMedicalItem(TraitementMedicalItem traitementMedicalItem);
+
 }

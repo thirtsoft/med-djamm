@@ -27,14 +27,14 @@ public class HospitalisationController implements HospitalisationApi {
     }
 
     @Override
-    public void creerHospitalisation(HospitalisationDs hospitalisationDs) {
-        hospitalisationService.saveHospitalisation(hospitalisationAssembler.assembleDsToEntity(hospitalisationDs));
+    public Long creerHospitalisation(HospitalisationDs hospitalisationDs) {
+        return hospitalisationService.saveHospitalisation(hospitalisationAssembler.assembleDsToEntity(hospitalisationDs));
 
     }
 
     @Override
-    public void updateHospitalisation(Long id, HospitalisationDs hospitalisationDs) {
-        hospitalisationService.updateHospitalisation(id, hospitalisationAssembler.assembleUpdateHospitalisation(hospitalisationDs));
+    public Long updateHospitalisation(Long id, HospitalisationDs hospitalisationDs) {
+        return hospitalisationService.updateHospitalisation(id, hospitalisationAssembler.assembleUpdateHospitalisation(hospitalisationDs));
     }
 
     @Override
@@ -88,6 +88,11 @@ public class HospitalisationController implements HospitalisationApi {
     @Override
     public boolean addExamHematologicToHospitalisation(Long hospitalisationId, MultipartFile hematologic) throws Exception {
         return hospitalisationService.addExamHematologicToHospitalisation(hospitalisationId, hematologic);
+    }
+
+    @Override
+    public boolean addProtocolMedicalTraitFileToHospitalisation(Long hospitalisationId, MultipartFile protocol) throws Exception {
+        return hospitalisationService.addProtocolMedicalTraitFileToHospitalisation(hospitalisationId, protocol);
     }
 
 

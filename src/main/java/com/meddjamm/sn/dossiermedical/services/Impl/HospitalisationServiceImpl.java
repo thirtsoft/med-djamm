@@ -3,6 +3,7 @@ package com.meddjamm.sn.dossiermedical.services.Impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
+import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
@@ -38,7 +39,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
-    public Hospitalisation saveHospitalisation(Hospitalisation hospitalisation) {
+    public Long saveHospitalisation(Hospitalisation hospitalisation) {
         hospitalisation.setActif(true);
         hospitalisation.setCreatedDate(new Date());
         if (hospitalisation.getNumeroHospitalisation() == 0) {
@@ -47,12 +48,13 @@ public class HospitalisationServiceImpl implements HospitalisationService {
 //        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(hospitalisation.getCircuitPatientId());
 //        hospitalisation.setCircuitPatientId(circuitPatient.getId());
 //        hospitalisation.setCircuitPatient(circuitPatient);
-        return hospitalisationRepository.save(hospitalisation);
+        Hospitalisation hospitalisationResult = hospitalisationRepository.save(hospitalisation);
+        return hospitalisationResult.getId();
     }
 
 
     @Override
-    public Hospitalisation updateHospitalisation(Long id, Hospitalisation hospitalisation) {
+    public Long updateHospitalisation(Long id, Hospitalisation hospitalisation) {
         if (!hospitalisationRepository.existsById(id)) {
             log.info("Hospitalisation that id is " + id + "is not found");
         }
@@ -67,7 +69,9 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         hospitalisationResult.setSynthese(hospitalisation.getSynthese());
         hospitalisationResult.setTraitementMedical(hospitalisation.getTraitementMedical());
         hospitalisationResult.setMatricule(hospitalisation.getMatricule());
-        return hospitalisationRepository.save(hospitalisation);
+        Hospitalisation savedHospitalisationResult = hospitalisationRepository.save(hospitalisationResult);
+        return savedHospitalisationResult.getId();
+        //  return hospitalisationRepository.save(hospitalisation);
     }
 
     @Override
@@ -93,8 +97,8 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
-    public boolean addExamBiologicToHospitalisation(Long biologicExamId, MultipartFile biologic) throws Exception {
-        Hospitalisation hospitalisation = findById(biologicExamId);
+    public boolean addExamBiologicToHospitalisation(Long hospitalisationId, MultipartFile biologic) throws Exception {
+        Hospitalisation hospitalisation = findById(hospitalisationId);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
@@ -118,13 +122,13 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
-    public boolean addExamImmunologicToHospitalisation(Long immunologicExamId, MultipartFile immunologic) throws Exception {
-        Hospitalisation hospitalisation = findById(immunologicExamId);
+    public boolean addExamImmunologicToHospitalisation(Long hospitalisationId, MultipartFile immunologic) throws Exception {
+        Hospitalisation hospitalisation = findById(hospitalisationId);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
                 ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
-                if (immunologicExamId != null) {
+                if (immunologic != null) {
                     PiecesJointes piecesJointesDTO = new PiecesJointes();
                     piecesJointesDTO.setObjectId(examenComplementaire.getId());
                     piecesJointesDTO.setDossier("pieces_jointes");
@@ -143,8 +147,8 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
-    public boolean addExamImagerToHospitalisation(Long imagerExamId, MultipartFile imager) throws Exception {
-        Hospitalisation hospitalisation = findById(imagerExamId);
+    public boolean addExamImagerToHospitalisation(Long hospitalisationId, MultipartFile imager) throws Exception {
+        Hospitalisation hospitalisation = findById(hospitalisationId);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
@@ -168,8 +172,8 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
-    public boolean addExamHematologicToHospitalisation(Long hematologicExamId, MultipartFile hematologic) throws Exception {
-        Hospitalisation hospitalisation = findById(hematologicExamId);
+    public boolean addExamHematologicToHospitalisation(Long hospitalisationId, MultipartFile hematologic) throws Exception {
+        Hospitalisation hospitalisation = findById(hospitalisationId);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (hospitalisation != null) {
@@ -181,6 +185,32 @@ public class HospitalisationServiceImpl implements HospitalisationService {
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_ANA_COMP);
                     piecesJointesDTO.setNomFichier(hematologic.getName());
                     piecesJointesService.savePiecesJointes(hematologic, objectMapper.writeValueAsString(piecesJointesDTO));
+                    return true;
+                } else {
+                    throw new Exception("L'hospitalisation n'existe pas.");
+                }
+            }
+
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean addProtocolMedicalTraitFileToHospitalisation(Long hospitalisationId, MultipartFile protocol) throws Exception {
+        Hospitalisation hospitalisation = findById(hospitalisationId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            if (hospitalisation != null) {
+                TraitementMedical traitementMedical = hospitalisation.getTraitementMedical();
+                if (protocol != null) {
+                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    piecesJointesDTO.setObjectId(traitementMedical.getId());
+                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_PROTOCOLE_MEDIC);
+                    piecesJointesDTO.setNomFichier(protocol.getName());
+                    piecesJointesService.savePiecesJointes(protocol, objectMapper.writeValueAsString(piecesJointesDTO));
                     return true;
                 } else {
                     throw new Exception("L'hospitalisation n'existe pas.");

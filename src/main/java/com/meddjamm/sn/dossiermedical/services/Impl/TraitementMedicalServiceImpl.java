@@ -74,6 +74,4 @@ public class TraitementMedicalServiceImpl implements TraitementMedicalService {
     public TraitementMedicalItem saveTraitementMedicalItem(TraitementMedicalItem traitementMedicalItem) {
         return traitementMedicalItemRepository.save(traitementMedicalItem);
     }
-
-
 }

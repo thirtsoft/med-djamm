@@ -14,5 +14,7 @@ public final class ConstantSigps {
     public static final Long TYPE_EXAM_IMMUNO_COMP = 8L;
     public static final Long TYPE_EXAM_IMG_COMP = 9L;
     public static final Long TYPE_EXAM_ANA_COMP = 10L;
-    
+
+    public static final Long TYPE_PROTOCOLE_MEDIC = 11L;
+
 }

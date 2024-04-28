@@ -1,10 +1,12 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +29,10 @@ public class ConsultationMedicalDs {
 
     private String nomCompletAgent;
 
+    private List<PiecesJointesDs> piecesJointesDs;
+
     private int actif;
+
 
     public boolean isActif() {
         return actif == 1;

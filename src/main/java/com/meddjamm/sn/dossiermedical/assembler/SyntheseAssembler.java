@@ -4,7 +4,6 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Synthese;
 import com.meddjamm.sn.dossiermedical.remote.model.SyntheseDs;
-import com.meddjamm.sn.dossiermedical.repository.SyntheseRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,12 +12,9 @@ import java.util.List;
 public class SyntheseAssembler {
 
     private final UtilisateurService utilisateurService;
-    private final SyntheseRepository syntheseRepository;
 
-    public SyntheseAssembler(UtilisateurService utilisateurService,
-                             SyntheseRepository syntheseRepository) {
+    public SyntheseAssembler(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
-        this.syntheseRepository = syntheseRepository;
     }
 
     public List<SyntheseDs> assembleEntitiesFrom(List<Synthese> syntheseList) {
@@ -38,8 +34,8 @@ public class SyntheseAssembler {
         syntheseDs.setObservation(synthese.getObservation());
         syntheseDs.setCreatedBy(synthese.getCreatedBy());
         syntheseDs.setCircuitPatientId(synthese.getCircuitPatientId());
-        if (synthese.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(synthese.getCreatedBy());
+        if (synthese.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(synthese.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             syntheseDs.setNomCompletAgent(nomAgent);
         }

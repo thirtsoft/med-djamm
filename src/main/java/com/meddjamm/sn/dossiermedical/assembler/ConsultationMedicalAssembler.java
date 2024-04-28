@@ -5,11 +5,15 @@ import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
 import com.meddjamm.sn.dossiermedical.remote.model.ConsultationMedicalDs;
 import com.meddjamm.sn.dossiermedical.services.ConsultationMedicalService;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ConsultationMedicalAssembler {
 
     private final UtilisateurService utilisateurService;
@@ -20,16 +24,7 @@ public class ConsultationMedicalAssembler {
 
     private final ExamenBiologiqueAssembler examenBiologiqueAssembler;
 
-    public ConsultationMedicalAssembler(UtilisateurService utilisateurService,
-                                        ConsultationAssembler consultationAssembler,
-                                        ConsultationMedicalService consultationMedicalService,
-                                        ExamenBiologiqueAssembler examenBiologiqueAssembler) {
-        this.utilisateurService = utilisateurService;
-        this.consultationAssembler = consultationAssembler;
-        this.consultationMedicalService = consultationMedicalService;
-        this.examenBiologiqueAssembler = examenBiologiqueAssembler;
-    }
-
+    private final PiecesJointesService piecesJointesService;
 
     public List<ConsultationMedicalDs> assembleEntitiesFrom(List<ConsultationMedical> consultationMedicalList) {
         return consultationMedicalList.stream().map(this::assembleEntityToDs).toList();
@@ -49,6 +44,11 @@ public class ConsultationMedicalAssembler {
             Utilisateur utilisateur = utilisateurService.findUserById(consultationMedical.getCreatedBy());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             consultationMedicalDs.setNomCompletAgent(nomAgent);
+        }
+        consultationMedicalDs.setPiecesJointesDs(piecesJointesService.getListPieceJointePatient(consultationMedical.getId()));
+        List<PiecesJointesDs> piecesJointesDsBiologique = piecesJointesService.getListPieceJointePatient(consultationMedical.getExamenBiologique().getId());
+        if (piecesJointesDsBiologique != null) {
+            consultationMedicalDs.getPiecesJointesDs().addAll(piecesJointesDsBiologique);
         }
         return consultationMedicalDs;
     }

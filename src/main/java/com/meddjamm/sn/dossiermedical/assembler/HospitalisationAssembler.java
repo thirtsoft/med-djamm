@@ -10,9 +10,11 @@ import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationListDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
-import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesAssembler;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
 import com.meddjamm.sn.utils.UtilString;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,21 +28,15 @@ public class HospitalisationAssembler {
     private final ObservationCliniqueAssembler observationCliniqueAssembler;
     private final ExamenComplementaireAssembler examenComplementaireAssembler;
     private final TraitementMedicalAssembler traitementMedicalAssembler;
-    private final ConsultationAssembler consultationAssembler;
-    private final OrdonnanceAssembler ordonnanceAssembler;
-    private final AvisSpecialisteAssembler avisSpecialisteAssembler;
     private final SyntheseAssembler syntheseAssembler;
-    private final ExamenBiologiqueAssembler examenBiologiqueAssembler;
     private final PatientAssembler patientAssembler;
     private final PatientService patientService;
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
     private final DiscussionAssembler discussionAssembler;
-    ;
-
-    private final HospitalisationRepository hospitalisationRepository;
-
     private final HospitalisationService hospitalisationService;
+    private final PiecesJointesAssembler piecesJointesAssembler;
+    private final PiecesJointesService piecesJointesService;
 
     public List<HospitalisationListDs> assembleEntitiesFrom(List<Hospitalisation> hospitalisationList) {
         return hospitalisationList.stream().map(this::assembleEntityToListDs).toList();
@@ -183,6 +179,16 @@ public class HospitalisationAssembler {
             hospitalisationDetailDs.setUtilisateurDs(utilisateurDs);
             hospitalisationDetailDs.setNomCompletMedecin(utilisateur.getPrenom() + ' ' + utilisateur.getNom());
         }
+        hospitalisationDetailDs.setPiecesJointesDs(piecesJointesService.getListPieceJointePatient(hospitalisation.getId()));
+        List<PiecesJointesDs> piecesJointesDsExamen = piecesJointesService.getListPieceJointePatient(hospitalisation.getExamenComplementaire().getId());
+        if (piecesJointesDsExamen != null) {
+            hospitalisationDetailDs.getPiecesJointesDs().addAll(piecesJointesDsExamen);
+        }
+        List<PiecesJointesDs> piecesJointesDsTraitment = piecesJointesService.getListPieceJointePatient(hospitalisation.getTraitementMedical().getId());
+        if (piecesJointesDsTraitment != null) {
+            hospitalisationDetailDs.getPiecesJointesDs().addAll(piecesJointesDsTraitment);
+        }
+
         return hospitalisationDetailDs;
     }
 

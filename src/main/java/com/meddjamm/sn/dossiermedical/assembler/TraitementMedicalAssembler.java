@@ -4,28 +4,21 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
 import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalDs;
-import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalRepository;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class TraitementMedicalAssembler {
 
     private final TraitementMedicalItemAssembler traitementMedicalItemAssembler;
 
-    private final TraitementMedicalRepository traitementMedicalRepository;
-
     private final UtilisateurService utilisateurService;
 
-    public TraitementMedicalAssembler(
-            TraitementMedicalItemAssembler traitementMedicalItemAssembler,
-            TraitementMedicalRepository traitementMedicalRepository,
-            UtilisateurService utilisateurService) {
-        this.traitementMedicalItemAssembler = traitementMedicalItemAssembler;
-        this.traitementMedicalRepository = traitementMedicalRepository;
-        this.utilisateurService = utilisateurService;
-    }
+    private final PiecesJointesService piecesJointesService;
 
     public List<TraitementMedicalDs> assembleEntitiesFrom(List<TraitementMedical> traitementMedicals) {
         return traitementMedicals.stream().map(this::assembleEntityToDs).toList();
@@ -53,6 +46,7 @@ public class TraitementMedicalAssembler {
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             traitementMedicalDs.setNomCompletAgent(nomAgent);
         }
+        traitementMedicalDs.setPiecesJointesDs(piecesJointesService.getListPieceJointePatient(traitementMedical.getId()));
         return traitementMedicalDs;
     }
 

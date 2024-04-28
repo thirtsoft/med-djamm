@@ -35,8 +35,7 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
-
+/*
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
         Action action2 = new Action("ADD_AG", "Ajouter/Modifier un agent medicale");
         Action action3 = new Action("LST_PAT", "Lister les patients");
@@ -67,8 +66,7 @@ public class MedDjammApplication implements CommandLineRunner {
         var manager = RegisterRequest.builder().firstname("Salif").prenom("Salif").email("salifger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken()); */
 
-        /*
-
+/*
         TypeDocument typeDocument1 = new TypeDocument(1L, "TYPE_PHOTO_PAT", "Photo du patient");
         TypeDocument typeDocument2 = new TypeDocument(1L, "TYPE_PHOTO_PROF", "Photo profile agent");
         TypeDocument typeDocument3 = new TypeDocument(3L, "TYPE_EXAM_CONS_BIO", "Consultation examen biologie");
@@ -81,6 +79,8 @@ public class MedDjammApplication implements CommandLineRunner {
         TypeDocument typeDocument9 = new TypeDocument(9L, "TYPE_EXAM_IMG_COMP", "Examen complementaire imagerie");
         TypeDocument typeDocument10 = new TypeDocument(10L, "TYPE_EXAM_ANA_COMP", "Examen complementaire anatologie");
 
+        TypeDocument typeDocument11 = new TypeDocument(11L, "TYPE_PROTOCOLE_MEDIC", "Protocole médical");
+
         List<TypeDocument> typeDocumentList = new ArrayList<>();
         typeDocumentList.add(typeDocument1);
         typeDocumentList.add(typeDocument2);
@@ -92,9 +92,12 @@ public class MedDjammApplication implements CommandLineRunner {
         typeDocumentList.add(typeDocument8);
         typeDocumentList.add(typeDocument9);
         typeDocumentList.add(typeDocument10);
+        typeDocumentList.add(typeDocument11);
 
         typeDocumentRepository.saveAllAndFlush(typeDocumentList);
-        */
+
+ */
+
 
     }
 }

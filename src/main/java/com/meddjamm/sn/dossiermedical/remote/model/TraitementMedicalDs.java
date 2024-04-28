@@ -1,5 +1,6 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,8 @@ public class TraitementMedicalDs {
     private String nomCompletAgent;
 
     private Long createdBy;
+
+    private List<PiecesJointesDs> piecesJointesDs;
 
     private int actif;
 

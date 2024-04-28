@@ -1,10 +1,12 @@
 package com.meddjamm.sn.dossiermedical.remote.model;
 
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -36,6 +38,8 @@ public class ExamenComplementaireDs {
     private Date createdDate;
 
     private String nomCompletAgent;
+
+    private List<PiecesJointesDs> piecesJointesDsList;
 
     private int actif;
 

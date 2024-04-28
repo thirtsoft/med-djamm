@@ -5,7 +5,7 @@ import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
-import com.meddjamm.sn.dossiermedical.repository.ExamenComplementaireRepository;
+import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class ExamenComplementaireAssembler {
 
     private final UtilisateurService utilisateurService;
-    private final ExamenComplementaireRepository examenComplementaireRepository;
+    private final PiecesJointesService piecesJointesService;
 
     public List<ExamenComplementaireDetailDs> assembleEntitiesFrom(List<ExamenComplementaire> examenComplementaires) {
         return examenComplementaires.stream().map(this::assembleEntitiesToDs).toList();
@@ -51,6 +51,7 @@ public class ExamenComplementaireAssembler {
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             examenComplementaireDs.setNomCompletAgent(nomAgent);
         }
+        examenComplementaireDs.setPiecesJointesDsList(piecesJointesService.getListPieceJointePatient(examenComplementaire.getId()));
         return examenComplementaireDs;
     }
 

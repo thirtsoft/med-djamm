@@ -176,4 +176,12 @@ public class PiecesJointesService {
         PiecesJointesDs pieceJointeDTO = piecesJointesAssembler.createPieceJointeDs(piecesJointes);
         return pieceJointeDTO;
     }
+
+    public List<PiecesJointesDs> getListPieceJointePatient(Long patientId) {
+        List<PiecesJointes> piecesJointes = piecesJointesRepository.findByActifAndObjectId(1, patientId);
+        List<PiecesJointesDs> dtos = new ArrayList<>();
+        for (PiecesJointes pj : piecesJointes)
+            dtos.add(getPiecesJointesDTO(pj));
+        return dtos;
+    }
 }

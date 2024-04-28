@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,10 +24,12 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface HospitalisationApi {
 
     @PostMapping(value = "/save")
-    void creerHospitalisation(@RequestBody HospitalisationDs hospitalisationDs);
+    @ResponseBody
+    Long creerHospitalisation(@RequestBody HospitalisationDs hospitalisationDs);
 
     @PutMapping(value = "/edit/{id}")
-    void updateHospitalisation(@PathVariable Long id, @RequestBody HospitalisationDs hospitalisationDs) throws Exception;
+    @ResponseBody
+    Long updateHospitalisation(@PathVariable Long id, @RequestBody HospitalisationDs hospitalisationDs) throws Exception;
 
     @GetMapping(value = "/{id}")
     ResponseEntity<HospitalisationDetailDs> findById(@PathVariable Long id);
@@ -54,5 +57,8 @@ public interface HospitalisationApi {
 
     @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-hematologic-file")
     boolean addExamHematologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile hematologic) throws Exception;
+
+    @PutMapping("/protocol/{medicalTraitId}/add-protocol-file")
+    boolean addProtocolMedicalTraitFileToHospitalisation(@PathVariable Long medicalTraitId, @RequestParam(required = false) MultipartFile protocol) throws Exception;
 
 }

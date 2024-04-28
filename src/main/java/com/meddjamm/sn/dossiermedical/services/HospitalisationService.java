@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface HospitalisationService {
 
-    Hospitalisation saveHospitalisation(Hospitalisation hospitalisation);
+    Long saveHospitalisation(Hospitalisation hospitalisation);
 
-    Hospitalisation updateHospitalisation(Long id, Hospitalisation hospitalisation);
+    Long updateHospitalisation(Long id, Hospitalisation hospitalisation);
 
     Hospitalisation findById(Long id);
 
@@ -19,12 +19,15 @@ public interface HospitalisationService {
 
     void deleteHospitalisation(Long id);
 
-    boolean addExamBiologicToHospitalisation(Long biologicExamId, MultipartFile biologic) throws Exception;
+    boolean addExamBiologicToHospitalisation(Long hospitalisationId, MultipartFile biologic) throws Exception;
 
-    boolean addExamImmunologicToHospitalisation(Long immunologicExamId, MultipartFile immunologic) throws Exception;
+    boolean addExamImmunologicToHospitalisation(Long hospitalisationId, MultipartFile immunologic) throws Exception;
 
-    boolean addExamImagerToHospitalisation(Long imagerExamId, MultipartFile imager) throws Exception;
+    boolean addExamImagerToHospitalisation(Long hospitalisationId, MultipartFile imager) throws Exception;
 
-    boolean addExamHematologicToHospitalisation(Long hematologicExamId, MultipartFile hematologic) throws Exception;
+    boolean addExamHematologicToHospitalisation(Long hospitalisationId, MultipartFile hematologic) throws Exception;
+
+    boolean addProtocolMedicalTraitFileToHospitalisation(Long hospitalisationId, MultipartFile protocol) throws Exception;
+
 
 }

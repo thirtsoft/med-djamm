@@ -14,8 +14,6 @@ public class DiscussionAssembler {
 
     private final UtilisateurService utilisateurService;
 
-    private final DiscussionRepository discussionRepository;
-
     public DiscussionAssembler(UtilisateurService utilisateurService,
                                DiscussionRepository discussionRepository) {
         this.utilisateurService = utilisateurService;
