@@ -5,6 +5,7 @@ import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.repository.AvisSpecialisteRepository;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.services.AvisSpecialisteService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +14,13 @@ import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AvisSpecialisteServiceImpl implements AvisSpecialisteService {
 
     private final AvisSpecialisteRepository avisSpecialisteRepository;
 
     private final CircuitPatientRepository circuitPatientRepository;
 
-    public AvisSpecialisteServiceImpl(AvisSpecialisteRepository avisSpecialisteRepository,
-                                      CircuitPatientRepository circuitPatientRepository) {
-        this.avisSpecialisteRepository = avisSpecialisteRepository;
-        this.circuitPatientRepository = circuitPatientRepository;
-    }
 
     @Override
     public AvisSpecialiste saveAvisSpecialiste(AvisSpecialiste avisSpecialiste) {
