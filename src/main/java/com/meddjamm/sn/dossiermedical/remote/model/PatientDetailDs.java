@@ -40,4 +40,5 @@ public class PatientDetailDs implements Serializable {
     private Long createdBy;
     private boolean est_accompagne;
     private DiagnosticDs diagnosticDs;
+    private Date createdDate;
 }

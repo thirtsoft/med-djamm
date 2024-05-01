@@ -104,19 +104,6 @@ public class PatientAssembler {
 
     public Patient assembleUpdatePatientFromDs(PatientDetailDs patientDetailDs) {
         Patient patient = patientService.findById(patientDetailDs.getId());
-        patient.setCode(patientDetailDs.getCode());
-        patient.setDateAdmission(patientDetailDs.getDateAdmission());
-        patient.setNom(patientDetailDs.getNom());
-        patient.setPrenom(patientDetailDs.getPrenom());
-        patient.setSexe(patientDetailDs.getSexe());
-        patient.setAge(patientDetailDs.getAge());
-        patient.setCivilite(patientDetailDs.getCivilite());
-        patient.setAddress(patientDetailDs.getAddress());
-        patient.setDateNaissance(patientDetailDs.getDateNaissance());
-        patient.setNumeroTelephone(patientDetailDs.getNumeroTelephone());
-        patient.setProfession(patientDetailDs.getProfession());
-        patient.setSituationMatrimonial(patientDetailDs.getSituationMatrimonial());
-        patient.setNationalite(patientDetailDs.getNationalite());
         if (patientDetailDs.getPersonneConfianceDs() != null)
             patient.setPersonneConfiance(assembleUpdateEntityFromDs(patient.getPersonneConfiance(), patientDetailDs.getPersonneConfianceDs()));
         patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
@@ -127,7 +114,6 @@ public class PatientAssembler {
         PatientMinDs patientMinDs = new PatientMinDs();
         patientMinDs.setId(patient.getId());
         patientMinDs.setCode(patient.getCode());
-        patientMinDs.setDateAdmission(patient.getDateAdmission());
         patientMinDs.setNom(patient.getNom());
         patientMinDs.setPrenom(patient.getPrenom());
         patientMinDs.setTelephone(patient.getNumeroTelephone());
@@ -135,6 +121,7 @@ public class PatientAssembler {
         patientMinDs.setIsCircuitGenerated(patient.getIsCircuitGenerated());
         patientMinDs.setCreatedBy(patient.getCreatedBy());
         patientMinDs.setEst_accompagne(patient.isEst_accompagne());
+        patientMinDs.setCreatedDate(patient.getCreationDate());
         patientMinDs.setDiagnosticDs(diagnosticAssembler.assembleEntityToDs(patient.getDiagnostic()));
         return patientMinDs;
     }

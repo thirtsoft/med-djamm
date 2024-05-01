@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -24,6 +25,6 @@ public class PatientMinDs implements Serializable {
     private boolean est_accompagne;
     private String telephone;
     private Date dateNaissance;
-
+    private LocalDateTime createdDate;
     private DiagnosticDs diagnosticDs;
 }
