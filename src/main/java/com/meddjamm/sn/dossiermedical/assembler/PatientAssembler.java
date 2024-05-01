@@ -125,7 +125,6 @@ public class PatientAssembler {
         patientMinDs.setDiagnosticDs(diagnosticAssembler.assembleEntityToDs(patient.getDiagnostic()));
         return patientMinDs;
     }
-    //
 
     public PersonneConfianceDs assembleDsFromEntity(PersonneConfiance personneConfiance) {
         PersonneConfianceDs personneConfianceDs = new PersonneConfianceDs();
