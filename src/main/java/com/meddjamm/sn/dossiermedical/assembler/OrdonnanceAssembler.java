@@ -44,8 +44,8 @@ public class OrdonnanceAssembler {
         OrdonnanceDs.setCreatedBy(Ordonnance.getCreatedBy());
         OrdonnanceDs.setCircuitPatientId(Ordonnance.getCircuitPatientId());
         OrdonnanceDs.setCreatedBy(Ordonnance.getCreatedBy());
-        if (Ordonnance.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(Ordonnance.getCreatedBy());
+        if (Ordonnance.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(Ordonnance.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             OrdonnanceDs.setNomCompletAgent(nomAgent);
         }
@@ -82,7 +82,6 @@ public class OrdonnanceAssembler {
                 ordonnance.getCircuitPatient().getNumeroCircuit()));
         allCircuitPatientDs.setCreateDate(ordonnance.getCreatedDate());
         allCircuitPatientDs.setType("Ordonnance");
-        allCircuitPatientDs.setCode(ordonnance.getCircuitPatient().getMatricule());
         if (ordonnance.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(ordonnance.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();

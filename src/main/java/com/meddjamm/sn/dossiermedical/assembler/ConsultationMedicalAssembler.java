@@ -3,10 +3,12 @@ package com.meddjamm.sn.dossiermedical.assembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
+import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ConsultationMedicalDs;
 import com.meddjamm.sn.dossiermedical.services.ConsultationMedicalService;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
+import com.meddjamm.sn.utils.UtilString;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -73,6 +75,27 @@ public class ConsultationMedicalAssembler {
         consultationMedical.setExamenBiologique(examenBiologiqueAssembler.
                 assembleUpdateExamenBiologiqueFromDs(consultationMedical.getExamenBiologique(), consultationMedicalDs.getExamenBiologiqueDs()));
         return consultationMedical;
+    }
+
+    public List<AllCircuitPatientDs> assembleAllCircuitPatientEntitiesFrom(List<ConsultationMedical> consultationMedicalList) {
+        return consultationMedicalList.stream().map(this::assembleAllCircuitPatientDsFromEntity).toList();
+    }
+
+    public AllCircuitPatientDs assembleAllCircuitPatientDsFromEntity(ConsultationMedical consultationMedical) {
+        AllCircuitPatientDs allCircuitPatientDs = new AllCircuitPatientDs();
+        if (consultationMedical.getId() != null)
+            allCircuitPatientDs.setId(consultationMedical.getId());
+        allCircuitPatientDs.setActif(consultationMedical.isActif());
+        allCircuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(
+                consultationMedical.getCircuitPatient().getNumeroCircuit()));
+        allCircuitPatientDs.setCreateDate(consultationMedical.getCreatedDate());
+        allCircuitPatientDs.setType("Consultation médicale");
+        if (consultationMedical.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(consultationMedical.getCreatedByUser());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            allCircuitPatientDs.setNomCompletAgent(nomAgent);
+        }
+        return allCircuitPatientDs;
     }
 
 }

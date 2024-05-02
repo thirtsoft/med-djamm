@@ -42,7 +42,7 @@ public interface CircuitPatientApi {
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteCircuitPatient(@PathVariable Long id);
 
-    @GetMapping(value = "/by-patientsss/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/allcircuit/bypatient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(@PathVariable String code);
-
+    
 }

@@ -12,12 +12,14 @@ public class OrdonnanceItemDs {
 
     private Long id;
 
-    private String code;
+    private Long code;
 
     private String psologie;
 
     private String nbrePrise;
 
     private MedicamentDs medicamentDs;
+
+    private String libelleMedicament;
 
 }

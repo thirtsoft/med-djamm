@@ -6,13 +6,13 @@ import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
+import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDs;
 import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationListDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
-import com.meddjamm.sn.rh.piecejointe.PiecesJointesAssembler;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesDs;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
 import com.meddjamm.sn.utils.UtilString;
@@ -35,7 +35,6 @@ public class HospitalisationAssembler {
     private final UtilisateurAssembler utilisateurAssembler;
     private final DiscussionAssembler discussionAssembler;
     private final HospitalisationService hospitalisationService;
-    private final PiecesJointesAssembler piecesJointesAssembler;
     private final PiecesJointesService piecesJointesService;
 
     public List<HospitalisationListDs> assembleEntitiesFrom(List<Hospitalisation> hospitalisationList) {
@@ -190,6 +189,27 @@ public class HospitalisationAssembler {
         }
 
         return hospitalisationDetailDs;
+    }
+
+    public List<AllCircuitPatientDs> assembleAllCircuitPatientEntitiesFrom(List<Hospitalisation> hospitalisationList) {
+        return hospitalisationList.stream().map(this::assembleAllCircuitPatientDsFromEntity).toList();
+    }
+
+    public AllCircuitPatientDs assembleAllCircuitPatientDsFromEntity(Hospitalisation hospitalisation) {
+        AllCircuitPatientDs allCircuitPatientDs = new AllCircuitPatientDs();
+        if (hospitalisation.getId() != null)
+            allCircuitPatientDs.setId(hospitalisation.getId());
+        allCircuitPatientDs.setActif(hospitalisation.isActif());
+        allCircuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(
+                hospitalisation.getNumeroHospitalisation()));
+        allCircuitPatientDs.setCreateDate(hospitalisation.getCreatedDate());
+        allCircuitPatientDs.setType("Hospitalisation");
+        if (hospitalisation.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(hospitalisation.getCreatedByUser());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            allCircuitPatientDs.setNomCompletAgent(nomAgent);
+        }
+        return allCircuitPatientDs;
     }
 
 

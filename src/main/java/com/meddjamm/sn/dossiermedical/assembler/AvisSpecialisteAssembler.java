@@ -77,7 +77,6 @@ public class AvisSpecialisteAssembler {
                 avisSpecialiste.getCircuitPatient().getNumeroCircuit()));
         allCircuitPatientDs.setCreateDate(avisSpecialiste.getCreatedDate());
         allCircuitPatientDs.setType("Avis spécialiste");
-        allCircuitPatientDs.setCode(avisSpecialiste.getResume());
         if (avisSpecialiste.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(avisSpecialiste.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();

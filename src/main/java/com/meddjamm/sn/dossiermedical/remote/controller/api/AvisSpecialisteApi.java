@@ -39,4 +39,7 @@ public interface AvisSpecialisteApi {
     @GetMapping(value = "/by-circuit/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<AvisSpecialisteDs>> findAllAvisSpecialistesByCircuitId(@PathVariable Long code);
 
+    @GetMapping(value = "/top3/by-circuit/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<AvisSpecialisteDs>> findTop3AvisSpecialistesByCircuitId(@PathVariable Long code);
+
 }

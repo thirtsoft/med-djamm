@@ -47,10 +47,9 @@ public class OrdonnanceItemAssembler {
         ordonnanceItemDs.setPsologie(ordonnanceItem.getPsologie());
         ordonnanceItemDs.setNbrePrise(ordonnanceItem.getNbrePrise());
         if (ordonnanceItem.getCode() != null) {
-            MedicamentDs medicamentDs = medicamentAssembler.assembleEntityToDs(
-                    medicamentService.findByCode(ordonnanceItem.getCode())
-            );
+            MedicamentDs medicamentDs = medicamentAssembler.assembleEntityToDs(medicamentService.findById(ordonnanceItem.getCode()));
             ordonnanceItemDs.setMedicamentDs(medicamentDs);
+            ordonnanceItemDs.setLibelleMedicament(medicamentDs.getLibelle());
         }
         return ordonnanceItemDs;
     }

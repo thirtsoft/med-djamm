@@ -153,17 +153,11 @@ public class CircuitPatientAssembler {
             return null;
         AllCircuitPatientDs circuitPatientDs = new AllCircuitPatientDs();
         circuitPatientDs.setId(circuitPatient.getId());
-        circuitPatientDs.setCode(circuitPatient.getCode());
         circuitPatientDs.setEtat(circuitPatient.getEtat());
         circuitPatientDs.setActif(circuitPatient.isActif());
         circuitPatientDs.setCreateDate(circuitPatient.getCreateDate());
         circuitPatientDs.setNumeroCircuit(
                 UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
-        if (circuitPatient.getCode() != null) {
-            Patient patient = patientService.findByCode(circuitPatient.getCode());
-            String nomPatient = patient.getPrenom() + ' ' + patient.getNom();
-            circuitPatientDs.setNomCompletPatient(nomPatient);
-        }
         if (circuitPatient.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();

@@ -19,4 +19,6 @@ public interface AvisSpecialisteService {
     List<AvisSpecialiste> findAvisSpecialisteByPatientId(String code);
 
     List<AvisSpecialiste> findAvisSpecialisteByCircuitId(Long circuitId);
+
+    List<AvisSpecialiste> findTop3AvisSpecialisteByCircuitId(Long circuitId);
 }

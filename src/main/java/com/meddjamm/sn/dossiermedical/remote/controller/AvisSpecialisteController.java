@@ -73,4 +73,11 @@ public class AvisSpecialisteController implements AvisSpecialisteApi {
                 avisSpecialisteService.findAvisSpecialisteByCircuitId(code)
         ), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<AvisSpecialisteDs>> findTop3AvisSpecialistesByCircuitId(Long code) {
+        return new ResponseEntity<>(avisSpecialisteAssembler.assembleEntitiesFrom(
+                avisSpecialisteService.findTop3AvisSpecialisteByCircuitId(code)
+        ), HttpStatus.OK);
+    }
 }

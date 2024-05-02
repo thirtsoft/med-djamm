@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class OrdonnanceItem extends AbstractAuditableEntity implements Serializable {
 
     @Column(name = "medicament_uid")
-    private String code;
+    private Long code;
 
     private String psologie;
 

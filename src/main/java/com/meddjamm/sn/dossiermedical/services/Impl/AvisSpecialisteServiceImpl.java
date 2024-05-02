@@ -71,4 +71,9 @@ public class AvisSpecialisteServiceImpl implements AvisSpecialisteService {
     public List<AvisSpecialiste> findAvisSpecialisteByCircuitId(Long circuitId) {
         return avisSpecialisteRepository.findAvisSpecialisteByCircuitId(circuitId);
     }
+
+    @Override
+    public List<AvisSpecialiste> findTop3AvisSpecialisteByCircuitId(Long circuitId) {
+        return avisSpecialisteRepository.findTop3ByOrderByIdDesc(circuitId);
+    }
 }

@@ -15,17 +15,11 @@ public class AllCircuitPatientDs {
 
     private String numeroCircuit;
 
-    private String code;
-
-    private String nomCompletPatient;
-
     private String nomCompletAgent;
 
     private String type;
 
     private int etat;
-
-    private String createdByUser;
 
     private Date createDate;
 
