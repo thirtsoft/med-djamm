@@ -5,7 +5,6 @@ import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.UtilisateurRepository;
 import com.meddjamm.sn.config.service.auth.AuthenticationService;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
-import com.meddjamm.sn.rh.repository.MaladieRepository;
 import com.meddjamm.sn.rh.repository.TypeDocumentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //        })
 @AllArgsConstructor
 public class MedDjammApplication implements CommandLineRunner {
-    private final MaladieRepository maladieRepository;
     private final PatientRepository patientRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final ActionRepository actionRepository;

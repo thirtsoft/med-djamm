@@ -15,7 +15,7 @@ public interface PlanificationRepository extends JpaRepository<Planification, Lo
     @Query("SELECT DISTINCT p from Planification p where p.actif=1 order by p.id desc")
     List<Planification> findAllPlanifications();
 
-    @Query("SELECT DISTINCT p from Planification p where p.matricule=:agentId and p.actif=1 order by p.id desc")
-    List<Planification> findPlanificationByAgent(@Param("agentId") String agentId);
+    @Query("SELECT DISTINCT p from Planification p where p.agentId=:agentId and p.actif=1")
+    List<Planification> findPlanificationByAgent(@Param("agentId") Long agentId);
 
 }

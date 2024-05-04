@@ -1,6 +1,8 @@
 package com.meddjamm.sn.rh.assembler;
 
+import com.meddjamm.sn.config.assembler.UtilisateurAssembler;
 import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.rh.entity.Planification;
 import com.meddjamm.sn.rh.remote.model.PlanificationDetailDs;
@@ -15,8 +17,12 @@ public class PlanificationAssembler {
 
     private final UtilisateurService utilisateurService;
 
-    public PlanificationAssembler(UtilisateurService utilisateurService) {
+    private final UtilisateurAssembler utilisateurAssembler;
+
+    public PlanificationAssembler(UtilisateurService utilisateurService,
+                                  UtilisateurAssembler utilisateurAssembler) {
         this.utilisateurService = utilisateurService;
+        this.utilisateurAssembler = utilisateurAssembler;
     }
 
     public List<PlanificationDs> assembleEntitiesFrom(List<Planification> planifications) {
@@ -27,11 +33,17 @@ public class PlanificationAssembler {
         PlanificationDs planificationDs = new PlanificationDs();
         if (planification.getId() != null)
             planificationDs.setId(planification.getId());
-        planificationDs.setAgentMedical(planification.getMatricule());
+        planificationDs.setAgentId(planification.getAgentId());
         planificationDs.setDateService(planification.getDateService());
         planificationDs.setCreatedDate(new Date());
         planificationDs.setActif(planification.isActif());
         planificationDs.setLibelle(planification.getLibelle());
+        planificationDs.setIsCreatedBy(planification.getIsCreatedBy());
+        if (planification.getAgentId() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurById(planification.getAgentId());
+            String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
+            planificationDs.setNomCompletAgent(nomAgent);
+        }
         return planificationDs;
     }
 
@@ -39,7 +51,8 @@ public class PlanificationAssembler {
         Planification planification = new Planification();
         if (planificationDs.getId() != null)
             planification.setId(planificationDs.getId());
-        planification.setMatricule(planificationDs.getAgentMedical());
+        planification.setAgentId(planificationDs.getAgentId());
+        planification.setIsCreatedBy(planificationDs.getIsCreatedBy());
         planification.setDateService(planificationDs.getDateService());
         planification.setCreatedDate(new Date());
         planification.setActif(planificationDs.isActif());
@@ -57,17 +70,16 @@ public class PlanificationAssembler {
         if (planification.getId() != null)
             planificationDetailDs.setId(planification.getId());
         planificationDetailDs.setDateService(planification.getDateService());
+        planificationDetailDs.setIsCreatedBy(planification.getIsCreatedBy());
         planificationDetailDs.setCreatedDate(new Date());
         planificationDetailDs.setActif(planification.isActif());
         planificationDetailDs.setLibelle(planification.getLibelle());
-        if (planification.getMatricule() != null) {
-            Utilisateur agentMedical = utilisateurService.findUtilisateurByMatricule(planification.getMatricule());
+        if (planification.getAgentId() != null) {
+            Utilisateur agentMedical = utilisateurService.findUtilisateurById(planification.getAgentId());
             String nomAgent = agentMedical.getPrenom() + ' ' + agentMedical.getNom();
-            planificationDetailDs.setAgentMedical(planification.getMatricule());
+            UtilisateurDs utilisateurDs = utilisateurAssembler.assembleUtilisateurDsFromEntity(agentMedical);
+            planificationDetailDs.setUtilisateurDs(utilisateurDs);
             planificationDetailDs.setNomCompletAgent(nomAgent);
-            if (planification.getMatricule() != null) {
-                planificationDetailDs.setAgentMedical(planification.getMatricule());
-            }
         }
         return planificationDetailDs;
     }

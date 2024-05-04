@@ -1,7 +1,7 @@
 package com.meddjamm.sn.rh.remote.controller.api;
 
-import com.meddjamm.sn.rh.remote.model.PlanificationDetailDs;
-import com.meddjamm.sn.rh.remote.model.PlanificationDs;
+import com.meddjamm.sn.rh.remote.model.RendezVousDetailDs;
+import com.meddjamm.sn.rh.remote.model.RendezVousDs;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,24 +15,24 @@ import java.util.List;
 
 import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 
-@RequestMapping(value = APP_ROOT + "/planification")
-public interface PlanificationApi {
+@RequestMapping(value = APP_ROOT + "/rendezvous")
+public interface RendezVousApi {
 
     @PostMapping(value = "/save")
-    void creerPlanification(@RequestBody PlanificationDs planificationDs);
+    ResponseEntity<RendezVousDetailDs> creerRendezVousDs(@RequestBody RendezVousDs rendezVousDs);
 
     @PutMapping(value = "/edit/{id}")
-    void updatePlanification(@PathVariable Long id, @RequestBody PlanificationDs planificationDs) throws Exception;
+    ResponseEntity<RendezVousDetailDs> updateRendezVousDs(@PathVariable Long id, @RequestBody RendezVousDs rendezVousDs) throws Exception;
 
     @GetMapping(value = "/{id}")
-    ResponseEntity<PlanificationDetailDs> findPlanificationById(@PathVariable Long id);
+    ResponseEntity<RendezVousDetailDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/list")
-    ResponseEntity<List<PlanificationDetailDs>> findAllPlanifications();
-
-    @GetMapping(value = "/by-agent/{agentId}")
-    ResponseEntity<List<PlanificationDetailDs>> findPlanificationsByAgent(@PathVariable Long agentId);
+    ResponseEntity<List<RendezVousDetailDs>> findAllRendezVous();
 
     @DeleteMapping(value = "/delete/{id}")
-    void deletePlanification(@PathVariable Long id);
+    void deleteRendezVous(@PathVariable Long id);
+
+    @GetMapping(value = "/by-doctor/{matricule}")
+    ResponseEntity<List<RendezVousDetailDs>> findByDoctorId(@PathVariable Long matricule);
 }

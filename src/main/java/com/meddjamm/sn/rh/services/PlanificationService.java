@@ -14,7 +14,7 @@ public interface PlanificationService {
 
     List<Planification> findAllPlanifications();
 
-    List<Planification> findAllPlanificationsByAgent(String agent);
+    List<Planification> findAllPlanificationsByAgent(Long agent);
 
     void deletePlanification(Long id);
 

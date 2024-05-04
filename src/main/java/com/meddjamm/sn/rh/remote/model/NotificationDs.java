@@ -9,19 +9,15 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlanificationDs {
+public class NotificationDs {
 
     private Long id;
 
-    private String libelle;
+    private String message;
 
-    private Long agentId;
+    private Long createdBy;
 
     private String nomCompletAgent;
-
-    private int isCreatedBy;
-
-    private Date dateService;
 
     private Date createdDate;
 

@@ -4,28 +4,37 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PlanificationDs {
+@AllArgsConstructor
+public class RendezVousDs implements Serializable {
 
     private Long id;
 
     private String libelle;
 
-    private Long agentId;
+    private Long patientId;
+
+    private String nomCompletPatient;
+
+    private Long createdBy;
+
+    private Long medecinId;
+
+    private String heure;
+
+    private Date dateRendezVous;
+
+    private Date createDate;
 
     private String nomCompletAgent;
 
-    private int isCreatedBy;
-
-    private Date dateService;
-
-    private Date createdDate;
-
     private int actif;
+
+    private int etat;
 
     public boolean isActif() {
         if (actif == 1)

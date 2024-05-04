@@ -53,7 +53,7 @@ public class PlanificationController implements PlanificationApi {
     }
 
     @Override
-    public ResponseEntity<List<PlanificationDetailDs>> findPlanificationsByAgent(String agentId) {
+    public ResponseEntity<List<PlanificationDetailDs>> findPlanificationsByAgent(Long agentId) {
         return new ResponseEntity<>(planificationAssembler.assembleDetailPlanificationsFromEntities(
                 planificationService.findAllPlanificationsByAgent(agentId)
         ), HttpStatus.OK);

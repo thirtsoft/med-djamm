@@ -1,35 +1,33 @@
 package com.meddjamm.sn.rh.remote.model;
 
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PlanificationDetailDs {
-
+@AllArgsConstructor
+public class RendezVousDetailDs implements Serializable {
     private Long id;
-
     private String libelle;
-
-    private Long agentId;
-
-    private String nomCompletAgent;
-
+    private Long patientId;
+    private PatientDetailDs patient;
+    private String nomCompletPatient;
+    private Long medecinId;
     private UtilisateurDs utilisateurDs;
-
-    private int isCreatedBy;
-
-    private Date dateService;
-
-    private Date createdDate;
-
+    private Date dateRendezVous;
+    private String heure;
+    private Date createDate;
+    private String libelleEtat;
+    private Long createdBy;
+    private String nomCompletAgent;
     private int actif;
+    private int etat;
 
     public boolean isActif() {
         if (actif == 1)

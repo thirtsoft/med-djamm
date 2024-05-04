@@ -8,7 +8,7 @@ import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
-import com.meddjamm.sn.services.ReportPdfService;
+import com.meddjamm.sn.reportpdfexcel.services.ReportPdfService;
 import com.meddjamm.sn.utils.CSVSupport;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.io.InputStreamResource;

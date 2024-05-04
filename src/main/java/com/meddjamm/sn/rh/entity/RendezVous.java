@@ -12,22 +12,30 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "planification")
+@Table(name = "rendez_vous")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Planification extends AbstractAuditableEntity implements Serializable {
+public class RendezVous extends AbstractAuditableEntity implements Serializable {
 
     private String libelle;
 
-    @Column(name = "agent_medical_uid")
-    private Long agentId;
+    @Column(name = "patient_uid")
+    private Long patientId;
 
-    private Date dateService;
+    @Column(name = "medecin_uid")
+    private Long medecinId;
 
-    private int isCreatedBy;
+    private Long createdBy;
 
-    private Date createdDate;
+    @Column(name = "date_rendez_vous")
+    private Date dateRendezVous;
+
+    private String heure;
+
+    private Date createDate;
+
+    private int etat;
 
     private int actif;
 
@@ -44,5 +52,4 @@ public class Planification extends AbstractAuditableEntity implements Serializab
         else
             this.actif = 0;
     }
-
 }

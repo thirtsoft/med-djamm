@@ -23,6 +23,7 @@ public class PlanificationServiceImpl implements PlanificationService {
     public void savePlanification(Planification planification) {
         planification.setActif(true);
         planification.setCreatedDate(new Date());
+        planification.setIsCreatedBy(1);
         planificationRepository.save(planification);
     }
 
@@ -46,7 +47,7 @@ public class PlanificationServiceImpl implements PlanificationService {
     }
 
     @Override
-    public List<Planification> findAllPlanificationsByAgent(String agent) {
+    public List<Planification> findAllPlanificationsByAgent(Long agent) {
         return planificationRepository.findPlanificationByAgent(agent);
     }
 

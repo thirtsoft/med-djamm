@@ -1,21 +1,27 @@
-package com.meddjamm.sn.dossiermedical.remote.model;
+package com.meddjamm.sn.rh.entity;
 
+import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "notification")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConsultationDetailDs {
+public class Notification extends AbstractAuditableEntity implements Serializable {
 
-    private Long id;
+    @Column(columnDefinition = "TEXT")
+    private String message;
 
-    private String resume;
-
-    private PatientDetailDs patientDetailDs;
+    private Long createdBy;
 
     private Date createdDate;
 
