@@ -6,11 +6,11 @@ import java.util.Date;
 
 public class PiecesJointesDs {
 
-    private Long typeDocumentId; //type du document entré
+    private Long typeDocumentId;
 
     private String typeDocumentLibelle;
 
-    private Long objectId; //ID de l'objet concerné
+    private Long objectId;
 
     private String dossier;
 
@@ -25,8 +25,6 @@ public class PiecesJointesDs {
     private int actif;
 
     private boolean v1;
-
-    private boolean docPme; //v1 document enregistré dans PME true / acc false
 
     private boolean pdf;
 
@@ -155,15 +153,7 @@ public class PiecesJointesDs {
     public void setPdf(boolean pdf) {
         this.pdf = pdf;
     }
-
-    public boolean isDocPme() {
-        return docPme;
-    }
-
-    public void setDocPme(boolean docPme) {
-        this.docPme = docPme;
-    }
-
+    
     public boolean isImg() {
         return img;
     }

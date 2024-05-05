@@ -19,9 +19,9 @@ public class PiecesJointes extends AbstractAuditableEntity implements Serializab
 
     private String nomTechnique;
 
-    private Long typeDocumentId; //type du document entré
+    private Long typeDocumentId;
 
-    private Long objectId; //ID de l'objet concerné
+    private Long objectId;
 
     private String dossier;
 
