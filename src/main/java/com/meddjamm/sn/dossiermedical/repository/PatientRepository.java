@@ -22,4 +22,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("SELECT COUNT(p) from Patient p where p.actif=1")
     long countActivePatient();
+
+    @Query("SELECT DISTINCT p from Patient p where p.actif=1 ORDER BY p.prenom DESC")
+    List<Patient> findAllPatientOrderByFirstName();
 }

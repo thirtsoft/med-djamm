@@ -25,4 +25,5 @@ public interface PatientService {
 
     long countActivePatient();
 
+    List<Patient> findAllActivesPatients();
 }

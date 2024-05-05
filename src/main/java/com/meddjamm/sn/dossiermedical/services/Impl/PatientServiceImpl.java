@@ -108,4 +108,9 @@ public class PatientServiceImpl implements PatientService {
     public long countActivePatient() {
         return patientRepository.countActivePatient();
     }
+
+    @Override
+    public List<Patient> findAllActivesPatients() {
+        return patientRepository.findAllPatientOrderByFirstName();
+    }
 }

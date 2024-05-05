@@ -107,6 +107,12 @@ public class PatientController implements PatientApi {
         reportPdfService.exportToPDF(response, patientAssembler.assembleEntitiesFrom(patientService.findAllPatients()));
     }
 
+    @Override
+    public ResponseEntity<List<PatientMinDs>> findAllPatientOrderByFirstName() {
+        List<PatientMinDs> patientResult = patientAssembler.assembleEntitiesFrom(patientService.findAllActivesPatients());
+        return new ResponseEntity<>(patientResult, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/mySession")
     Authentication authentication(Authentication authentication) {
         return authentication;

@@ -57,4 +57,8 @@ public interface PatientApi {
     @GetMapping(value = "/export-pdf")
     @Transactional(readOnly = true)
     void exportPatientsToPDF(HttpServletResponse response) throws IOException;
+
+    @GetMapping(value = "/list/order")
+    ResponseEntity<List<PatientMinDs>> findAllPatientOrderByFirstName();
+
 }
