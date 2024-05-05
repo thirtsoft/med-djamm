@@ -7,10 +7,17 @@ import com.meddjamm.sn.config.service.auth.AuthenticationService;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.rh.repository.TypeDocumentRepository;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @SpringBootApplication
 //        (exclude = {
@@ -26,12 +33,30 @@ public class MedDjammApplication implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final TypeDocumentRepository typeDocumentRepository;
 
+    private static final Logger LOG = LoggerFactory.getLogger(MedDjammApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(MedDjammApplication.class, args);
+
+        createDirectoryIfItDoesntExist();
+    }
+
+    private static void createDirectoryIfItDoesntExist() {
+        Path path = Paths.get(System.getProperty("src/main/resources/static/webapp/document") + "/multi_ged/dmi");
+
+        if (Files.notExists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException ie) {
+                LOG.error(String.format("Problem creating directory %s", path));
+            }
+        }
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+
 
         /*
 
