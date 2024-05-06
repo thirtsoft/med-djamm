@@ -1,7 +1,6 @@
 package com.meddjamm.sn.rh.piecejointe;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meddjamm.sn.rh.assembler.TypeDocumentAssembler;
 import com.meddjamm.sn.rh.entity.TypeDocument;
 import com.meddjamm.sn.rh.services.TypeDocumentService;
 import com.meddjamm.sn.utils.ConstantDeployment;
@@ -30,8 +29,6 @@ public class PiecesJointesService {
 
     private final PiecesJointesAssembler piecesJointesAssembler;
 
-    private final TypeDocumentAssembler typeDocumentAssembler;
-
     private final TypeDocumentService typeDocumentService;
 
 
@@ -41,13 +38,11 @@ public class PiecesJointesService {
                                 PiecesJointesRepository piecesJointesRepository,
                                 ObjectMapper objectMapper,
                                 PiecesJointesAssembler piecesJointesAssembler,
-                                TypeDocumentAssembler typeDocumentAssembler,
                                 TypeDocumentService typeDocumentService) {
         this.fileUtilsService = fileUtilsService;
         this.piecesJointesRepository = piecesJointesRepository;
         this.objectMapper = objectMapper;
         this.piecesJointesAssembler = piecesJointesAssembler;
-        this.typeDocumentAssembler = typeDocumentAssembler;
         this.typeDocumentService = typeDocumentService;
     }
 
@@ -142,7 +137,6 @@ public class PiecesJointesService {
 
             return body;
         } catch (IOException e) {
-            //throw new PieceJointeException("Impossible de lire le content de la piéce jointe : "+e.getMessage());
         }
         return null;
     }

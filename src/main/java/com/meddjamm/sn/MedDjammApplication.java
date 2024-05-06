@@ -14,11 +14,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 @SpringBootApplication
 //        (exclude = {
 //                SecurityAutoConfiguration.class
@@ -38,9 +33,10 @@ public class MedDjammApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(MedDjammApplication.class, args);
 
-        createDirectoryIfItDoesntExist();
+        //    createDirectoryIfItDoesntExist();
     }
 
+    /*
     private static void createDirectoryIfItDoesntExist() {
         Path path = Paths.get(System.getProperty("src/main/resources/static/webapp/document") + "/multi_ged/dmi");
 
@@ -51,7 +47,7 @@ public class MedDjammApplication implements CommandLineRunner {
                 LOG.error(String.format("Problem creating directory %s", path));
             }
         }
-    }
+    }*/
 
     @Override
     public void run(String... args) throws Exception {
