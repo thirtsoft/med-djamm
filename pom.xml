@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dalaljamm</groupId>
     <artifactId>meddjamm</artifactId>
-    <!--  <packaging>war</packaging> -->
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>meddjamm</name>
     <description>Demo project for Spring Boot</description>

@@ -52,8 +52,6 @@ public class MedDjammApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
-
         /*
 
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
@@ -86,8 +84,8 @@ public class MedDjammApplication implements CommandLineRunner {
         var manager = RegisterRequest.builder().firstname("Salif").prenom("Salif").email("salifger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken()); */
 
-        /*
 
+        /*
         TypeDocument typeDocument1 = new TypeDocument(1L, "TYPE_PHOTO_PAT", "Photo du patient", 1);
         TypeDocument typeDocument2 = new TypeDocument(2L, "TYPE_PHOTO_PROF", "Photo profile agent", 1);
         TypeDocument typeDocument3 = new TypeDocument(3L, "TYPE_EXAM_CONS_BIO", "Consultation biologie", 1);
@@ -114,6 +112,7 @@ public class MedDjammApplication implements CommandLineRunner {
         typeDocumentList.add(typeDocument11);
 
         typeDocumentRepository.saveAllAndFlush(typeDocumentList);
+
         */
 
 
