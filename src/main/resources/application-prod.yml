@@ -2,9 +2,9 @@ server:
   port: 8092
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-52-215-160-108.eu-west-1.compute.amazonaws.com:5432/dbvtd1ah6lc9l8
-    username: iffujrbfmbtisw
-    password: d5d65c563ca681fb20ad1fc0787b2928071359e388b959c0847d150c07875cb9
+    url: jdbc:postgresql://77.37.86.213:5432/senapplimed_hdj
+    username: postgres
+    password: Windev2018@Snapplimed
   main:
     allow-circular-references: true
   jpa:
