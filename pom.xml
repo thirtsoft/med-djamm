@@ -188,6 +188,7 @@
             <!--			</plugin>-->
 
         </plugins>
+        <finalName>snapplimedhdj</finalName>
     </build>
 
     <profiles>
