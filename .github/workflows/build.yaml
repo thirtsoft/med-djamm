@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           # jdk version
-          java-version: '8'
+          java-version: '18'
           # Note, the adopt here is because I need to use this, you can change to other distributions according to your situation
           distribution: 'adopt'
           cache: 'maven'
