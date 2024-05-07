@@ -51,7 +51,6 @@ public class MedDjammApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         /*
 
         Action action1 = new Action("ADD_PAT", "Ajouter/Modifier un patient");
