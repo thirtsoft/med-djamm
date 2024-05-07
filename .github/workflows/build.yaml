@@ -1,0 +1,31 @@
+# Workflow Name
+name: "Java CI with Multi-arch Docker Image"
+
+# Event triggering conditions and branching
+on:
+  push:
+    branches: [ release_v1_hdj ]
+# a job
+jobs:
+  docker:
+    name: Running Compile Java Multi-arch Docker Image
+    # Based on the ubuntu-latest runtime
+    runs-on: ubuntu-latest
+    steps:
+      # Setting up the Java environment
+      - uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          # jdk version
+          java-version: '8'
+          # Note, the adopt here is because I need to use this, you can change to other distributions according to your situation
+          distribution: 'adopt'
+          cache: 'maven'
+      - name: Build with Maven
+        # maven build
+        run: mvn clean package -DskipTests -P prod
+      - uses: actions/upload-artifact@v3
+        with:
+          name: snapplimedhdj-backend
+          path: target/snapplimedhdj.jar
