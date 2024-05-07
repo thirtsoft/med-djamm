@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://77.37.86.213:5432/senapplimed_hdj
-    username: postgres
-    password: Windev2018@Snapplimed
+    username: administrator
+    password: Snapplimed@2024
   main:
     allow-circular-references: true
   jpa:
