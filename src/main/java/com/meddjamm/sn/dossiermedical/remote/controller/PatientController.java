@@ -113,6 +113,16 @@ public class PatientController implements PatientApi {
         return new ResponseEntity<>(patientResult, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<InputStreamResource> exportDossierPatient(String code) {
+        List<List<String>> strings = patientAssembler.assembleEntitiesFromPatientDetailDs(patientService.findAllPatients()).stream()
+                .map(csvExportAssembler::mapEntityToListData)
+                .toList();
+        return ResponseEntity.ok()
+                .contentType(TEXT_PLAIN)
+                .body(CSVSupport.generate(CSVExportAssembler.headeurs().toArray(new String[]{}), strings));
+    }
+
     @GetMapping(value = "/mySession")
     Authentication authentication(Authentication authentication) {
         return authentication;

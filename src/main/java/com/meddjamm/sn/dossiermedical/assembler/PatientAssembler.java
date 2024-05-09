@@ -30,6 +30,10 @@ public class PatientAssembler {
         return patients.stream().map(this::assembleMinFrom).toList();
     }
 
+    public List<PatientDetailDs> assembleEntitiesFromPatientDetailDs(List<Patient> patients) {
+        return patients.stream().map(this::assemblePatientDetails).toList();
+    }
+
     public PatientDetailDs assemblePatientDetails(Patient patient) {
         PatientDetailDs patientDetailDs = new PatientDetailDs();
         if (patient.getCode() != null)

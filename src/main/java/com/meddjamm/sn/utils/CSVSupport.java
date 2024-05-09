@@ -41,4 +41,32 @@ public class CSVSupport {
         csvPrinter.flush();
         return new ByteArrayInputStream(out.toByteArray());
     }
+
+    //
+    public static InputStreamResource generateData(String[] csvHeader, Object csvBody) {
+        ByteArrayInputStream byteArrayInputStream;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        CSVFormat csvFormat = CSVFormat.Builder.create(EXCEL).setHeader(csvHeader).setDelimiter(DELIMITER).build();
+
+        try (CSVPrinter csvPrinter = getCsvPrinterData(out, csvFormat)) {
+            byteArrayInputStream = printBodyData(csvBody, out, csvPrinter);
+        } catch (IOException e) {
+            throw new RuntimeException("Invalid CSV document", e);
+        }
+
+        return new InputStreamResource(byteArrayInputStream);
+    }
+
+    protected static CSVPrinter getCsvPrinterData(ByteArrayOutputStream out, CSVFormat csvFormat) throws IOException {
+        return new CSVPrinter(new PrintWriter(out), csvFormat);
+    }
+
+    protected static ByteArrayInputStream printBodyData(Object csvBody, ByteArrayOutputStream out, CSVPrinter csvPrinter)
+            throws IOException {
+        csvPrinter.printRecord(csvBody);
+        csvPrinter.flush();
+        return new ByteArrayInputStream(out.toByteArray());
+    }
+
+
 }

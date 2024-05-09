@@ -10,4 +10,6 @@ public interface ReportPdfService {
 
 
     void writeTableData(PdfPTable table, Object data);
+
+    void writeTableDataMedical(PdfPTable table, Object data);
 }
