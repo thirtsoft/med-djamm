@@ -1,6 +1,10 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
+import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
+import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
+import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
+import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import org.springframework.data.domain.Page;
@@ -15,8 +19,16 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 
-    public PatientServiceImpl(PatientRepository patientRepository) {
+    private final CircuitPatientRepository circuitPatientRepository;
+
+    private final HospitalisationRepository hospitalisationRepository;
+
+    public PatientServiceImpl(PatientRepository patientRepository,
+                              CircuitPatientRepository circuitPatientRepository,
+                              HospitalisationRepository hospitalisationRepository) {
         this.patientRepository = patientRepository;
+        this.circuitPatientRepository = circuitPatientRepository;
+        this.hospitalisationRepository = hospitalisationRepository;
     }
 
     @Override
@@ -97,6 +109,12 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = patientRepository.findPatientById(id);
         patient.setActif(false);
         patientRepository.save(patient);
+        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientByPatient(patient.getCode());
+        circuitPatient.setActif(false);
+        circuitPatientRepository.save(circuitPatient);
+        Hospitalisation hospitalisation = hospitalisationRepository.findHospitalisationByPatientCode(patient.getCode());
+        hospitalisation.setActif(false);
+        hospitalisationRepository.saveAndFlush(hospitalisation);
     }
 
     @Override

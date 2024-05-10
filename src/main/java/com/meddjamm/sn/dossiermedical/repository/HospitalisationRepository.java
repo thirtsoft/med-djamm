@@ -20,4 +20,7 @@ public interface HospitalisationRepository extends JpaRepository<Hospitalisation
 
     @Query("SELECT DISTINCT max(act.numeroHospitalisation) FROM Hospitalisation act")
     int maxNumeroHospitalisation();
+
+    @Query("SELECT DISTINCT p from Hospitalisation p where p.code=:code and p.actif=1")
+    Hospitalisation findHospitalisationByPatientCode(@Param("code") String code);
 }
