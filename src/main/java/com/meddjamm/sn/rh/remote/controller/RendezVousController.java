@@ -64,4 +64,22 @@ public class RendezVousController implements RendezVousApi {
                 .toList();
         return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<RendezVousDetailDs>> findTreeLatestRendezVousByPatient(Long patientId) {
+        List<RendezVousDetailDs> rendezVousDsList = rendezVousService.findTreeLatestRendezVousByPatient(patientId)
+                .stream()
+                .map(rendezVousAssembler::assembleEntitiesToDs)
+                .toList();
+        return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<RendezVousDetailDs>> getAllRendezVousInDay() {
+        List<RendezVousDetailDs> rendezVousDsList = rendezVousService.findRendezVousDuJours()
+                .stream()
+                .map(rendezVousAssembler::assembleEntitiesToDs)
+                .toList();
+        return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
+    }
 }

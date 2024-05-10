@@ -18,4 +18,8 @@ public interface RendezVousService {
 
     List<RendezVous> findAllRendezVousByDoctorId(Long matricule);
 
+    List<RendezVous> findTreeLatestRendezVousByPatient(Long patientId);
+
+    List<RendezVous> findRendezVousDuJours();
+
 }

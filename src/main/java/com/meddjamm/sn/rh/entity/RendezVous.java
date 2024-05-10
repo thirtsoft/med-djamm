@@ -1,5 +1,6 @@
 package com.meddjamm.sn.rh.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +30,7 @@ public class RendezVous extends AbstractAuditableEntity implements Serializable 
     private Long createdBy;
 
     @Column(name = "date_rendez_vous")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
     private Date dateRendezVous;
 
     private String heure;

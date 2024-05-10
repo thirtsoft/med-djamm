@@ -35,4 +35,10 @@ public interface RendezVousApi {
 
     @GetMapping(value = "/by-doctor/{matricule}")
     ResponseEntity<List<RendezVousDetailDs>> findByDoctorId(@PathVariable Long matricule);
+
+    @GetMapping(value = "/treelatest/by-patient/{patientId}")
+    ResponseEntity<List<RendezVousDetailDs>> findTreeLatestRendezVousByPatient(@PathVariable Long patientId);
+
+    @GetMapping(value = "/du-jour")
+    ResponseEntity<List<RendezVousDetailDs>> getAllRendezVousInDay();
 }

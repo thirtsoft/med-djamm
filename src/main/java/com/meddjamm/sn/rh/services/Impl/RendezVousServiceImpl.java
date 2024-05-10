@@ -35,7 +35,9 @@ public class RendezVousServiceImpl implements RendezVousService {
         if (rendezVousResult == null) {
             throw new Exception("This Rendez-vous  is not found");
         }
-        rendezVousResult.setId(id);
+        rendezVousResult.setDateRendezVous(rendezVous.getDateRendezVous());
+        rendezVousResult.setHeure(rendezVous.getHeure());
+        rendezVousResult.setMedecinId(rendezVous.getMedecinId());
         return rendezVousRepository.save(rendezVousResult);
     }
 
@@ -59,5 +61,15 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Override
     public List<RendezVous> findAllRendezVousByDoctorId(Long matricule) {
         return rendezVousRepository.findRendezVousByDoctorMatricule(matricule);
+    }
+
+    @Override
+    public List<RendezVous> findTreeLatestRendezVousByPatient(Long patientId) {
+        return rendezVousRepository.findTreeLatestRendezVousByPatient(patientId);
+    }
+
+    @Override
+    public List<RendezVous> findRendezVousDuJours() {
+        return rendezVousRepository.findAllRendezVousDay();
     }
 }
