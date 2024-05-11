@@ -22,4 +22,9 @@ public interface RendezVousService {
 
     List<RendezVous> findRendezVousDuJours();
 
+    List<RendezVous> findAllRendezVousOfDoctorInMonth(Long matricule);
+
+    void deplacezRendezVous(RendezVous rendezVousDeplace);
+
+
 }

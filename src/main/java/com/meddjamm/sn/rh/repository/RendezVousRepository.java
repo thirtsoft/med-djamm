@@ -27,4 +27,7 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.dateRendezVous=current_date and r.actif=1 ORDER BY r.id")
     List<RendezVous> findAllRendezVousDay();
 
+    @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.medecinId=:matricule and month(r.dateRendezVous)=month(current_date) and r.actif=1 ORDER BY r.id")
+    List<RendezVous> findAllRendezVousOfDoctorInMonth(@Param("matricule") Long matricule);
+
 }

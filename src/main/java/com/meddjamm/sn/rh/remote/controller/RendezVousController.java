@@ -3,6 +3,7 @@ package com.meddjamm.sn.rh.remote.controller;
 import com.meddjamm.sn.rh.assembler.RendezVousAssembler;
 import com.meddjamm.sn.rh.entity.RendezVous;
 import com.meddjamm.sn.rh.remote.controller.api.RendezVousApi;
+import com.meddjamm.sn.rh.remote.model.RendezVousDeplaceDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDs;
 import com.meddjamm.sn.rh.services.RendezVousService;
@@ -81,5 +82,20 @@ public class RendezVousController implements RendezVousApi {
                 .map(rendezVousAssembler::assembleEntitiesToDs)
                 .toList();
         return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<RendezVousDetailDs>> findAllRendezVousOfDoctorInMonth(Long matricule) {
+        List<RendezVousDetailDs> rendezVousDsList = rendezVousService.findAllRendezVousOfDoctorInMonth(matricule)
+                .stream()
+                .map(rendezVousAssembler::assembleEntitiesToDs)
+                .toList();
+        return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
+    }
+
+    @Override
+    public void DeplacerRendezVous(RendezVousDeplaceDs rendezVousDeplace) {
+        RendezVous rendezVousModifier = rendezVousAssembler.assembleEntitiesToDeplaceRendezVous(rendezVousDeplace);
+        rendezVousService.deplacezRendezVous(rendezVousModifier);
     }
 }

@@ -9,6 +9,7 @@ import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.rh.entity.RendezVous;
+import com.meddjamm.sn.rh.remote.model.RendezVousDeplaceDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDs;
 import com.meddjamm.sn.rh.services.RendezVousService;
@@ -116,6 +117,18 @@ public class RendezVousAssembler {
         rendezVousDs.setEtat(rendezVous.getEtat());
         rendezVousDs.setLibelleEtat(getLibelleEtat(rendezVous.getEtat()));
         return rendezVousDs;
+    }
+
+    public RendezVous assembleEntitiesToDeplaceRendezVous(RendezVousDeplaceDs rendezVousDeplaceDs) {
+        RendezVous rendezVous = null;
+        List<RendezVousDetailDs> rendezVousDetailDsList = rendezVousDeplaceDs.getRendezVousDetailDs();
+        for (RendezVousDetailDs rendezVousDetailDs : rendezVousDetailDsList) {
+            rendezVous = rendezVousService.findById(rendezVousDetailDs.getId());
+            rendezVous.setDateRendezVous(rendezVousDeplaceDs.getDateDeplace());
+            rendezVous.setHeure(rendezVousDeplaceDs.getHeure());
+        }
+        return rendezVous;
+
     }
 
     public String getLibelleEtat(int etat) {

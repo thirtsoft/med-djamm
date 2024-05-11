@@ -1,5 +1,6 @@
 package com.meddjamm.sn.rh.remote.controller.api;
 
+import com.meddjamm.sn.rh.remote.model.RendezVousDeplaceDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDs;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +42,12 @@ public interface RendezVousApi {
 
     @GetMapping(value = "/du-jour")
     ResponseEntity<List<RendezVousDetailDs>> getAllRendezVousInDay();
+
+    @GetMapping(value = "/by-doctor/in-month/{matricule}")
+    ResponseEntity<List<RendezVousDetailDs>> findAllRendezVousOfDoctorInMonth(@PathVariable Long matricule);
+
+    @PostMapping(value = "/deplacez-rendezvous")
+    void DeplacerRendezVous(@RequestBody RendezVousDeplaceDs rendezVousDeplace);
+
+
 }

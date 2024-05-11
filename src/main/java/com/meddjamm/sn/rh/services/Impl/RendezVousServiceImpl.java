@@ -4,12 +4,14 @@ import com.meddjamm.sn.rh.entity.RendezVous;
 import com.meddjamm.sn.rh.repository.RendezVousRepository;
 import com.meddjamm.sn.rh.services.RendezVousService;
 import com.meddjamm.sn.utils.Constants;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class RendezVousServiceImpl implements RendezVousService {
 
     private final RendezVousRepository rendezVousRepository;
@@ -71,5 +73,19 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Override
     public List<RendezVous> findRendezVousDuJours() {
         return rendezVousRepository.findAllRendezVousDay();
+    }
+
+    @Override
+    public List<RendezVous> findAllRendezVousOfDoctorInMonth(Long matricule) {
+        return rendezVousRepository.findAllRendezVousOfDoctorInMonth(matricule);
+    }
+
+    @Override
+    public void deplacezRendezVous(RendezVous rendezVousDeplace) {
+        if (rendezVousDeplace == null) {
+            log.info("Pas de rendez à déplacer");
+        }
+        assert rendezVousDeplace != null;
+        rendezVousRepository.save(rendezVousDeplace);
     }
 }
