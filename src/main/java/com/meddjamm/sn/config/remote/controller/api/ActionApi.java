@@ -19,7 +19,7 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface ActionApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    void creerAction(@RequestBody ActionListDs actionListDs);
+    void creerAction(@RequestBody ActionListDs actionListDs) throws Exception;
 
     @PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void updateAction(@PathVariable Long id, @RequestBody ActionListDs actionListDs);

@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
@@ -25,4 +26,11 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("SELECT DISTINCT p from Patient p where p.actif=1 ORDER BY p.prenom DESC")
     List<Patient> findAllPatientOrderByFirstName();
+
+    @Query("SELECT p FROM Patient p WHERE lower(p.code) = lower(:code) AND p.actif = 1")
+    Optional<Patient> findByCode(@Param("code") String code);
+
+    @Query("SELECT p FROM Patient p WHERE lower(p.numeroTelephone) = lower(:telephone) AND p.actif = 1")
+    Optional<Patient> findByNumeroTelephone(@Param("telephone") String telephone);
+    
 }

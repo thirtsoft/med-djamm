@@ -18,7 +18,7 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface ProfilApi {
 
     @PostMapping(value = "/save")
-    ResponseEntity<ProfilDs> creerProfil(@RequestBody ProfilDs profilDs);
+    ResponseEntity<ProfilDs> creerProfil(@RequestBody ProfilDs profilDs) throws Exception;
 
     @PutMapping(value = "/edit/{id}")
     ResponseEntity<ProfilDs> updateProfil(@PathVariable Long id, @RequestBody ProfilDs profilDs) throws Exception;

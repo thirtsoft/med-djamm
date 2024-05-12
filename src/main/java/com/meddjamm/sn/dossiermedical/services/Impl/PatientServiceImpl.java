@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -32,7 +33,19 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient savePatient(Patient patient) {
+    public Patient savePatient(Patient patient) throws Exception {
+        String code = patient.getCode();
+        Optional<Patient> byCode = patientRepository.findByCode(code);
+        if (patient.getId() == null && byCode.isPresent()
+                || (patient.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(patient.getId()))) {
+            throw new Exception(String.format("L'index %s est déjà associé à un autre patient.", code));
+        }
+        String telephone = patient.getNumeroTelephone();
+        Optional<Patient> byTelephone = patientRepository.findByNumeroTelephone(telephone);
+        if (patient.getId() == null && byTelephone.isPresent()
+                || (patient.getId() != null && byTelephone.isPresent() && !byTelephone.get().getId().equals(patient.getId()))) {
+            throw new Exception(String.format("Le numéro téléphone %s est déjà associé à un autre patient.", telephone));
+        }
         patient.setActif(true);
         patient.setDateAdmission(new Date());
         return patientRepository.save(patient);

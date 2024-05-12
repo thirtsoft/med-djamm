@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProfilService {
 
-    Profil saveProfil(Profil profil);
+    Profil saveProfil(Profil profil) throws Exception;
 
     Profil updateProfil(Long id, Profil profil) throws Exception;
 

@@ -24,7 +24,7 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface UtilisateurApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UtilisateurDs> creerUtilisateur(@RequestBody @Valid UtilisateurDs utilisateurDs, HttpServletRequest request);
+    ResponseEntity<UtilisateurDs> creerUtilisateur(@RequestBody @Valid UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception;
 
     @GetMapping(value = "/activation")
     String activation(@RequestParam("code") String code);

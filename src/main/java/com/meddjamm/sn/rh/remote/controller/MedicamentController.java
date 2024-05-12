@@ -25,7 +25,7 @@ public class MedicamentController implements MedicamentApi {
     }
 
     @Override
-    public ResponseEntity<MedicamentDs> creerMedicament(MedicamentDs medicamentDs) {
+    public ResponseEntity<MedicamentDs> creerMedicament(MedicamentDs medicamentDs) throws Exception {
         Medicament medicament = medicamentAssembler.assembleMedicamentFromDs(medicamentDs);
         return new ResponseEntity<>(medicamentAssembler.assembleEntityToDs(
                 medicamentService.saveMedicament(medicament)

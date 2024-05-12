@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UtilisateurService {
 
-    Utilisateur saveUtilisateur(Utilisateur utilisateur, String url);
+    Utilisateur saveUtilisateur(Utilisateur utilisateur, String url) throws Exception;
 
     Utilisateur findUtilisateurByCode(String code);
 

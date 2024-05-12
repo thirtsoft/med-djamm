@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PatientService {
 
-    Patient savePatient(Patient patient);
+    Patient savePatient(Patient patient) throws Exception;
 
     Patient updatePatient(Long id, Patient patient) throws Exception;
 

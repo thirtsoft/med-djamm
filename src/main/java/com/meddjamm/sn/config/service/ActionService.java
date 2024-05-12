@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ActionService {
 
-    void saveAction(Action action);
+    void saveAction(Action action) throws Exception;
 
     void updateAction(Long id, Action action);
 

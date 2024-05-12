@@ -25,7 +25,7 @@ public class ProfilController implements ProfilApi {
     private final ProfilAssembler profilAssembler;
 
     @Override
-    public ResponseEntity<ProfilDs> creerProfil(ProfilDs profilDs) {
+    public ResponseEntity<ProfilDs> creerProfil(ProfilDs profilDs) throws Exception {
         Profil profil = profilAssembler.assembleProfilFromDs(profilDs);
         return new ResponseEntity<>(profilAssembler.assembleEntityToDs(profilService.saveProfil(profil)), CREATED);
     }

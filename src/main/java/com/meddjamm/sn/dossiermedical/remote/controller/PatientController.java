@@ -39,13 +39,13 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<PatientMinDs> creerPatient(PatientDetailDs patientDetailDs) {
+    public ResponseEntity<PatientMinDs> creerPatient(PatientDetailDs patientDetailDs) throws Exception {
         Patient patientAjouter = patientAssembler.assemblePatientFromDs(patientDetailDs);
         return new ResponseEntity<>(patientAssembler.assembleMinFrom(patientService.savePatient(patientAjouter)), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<PatientDetailDs> creerDossierPatient(PatientDetailDs patientDetailDs) {
+    public ResponseEntity<PatientDetailDs> creerDossierPatient(PatientDetailDs patientDetailDs) throws Exception {
         Patient patientAjouter = patientAssembler.assemblePatientFromDs(patientDetailDs);
         return new ResponseEntity<>(patientAssembler.assemblePatientDetails(patientService.savePatient(patientAjouter)), HttpStatus.CREATED);
     }

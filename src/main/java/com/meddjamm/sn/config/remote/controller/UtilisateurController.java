@@ -7,7 +7,7 @@ import com.meddjamm.sn.config.remote.controller.api.UtilisateurApi;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
-import com.meddjamm.sn.utils.ApiUrlAccess;
+import com.meddjamm.sn.utils.ConstantDeployment;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class UtilisateurController implements UtilisateurApi {
     private final UtilisateurAssembler utilisateurAssembler;
 
     @Override
-    public ResponseEntity<UtilisateurDs> creerUtilisateur(UtilisateurDs utilisateurDs, HttpServletRequest request) {
+    public ResponseEntity<UtilisateurDs> creerUtilisateur(UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception {
         Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurFromDs(utilisateurDs);
         return new ResponseEntity<>(utilisateurAssembler
                 .assembleUtilisateurDsFromEntity(utilisateurService.
@@ -44,7 +44,7 @@ public class UtilisateurController implements UtilisateurApi {
                 "<h1>Votre compte a bien été activié.,</h1>" + " <br>" +
                         "<h2> Veuillez cliquez sur le lien ci-dessous pour vous connectez.</h2>" +
                         "<h2> Avec votre email et le mot de passe que vous avez reçu par émail.</h2>" +
-                        "<a href=\"" + ApiUrlAccess.HOST_FRONT + "\">Se connecter</a>";
+                        "<a href=\"" + ConstantDeployment.HOST_FRONT + "\">Se connecter</a>";
         utilisateurService.lireEnFonctionDuCode(code);
         return FormConnexionFrontend;
     }

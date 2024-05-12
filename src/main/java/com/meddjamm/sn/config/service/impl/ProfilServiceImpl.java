@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,9 +21,12 @@ public class ProfilServiceImpl implements ProfilService {
     }
 
     @Override
-    public Profil saveProfil(Profil profil) {
-        if (findByCode(profil.getCode()) != null) {
-            log.info("This profil exist");
+    public Profil saveProfil(Profil profil) throws Exception {
+        String code = profil.getCode();
+        Optional<Profil> byCode = profilRepository.findByProfilCode(code);
+        if (profil.getId() == null && byCode.isPresent()
+                || (profil.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(profil.getId()))) {
+            throw new Exception(String.format("Le code %s est déjà associé à pour un autre profil .", code));
         }
         profil.setActif(true);
         return profilRepository.save(profil);

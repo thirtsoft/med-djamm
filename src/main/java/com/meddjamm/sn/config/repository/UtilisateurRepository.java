@@ -50,9 +50,6 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.activation=:code")
     Utilisateur findUtilisateurByActivation(@Param("code") String code);
 
-    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.codeUtilisateur=:code")
-    Utilisateur findAdepmeByCodeUtilisateur(@Param("code") String code);
-
     Optional<Utilisateur> findByEmail(String email);
 
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.matricule=:matricule")
@@ -60,4 +57,13 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 
     @Query("Select DISTINCT u from Utilisateur u where u.actif=true and u.typeUtilisateur='Medecin' order by u.nom")
     List<Utilisateur> findAllMedecins();
+
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.codeUtilisateur=:code and u.actif=true")
+    Optional<Utilisateur> findUtilisateurByCodeUtilisateur(@Param("code") String code);
+
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.email=:email and u.actif=true")
+    Optional<Utilisateur> findUtilisateurByEmail(@Param("email") String email);
+
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.email=:telephone and u.actif=true")
+    Optional<Utilisateur> findUtilisateurByTelephone(@Param("telephone") String telephone);
 }

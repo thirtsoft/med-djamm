@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,9 +21,13 @@ public class MedicamentServiceImpl implements MedicamentService {
     }
 
     @Override
-    public Medicament saveMedicament(Medicament medicament) {
-        if (findByCode(medicament.getCode()) != null)
-            log.info("This medicament is exist");
+    public Medicament saveMedicament(Medicament medicament) throws Exception {
+        String code = medicament.getCode();
+        Optional<Medicament> byCode = medicamentRepository.findByCode(code);
+        if (medicament.getId() == null && byCode.isPresent()
+                || (medicament.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(medicament.getId()))) {
+            throw new Exception(String.format("Le code %s est déjà associé à pour un autre médicament .", code));
+        }
         medicament.setActif(true);
         medicament.setCreateDate(new Date());
         return medicamentRepository.save(medicament);

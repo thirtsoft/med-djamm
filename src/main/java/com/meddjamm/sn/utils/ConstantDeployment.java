@@ -8,4 +8,6 @@ public final class ConstantDeployment {
 
     public static String HOST_FRONT = "https://hdj.snapplimed.com/";
 
+    public static String HOST_API = "https://snapplimedhdjapi.snapplimed.com";
+
 }

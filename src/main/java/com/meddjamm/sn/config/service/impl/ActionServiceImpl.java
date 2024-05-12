@@ -5,13 +5,13 @@ import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.repository.ActionRepository;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.service.ActionService;
-import com.meddjamm.sn.exception.ActionAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 
@@ -25,10 +25,12 @@ public class ActionServiceImpl implements ActionService {
     private final ProfilRepository profilRepository;
 
     @Override
-    public void saveAction(Action action) {
-        if (findByCode(action.getCode()) != null) {
-            log.info("This action exist");
-            throw new ActionAlreadyExistException(action.getCode() + " action already exist");
+    public void saveAction(Action action) throws Exception {
+        String code = action.getCode();
+        Optional<Action> byCode = actionRepository.findByActionCode(code);
+        if (action.getId() == null && byCode.isPresent()
+                || (action.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(action.getId()))) {
+            throw new Exception(String.format("Le code %s est déjà associé à pour une autre action .", code));
         }
         actionRepository.save(action);
     }

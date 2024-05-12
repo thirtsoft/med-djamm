@@ -24,10 +24,10 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface PatientApi {
 
     @PostMapping(value = "/save")
-    ResponseEntity<PatientMinDs> creerPatient(@RequestBody PatientDetailDs patientDetailDs);
+    ResponseEntity<PatientMinDs> creerPatient(@RequestBody PatientDetailDs patientDetailDs) throws Exception;
 
     @PostMapping(value = "/generated-dossier-patient")
-    ResponseEntity<PatientDetailDs> creerDossierPatient(@RequestBody PatientDetailDs patientDetailDs);
+    ResponseEntity<PatientDetailDs> creerDossierPatient(@RequestBody PatientDetailDs patientDetailDs) throws Exception;
 
     @PutMapping(value = "/edit/{id}")
     void updatePatientByMedecin(@PathVariable Long id, @RequestBody PatientUpdateDs patientUpdateDs) throws Exception;

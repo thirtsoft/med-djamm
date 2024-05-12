@@ -22,6 +22,7 @@ import javax.crypto.SecretKey;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.meddjamm.sn.utils.UtilString.generateCommonsLang3Password;
@@ -45,7 +46,25 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final ProfilRepository profilRepository;
 
     @Override
-    public Utilisateur saveUtilisateur(Utilisateur utilisateur, String url) {
+    public Utilisateur saveUtilisateur(Utilisateur utilisateur, String url) throws Exception {
+        String code = utilisateur.getCodeUtilisateur();
+        Optional<Utilisateur> byCode = utilisateurRepository.findUtilisateurByCodeUtilisateur(code);
+        if (utilisateur.getId() == null && byCode.isPresent()
+                || (utilisateur.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(utilisateur.getId()))) {
+            throw new Exception(String.format("Le code %s est déjà associé à un compte utilisateur .", code));
+        }
+        String email = utilisateur.getEmail();
+        Optional<Utilisateur> byEmail = utilisateurRepository.findUtilisateurByEmail(email);
+        if (utilisateur.getId() == null && byEmail.isPresent()
+                || (utilisateur.getId() != null && byEmail.isPresent() && !byEmail.get().getId().equals(utilisateur.getId()))) {
+            throw new Exception(String.format("L'email %s est déjà associé à un compte utilisateur .", email));
+        }
+        String telephone = utilisateur.getTelephone();
+        Optional<Utilisateur> byTelephone = utilisateurRepository.findUtilisateurByTelephone(telephone);
+        if (utilisateur.getId() == null && byTelephone.isPresent()
+                || (utilisateur.getId() != null && byTelephone.isPresent() && !byTelephone.get().getId().equals(utilisateur.getId()))) {
+            throw new Exception(String.format("Le numéro de téléphone %s est déjà associé à un compte utilisateur .", email));
+        }
         utilisateur.setMatricule(genererMatricule());
         String defaultPassword = generateCommonsLang3Password();
         utilisateur.setMotdepasse(passwordEncoder.encode(defaultPassword));
