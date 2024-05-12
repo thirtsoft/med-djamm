@@ -1,6 +1,7 @@
 package com.meddjamm.sn.config.event;
 
 import com.meddjamm.sn.config.entity.Utilisateur;
+import com.meddjamm.sn.utils.ConstantDeployment;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
@@ -15,6 +16,6 @@ public class RegistrationCompleteEvent extends ApplicationEvent {
     public RegistrationCompleteEvent(Utilisateur utilisateur, String url) {
         super(utilisateur);
         this.utilisateur = utilisateur;
-        this.url = url;
+        this.url = ConstantDeployment.HOST_API;
     }
 }

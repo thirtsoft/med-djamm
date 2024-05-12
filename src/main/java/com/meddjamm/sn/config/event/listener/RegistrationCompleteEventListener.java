@@ -16,8 +16,6 @@ import org.springframework.stereotype.Component;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
-import static com.meddjamm.sn.utils.ConstantDeployment.HOST_API;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -37,8 +35,8 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String token = UUID.randomUUID().toString();
         validationService.enregistrerCode(utilisateur, token);
 
-        //  String url = event.getUrl() + "/med-dalaljamm/v1/utilisateur/activation?code=".concat(token);
-        String url = HOST_API + "/med-dalaljamm/v1/utilisateur/activation?code=".concat(token);
+        String url = event.getUrl() + "/med-dalaljamm/v1/utilisateur/activation?code=".concat(token);
+        //  String url = event + ConstantDeployment.HOST_API + "/med-dalaljamm/v1/utilisateur/activation?code=".concat(token);
         try {
             sendVerificationEmail(url);
         } catch (MessagingException | UnsupportedEncodingException e) {
@@ -53,7 +51,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
                 "<p>Le Service Médecine Interne de Dalal-Jamm est heureuse de vous compter parmi ses collaborateurs.," + " <br>" +
                 "Vous pouvez cliquez sur le lien ci-dessous pour activer votre compte.</p>" +
-                "<a href=\"" + HOST_API + "\">activer votre compte</a>" +
+                "<a href=\"" + url + "\">activer votre compte</a>" +
                 "<p>Votre mot de passe: " + utilisateur.getMotdepasseprecedent() + "</p>" +
                 "<p> Cordialement <br> Service d'enregistrement</p>";
         MimeMessage message = mailSender.createMimeMessage();
@@ -71,7 +69,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String mailContent = "<p> Hi, " + utilisateur.getPrenom() + ", </p>" +
                 "<p><b>You recently requested to reset your password,</b>" + "" +
                 "Please, follow the link below to complete the action.</p>" +
-                "<a href=\"" + HOST_API + "\">Reset password</a>" +
+                "<a href=\"" + url + "\">Reset password</a>" +
                 "<p> Users Registration Portal Service";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
