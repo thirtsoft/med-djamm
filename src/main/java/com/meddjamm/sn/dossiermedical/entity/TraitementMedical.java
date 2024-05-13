@@ -25,6 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class TraitementMedical extends AbstractAuditableEntity implements Serializable {
 
+    @Column(columnDefinition = "TEXT")
     private String protocole;
 
     private String protocoleFileName;
@@ -34,7 +35,7 @@ public class TraitementMedical extends AbstractAuditableEntity implements Serial
 
     @Column(name = "medecin_uid")
     private String matricule;
-    
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "traitement_medical_item_par_traitement", joinColumns =
     @JoinColumn(name = "traitement_uid"),

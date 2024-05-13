@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -29,5 +30,8 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
     @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.medecinId=:matricule and month(r.dateRendezVous)=month(current_date) and r.actif=1 ORDER BY r.id")
     List<RendezVous> findAllRendezVousOfDoctorInMonth(@Param("matricule") Long matricule);
+
+    @Query("select p from RendezVous p where p.actif=1 and p.dateRendezVous=:date Order by p.dateRendezVous DESC")
+    List<RendezVous> findRendezVousBySelectedDate(@Param("date") Date date);
 
 }

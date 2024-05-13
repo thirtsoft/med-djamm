@@ -88,4 +88,9 @@ public class RendezVousServiceImpl implements RendezVousService {
         assert rendezVousDeplace != null;
         rendezVousRepository.save(rendezVousDeplace);
     }
+
+    @Override
+    public List<RendezVous> findRendezVousBySelectedDate(Date date) {
+        return rendezVousRepository.findRendezVousBySelectedDate(date);
+    }
 }

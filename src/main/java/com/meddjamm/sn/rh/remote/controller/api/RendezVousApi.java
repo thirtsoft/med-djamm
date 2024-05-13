@@ -3,6 +3,7 @@ package com.meddjamm.sn.rh.remote.controller.api;
 import com.meddjamm.sn.rh.remote.model.RendezVousDeplaceDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDetailDs;
 import com.meddjamm.sn.rh.remote.model.RendezVousDs;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
@@ -48,6 +50,10 @@ public interface RendezVousApi {
 
     @PostMapping(value = "/deplacez-rendezvous")
     void DeplacerRendezVous(@RequestBody RendezVousDeplaceDs rendezVousDeplace);
+
+    @GetMapping(value = "/by-date/{dateRv}")
+    ResponseEntity<List<RendezVousDetailDs>> findRendezVousBySelectedDate(@PathVariable
+                                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateRv);
 
 
 }

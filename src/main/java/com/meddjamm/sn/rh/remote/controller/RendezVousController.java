@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -97,5 +98,14 @@ public class RendezVousController implements RendezVousApi {
     public void DeplacerRendezVous(RendezVousDeplaceDs rendezVousDeplace) {
         RendezVous rendezVousModifier = rendezVousAssembler.assembleEntitiesToDeplaceRendezVous(rendezVousDeplace);
         rendezVousService.deplacezRendezVous(rendezVousModifier);
+    }
+
+    @Override
+    public ResponseEntity<List<RendezVousDetailDs>> findRendezVousBySelectedDate(Date dateRv) {
+        List<RendezVousDetailDs> rendezVousDsList = rendezVousService.findRendezVousBySelectedDate(dateRv)
+                .stream()
+                .map(rendezVousAssembler::assembleEntitiesToDs)
+                .toList();
+        return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
     }
 }

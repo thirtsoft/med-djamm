@@ -1,6 +1,7 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -20,18 +21,22 @@ import java.util.Date;
 @AllArgsConstructor
 public class ExamenBiologique extends AbstractAuditableEntity implements Serializable {
 
+    @Column(columnDefinition = "TEXT")
     private String biologie;
 
     private String biologieFileName;
 
+    @Column(columnDefinition = "TEXT")
     private String immunologie;
 
     private String immunologieFileName;
 
+    @Column(columnDefinition = "TEXT")
     private String imagerie;
 
     private String imagerieFileName;
 
+    @Column(columnDefinition = "TEXT")
     private String anatomopathologie;
 
     private String anatomopathologieFileName;

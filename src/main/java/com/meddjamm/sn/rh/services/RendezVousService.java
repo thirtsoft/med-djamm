@@ -2,6 +2,7 @@ package com.meddjamm.sn.rh.services;
 
 import com.meddjamm.sn.rh.entity.RendezVous;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RendezVousService {
@@ -25,6 +26,8 @@ public interface RendezVousService {
     List<RendezVous> findAllRendezVousOfDoctorInMonth(Long matricule);
 
     void deplacezRendezVous(RendezVous rendezVousDeplace);
+
+    List<RendezVous> findRendezVousBySelectedDate(Date date);
 
 
 }
