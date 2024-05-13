@@ -93,4 +93,9 @@ public class RendezVousServiceImpl implements RendezVousService {
     public List<RendezVous> findRendezVousBySelectedDate(Date date) {
         return rendezVousRepository.findRendezVousBySelectedDate(date);
     }
+
+    @Override
+    public int countNumberOfRendezVousByDoctorAndDataRendezVous(Long matricule, Date date) {
+        return rendezVousRepository.countNumberOfRendezVousByDoctorAndDataRendezVous(matricule, date);
+    }
 }

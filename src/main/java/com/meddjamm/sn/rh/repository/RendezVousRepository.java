@@ -34,4 +34,7 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     @Query("select p from RendezVous p where p.actif=1 and p.dateRendezVous=:date Order by p.dateRendezVous DESC")
     List<RendezVous> findRendezVousBySelectedDate(@Param("date") Date date);
 
+    @Query("select count(c) from RendezVous c where c.medecinId=:matricule and c.dateRendezVous=:date and c.actif=1 ")
+    int countNumberOfRendezVousByDoctorAndDataRendezVous(@Param("matricule") Long matricule, @Param("date") Date date);
+
 }

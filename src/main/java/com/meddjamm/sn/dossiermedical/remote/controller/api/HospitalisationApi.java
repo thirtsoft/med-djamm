@@ -58,7 +58,7 @@ public interface HospitalisationApi {
     @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-hematologic-file")
     boolean addExamHematologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile hematologic) throws Exception;
 
-    @PutMapping("/protocol/{medicalTraitId}/add-protocol-file")
-    boolean addProtocolMedicalTraitFileToHospitalisation(@PathVariable Long medicalTraitId, @RequestParam(required = false) MultipartFile protocol) throws Exception;
+    @PutMapping("/protocol/{hospitalisationId}/add-protocol-file")
+    boolean addProtocolMedicalTraitFileToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile protocol) throws Exception;
 
 }

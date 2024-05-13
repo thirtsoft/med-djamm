@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meddjamm.sn.dossiermedical.entity.ExamenComplementaire;
 import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
-import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointes;
@@ -28,14 +27,10 @@ public class HospitalisationServiceImpl implements HospitalisationService {
 
     private final PiecesJointesService piecesJointesService;
 
-    private final CircuitPatientRepository circuitPatientRepository;
-
     public HospitalisationServiceImpl(HospitalisationRepository hospitalisationRepository,
-                                      PiecesJointesService piecesJointesService,
-                                      CircuitPatientRepository circuitPatientRepository) {
+                                      PiecesJointesService piecesJointesService) {
         this.hospitalisationRepository = hospitalisationRepository;
         this.piecesJointesService = piecesJointesService;
-        this.circuitPatientRepository = circuitPatientRepository;
     }
 
     @Override
@@ -45,9 +40,6 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         if (hospitalisation.getNumeroHospitalisation() == 0) {
             hospitalisation.setNumeroHospitalisation(createNumeroHospitalisation());
         }
-//        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(hospitalisation.getCircuitPatientId());
-//        hospitalisation.setCircuitPatientId(circuitPatient.getId());
-//        hospitalisation.setCircuitPatient(circuitPatient);
         Hospitalisation hospitalisationResult = hospitalisationRepository.save(hospitalisation);
         return hospitalisationResult.getId();
     }

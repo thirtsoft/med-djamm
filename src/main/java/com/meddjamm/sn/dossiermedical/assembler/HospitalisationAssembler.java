@@ -183,6 +183,7 @@ public class HospitalisationAssembler {
         if (piecesJointesDsExamen != null) {
             hospitalisationDetailDs.getPiecesJointesDs().addAll(piecesJointesDsExamen);
         }
+        hospitalisationDetailDs.setPiecesJointesDs(piecesJointesService.getListPieceJointePatient(hospitalisation.getId()));
         List<PiecesJointesDs> piecesJointesDsTraitment = piecesJointesService.getListPieceJointePatient(hospitalisation.getTraitementMedical().getId());
         if (piecesJointesDsTraitment != null) {
             hospitalisationDetailDs.getPiecesJointesDs().addAll(piecesJointesDsTraitment);

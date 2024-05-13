@@ -108,4 +108,9 @@ public class RendezVousController implements RendezVousApi {
                 .toList();
         return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
     }
+
+    @Override
+    public int countNumberOfRendezVousByDoctorAndDataRendezVous(Long matricule, Date dateRv) {
+        return rendezVousService.countNumberOfRendezVousByDoctorAndDataRendezVous(matricule, dateRv);
+    }
 }
