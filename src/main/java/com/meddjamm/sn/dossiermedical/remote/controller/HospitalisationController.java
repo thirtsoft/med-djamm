@@ -95,5 +95,20 @@ public class HospitalisationController implements HospitalisationApi {
         return hospitalisationService.addProtocolMedicalTraitFileToHospitalisation(hospitalisationId, protocol);
     }
 
+    @Override
+    public int countHospitalisationHomme() {
+        return hospitalisationService.countHospitalisationHomme();
+    }
+
+    @Override
+    public int countHospitalisationFemme() {
+        return hospitalisationService.countHospitalisationFemme();
+    }
+
+    @Override
+    public long countHospitalisation() {
+        return hospitalisationService.countHospitalisation();
+    }
+
 
 }

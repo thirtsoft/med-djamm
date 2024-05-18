@@ -38,7 +38,6 @@ public class RendezVousAssembler {
         rendezVousDs.setLibelle(rendezVous.getLibelle());
         rendezVousDs.setPatientId(rendezVous.getPatientId());
         rendezVousDs.setMedecinId(rendezVousDs.getMedecinId());
-        rendezVousDs.setCreatedBy(rendezVous.getCreatedBy());
         rendezVousDs.setEtat(rendezVous.getEtat());
         rendezVousDs.setDateRendezVous(rendezVous.getDateRendezVous());
         rendezVousDs.setHeure(rendezVous.getHeure());
@@ -64,7 +63,6 @@ public class RendezVousAssembler {
         rendezVous.setPatientId(rendezVousDs.getPatientId());
         rendezVous.setLibelle(rendezVousDs.getLibelle());
         rendezVous.setMedecinId(rendezVousDs.getMedecinId());
-        rendezVous.setCreatedBy(rendezVousDs.getCreatedBy());
         rendezVous.setDateRendezVous(rendezVousDs.getDateRendezVous());
         rendezVous.setHeure(rendezVousDs.getHeure());
         rendezVous.setCreateDate(rendezVousDs.getCreateDate());
@@ -77,7 +75,6 @@ public class RendezVousAssembler {
         rendezVous.setPatientId(rendezVousDs.getPatientId());
         rendezVous.setLibelle(rendezVousDs.getLibelle());
         rendezVous.setMedecinId(rendezVousDs.getMedecinId());
-        rendezVous.setCreatedBy(rendezVousDs.getCreatedBy());
         rendezVous.setDateRendezVous(rendezVousDs.getDateRendezVous());
         rendezVous.setHeure(rendezVousDs.getHeure());
         return rendezVous;
@@ -87,7 +84,6 @@ public class RendezVousAssembler {
         RendezVousDetailDs rendezVousDs = new RendezVousDetailDs();
         if (rendezVous.getId() != null)
             rendezVousDs.setId(rendezVous.getId());
-        rendezVousDs.setCreatedBy(rendezVous.getCreatedBy());
         rendezVousDs.setLibelle(rendezVous.getLibelle());
         rendezVousDs.setDateRendezVous(rendezVous.getDateRendezVous());
         rendezVousDs.setHeure(rendezVous.getHeure());

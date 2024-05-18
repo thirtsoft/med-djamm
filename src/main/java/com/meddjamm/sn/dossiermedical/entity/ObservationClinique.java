@@ -1,26 +1,17 @@
 package com.meddjamm.sn.dossiermedical.entity;
 
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
-import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -42,39 +33,8 @@ public class ObservationClinique extends AbstractAuditableEntity implements Seri
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private ExamenPhysique examenPhysique;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "circuit_patient_uid")
-    private CircuitPatient circuitPatient;
-
-    @JoinColumn(name = "circuit_patient_id")
-    private Long circuitPatientId;
-
-    private Long createdBy;
 
     private Date createdDate;
-
-    @CreatedDate
-    @Column(nullable = false,
-            updatable = false
-    )
-    @Basic(fetch = FetchType.LAZY)
-    private LocalDateTime creationDate;
-
-    @LastModifiedDate
-    @Basic(fetch = FetchType.LAZY)
-    private LocalDateTime lastModifiedDate;
-
-    @CreatedBy
-    @Column(nullable = false,
-            updatable = false
-    )
-    @Basic(fetch = FetchType.LAZY)
-    private @Size(max = 50) String createdByUser;
-
-    @LastModifiedBy
-    @Basic(fetch = FetchType.LAZY)
-    private @Size(max = 50) String lastModifiedBy;
 
     private int actif;
 

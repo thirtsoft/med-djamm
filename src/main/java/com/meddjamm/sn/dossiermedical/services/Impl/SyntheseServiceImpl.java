@@ -1,6 +1,5 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
-import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.Synthese;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.SyntheseRepository;
@@ -8,7 +7,6 @@ import com.meddjamm.sn.dossiermedical.services.SyntheseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,12 +26,6 @@ public class SyntheseServiceImpl implements SyntheseService {
     @Override
     public Synthese saveSynthese(Synthese synthese) {
         synthese.setActif(true);
-        synthese.setCreatedDate(new Date());
-        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(synthese.getCircuitPatientId());
-        circuitPatient.setType("Synthese");
-        circuitPatientRepository.save(circuitPatient);
-        synthese.setCircuitPatientId(circuitPatient.getId());
-        synthese.setCircuitPatient(circuitPatient);
         return syntheseRepository.save(synthese);
     }
 

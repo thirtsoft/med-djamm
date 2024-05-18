@@ -33,14 +33,9 @@ public class TraitementMedicalAssembler {
         if (traitementMedical.getId() != null)
             traitementMedicalDs.setId(traitementMedical.getId());
         traitementMedicalDs.setTraitementMedicalItemDs(traitementMedicalItemAssembler.createListTraitementMedicalItemDs(traitementMedical.getTraitementMedicalItems()));
-        traitementMedicalDs.setCreatedDate(traitementMedical.getCreatedDate());
         traitementMedicalDs.setActif(traitementMedical.isActif());
-        traitementMedicalDs.setCreatedBy(traitementMedical.getCreatedBy());
-        traitementMedicalDs.setCircuitPatientId(traitementMedical.getCircuitPatientId());
         traitementMedicalDs.setProtocole(traitementMedical.getProtocole());
         traitementMedicalDs.setProtocoleFileName(traitementMedical.getProtocoleFileName());
-        traitementMedicalDs.setCircuitPatientId(traitementMedical.getCircuitPatientId());
-        traitementMedicalDs.setCreatedBy(traitementMedical.getCreatedBy());
         if (traitementMedical.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(traitementMedical.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
@@ -55,13 +50,9 @@ public class TraitementMedicalAssembler {
         if (traitementMedicalDs.getId() != null)
             traitementMedical.setId(traitementMedicalDs.getId());
         traitementMedical.setTraitementMedicalItems(traitementMedicalItemAssembler.createSetTraitementMedicalItem(traitementMedicalDs.getTraitementMedicalItemDs()));
-        traitementMedical.setCreatedDate(traitementMedicalDs.getCreatedDate());
         traitementMedical.setActif(traitementMedicalDs.isActif());
-        traitementMedical.setCreatedBy(traitementMedicalDs.getCreatedBy());
-        traitementMedical.setCircuitPatientId(traitementMedicalDs.getCircuitPatientId());
         traitementMedical.setProtocole(traitementMedicalDs.getProtocole());
         traitementMedical.setProtocoleFileName(traitementMedicalDs.getProtocoleFileName());
-        traitementMedical.setCircuitPatientId(traitementMedicalDs.getCircuitPatientId());
         return traitementMedical;
     }
 
@@ -70,7 +61,6 @@ public class TraitementMedicalAssembler {
                 .createUpdateSetTraitementMedicalItem(traitementMedicalDs.getTraitementMedicalItemDs()));
         traitementMedical.setProtocole(traitementMedicalDs.getProtocole());
         traitementMedical.setProtocoleFileName(traitementMedicalDs.getProtocoleFileName());
-        traitementMedical.setCircuitPatientId(traitementMedicalDs.getCircuitPatientId());
         return traitementMedical;
     }
 }

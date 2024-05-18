@@ -46,17 +46,14 @@ public class ObservationCliniqueAssembler {
         if (observationClinique.getId() != null) observationCliniqueDs.setId(observationClinique.getId());
         observationCliniqueDs.setActif(observationClinique.isActif());
         observationCliniqueDs.setMotifsHospitalisation(observationClinique.getMotifsHospitalisation());
-        //    observationCliniqueDs.setMotifsHospitalisation(new ArrayList<>(observationClinique.getMotifsHospitalisation()));
         observationCliniqueDs.setHistoireMaladie(observationClinique.getHistoireMaladie());
         observationCliniqueDs.setCreatedDate(observationClinique.getCreatedDate());
         if (observationClinique.getAntecedent() != null)
             observationCliniqueDs.setAntecedentDs(antecedentAssembler.assembleEntityToDs(observationClinique.getAntecedent()));
         if (observationClinique.getExamenPhysique() != null)
             observationCliniqueDs.setExamenPhysiqueDs(examenPhysiqueAssembler.assembleEntityToDs(observationClinique.getExamenPhysique()));
-        observationCliniqueDs.setCircuitPatientId(observationClinique.getCircuitPatientId());
-        observationCliniqueDs.setCreatedBy(observationClinique.getCreatedBy());
-        if (observationClinique.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(observationClinique.getCreatedBy());
+        if (observationClinique.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(observationClinique.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             observationCliniqueDs.setNomCompletAgent(nomAgent);
         }
@@ -74,8 +71,6 @@ public class ObservationCliniqueAssembler {
             observationClinique.setExamenPhysique(examenPhysiqueAssembler.assembleExamenPhysiqueFromDs(observationCliniqueDs.getExamenPhysiqueDs()));
         if (observationCliniqueDs.getAntecedentDs() != null)
             observationClinique.setAntecedent(antecedentAssembler.assembleAntecedentFromDs(observationCliniqueDs.getAntecedentDs()));
-        observationClinique.setCircuitPatientId(observationCliniqueDs.getCircuitPatientId());
-        observationClinique.setCreatedBy(observationCliniqueDs.getCreatedBy());
         return observationClinique;
     }
 

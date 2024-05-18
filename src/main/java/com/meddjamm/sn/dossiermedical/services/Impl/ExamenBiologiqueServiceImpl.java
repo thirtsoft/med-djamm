@@ -1,6 +1,5 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
-import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.ExamenBiologique;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.ExamenBiologiqueRepository;
@@ -8,7 +7,6 @@ import com.meddjamm.sn.dossiermedical.services.ExamenBiologiqueService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,11 +26,6 @@ public class ExamenBiologiqueServiceImpl implements ExamenBiologiqueService {
     @Override
     public ExamenBiologique saveExamenBiologique(ExamenBiologique examen) {
         examen.setActif(true);
-        examen.setCreatedDate(new Date());
-        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(examen.getCircuitPatientId());
-        circuitPatient.setType("Examen biologie");
-        examen.setCircuitPatientId(circuitPatient.getId());
-        examen.setCircuitPatient(circuitPatient);
         return examenBiologiqueRepository.save(examen);
     }
 

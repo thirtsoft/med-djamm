@@ -29,9 +29,7 @@ public class DiscussionAssembler {
         DiscussionDs discussionDs = new DiscussionDs();
         if (discussion.getId() != null)
             discussionDs.setId(discussion.getId());
-        discussionDs.setActif(discussion.isActif());
         discussionDs.setResume(discussion.getResume());
-        discussionDs.setCircuitPatientId(discussion.getCircuitPatientId());
         if (discussion.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(discussion.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
@@ -46,8 +44,6 @@ public class DiscussionAssembler {
         if (discussionDs.getId() != null)
             discussion.setId(discussionDs.getId());
         discussion.setResume(discussionDs.getResume());
-        discussion.setActif(discussionDs.isActif());
-        discussion.setCircuitPatientId(discussionDs.getCircuitPatientId());
         return discussion;
     }
 

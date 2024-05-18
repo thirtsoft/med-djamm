@@ -26,7 +26,6 @@ public class ExamenBiologiqueAssembler {
         if (examenBiologique.getId() != null)
             examenBiologiqueDs.setId(examenBiologique.getId());
         examenBiologiqueDs.setActif(examenBiologique.isActif());
-        examenBiologiqueDs.setCreatedDate(examenBiologique.getCreatedDate());
         examenBiologiqueDs.setBiologie(examenBiologique.getBiologie());
         examenBiologiqueDs.setBiologieFileName(examenBiologique.getBiologieFileName());
         examenBiologiqueDs.setImmunologie(examenBiologique.getImmunologie());
@@ -35,10 +34,8 @@ public class ExamenBiologiqueAssembler {
         examenBiologiqueDs.setImagerieFileName(examenBiologique.getImagerieFileName());
         examenBiologiqueDs.setAnatomopathologie(examenBiologique.getAnatomopathologie());
         examenBiologiqueDs.setAnatomopathologieFileName(examenBiologique.getAnatomopathologieFileName());
-        examenBiologiqueDs.setCircuitPatientId(examenBiologique.getCircuitPatientId());
-        examenBiologiqueDs.setCreatedBy(examenBiologique.getCreatedBy());
-        if (examenBiologique.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(examenBiologique.getCreatedBy());
+        if (examenBiologique.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(examenBiologique.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             examenBiologiqueDs.setNomCompletAgent(nomAgent);
         }
@@ -50,7 +47,6 @@ public class ExamenBiologiqueAssembler {
         if (examenBiologiqueDs.getId() != null)
             examenBiologique.setId(examenBiologiqueDs.getId());
         examenBiologique.setActif(examenBiologiqueDs.isActif());
-        examenBiologique.setCreatedDate(examenBiologiqueDs.getCreatedDate());
         examenBiologique.setBiologie(examenBiologiqueDs.getBiologie());
         examenBiologique.setBiologieFileName(examenBiologiqueDs.getBiologieFileName());
         examenBiologique.setImmunologie(examenBiologiqueDs.getImmunologie());
@@ -59,8 +55,6 @@ public class ExamenBiologiqueAssembler {
         examenBiologique.setImagerieFileName(examenBiologiqueDs.getImagerieFileName());
         examenBiologique.setAnatomopathologie(examenBiologiqueDs.getAnatomopathologie());
         examenBiologique.setAnatomopathologieFileName(examenBiologiqueDs.getAnatomopathologieFileName());
-        examenBiologique.setCircuitPatientId(examenBiologiqueDs.getCircuitPatientId());
-        examenBiologique.setCreatedBy(examenBiologiqueDs.getCreatedBy());
         return examenBiologique;
     }
 

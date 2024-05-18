@@ -35,8 +35,6 @@ public class PiecesJointesAssembler {
         dto.setDossier(piecesJointes.getDossier());
         dto.setObjectId(piecesJointes.getObjectId());
         dto.setTypeDocumentId(piecesJointes.getTypeDocumentId());
-        dto.setDateCreation(piecesJointes.getDateCreation());
-        dto.setIdDocument(piecesJointes.getIdDocument());
         dto.setActif(piecesJointes.getActif());
         if (piecesJointes.getTypeDocumentId() != null) {
             TypeDocument typeDocument = typeDocumentService.findTypeDocumentById(piecesJointes.getTypeDocumentId());

@@ -17,22 +17,17 @@ public interface PiecesJointesRepository extends JpaRepository<PiecesJointes, Lo
     @Query("SELECT count(DISTINCT doc) FROM PiecesJointes doc")
     int findTotalDocuments();
 
-    @Query("SELECT DISTINCT doc FROM PiecesJointes doc WHERE doc.objectId=:id and doc.actif=1")
-    List<PiecesJointes> findPiecesJointesByObjectId(@Param("id") Long id);
-
     @Query("SELECT DISTINCT doc FROM PiecesJointes doc WHERE doc.typeDocumentId=:type AND doc.objectId=:id and doc.actif=1")
     PiecesJointes findPiecesJointesByObjectIdAndType(@Param("id") Long id, @Param("type") Long type);
 
     Optional<PiecesJointes> findByObjectIdAndTypeDocumentIdAndActif(Long id, Long typeDocumentId, int i);
 
-    Optional<PiecesJointes> findByObjectIdAndIdDocument(Long objectId, Long idDocument);
+    Optional<PiecesJointes> findByObjectIdAndTypeDocumentId(Long objectId, Long idDocument);
 
     @Query("SELECT DISTINCT doc FROM PiecesJointes doc WHERE doc.typeDocumentId=:type AND doc.objectId=:id and doc.idDocument = :idDocument and doc.actif=1")
     PiecesJointes findPiecesJointesByObjectIdAndTypeAndIdDocument(@Param("id") Long id, @Param("type") Long type, @Param("idDocument") Long idDocument);
-    
-    List<PiecesJointes> findByActifAndObjectIdAndTypeDocumentId(int actif, Long demandeId, Long typeDocumentId);
 
-    List<PiecesJointes> findByObjectIdAndTypeDocumentIdIsInAndActif(Long demandeId, Long[] typeDocuments, int actif);
+    List<PiecesJointes> findByActifAndObjectIdAndTypeDocumentId(int actif, Long patientId, Long typeDocumentId);
 
     List<PiecesJointes> findByActifAndObjectId(int actif, Long demandeId);
 }

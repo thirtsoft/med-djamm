@@ -55,7 +55,6 @@ public class ExamenPhysiqueAssembler {
         ExamenPhysiqueDs examenPhysiqueDs = new ExamenPhysiqueDs();
         if (examenPhysique.getId() != null) examenPhysiqueDs.setId(examenPhysique.getId());
         examenPhysiqueDs.setActif(examenPhysique.isActif());
-        examenPhysiqueDs.setCreatedDate(examenPhysique.getCreatedDate());
         examenPhysiqueDs.setExamenGeneral(examenPhysique.getExamenGeneral());
         examenPhysiqueDs.setExamenAppareil(examenPhysique.getExamenAppareil());
         examenPhysiqueDs.setPressionArterielS(examenPhysique.getPressionArterielS());
@@ -71,8 +70,8 @@ public class ExamenPhysiqueAssembler {
         examenPhysiqueDs.setTourTaille(examenPhysique.getTourTaille());
         examenPhysiqueDs.setTourHanche(examenPhysique.getTourHanche());
         examenPhysiqueDs.setGlycemie(examenPhysique.getGlycemie());
-        if (examenPhysique.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(examenPhysique.getCreatedBy());
+        if (examenPhysique.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(examenPhysique.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             examenPhysiqueDs.setNomCompletAgent(nomAgent);
         }
@@ -86,7 +85,6 @@ public class ExamenPhysiqueAssembler {
         examenPhysique.setActif(examenPhysiqueDs.isActif());
         examenPhysique.setExamenGeneral(examenPhysiqueDs.getExamenGeneral());
         examenPhysique.setExamenAppareil(examenPhysiqueDs.getExamenAppareil());
-        examenPhysique.setCreatedDate(examenPhysiqueDs.getCreatedDate());
         examenPhysique.setPressionArterielS(examenPhysiqueDs.getPressionArterielS());
         examenPhysique.setPressionArterielD(examenPhysiqueDs.getPressionArterielD());
         examenPhysique.setTemperature(examenPhysiqueDs.getTemperature());
@@ -106,7 +104,6 @@ public class ExamenPhysiqueAssembler {
     public ExamenPhysique assembleUpdateExamenPhysiqueFromDs(ExamenPhysique examenPhysique, ExamenPhysiqueDs examenPhysiqueDs) {
         examenPhysique.setExamenGeneral(examenPhysiqueDs.getExamenGeneral());
         examenPhysique.setExamenAppareil(examenPhysiqueDs.getExamenAppareil());
-        examenPhysique.setCreatedDate(examenPhysiqueDs.getCreatedDate());
         examenPhysique.setPressionArterielS(examenPhysiqueDs.getPressionArterielS());
         examenPhysique.setPressionArterielD(examenPhysiqueDs.getPressionArterielD());
         examenPhysique.setTemperature(examenPhysiqueDs.getTemperature());

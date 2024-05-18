@@ -23,4 +23,13 @@ public interface HospitalisationRepository extends JpaRepository<Hospitalisation
 
     @Query("SELECT DISTINCT p from Hospitalisation p where p.code=:code and p.actif=1")
     Hospitalisation findHospitalisationByPatientCode(@Param("code") String code);
+
+    @Query("SELECT COUNT(h) FROM Hospitalisation h WHERE h.typePatient=1 and h.actif=1 ")
+    int countHospitalisationHomme();
+
+    @Query("SELECT COUNT(h) FROM Hospitalisation h WHERE h.typePatient=0 and h.actif=1 ")
+    int countHospitalisationFemme();
+
+    @Query("SELECT COUNT(h) FROM Hospitalisation h WHERE h.actif=1 ")
+    long countHospitalisation();
 }

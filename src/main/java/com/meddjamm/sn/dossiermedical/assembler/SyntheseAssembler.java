@@ -30,10 +30,7 @@ public class SyntheseAssembler {
         if (synthese.getId() != null)
             syntheseDs.setId(synthese.getId());
         syntheseDs.setActif(synthese.isActif());
-        syntheseDs.setCreatedDate(synthese.getCreatedDate());
         syntheseDs.setObservation(synthese.getObservation());
-        syntheseDs.setCreatedBy(synthese.getCreatedBy());
-        syntheseDs.setCircuitPatientId(synthese.getCircuitPatientId());
         if (synthese.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(synthese.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
@@ -47,15 +44,11 @@ public class SyntheseAssembler {
         if (syntheseDs.getId() != null)
             synthese.setId(syntheseDs.getId());
         synthese.setActif(syntheseDs.isActif());
-        synthese.setCreatedDate(syntheseDs.getCreatedDate());
         synthese.setObservation(syntheseDs.getObservation());
-        synthese.setCreatedBy(syntheseDs.getCreatedBy());
-        synthese.setCircuitPatientId(syntheseDs.getCircuitPatientId());
         return synthese;
     }
 
     public Synthese assembleUpdateSyntheseFromDs(Synthese synthese, SyntheseDs syntheseDs) {
-        synthese.setCreatedDate(syntheseDs.getCreatedDate());
         synthese.setObservation(syntheseDs.getObservation());
         return synthese;
     }

@@ -73,7 +73,6 @@ public class HospitalisationAssembler {
         if (hospitalisation.getId() != null)
             hospitalisationDs.setId(hospitalisation.getId());
         hospitalisationDs.setCode(hospitalisation.getCode());
-        hospitalisationDs.setMatricule(hospitalisation.getMatricule());
         hospitalisationDs.setActif(hospitalisation.isActif());
         hospitalisationDs.setCreatedDate(hospitalisation.getCreatedDate());
         hospitalisationDs.setCreatedBy(hospitalisation.getCreatedBy());
@@ -101,7 +100,6 @@ public class HospitalisationAssembler {
         if (hospitalisationDs.getId() != null)
             hospitalisation.setId(hospitalisationDs.getId());
         hospitalisation.setCode(hospitalisationDs.getCode());
-        hospitalisation.setMatricule(hospitalisationDs.getMatricule());
         hospitalisation.setActif(hospitalisationDs.isActif());
         hospitalisation.setCreatedDate(hospitalisationDs.getCreatedDate());
         hospitalisation.setCreatedBy(hospitalisationDs.getCreatedBy());
@@ -180,15 +178,16 @@ public class HospitalisationAssembler {
         }
         hospitalisationDetailDs.setPiecesJointesDs(piecesJointesService.getListPieceJointePatient(hospitalisation.getId()));
         List<PiecesJointesDs> piecesJointesDsExamen = piecesJointesService.getListPieceJointePatient(hospitalisation.getExamenComplementaire().getId());
-        if (piecesJointesDsExamen != null) {
+        if (!piecesJointesDsExamen.isEmpty()) {
+            hospitalisationDetailDs.getExamenComplementaireDs().setPiecesJointesDsList(piecesJointesDsExamen);
             hospitalisationDetailDs.getPiecesJointesDs().addAll(piecesJointesDsExamen);
         }
         hospitalisationDetailDs.setPiecesJointesDs(piecesJointesService.getListPieceJointePatient(hospitalisation.getId()));
         List<PiecesJointesDs> piecesJointesDsTraitment = piecesJointesService.getListPieceJointePatient(hospitalisation.getTraitementMedical().getId());
         if (piecesJointesDsTraitment != null) {
             hospitalisationDetailDs.getPiecesJointesDs().addAll(piecesJointesDsTraitment);
+            hospitalisationDetailDs.getTraitementMedicalDs().setPiecesJointesDs(piecesJointesDsTraitment);
         }
-
         return hospitalisationDetailDs;
     }
 
@@ -212,6 +211,4 @@ public class HospitalisationAssembler {
         }
         return allCircuitPatientDs;
     }
-
-
 }

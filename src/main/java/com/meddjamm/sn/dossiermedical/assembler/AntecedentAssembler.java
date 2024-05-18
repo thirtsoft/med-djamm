@@ -24,8 +24,6 @@ public class AntecedentAssembler {
         AntecedentDs antecedentDs = new AntecedentDs();
         if (antecedent.getId() != null)
             antecedentDs.setId(antecedent.getId());
-        antecedentDs.setActif(antecedent.isActif());
-        antecedentDs.setCreateDate(antecedent.getCreateDate());
         antecedentDs.setAntecedentsMedicaux(antecedent.getAntecedentsMedicaux());
         antecedentDs.setAntecedentsChirurgicaux(antecedent.getAntecedentsChirurgicaux());
         antecedentDs.setAntecedentsGynecologiques(antecedent.getAntecedentsGynecologiques());
@@ -40,8 +38,6 @@ public class AntecedentAssembler {
         Antecedent antecedent = new Antecedent();
         if (antecedentDs.getId() != null)
             antecedent.setId(antecedentDs.getId());
-        antecedent.setCreateDate(antecedentDs.getCreateDate());
-        antecedent.setActif(antecedentDs.isActif());
         antecedent.setAntecedentsMedicaux(antecedentDs.getAntecedentsMedicaux());
         antecedent.setAntecedentsChirurgicaux(antecedentDs.getAntecedentsChirurgicaux());
         antecedent.setAntecedentsGynecologiques(antecedentDs.getAntecedentsGynecologiques());

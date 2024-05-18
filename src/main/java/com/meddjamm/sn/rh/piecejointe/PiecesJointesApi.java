@@ -26,8 +26,5 @@ public interface PiecesJointesApi {
 
     @GetMapping("/by-programme/{programmeId}")
     List<PiecesJointesDs> getListPieceJointeProgramme(@PathVariable Long programmeId);
-
-    @GetMapping("/if/{id}/piece-jointes/{typeDocumentId}")
-    PiecesJointesDs getPieceJointes(@PathVariable Long id, @PathVariable Long typeDocumentId) throws Exception;
     
 }

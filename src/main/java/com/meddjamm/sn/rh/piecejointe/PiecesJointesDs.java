@@ -2,8 +2,6 @@ package com.meddjamm.sn.rh.piecejointe;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.Date;
-
 public class PiecesJointesDs {
 
     private Long typeDocumentId;
@@ -19,8 +17,6 @@ public class PiecesJointesDs {
     private String nomFichier;
 
     private String nomTechnique;
-
-    private Date dateCreation;
 
     private int actif;
 
@@ -40,7 +36,6 @@ public class PiecesJointesDs {
 
     public PiecesJointesDs() {
         super();
-        this.dateCreation = new Date();
         this.actif = 1;
     }
 
@@ -98,14 +93,6 @@ public class PiecesJointesDs {
         }
     }
 
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
     public int getActif() {
         return actif;
     }
@@ -153,7 +140,7 @@ public class PiecesJointesDs {
     public void setPdf(boolean pdf) {
         this.pdf = pdf;
     }
-    
+
     public boolean isImg() {
         return img;
     }

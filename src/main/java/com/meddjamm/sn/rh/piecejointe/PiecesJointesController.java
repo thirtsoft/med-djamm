@@ -38,9 +38,5 @@ public class PiecesJointesController implements PiecesJointesApi {
     public List<PiecesJointesDs> getListPieceJointeProgramme(Long programmeId) {
         return null;
     }
-
-    @Override
-    public PiecesJointesDs getPieceJointes(Long id, Long typeDocumentId) throws Exception {
-        return piecesJointesService.getPieceJointesByDocumentIdAndTypeDocument(id, typeDocumentId);
-    }
+    
 }

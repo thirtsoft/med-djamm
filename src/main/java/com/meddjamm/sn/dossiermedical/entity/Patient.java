@@ -57,9 +57,7 @@ public class Patient extends AbstractAuditableEntity implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private Diagnostic diagnostic;
-
-    private Long createdBy;
-
+    
     private int actif;
 
     public boolean isActif() {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -32,8 +33,11 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
         if (circuitPatient.getNumeroCircuit() == 0) {
             circuitPatient.setNumeroCircuit(createNumeroCircuit());
         }
-        circuitPatientRepository.save(circuitPatient);
         Patient patient = patientRepository.findPatientByCode(circuitPatient.getCode());
+        if (Objects.equals(patient.getSexe(), "Homme"))
+            circuitPatient.setTypePatient(1);
+        circuitPatient.setTypePatient(0);
+        circuitPatientRepository.save(circuitPatient);
         patient.setIsCircuitGenerated(1);
         patientRepository.save(patient);
         return circuitPatient;

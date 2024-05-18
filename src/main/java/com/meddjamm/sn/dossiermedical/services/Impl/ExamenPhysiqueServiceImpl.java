@@ -8,7 +8,6 @@ import com.meddjamm.sn.dossiermedical.services.ExamenPhysiqueService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,7 +27,6 @@ public class ExamenPhysiqueServiceImpl implements ExamenPhysiqueService {
     @Override
     public ExamenPhysique saveExamenPhysique(ExamenPhysique examen) {
         examen.setActif(true);
-        examen.setCreatedDate(new Date());
         ObservationClinique observationClinique = observationCliniqueRepository.findObservationCliniqueById(examen.getObservationCliniqueId());
         examen.setObservationCliniqueId(examen.getObservationCliniqueId());
         examen.setObservationClinique(observationClinique);

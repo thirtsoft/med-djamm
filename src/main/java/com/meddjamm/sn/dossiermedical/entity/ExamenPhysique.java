@@ -12,7 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "examen_physique")
@@ -26,8 +25,6 @@ public class ExamenPhysique extends AbstractAuditableEntity implements Serializa
     private ObservationClinique observationClinique;
 
     private Long observationCliniqueId;
-
-    private Long createdBy;
 
     @Column(name = "examen_general", columnDefinition = "TEXT")
     private String examenGeneral;
@@ -67,8 +64,6 @@ public class ExamenPhysique extends AbstractAuditableEntity implements Serializa
     private float tourHanche;
 
     private int glycemie;
-
-    private Date createdDate;
 
     private int actif;
 

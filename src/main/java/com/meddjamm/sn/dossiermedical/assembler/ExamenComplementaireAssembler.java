@@ -35,7 +35,6 @@ public class ExamenComplementaireAssembler {
         if (examenComplementaire.getId() != null)
             examenComplementaireDs.setId(examenComplementaire.getId());
         examenComplementaireDs.setActif(examenComplementaire.isActif());
-        examenComplementaireDs.setCreatedDate(examenComplementaire.getCreatedDate());
         examenComplementaireDs.setBiologie(examenComplementaire.getBiologie());
         examenComplementaireDs.setBiologieFileName(examenComplementaire.getBiologieFileName());
         examenComplementaireDs.setImmunologie(examenComplementaire.getImmunologie());
@@ -44,10 +43,8 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setImagerieFileName(examenComplementaire.getImagerieFileName());
         examenComplementaireDs.setAnatomopathologie(examenComplementaire.getAnatomopathologie());
         examenComplementaireDs.setAnatomopathologieFileName(examenComplementaire.getAnatomopathologieFileName());
-        examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
-        examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
-        if (examenComplementaire.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(examenComplementaire.getCreatedBy());
+        if (examenComplementaire.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(examenComplementaire.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             examenComplementaireDs.setNomCompletAgent(nomAgent);
         }
@@ -60,7 +57,6 @@ public class ExamenComplementaireAssembler {
         if (examenComplementaireDs.getId() != null)
             examenComplementaire.setId(examenComplementaireDs.getId());
         examenComplementaire.setActif(examenComplementaireDs.isActif());
-        examenComplementaire.setCreatedDate(examenComplementaireDs.getCreatedDate());
         examenComplementaire.setBiologie(examenComplementaireDs.getBiologie());
         examenComplementaire.setBiologieFileName(examenComplementaireDs.getBiologieFileName());
         examenComplementaire.setImmunologie(examenComplementaireDs.getImmunologie());
@@ -69,8 +65,6 @@ public class ExamenComplementaireAssembler {
         examenComplementaire.setImagerieFileName(examenComplementaireDs.getImagerieFileName());
         examenComplementaire.setAnatomopathologie(examenComplementaireDs.getAnatomopathologie());
         examenComplementaire.setAnatomopathologieFileName(examenComplementaireDs.getAnatomopathologieFileName());
-        examenComplementaire.setCircuitPatientId(examenComplementaireDs.getCircuitPatientId());
-        examenComplementaire.setCreatedBy(examenComplementaireDs.getCreatedBy());
         return examenComplementaire;
     }
 
@@ -91,7 +85,6 @@ public class ExamenComplementaireAssembler {
         if (examenComplementaire.getId() != null)
             examenComplementaireDs.setId(examenComplementaire.getId());
         examenComplementaireDs.setActif(examenComplementaire.isActif());
-        examenComplementaireDs.setCreatedDate(examenComplementaire.getCreatedDate());
         examenComplementaireDs.setBiologie(examenComplementaire.getBiologie());
         examenComplementaireDs.setBiologieFileName(examenComplementaire.getBiologieFileName());
         examenComplementaireDs.setImmunologie(examenComplementaire.getImmunologie());
@@ -100,10 +93,8 @@ public class ExamenComplementaireAssembler {
         examenComplementaireDs.setImagerieFileName(examenComplementaire.getImagerieFileName());
         examenComplementaireDs.setAnatomopathologie(examenComplementaire.getAnatomopathologie());
         examenComplementaireDs.setAnatomopathologieFileName(examenComplementaire.getAnatomopathologieFileName());
-        examenComplementaireDs.setCircuitPatientId(examenComplementaire.getCircuitPatientId());
-        examenComplementaireDs.setCreatedBy(examenComplementaire.getCreatedBy());
-        if (examenComplementaire.getCreatedBy() != null) {
-            Utilisateur utilisateur = utilisateurService.findUserById(examenComplementaire.getCreatedBy());
+        if (examenComplementaire.getCreatedByUser() != null) {
+            Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(examenComplementaire.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             examenComplementaireDs.setNomCompletAgent(nomAgent);
         }

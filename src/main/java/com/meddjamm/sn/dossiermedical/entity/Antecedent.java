@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "antecedent")
@@ -39,21 +38,4 @@ public class Antecedent extends AbstractAuditableEntity implements Serializable 
     @Column(name = "modes_de_vie", columnDefinition = "TEXT")
     private String modeVies;
 
-    private Date createDate;
-
-    private int actif;
-
-    public boolean isActif() {
-        if (actif == 1)
-            return true;
-        else
-            return false;
-    }
-
-    public void setActif(boolean actif) {
-        if (actif == true)
-            this.actif = 1;
-        else
-            this.actif = 0;
-    }
 }

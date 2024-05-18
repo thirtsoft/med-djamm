@@ -3,16 +3,12 @@ package com.meddjamm.sn.dossiermedical.entity;
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "examen_biologique")
@@ -40,18 +36,7 @@ public class ExamenBiologique extends AbstractAuditableEntity implements Seriali
     private String anatomopathologie;
 
     private String anatomopathologieFileName;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "circuit_patient_uid")
-    private CircuitPatient circuitPatient;
-
-    @JoinColumn(name = "circuit_patient_id")
-    private Long circuitPatientId;
-
-    private Long createdBy;
-
-    private Date createdDate;
-
+    
     private int actif;
 
     public boolean isActif() {

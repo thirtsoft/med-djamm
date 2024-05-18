@@ -32,9 +32,7 @@ public class AvisSpecialiste extends AbstractAuditableEntity implements Serializ
     private Long circuitPatientId;
 
     private Date createdDate;
-
-    private Long createdBy;
-
+    
     private int actif;
 
     public boolean isActif() {

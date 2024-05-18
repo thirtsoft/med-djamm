@@ -35,7 +35,6 @@ public class AvisSpecialisteAssembler {
         avisSpecialisteDs.setActif(avisSpecialiste.isActif());
         avisSpecialisteDs.setCreatedDate(avisSpecialiste.getCreatedDate());
         avisSpecialisteDs.setResume(avisSpecialiste.getResume());
-        avisSpecialisteDs.setCreatedBy(avisSpecialiste.getCreatedBy());
         avisSpecialisteDs.setCircuitPatientId(avisSpecialiste.getCircuitPatientId());
         if (avisSpecialiste.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(avisSpecialiste.getCreatedByUser());
@@ -52,7 +51,6 @@ public class AvisSpecialisteAssembler {
         avisSpecialiste.setActif(avisSpecialisteDs.isActif());
         avisSpecialiste.setCreatedDate(avisSpecialisteDs.getCreatedDate());
         avisSpecialiste.setResume(avisSpecialisteDs.getResume());
-        avisSpecialiste.setCreatedBy(avisSpecialisteDs.getCreatedBy());
         avisSpecialiste.setCircuitPatientId(avisSpecialisteDs.getCircuitPatientId());
         return avisSpecialiste;
     }

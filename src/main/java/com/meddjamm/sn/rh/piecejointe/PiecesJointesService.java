@@ -17,6 +17,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class PiecesJointesService {
@@ -55,7 +56,8 @@ public class PiecesJointesService {
         } else {
             model1 = piecesJointesRepository.findPiecesJointesByObjectIdAndTypeAndIdDocument(dto.getObjectId(), dto.getTypeDocumentId(), dto.getIdDocument());
         }
-        PiecesJointes model2 = new PiecesJointes(dto);
+        PiecesJointes model2 = piecesJointesRepository.findByObjectIdAndTypeDocumentId(dto.getObjectId(), dto.getTypeDocumentId())
+                .orElse(new PiecesJointes(dto));
         String extension = fileUtilsService.getFileExtension(fichier.getOriginalFilename());
         model2.setNomFichier(fichier.getOriginalFilename());
         TypeDocument typ = typeDocumentService.findTypeDocumentById(model2.getTypeDocumentId());
@@ -82,42 +84,6 @@ public class PiecesJointesService {
         }
     }
 
-    public Long savePiecesJointes(byte[] fichier, PiecesJointesDs dto) throws IOException {
-        int nbr = piecesJointesRepository.findTotalDocuments() + 1;
-        PiecesJointes model1 = null;
-        if (dto.getIdDocument() == null) {
-            model1 = piecesJointesRepository.findPiecesJointesByObjectIdAndType(dto.getObjectId(), dto.getTypeDocumentId());
-        } else {
-            model1 = piecesJointesRepository.findPiecesJointesByObjectIdAndTypeAndIdDocument(dto.getObjectId(), dto.getTypeDocumentId(), dto.getIdDocument());
-        }
-        PiecesJointes model2 = new PiecesJointes(dto);
-
-        String extension = "pdf";
-        TypeDocument typ = typeDocumentService.findTypeDocumentById(model2.getTypeDocumentId());
-        model2.setNomTechnique(typ.getCode() + StringUtils.leftPad("" + nbr, 9, '0') + "." + extension);
-        model2.setNomFichier(model2.getNomTechnique());
-        Path basePath = getRepertoire(dto.getObjectId(), dto.getDossier());
-        Path fileStorageLocation = basePath.toAbsolutePath().normalize();
-        try {
-            if (model1 != null) {
-                model2.setId(model1.getId());
-                Path toDelete = basePath.resolve(model1.getNomTechnique());
-                Files.deleteIfExists(toDelete);
-            }
-            Files.createDirectories(fileStorageLocation);
-        } catch (Exception ex) {
-            throw new FileStorageException("Impossible de créer le dossier de sauvegarde des fichiers à uploader.", ex);
-        }
-        try {
-            Path targetLocation = fileStorageLocation.resolve(model2.getNomTechnique());
-            Files.write(targetLocation, fichier);
-            model2 = piecesJointesRepository.save(model2);
-            return model2.getId();
-        } catch (Exception ex) {
-            throw new FileStorageException("Impossible d'enregistrer le fichier " + model2.getNomFichier() + ".", ex);
-        }
-    }
-
     private Path getRepertoire(Long objectId, String dossier) {
         return Paths.get(url).toAbsolutePath().normalize().resolve("dossier_" + objectId + "/"
                 + dossier);
@@ -131,10 +97,7 @@ public class PiecesJointesService {
                     + pieceJointe.getDossier() + "/" + pieceJointe.getNomTechnique());
             Map body = new HashMap<>();
             body.put("content", Files.readAllBytes(path));
-
-            // Retrieve extension
             body.put("extension", fileUtilsService.getFileExtension(pieceJointe.getNomTechnique()));
-
             return body;
         } catch (IOException e) {
         }
@@ -158,11 +121,6 @@ public class PiecesJointesService {
         return list;
     }
 
-    public PiecesJointesDs getPieceJointesByDocumentIdAndTypeDocument(Long id, Long typeDocumentId) {
-        PiecesJointes piecesJointes = piecesJointesRepository.findByObjectIdAndTypeDocumentIdAndActif(id, typeDocumentId, 1).orElse(null);
-        return piecesJointesAssembler.createPieceJointeDs(piecesJointes);
-    }
-
     private PiecesJointesDs getPiecesJointesDTO(PiecesJointes piecesJointes) throws PieceJointeException {
         if (piecesJointes == null) {
             return null;
@@ -177,5 +135,9 @@ public class PiecesJointesService {
         for (PiecesJointes pj : piecesJointes)
             dtos.add(getPiecesJointesDTO(pj));
         return dtos;
+    }
+
+    public Optional<PiecesJointes> findByObjectIdAndIdDocument(Long objectId, Long idDocument) {
+        return piecesJointesRepository.findByObjectIdAndTypeDocumentId(objectId, idDocument);
     }
 }

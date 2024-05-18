@@ -1,6 +1,5 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
-import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.Discussion;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.DiscussionRepository;
@@ -25,12 +24,6 @@ public class DiscussionServiceImpl implements DiscussionService {
 
     @Override
     public Discussion saveDiscussion(Discussion discussion) {
-        discussion.setActif(true);
-        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(discussion.getCircuitPatientId());
-        circuitPatient.setType("Discussion");
-        circuitPatientRepository.save(circuitPatient);
-        discussion.setCircuitPatientId(circuitPatient.getId());
-        discussion.setCircuitPatient(circuitPatient);
         return discussionRepository.save(discussion);
     }
 
@@ -56,7 +49,6 @@ public class DiscussionServiceImpl implements DiscussionService {
     @Override
     public void deleteDiscussion(Long id) {
         Discussion discussion = discussionRepository.findDiscussionById(id);
-        discussion.setActif(false);
         discussionRepository.save(discussion);
     }
 

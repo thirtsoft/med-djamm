@@ -61,7 +61,6 @@ public class PatientAssembler {
         patientDetailDs.setConsanguinite(patient.getConsanguinite());
         patientDetailDs.setNiveauSocialEconomique(patient.getNiveauSocialEconomique());
         patientDetailDs.setRegimeAlimentaire(patient.getRegimeAlimentaire());
-        patientDetailDs.setCreatedBy(patient.getCreatedBy());
         if (patient.getPersonneConfiance() != null)
             patientDetailDs.setPersonneConfianceDs(assembleDsFromEntity(patient.getPersonneConfiance()));
         patientDetailDs.setIsCircuitGenerated(patient.getIsCircuitGenerated());
@@ -99,7 +98,6 @@ public class PatientAssembler {
         if (patientDetailDs.getPersonneConfianceDs() != null)
             patient.setPersonneConfiance(assembleEntityFromDs(patientDetailDs.getPersonneConfianceDs()));
         patient.setIsCircuitGenerated(patientDetailDs.getIsCircuitGenerated());
-        patient.setCreatedBy(patientDetailDs.getCreatedBy());
         patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
         if (patientDetailDs.getDiagnosticDs() != null)
             patient.setDiagnostic(assembleDiagnosticEntityFromDiagnosticDs(patientDetailDs.getDiagnosticDs()));
@@ -123,7 +121,6 @@ public class PatientAssembler {
         patientMinDs.setTelephone(patient.getNumeroTelephone());
         patientMinDs.setDateNaissance(patient.getDateNaissance());
         patientMinDs.setIsCircuitGenerated(patient.getIsCircuitGenerated());
-        patientMinDs.setCreatedBy(patient.getCreatedBy());
         patientMinDs.setEst_accompagne(patient.isEst_accompagne());
         patientMinDs.setCreatedDate(patient.getCreationDate());
         patientMinDs.setDiagnosticDs(diagnosticAssembler.assembleEntityToDs(patient.getDiagnostic()));

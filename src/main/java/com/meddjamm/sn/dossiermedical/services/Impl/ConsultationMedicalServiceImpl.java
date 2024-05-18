@@ -1,6 +1,7 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
 import com.meddjamm.sn.dossiermedical.entity.ExamenBiologique;
@@ -87,12 +88,14 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         ConsultationMedical consultationMedical = findById(biologicId);
         ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (examenBiologique != null) {
                 if (biologic != null) {
-                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument
+                            (examenBiologique.getId(), ConstantSigps.TYPE_EXAM_CONS_BIO).orElse(new PiecesJointes());
                     piecesJointesDTO.setObjectId(examenBiologique.getId());
-                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setDossier("examen_biologie");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_BIO);
                     piecesJointesDTO.setNomFichier(biologic.getName());
                     piecesJointesService.savePiecesJointes(biologic, objectMapper.writeValueAsString(piecesJointesDTO));
@@ -115,9 +118,10 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         try {
             if (examenBiologique != null) {
                 if (immunologic != null) {
-                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument
+                            (examenBiologique.getId(), ConstantSigps.TYPE_EXAM_CONS_IMMUNO).orElse(new PiecesJointes());
                     piecesJointesDTO.setObjectId(examenBiologique.getId());
-                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setDossier("examen_biologie");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_IMMUNO);
                     piecesJointesDTO.setNomFichier(immunologic.getName());
                     piecesJointesService.savePiecesJointes(immunologic, objectMapper.writeValueAsString(piecesJointesDTO));
@@ -140,9 +144,10 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         try {
             if (examenBiologique != null) {
                 if (imager != null) {
-                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument
+                            (examenBiologique.getId(), ConstantSigps.TYPE_EXAM_CONS_IMG).orElse(new PiecesJointes());
                     piecesJointesDTO.setObjectId(examenBiologique.getId());
-                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setDossier("examen_biologie");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_IMG);
                     piecesJointesDTO.setNomFichier(imager.getName());
                     piecesJointesService.savePiecesJointes(imager, objectMapper.writeValueAsString(piecesJointesDTO));
@@ -165,9 +170,10 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         try {
             if (examenBiologique != null) {
                 if (hematologic != null) {
-                    PiecesJointes piecesJointesDTO = new PiecesJointes();
+                    PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument
+                            (examenBiologique.getId(), ConstantSigps.TYPE_EXAM_CONS_ANA).orElse(new PiecesJointes());
                     piecesJointesDTO.setObjectId(examenBiologique.getId());
-                    piecesJointesDTO.setDossier("pieces_jointes");
+                    piecesJointesDTO.setDossier("examen_biologie");
                     piecesJointesDTO.setTypeDocumentId(ConstantSigps.TYPE_EXAM_CONS_ANA);
                     piecesJointesDTO.setNomFichier(hematologic.getName());
                     piecesJointesService.savePiecesJointes(hematologic, objectMapper.writeValueAsString(piecesJointesDTO));

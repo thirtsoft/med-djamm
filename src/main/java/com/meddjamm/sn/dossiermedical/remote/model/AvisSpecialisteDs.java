@@ -22,8 +22,6 @@ public class AvisSpecialisteDs {
 
     private Date createdDate;
 
-    private Long createdBy;
-
     private String nomCompletAgent;
 
 

@@ -1,6 +1,5 @@
 package com.meddjamm.sn.dossiermedical.services.Impl;
 
-import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedical;
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedicalItem;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,10 +26,6 @@ public class TraitementMedicalServiceImpl implements TraitementMedicalService {
     @Override
     public TraitementMedical saveTraitementMedical(TraitementMedical traitementMedical) {
         traitementMedical.setActif(true);
-        traitementMedical.setCreatedDate(new Date());
-        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(traitementMedical.getCircuitPatientId());
-        traitementMedical.setCircuitPatientId(circuitPatient.getId());
-        traitementMedical.setCircuitPatient(circuitPatient);
         return traitementMedicalRepository.save(traitementMedical);
     }
 

@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "pieces_jointes")
@@ -25,11 +24,7 @@ public class PiecesJointes extends AbstractAuditableEntity implements Serializab
 
     private String dossier;
 
-    private Date dateCreation;
-
     private int actif;
-
-    private Long idDocument;
 
     public PiecesJointes() {
         super();
@@ -40,8 +35,6 @@ public class PiecesJointes extends AbstractAuditableEntity implements Serializab
         typeDocumentId = dto.getTypeDocumentId();
         objectId = dto.getObjectId();
         dossier = dto.getDossier();
-        dateCreation = new Date();
-        idDocument = dto.getIdDocument();
         actif = 1;
         nomFichier = dto.getNomFichier();
     }

@@ -47,7 +47,8 @@ public interface HospitalisationApi {
     void deleteHospitalisation(@PathVariable Long id);
 
     @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-biologic-file")
-    boolean addExamBiologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile biologic) throws Exception;
+    boolean addExamBiologicToHospitalisation(@PathVariable Long hospitalisationId,
+                                             @RequestParam(required = false) MultipartFile biologic) throws Exception;
 
     @PutMapping("/exam-complementaire/{hospitalisationId}/add-hospitalisation-immunologic-file")
     boolean addExamImmunologicToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile immunologic) throws Exception;
@@ -60,5 +61,14 @@ public interface HospitalisationApi {
 
     @PutMapping("/protocol/{hospitalisationId}/add-protocol-file")
     boolean addProtocolMedicalTraitFileToHospitalisation(@PathVariable Long hospitalisationId, @RequestParam(required = false) MultipartFile protocol) throws Exception;
+
+    @GetMapping(value = "nombrehomme")
+    int countHospitalisationHomme();
+
+    @GetMapping(value = "nombrefemme")
+    int countHospitalisationFemme();
+
+    @GetMapping(value = "nombrehospitalisation")
+    long countHospitalisation();
 
 }

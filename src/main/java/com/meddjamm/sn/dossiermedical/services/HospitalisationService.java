@@ -29,5 +29,11 @@ public interface HospitalisationService {
 
     boolean addProtocolMedicalTraitFileToHospitalisation(Long hospitalisationId, MultipartFile protocol) throws Exception;
 
+    int countHospitalisationHomme();
+
+    int countHospitalisationFemme();
+
+    long countHospitalisation();
+
 
 }
