@@ -1,37 +1,76 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
-import com.meddjamm.sn.dossiermedical.entity.Diagnostic;
-import com.meddjamm.sn.dossiermedical.entity.Patient;
-import com.meddjamm.sn.dossiermedical.entity.PersonneConfiance;
-import com.meddjamm.sn.dossiermedical.remote.model.DiagnosticDs;
-import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
-import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
-import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
-import com.meddjamm.sn.dossiermedical.remote.model.PersonneConfianceDs;
+import com.meddjamm.sn.dossiermedical.entity.*;
+import com.meddjamm.sn.dossiermedical.remote.model.*;
+import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.rh.entity.Medicament;
+import com.meddjamm.sn.rh.services.MedicamentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static java.util.Optional.ofNullable;
+
 @Component
+@RequiredArgsConstructor
 public class PatientAssembler {
 
     private final DiagnosticAssembler diagnosticAssembler;
-
     private final PatientService patientService;
-
-    public PatientAssembler(DiagnosticAssembler diagnosticAssembler,
-                            PatientService patientService) {
-        this.diagnosticAssembler = diagnosticAssembler;
-        this.patientService = patientService;
-    }
+    private final MedicamentService medicamentService;
+    private final HospitalisationService hospitalisationService;
 
     public List<PatientMinDs> assembleEntitiesFrom(List<Patient> patients) {
         return patients.stream().map(this::assembleMinFrom).toList();
     }
 
-    public List<PatientDetailDs> assembleEntitiesFromPatientDetailDs(List<Patient> patients) {
-        return patients.stream().map(this::assemblePatientDetails).toList();
+    public List<PatientDetailsExport> assembleEntitiesFromPatientDetailDs(List<Patient> patients) {
+        return patients.stream().map(this::assemblePatientDossier).toList();
+    }
+
+    private PatientDetailsExport assemblePatientDossier(Patient patient) {
+        PatientDetailsExport patientDetailDs = new PatientDetailsExport();
+        patientDetailDs.setCode(patient.getCode());
+        patientDetailDs.setNom(patient.getNom());
+        patientDetailDs.setPrenom(patient.getPrenom());
+        patientDetailDs.setDateAdmission(patient.getDateAdmission());
+        patientDetailDs.setAddress(patient.getAddress());
+        patientDetailDs.setNumeroTelephone(patient.getNumeroTelephone());
+        List<Hospitalisation> allByPatient = hospitalisationService.findAllByPatient(patient.getCode());
+        patientDetailDs.setHospitalisation(allByPatient.stream()
+                .map(this::assemblePatientHospiDossier)
+                .toList());
+        return patientDetailDs;
+    }
+
+    private HospitalisationDsExport assemblePatientHospiDossier(Hospitalisation hospitalisation) {
+        HospitalisationDsExport hospitalisationDsExport = new HospitalisationDsExport();
+        hospitalisationDsExport.setBiologie(hospitalisation.getExamenComplementaire().getBiologie());
+        hospitalisationDsExport.setImmunologie(hospitalisation.getExamenComplementaire().getImmunologie());
+        hospitalisationDsExport.setImagerie(hospitalisation.getExamenComplementaire().getImagerie());
+        hospitalisationDsExport.setAnatomopathologie(hospitalisation.getExamenComplementaire().getAnatomopathologie());
+        hospitalisationDsExport.setResume(hospitalisation.getDiscussion().getResume());
+        hospitalisationDsExport.setObservation(hospitalisation.getSynthese().getObservation());
+        hospitalisationDsExport.setTraitementMedicalItemExport(hospitalisation.getTraitementMedical().getTraitementMedicalItems().stream()
+                .map(this::assembleTraitementMedicalItem)
+                .toList());
+
+
+        return hospitalisationDsExport;
+    }
+
+    private TraitementMedicalItemExport assembleTraitementMedicalItem(TraitementMedicalItem traitementMedicalItem) {
+        TraitementMedicalItemExport traitementMedicalItemDs = new TraitementMedicalItemExport();
+
+        traitementMedicalItemDs.setLibelle(ofNullable(medicamentService.findById(traitementMedicalItem.getMedicamendId()))
+                .map(Medicament::getLibelle)
+                .orElse(null));
+        traitementMedicalItemDs.setPsologie(traitementMedicalItem.getPsologie());
+        traitementMedicalItemDs.setAdministrePar(traitementMedicalItem.getAdministrePar());
+        traitementMedicalItemDs.setNbrePrise(traitementMedicalItem.getNbrePrise());
+        return traitementMedicalItemDs;
     }
 
     public PatientDetailDs assemblePatientDetails(Patient patient) {

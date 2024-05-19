@@ -93,16 +93,6 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<InputStreamResource> exportPatients() {
-        List<List<String>> strings = patientAssembler.assembleEntitiesFrom(patientService.findAllPatients()).stream()
-                .map(csvExportAssembler::mapEntityToList)
-                .toList();
-        return ResponseEntity.ok()
-                .contentType(TEXT_PLAIN)
-                .body(CSVSupport.generate(CSVExportAssembler.headers().toArray(new String[]{}), strings));
-    }
-
-    @Override
     public void exportPatientsToPDF(HttpServletResponse response) throws IOException {
         reportPdfService.exportToPDF(response, patientAssembler.assembleEntitiesFrom(patientService.findAllPatients()));
     }
@@ -111,6 +101,16 @@ public class PatientController implements PatientApi {
     public ResponseEntity<List<PatientMinDs>> findAllPatientOrderByFirstName() {
         List<PatientMinDs> patientResult = patientAssembler.assembleEntitiesFrom(patientService.findAllActivesPatients());
         return new ResponseEntity<>(patientResult, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> exportPatients() {
+        List<List<String>> strings = patientAssembler.assembleEntitiesFrom(patientService.findAllPatients()).stream()
+                .map(csvExportAssembler::mapEntityToList)
+                .toList();
+        return ResponseEntity.ok()
+                .contentType(TEXT_PLAIN)
+                .body(CSVSupport.generate(CSVExportAssembler.headers().toArray(new String[]{}), strings));
     }
 
     @Override
