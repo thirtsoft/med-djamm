@@ -15,6 +15,4 @@ public interface ExamenBiologiqueService {
     List<ExamenBiologique> findAllExamenBiologiques();
 
     void deleteExamenBiologique(Long id);
-
-    List<ExamenBiologique> findExamenBiologiqueByPatientId(String code);
 }

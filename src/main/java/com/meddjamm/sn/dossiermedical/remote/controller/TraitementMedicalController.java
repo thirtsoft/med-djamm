@@ -60,10 +60,4 @@ public class TraitementMedicalController implements TraitementMedicalApi {
         traitementMedicalService.deleteTraitementMedical(id);
     }
 
-    @Override
-    public ResponseEntity<List<TraitementMedicalDs>> findAllTraitementMedicalsByPatientId(String code) {
-        return new ResponseEntity<>(traitementMedicalAssembler.assembleEntitiesFrom(
-                traitementMedicalService.findTraitementMedicalByPatientId(code)
-        ), HttpStatus.OK);
-    }
 }

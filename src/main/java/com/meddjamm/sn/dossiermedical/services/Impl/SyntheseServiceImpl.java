@@ -56,9 +56,4 @@ public class SyntheseServiceImpl implements SyntheseService {
         synthese.setActif(false);
         syntheseRepository.save(synthese);
     }
-
-    @Override
-    public List<Synthese> findSynthesesByPatientId(String code) {
-        return syntheseRepository.findSyntheseByPatientId(code);
-    }
 }

@@ -55,8 +55,4 @@ public class ExamenBiologiqueServiceImpl implements ExamenBiologiqueService {
         examenBiologiqueRepository.save(examenBiologique);
     }
 
-    @Override
-    public List<ExamenBiologique> findExamenBiologiqueByPatientId(String code) {
-        return examenBiologiqueRepository.findExamenBiologiquesByPatientId(code);
-    }
 }

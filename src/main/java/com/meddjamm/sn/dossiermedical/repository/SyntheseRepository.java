@@ -15,7 +15,4 @@ public interface SyntheseRepository extends JpaRepository<Synthese, Long> {
 
     @Query("SELECT DISTINCT p from Synthese p where p.actif=1")
     List<Synthese> findAllSyntheses();
-
-    @Query("SELECT DISTINCT p from Synthese p where p.circuitPatient.code=:code and p.actif=1 ORDER BY p.id DESC")
-    List<Synthese> findSyntheseByPatientId(@Param("code") String code);
 }

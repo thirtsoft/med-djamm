@@ -15,6 +15,5 @@ public interface ExamenComplementaireService {
     List<ExamenComplementaire> findAllExamenComplementaires();
 
     void deleteExamenComplementaire(Long id);
-
-    List<ExamenComplementaire> findExamenComplementaireByPatientId(String code);
+    
 }

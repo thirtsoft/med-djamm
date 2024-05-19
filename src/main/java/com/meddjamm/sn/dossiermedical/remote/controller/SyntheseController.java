@@ -60,10 +60,4 @@ public class SyntheseController implements SyntheseApi {
         syntheseService.deleteSynthese(id);
     }
 
-    @Override
-    public ResponseEntity<List<SyntheseDs>> findAllSynthesesByPatientId(String code) {
-        return new ResponseEntity<>(syntheseAssembler.assembleEntitiesFrom(
-                syntheseService.findSynthesesByPatientId(code)
-        ), HttpStatus.OK);
-    }
 }

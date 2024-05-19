@@ -33,7 +33,4 @@ public interface TraitementMedicalApi {
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteTraitementMedical(@PathVariable Long id);
 
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<TraitementMedicalDs>> findAllTraitementMedicalsByPatientId(@PathVariable String code);
-    
 }

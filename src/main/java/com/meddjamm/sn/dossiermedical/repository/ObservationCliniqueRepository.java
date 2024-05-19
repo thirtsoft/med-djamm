@@ -15,7 +15,4 @@ public interface ObservationCliniqueRepository extends JpaRepository<Observation
     @Query("SELECT DISTINCT p from ObservationClinique p where p.actif=1 order by p.id desc")
     List<ObservationClinique> findAllObservationCliniques();
 
-    @Query("SELECT DISTINCT p from ObservationClinique p where p.circuitPatient.code=:code and p.actif=1")
-    List<ObservationClinique> findObservationCliniqueByPatientId(@Param("code") String code);
-
 }

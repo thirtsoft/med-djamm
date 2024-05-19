@@ -55,9 +55,4 @@ public class ConsultationServiceImpl implements ConsultationService {
         Consultation consultation = findById(id);
         consultationRepository.save(consultation);
     }
-
-    @Override
-    public List<Consultation> findConsultationsByPatientId(String code) {
-        return consultationRepository.findConsultationByPatientId(code);
-    }
 }

@@ -15,6 +15,4 @@ public interface DiscussionService {
     List<Discussion> findAllDiscussions();
 
     void deleteDiscussion(Long id);
-
-    List<Discussion> findDiscussionByPatientId(String code);
 }

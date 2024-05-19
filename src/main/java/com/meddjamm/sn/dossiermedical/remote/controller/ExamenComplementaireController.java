@@ -58,11 +58,4 @@ public class ExamenComplementaireController implements ExamenComplementaireApi {
     public void deleteExamenComplementaire(Long id) {
         examenComplementaireService.deleteExamenComplementaire(id);
     }
-
-    @Override
-    public ResponseEntity<List<ExamenComplementaireDetailDs>> findAllExamenComplementairesByPatientId(String code) {
-        return new ResponseEntity<>(examenComplementaireAssembler.assembleEntitiesFrom(
-                examenComplementaireService.findExamenComplementaireByPatientId(code)
-        ), HttpStatus.OK);
-    }
 }

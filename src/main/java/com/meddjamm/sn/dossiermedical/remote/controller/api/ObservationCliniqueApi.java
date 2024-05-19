@@ -3,7 +3,13 @@ package com.meddjamm.sn.dossiermedical.remote.controller.api;
 import com.meddjamm.sn.dossiermedical.remote.model.ObservationCliniqueDs;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -26,7 +32,4 @@ public interface ObservationCliniqueApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteObservationClinique(@PathVariable Long id);
-
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ObservationCliniqueDs>> findObservationCliniqueByPatientId(@PathVariable String code);
 }

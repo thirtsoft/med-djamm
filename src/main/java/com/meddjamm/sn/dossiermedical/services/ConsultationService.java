@@ -16,6 +16,4 @@ public interface ConsultationService {
 
     void deleteConsultation(Long id);
 
-    List<Consultation> findConsultationsByPatientId(String code);
-
 }

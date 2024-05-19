@@ -32,7 +32,4 @@ public interface ConsultationApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteConsultation(@PathVariable Long id);
-
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ConsultationDs>> findAllConsultationsByPatientId(@PathVariable String code);
 }

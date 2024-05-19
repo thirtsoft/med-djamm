@@ -4,7 +4,13 @@ import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.ExamenComplementaireDs;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -27,7 +33,4 @@ public interface ExamenComplementaireApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteExamenComplementaire(@PathVariable Long id);
-
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ExamenComplementaireDetailDs>> findAllExamenComplementairesByPatientId(@PathVariable String code);
 }

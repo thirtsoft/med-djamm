@@ -4,7 +4,6 @@ import com.meddjamm.sn.config.entity.Utilisateur;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.dossiermedical.entity.ObservationClinique;
 import com.meddjamm.sn.dossiermedical.remote.model.ObservationCliniqueDs;
-import com.meddjamm.sn.dossiermedical.repository.ObservationCliniqueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -20,16 +19,13 @@ public class ObservationCliniqueAssembler {
 
     private final UtilisateurService utilisateurService;
 
-    private final ObservationCliniqueRepository observationCliniqueRepository;
 
     public ObservationCliniqueAssembler(ExamenPhysiqueAssembler examenPhysiqueAssembler,
                                         AntecedentAssembler antecedentAssembler,
-                                        UtilisateurService utilisateurService,
-                                        ObservationCliniqueRepository observationCliniqueRepository) {
+                                        UtilisateurService utilisateurService) {
         this.examenPhysiqueAssembler = examenPhysiqueAssembler;
         this.antecedentAssembler = antecedentAssembler;
         this.utilisateurService = utilisateurService;
-        this.observationCliniqueRepository = observationCliniqueRepository;
     }
 
 

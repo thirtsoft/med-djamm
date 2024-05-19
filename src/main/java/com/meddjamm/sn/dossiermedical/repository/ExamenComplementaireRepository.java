@@ -14,7 +14,4 @@ public interface ExamenComplementaireRepository extends JpaRepository<ExamenComp
 
     @Query("SELECT DISTINCT p from ExamenComplementaire p where p.actif=1")
     List<ExamenComplementaire> findAllExamenComplementaires();
-
-    @Query("SELECT DISTINCT p from ExamenComplementaire p where p.circuitPatient.code=:code and p.actif=1")
-    List<ExamenComplementaire> findExamenComplementaireByPatientId(@Param("code") String code);
 }

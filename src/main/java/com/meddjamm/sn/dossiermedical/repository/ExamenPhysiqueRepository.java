@@ -19,7 +19,4 @@ public interface ExamenPhysiqueRepository extends JpaRepository<ExamenPhysique, 
 
     @Query("SELECT DISTINCT p from ExamenPhysique p where p.observationClinique.id=:id")
     List<ExamenPhysique> findAllExamenPhysiquesByObservationCliniqueId(@Param("id") Long id);
-
-    @Query("SELECT DISTINCT p from ExamenPhysique p where p.observationClinique.circuitPatient.code=:code and p.actif=1")
-    List<ExamenPhysique> findExamenPhysiqueByPatientId(@Param("code") String code);
 }

@@ -51,9 +51,4 @@ public class DiscussionServiceImpl implements DiscussionService {
         Discussion discussion = discussionRepository.findDiscussionById(id);
         discussionRepository.save(discussion);
     }
-
-    @Override
-    public List<Discussion> findDiscussionByPatientId(String code) {
-        return discussionRepository.findDiscussionByPatientId(code);
-    }
 }

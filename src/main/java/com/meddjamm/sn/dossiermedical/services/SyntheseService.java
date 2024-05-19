@@ -15,6 +15,4 @@ public interface SyntheseService {
     List<Synthese> findAllSyntheses();
 
     void deleteSynthese(Long id);
-
-    List<Synthese> findSynthesesByPatientId(String code);
 }

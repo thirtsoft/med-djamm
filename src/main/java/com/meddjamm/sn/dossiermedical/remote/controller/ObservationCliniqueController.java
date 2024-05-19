@@ -59,11 +59,5 @@ public class ObservationCliniqueController implements ObservationCliniqueApi {
     public void deleteObservationClinique(Long id) {
         observationCliniqueService.deleteObservationClinique(id);
     }
-
-    @Override
-    public ResponseEntity<List<ObservationCliniqueDs>> findObservationCliniqueByPatientId(String code) {
-        return new ResponseEntity<>(observationCliniqueAssembler.assembleEntitiesFrom(
-                observationCliniqueService.findObservationCliniqueByPatientId(code)
-        ), HttpStatus.OK);
-    }
+    
 }

@@ -13,8 +13,6 @@ public class ObservationCliniqueDs {
 
     private Long id;
 
-    //  private List<String> motifsHospitalisation;
-
     private String motifsHospitalisation;
 
     private String histoireMaladie;
@@ -22,10 +20,6 @@ public class ObservationCliniqueDs {
     private AntecedentDs antecedentDs;
 
     private ExamenPhysiqueDs examenPhysiqueDs;
-
-    //  private List<ExamenPhysiqueDs> examenPhysiqueDs;
-
-    private Long circuitPatientId;
 
     private Long createdBy;
 

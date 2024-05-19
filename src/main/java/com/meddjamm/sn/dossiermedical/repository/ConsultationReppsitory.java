@@ -9,12 +9,9 @@ import java.util.List;
 
 public interface ConsultationReppsitory extends JpaRepository<Consultation, Long> {
 
-    @Query("SELECT DISTINCT p from Consultation p where p.id=:id and p.actif=1")
+    @Query("SELECT DISTINCT p from Consultation p where p.id=:id")
     Consultation findConsultationById(@Param("id") Long id);
 
-    @Query("SELECT DISTINCT p from Consultation p where p.actif=1")
+    @Query("SELECT DISTINCT p from Consultation p")
     List<Consultation> findAllConsultations();
-
-    @Query("SELECT DISTINCT p from Consultation p where p.circuitPatient.code=:code and p.actif=1 ORDER BY p.id DESC")
-    List<Consultation> findConsultationByPatientId(@Param("code") String code);
 }

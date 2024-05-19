@@ -60,10 +60,4 @@ public class ConsultationController implements ConsultationApi {
         consultationService.deleteConsultation(id);
     }
 
-    @Override
-    public ResponseEntity<List<ConsultationDs>> findAllConsultationsByPatientId(String code) {
-        return new ResponseEntity<>(consultationAssembler.assembleEntitiesFrom(
-                consultationService.findConsultationsByPatientId(code)
-        ), HttpStatus.OK);
-    }
 }

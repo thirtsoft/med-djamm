@@ -52,8 +52,4 @@ public class ExamenBiologiqueController implements ExamenBiologiqueApi {
         examenBiologiqueService.deleteExamenBiologique(id);
     }
 
-    @Override
-    public ResponseEntity<List<ExamenBiologiqueDs>> findAllExamenBiologiquesByPatientId(String code) {
-        return new ResponseEntity<>(examenBiologiqueAssembler.assembleEntitiesFrom(examenBiologiqueService.findExamenBiologiqueByPatientId(code)), HttpStatus.OK);
-    }
 }

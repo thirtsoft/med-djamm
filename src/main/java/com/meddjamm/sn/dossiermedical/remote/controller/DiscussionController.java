@@ -53,10 +53,4 @@ public class DiscussionController implements DiscussionApi {
         discussionService.deleteDiscussion(id);
     }
 
-    @Override
-    public ResponseEntity<List<DiscussionDs>> findAllDiscussionsByPatientId(String code) {
-        return new ResponseEntity<>(discussionAssembler.assembleEntitiesFrom(
-                discussionService.findDiscussionByPatientId(code)
-        ), HttpStatus.OK);
-    }
 }

@@ -20,11 +20,7 @@ public class ObservationCliniqueDetailDs {
 
     private AntecedentDs antecedentDs;
 
-    // private ExamenPhysiqueDs examenPhysiqueDs;
-
     private List<ExamenPhysiqueDs> examenPhysiqueDs;
-
-    private Long circuitPatientId;
 
     private Long createdBy;
 

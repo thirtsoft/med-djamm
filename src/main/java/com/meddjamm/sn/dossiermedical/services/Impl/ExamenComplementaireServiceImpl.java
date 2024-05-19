@@ -53,9 +53,4 @@ public class ExamenComplementaireServiceImpl implements ExamenComplementaireServ
         examenComplementaire.setActif(false);
         examenComplementaireRepository.save(examenComplementaire);
     }
-
-    @Override
-    public List<ExamenComplementaire> findExamenComplementaireByPatientId(String code) {
-        return examenComplementaireRepository.findExamenComplementaireByPatientId(code);
-    }
 }

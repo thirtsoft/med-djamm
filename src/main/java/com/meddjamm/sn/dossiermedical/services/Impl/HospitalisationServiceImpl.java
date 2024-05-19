@@ -48,9 +48,12 @@ public class HospitalisationServiceImpl implements HospitalisationService {
             hospitalisation.setNumeroHospitalisation(createNumeroHospitalisation());
         }
         Patient patient = patientService.findByCode(hospitalisation.getCode());
-        if (patient.getSexe().equals("Homme"))
+        String sexe = patient.getSexe();
+        if (sexe.equals(ConstantSigps.TYPE_SEXE_PATIENT)) {
             hospitalisation.setTypePatient(1);
-        hospitalisation.setTypePatient(0);
+        } else {
+            hospitalisation.setTypePatient(0);
+        }
         Hospitalisation hospitalisationResult = hospitalisationRepository.save(hospitalisation);
         return hospitalisationResult.getId();
     }

@@ -53,12 +53,7 @@ public class TraitementMedicalServiceImpl implements TraitementMedicalService {
                 traitementMedical
         );
     }
-
-    @Override
-    public List<TraitementMedical> findTraitementMedicalByPatientId(String code) {
-        return traitementMedicalRepository.findTraitementMedicalByPatientId(code);
-    }
-
+    
     @Override
     public TraitementMedicalItem findTraitementMedicalItemById(Long id) {
         return traitementMedicalItemRepository.findById(id).orElse(null);

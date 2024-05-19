@@ -17,8 +17,6 @@ public interface TraitementMedicalService {
 
     void deleteTraitementMedical(Long id);
 
-    List<TraitementMedical> findTraitementMedicalByPatientId(String code);
-
     TraitementMedicalItem findTraitementMedicalItemById(Long id);
 
     TraitementMedicalItem saveTraitementMedicalItem(TraitementMedicalItem traitementMedicalItem);

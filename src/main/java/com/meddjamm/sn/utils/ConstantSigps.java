@@ -17,4 +17,6 @@ public final class ConstantSigps {
 
     public static final Long TYPE_PROTOCOLE_MEDIC = 11L;
 
+    public static final String TYPE_SEXE_PATIENT = "Homme";
+
 }

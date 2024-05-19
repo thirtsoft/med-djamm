@@ -61,9 +61,4 @@ public class ObservationCliniqueServiceImpl implements ObservationCliniqueServic
         observationClinique.setActif(false);
         observationCliniqueRepository.save(observationClinique);
     }
-
-    @Override
-    public List<ObservationClinique> findObservationCliniqueByPatientId(String code) {
-        return observationCliniqueRepository.findObservationCliniqueByPatientId(code);
-    }
 }

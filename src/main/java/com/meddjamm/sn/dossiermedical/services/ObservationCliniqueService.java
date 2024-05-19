@@ -15,6 +15,4 @@ public interface ObservationCliniqueService {
     List<ObservationClinique> findAllObservationCliniques();
 
     void deleteObservationClinique(Long id);
-
-    List<ObservationClinique> findObservationCliniqueByPatientId(String code);
 }

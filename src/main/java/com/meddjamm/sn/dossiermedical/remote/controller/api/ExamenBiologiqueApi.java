@@ -32,8 +32,5 @@ public interface ExamenBiologiqueApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteExamenComplementaire(@PathVariable Long id);
-
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ExamenBiologiqueDs>> findAllExamenBiologiquesByPatientId(@PathVariable String code);
 }
 

@@ -32,7 +32,4 @@ public interface SyntheseApi {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteSynthese(@PathVariable Long id);
-
-    @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<SyntheseDs>> findAllSynthesesByPatientId(@PathVariable String code);
 }

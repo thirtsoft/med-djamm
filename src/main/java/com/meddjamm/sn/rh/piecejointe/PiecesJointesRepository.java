@@ -22,10 +22,7 @@ public interface PiecesJointesRepository extends JpaRepository<PiecesJointes, Lo
 
     Optional<PiecesJointes> findByObjectIdAndTypeDocumentIdAndActif(Long id, Long typeDocumentId, int i);
 
-    Optional<PiecesJointes> findByObjectIdAndTypeDocumentId(Long objectId, Long idDocument);
-
-    @Query("SELECT DISTINCT doc FROM PiecesJointes doc WHERE doc.typeDocumentId=:type AND doc.objectId=:id and doc.idDocument = :idDocument and doc.actif=1")
-    PiecesJointes findPiecesJointesByObjectIdAndTypeAndIdDocument(@Param("id") Long id, @Param("type") Long type, @Param("idDocument") Long idDocument);
+    Optional<PiecesJointes> findByObjectIdAndTypeDocumentId(Long objectId, Long typeDocumentId);
 
     List<PiecesJointes> findByActifAndObjectIdAndTypeDocumentId(int actif, Long patientId, Long typeDocumentId);
 

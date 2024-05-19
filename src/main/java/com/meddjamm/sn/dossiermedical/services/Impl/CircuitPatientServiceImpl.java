@@ -5,12 +5,12 @@ import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.dossiermedical.services.CircuitPatientService;
+import com.meddjamm.sn.utils.ConstantSigps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Slf4j
@@ -34,9 +34,12 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
             circuitPatient.setNumeroCircuit(createNumeroCircuit());
         }
         Patient patient = patientRepository.findPatientByCode(circuitPatient.getCode());
-        if (Objects.equals(patient.getSexe(), "Homme"))
+        String sexe = patient.getSexe();
+        if (sexe.equals(ConstantSigps.TYPE_SEXE_PATIENT)) {
             circuitPatient.setTypePatient(1);
-        circuitPatient.setTypePatient(0);
+        } else {
+            circuitPatient.setTypePatient(0);
+        }
         circuitPatientRepository.save(circuitPatient);
         patient.setIsCircuitGenerated(1);
         patientRepository.save(patient);

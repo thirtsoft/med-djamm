@@ -25,21 +25,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CircuitPatientAssembler {
 
-    private final ObservationCliniqueAssembler observationCliniqueAssembler;
-    private final ExamenComplementaireAssembler examenComplementaireAssembler;
-    private final TraitementMedicalAssembler traitementMedicalAssembler;
-    private final ConsultationAssembler consultationAssembler;
     private final OrdonnanceAssembler ordonnanceAssembler;
     private final AvisSpecialisteAssembler avisSpecialisteAssembler;
-    private final SyntheseAssembler syntheseAssembler;
-    private final ExamenBiologiqueAssembler examenBiologiqueAssembler;
     private final PatientAssembler patientAssembler;
     private final PatientService patientService;
     private final UtilisateurService utilisateurService;
     private final UtilisateurAssembler utilisateurAssembler;
-    private final DiscussionAssembler discussionAssembler;
     private final ConsultationMedicalAssembler consultationMedicalAssembler;
-    private final HospitalisationAssembler hospitalisationAssembler;
 
     public List<CircuitPatientListDs> assembleEntitiesFrom(List<CircuitPatient> circuitPatients) {
         return circuitPatients.stream().map(this::assembleEntityToListDs).toList();
