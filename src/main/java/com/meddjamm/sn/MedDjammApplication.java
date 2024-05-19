@@ -4,7 +4,8 @@ import com.meddjamm.sn.config.repository.ActionRepository;
 import com.meddjamm.sn.config.repository.ProfilRepository;
 import com.meddjamm.sn.config.repository.UtilisateurRepository;
 import com.meddjamm.sn.config.service.auth.AuthenticationService;
-import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
+import com.meddjamm.sn.dossiermedical.repository.*;
+import com.meddjamm.sn.rh.repository.MedicamentRepository;
 import com.meddjamm.sn.rh.repository.TypeDocumentRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,8 +26,18 @@ import java.nio.file.Paths;
 //                SecurityAutoConfiguration.class
 //        })
 @AllArgsConstructor
+@Transactional
 public class MedDjammApplication implements CommandLineRunner {
     private final PatientRepository patientRepository;
+    private final ExamenComplementaireRepository examenComplementaireRepository;
+    private final MedicamentRepository medicamentRepository;
+    private final SyntheseRepository syntheseRepository;
+    private final DiscussionRepository discussionRepository;
+    private final TraitementMedicalItemRepository traitementMedicalItemRepository;
+    private final TraitementMedicalRepository traitementMedicalRepository;
+    private final HospitalisationRepository hospitalisationRepository;
+
+
     private final UtilisateurRepository utilisateurRepository;
     private final ActionRepository actionRepository;
     private final ProfilRepository profilRepository;
@@ -77,8 +89,58 @@ public class MedDjammApplication implements CommandLineRunner {
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
 
+        Patient patient = Patient.builder()
+                .code("0001")
+                .nom("Diallo")
+                .prenom("Saliou")
+                .numeroTelephone("77 000 00 00")
+                .address("addresse")
+                .dateAdmission(LocalDate.now().toDate())
+                .actif(1)
+                .build();
+        Patient savedPatient = patientRepository.save(patient);
+        ExamenComplementaire examenComplementair = ExamenComplementaire.builder()
+                .biologie("biologie")
+                .immunologie("immunologie")
+                .imagerie("imagerie")
+                .anatomopathologie("anatomopathologie")
+                .actif(1)
+                .build();
+
+        ExamenComplementaire savedExamenComplementaire = examenComplementaireRepository.save(examenComplementair);
+        Discussion discussion = discussionRepository.save(Discussion.builder().resume("resume resume").actif(1).build());
+        Synthese synthese = syntheseRepository.save(Synthese.builder().observation("observation observation").actif(1).build());
+        Medicament medicament = medicamentRepository.save(Medicament.builder().code("MEDOC_01").libelle("libelle").actif(1).build());
+
+        TraitementMedicalItem traitementMedicalItem = traitementMedicalItemRepository.save(TraitementMedicalItem.builder()
+                .medicamendId(medicament.getId())
+                .psologie("psologie")
+                .administrePar("oral")
+                .nbrePrise("2")
+                .build());
 
 
+        TraitementMedical traitementMedical = TraitementMedical.builder()
+                .traitementMedicalItems(Collections.singleton(traitementMedicalItem))
+                .actif(1)
+                .build();
+
+        TraitementMedical savedTraitementMedical = traitementMedicalRepository.save(traitementMedical);
+
+        Hospitalisation hospitalisation = Hospitalisation.builder()
+                .code(savedPatient.getCode())
+                .examenComplementaire(savedExamenComplementaire)
+                .traitementMedical(savedTraitementMedical)
+                .discussion(discussion)
+                .synthese(synthese)
+                .actif(1)
+                .build();
+
+        Hospitalisation savedHospitalisation = hospitalisationRepository.save(hospitalisation);
+
+        System.out.println("savedPatient " + savedPatient);
+        System.out.println("savedHospitalisation " + savedHospitalisation);
+*/
         /*
         var manager = RegisterRequest.builder().firstname("User012").prenom("User012").email("mana12ger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
