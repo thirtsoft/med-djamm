@@ -34,7 +34,8 @@ public class PlanificationAssembler {
         if (planification.getId() != null)
             planificationDs.setId(planification.getId());
         planificationDs.setAgentId(planification.getAgentId());
-        planificationDs.setDateService(planification.getDateService());
+        planificationDs.setDateDebut(planification.getDateDebut());
+        planificationDs.setDateFin(planification.getDateFin());
         planificationDs.setCreatedDate(new Date());
         planificationDs.setActif(planification.isActif());
         planificationDs.setLibelle(planification.getLibelle());
@@ -53,7 +54,8 @@ public class PlanificationAssembler {
             planification.setId(planificationDs.getId());
         planification.setAgentId(planificationDs.getAgentId());
         planification.setIsCreatedBy(planificationDs.getIsCreatedBy());
-        planification.setDateService(planificationDs.getDateService());
+        planification.setDateDebut(planificationDs.getDateDebut());
+        planification.setDateFin(planificationDs.getDateFin());
         planification.setCreatedDate(new Date());
         planification.setActif(planificationDs.isActif());
         planification.setLibelle(planificationDs.getLibelle());
@@ -69,7 +71,8 @@ public class PlanificationAssembler {
         PlanificationDetailDs planificationDetailDs = new PlanificationDetailDs();
         if (planification.getId() != null)
             planificationDetailDs.setId(planification.getId());
-        planificationDetailDs.setDateService(planification.getDateService());
+        planificationDetailDs.setDateDebut(planification.getDateDebut());
+        planificationDetailDs.setDateFin(planification.getDateFin());
         planificationDetailDs.setIsCreatedBy(planification.getIsCreatedBy());
         planificationDetailDs.setCreatedDate(new Date());
         planificationDetailDs.setActif(planification.isActif());

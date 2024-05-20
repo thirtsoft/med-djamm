@@ -129,6 +129,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         Hospitalisation hospitalisation = findById(hospitalisationId);
         ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (immunologic != null) {
                 PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument
@@ -152,6 +153,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         Hospitalisation hospitalisation = findById(hospitalisationId);
         ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (imager != null) {
                 PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument
@@ -175,6 +177,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         Hospitalisation hospitalisation = findById(hospitalisationId);
         ExamenComplementaire examenComplementaire = hospitalisation.getExamenComplementaire();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (hematologic != null) {
                 PiecesJointes piecesJointesDTO = piecesJointesService.findByObjectIdAndIdDocument

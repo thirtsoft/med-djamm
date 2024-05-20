@@ -19,6 +19,9 @@ public interface PiecesJointesRepository extends JpaRepository<PiecesJointes, Lo
 
     @Query("SELECT DISTINCT doc FROM PiecesJointes doc WHERE doc.typeDocumentId=:type AND doc.objectId=:id and doc.actif=1")
     PiecesJointes findPiecesJointesByObjectIdAndType(@Param("id") Long id, @Param("type") Long type);
+    
+    @Query("SELECT DISTINCT doc FROM PiecesJointes doc WHERE doc.typeDocumentId=:type AND doc.objectId=:id and doc.idDocument = :idDocument and doc.actif=1")
+    PiecesJointes findPiecesJointesByObjectIdAndTypeAndIdDocument(@Param("id") Long id, @Param("type") Long type, @Param("idDocument") Long idDocument);
 
     Optional<PiecesJointes> findByObjectIdAndTypeDocumentIdAndActif(Long id, Long typeDocumentId, int i);
 

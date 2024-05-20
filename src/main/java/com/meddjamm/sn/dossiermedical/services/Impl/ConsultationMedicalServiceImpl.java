@@ -37,17 +37,18 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
     }
 
     @Override
-    public ConsultationMedical saveConsultationMedical(ConsultationMedical consultationMedical) {
+    public Long saveConsultationMedical(ConsultationMedical consultationMedical) {
         consultationMedical.setActif(true);
         consultationMedical.setCreatedDate(new Date());
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientById(consultationMedical.getCircuitPatientId());
         consultationMedical.setCircuitPatientId(circuitPatient.getId());
         consultationMedical.setCircuitPatient(circuitPatient);
-        return consultationMedicalRepository.save(consultationMedical);
+        ConsultationMedical saveconsultationMedical = consultationMedicalRepository.save(consultationMedical);
+        return saveconsultationMedical.getId();
     }
 
     @Override
-    public ConsultationMedical updateConsultationMedical(Long id, ConsultationMedical consultationMedical) throws Exception {
+    public Long updateConsultationMedical(Long id, ConsultationMedical consultationMedical) throws Exception {
         if (!consultationMedicalRepository.existsById(id)) {
             log.info("ConsultationMedical that this id " + id + "not found");
         }
@@ -57,7 +58,8 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         }
         consultationMedicalResult.setConsultation(consultationMedical.getConsultation());
         consultationMedicalResult.setExamenBiologique(consultationMedical.getExamenBiologique());
-        return consultationMedicalRepository.save(consultationMedicalResult);
+        ConsultationMedical updatedconsultationMedical = consultationMedicalRepository.save(consultationMedical);
+        return updatedconsultationMedical.getId();
     }
 
     @Override
@@ -115,6 +117,7 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         ConsultationMedical consultationMedical = findById(biologicId);
         ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (examenBiologique != null) {
                 if (immunologic != null) {
@@ -141,6 +144,7 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         ConsultationMedical consultationMedical = findById(biologicId);
         ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (examenBiologique != null) {
                 if (imager != null) {
@@ -167,6 +171,7 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         ConsultationMedical consultationMedical = findById(biologicId);
         ExamenBiologique examenBiologique = consultationMedical.getExamenBiologique();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
             if (examenBiologique != null) {
                 if (hematologic != null) {

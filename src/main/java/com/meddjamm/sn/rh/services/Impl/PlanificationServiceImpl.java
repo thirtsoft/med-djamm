@@ -30,10 +30,17 @@ public class PlanificationServiceImpl implements PlanificationService {
     @Override
     public void updatePlanification(Long id, Planification planification) throws Exception {
         if (!planificationRepository.existsById(id)) {
-            log.info("Planification that id is " + id + "not found");
+            throw new Exception("Planification that id is " + id + "not found");
         }
-        planification.setId(id);
-        planificationRepository.save(planification);
+        Planification planificationeResult = planificationRepository.findPlanificationById(id);
+        if (planificationeResult == null) {
+            throw new Exception("This Planification is not found");
+        }
+        planificationeResult.setLibelle(planification.getLibelle());
+        planificationeResult.setAgentId(planification.getAgentId());
+        planificationeResult.setDateDebut(planification.getDateDebut());
+        planificationeResult.setDateFin(planification.getDateFin());
+        planificationRepository.save(planificationeResult);
     }
 
     @Override

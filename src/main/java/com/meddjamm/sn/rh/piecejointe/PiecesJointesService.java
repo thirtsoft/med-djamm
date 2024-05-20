@@ -54,7 +54,7 @@ public class PiecesJointesService {
         if (dto.getIdDocument() == null) {
             model1 = piecesJointesRepository.findPiecesJointesByObjectIdAndType(dto.getObjectId(), dto.getTypeDocumentId());
         } else {
-            model1 = piecesJointesRepository.findPiecesJointesByObjectIdAndType(dto.getObjectId(), dto.getTypeDocumentId());
+            model1 = piecesJointesRepository.findPiecesJointesByObjectIdAndTypeAndIdDocument(dto.getObjectId(), dto.getTypeDocumentId(), dto.getIdDocument());
         }
         PiecesJointes model2 = piecesJointesRepository.findByObjectIdAndTypeDocumentId(dto.getObjectId(), dto.getTypeDocumentId())
                 .orElse(new PiecesJointes(dto));

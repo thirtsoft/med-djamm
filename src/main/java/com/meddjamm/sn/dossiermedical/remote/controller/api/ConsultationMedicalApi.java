@@ -21,10 +21,10 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface ConsultationMedicalApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ConsultationMedicalDs> creerConsultationMedical(@RequestBody ConsultationMedicalDs consultationMedicalDs);
+    Long creerConsultationMedical(@RequestBody ConsultationMedicalDs consultationMedicalDs);
 
     @PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ConsultationMedicalDs> updateConsultationMedical(@PathVariable Long id, @RequestBody ConsultationMedicalDs consultationMedicalDs) throws Exception;
+    Long updateConsultationMedical(@PathVariable Long id, @RequestBody ConsultationMedicalDs consultationMedicalDs) throws Exception;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ConsultationMedicalDs> findById(@PathVariable Long id);

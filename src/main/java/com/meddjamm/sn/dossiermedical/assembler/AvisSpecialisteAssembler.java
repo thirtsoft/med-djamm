@@ -57,7 +57,6 @@ public class AvisSpecialisteAssembler {
 
     public AvisSpecialiste assembleUpdateAvisSpecialisteFromDs(AvisSpecialisteDs avisSpecialisteDs) {
         AvisSpecialiste avisSpecialiste = avisSpecialisteService.findById(avisSpecialisteDs.getId());
-        avisSpecialiste.setId(avisSpecialisteDs.getId());
         avisSpecialiste.setResume(avisSpecialisteDs.getResume());
         return avisSpecialiste;
     }

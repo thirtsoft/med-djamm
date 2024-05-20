@@ -21,7 +21,9 @@ public class PlanificationDs {
 
     private int isCreatedBy;
 
-    private Date dateService;
+    private Date dateDebut;
+
+    private Date dateFin;
 
     private Date createdDate;
 

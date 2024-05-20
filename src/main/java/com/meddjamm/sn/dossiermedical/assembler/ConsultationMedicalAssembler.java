@@ -70,10 +70,14 @@ public class ConsultationMedicalAssembler {
 
     public ConsultationMedical assembleUpdateConsultationMedicallisteFromDs(ConsultationMedicalDs consultationMedicalDs) {
         ConsultationMedical consultationMedical = consultationMedicalService.findById(consultationMedicalDs.getId());
-        consultationMedical.setConsultation(consultationAssembler.
-                assembleUpdateConsultationFromDs(consultationMedical.getConsultation(), consultationMedicalDs.getConsultationDs()));
-        consultationMedical.setExamenBiologique(examenBiologiqueAssembler.
-                assembleUpdateExamenBiologiqueFromDs(consultationMedical.getExamenBiologique(), consultationMedicalDs.getExamenBiologiqueDs()));
+        if (consultationMedical.getConsultation() != null) {
+            consultationMedical.setConsultation(consultationAssembler.assembleUpdateConsultationFromDs(
+                    consultationMedical.getConsultation(), consultationMedicalDs.getConsultationDs()));
+        }
+        if (consultationMedical.getExamenBiologique() != null) {
+            consultationMedical.setExamenBiologique(examenBiologiqueAssembler.assembleUpdateExamenBiologiqueFromDs(
+                    consultationMedical.getExamenBiologique(), consultationMedicalDs.getExamenBiologiqueDs()));
+        }
         return consultationMedical;
     }
 

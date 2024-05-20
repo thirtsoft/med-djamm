@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ConsultationMedicalService {
 
-    ConsultationMedical saveConsultationMedical(ConsultationMedical consultationMedical);
+    Long saveConsultationMedical(ConsultationMedical consultationMedical);
 
-    ConsultationMedical updateConsultationMedical(Long id, ConsultationMedical consultationMedical) throws Exception;
+    Long updateConsultationMedical(Long id, ConsultationMedical consultationMedical) throws Exception;
 
     ConsultationMedical findById(Long id);
 

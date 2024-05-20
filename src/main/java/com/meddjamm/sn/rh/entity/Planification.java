@@ -23,7 +23,11 @@ public class Planification extends AbstractAuditableEntity implements Serializab
     @Column(name = "agent_medical_uid")
     private Long agentId;
 
-    private Date dateService;
+    @Column(name = "date_debut_service")
+    private Date dateDebut;
+
+    @Column(name = "date_fin_service")
+    private Date dateFin;
 
     private int isCreatedBy;
 

@@ -22,6 +22,8 @@ public class PiecesJointes extends AbstractAuditableEntity implements Serializab
 
     private Long objectId;
 
+    private Long idDocument;
+
     private String dossier;
 
     private int actif;
@@ -35,6 +37,7 @@ public class PiecesJointes extends AbstractAuditableEntity implements Serializab
         typeDocumentId = dto.getTypeDocumentId();
         objectId = dto.getObjectId();
         dossier = dto.getDossier();
+        idDocument = dto.getIdDocument();
         actif = 1;
         nomFichier = dto.getNomFichier();
     }

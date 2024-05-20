@@ -25,21 +25,14 @@ public class ConsultationMedicalController implements ConsultationMedicalApi {
     }
 
     @Override
-    public ResponseEntity<ConsultationMedicalDs> creerConsultationMedical(ConsultationMedicalDs consultationMedicalDs) {
-        return new ResponseEntity<>(consultationMedicalAssembler.assembleEntityToDs(
-                consultationMedicalService.saveConsultationMedical(
-                        consultationMedicalAssembler.assembleConsultationMedicallisteFromDs(consultationMedicalDs)
-                )
-        ), HttpStatus.OK);
+    public Long creerConsultationMedical(ConsultationMedicalDs consultationMedicalDs) {
+        return consultationMedicalService.saveConsultationMedical(consultationMedicalAssembler.assembleConsultationMedicallisteFromDs(consultationMedicalDs));
     }
 
     @Override
-    public ResponseEntity<ConsultationMedicalDs> updateConsultationMedical(Long id, ConsultationMedicalDs consultationMedicalDs) throws Exception {
-        return new ResponseEntity<>(consultationMedicalAssembler.assembleEntityToDs(
-                consultationMedicalService.updateConsultationMedical(id,
-                        consultationMedicalAssembler.assembleUpdateConsultationMedicallisteFromDs(consultationMedicalDs)
-                )
-        ), HttpStatus.OK);
+    public Long updateConsultationMedical(Long id, ConsultationMedicalDs consultationMedicalDs) throws Exception {
+        return consultationMedicalService.updateConsultationMedical(id, consultationMedicalAssembler
+                .assembleUpdateConsultationMedicallisteFromDs(consultationMedicalDs));
     }
 
     @Override
