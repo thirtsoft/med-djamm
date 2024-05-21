@@ -199,7 +199,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         String token = UUID.randomUUID().toString();
         this.createPasswordResetTokenForUser(utilisateur, token);
         try {
-            return passwordResetEmailLink(url.concat(token));
+            return passwordResetEmailLink(utilisateur, url.concat(token));
         } catch (MessagingException | UnsupportedEncodingException e) {
             throw new IllegalArgumentException(e);
         }
@@ -221,8 +221,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return utilisateurRepository.findAllMedecins();
     }
 
-    private String passwordResetEmailLink(String applicationUrl) throws MessagingException, UnsupportedEncodingException {
-        eventListener.sendPasswordResetVerificationEmail(applicationUrl);
+    private String passwordResetEmailLink(Utilisateur utilisateur, String applicationUrl) throws MessagingException, UnsupportedEncodingException {
+        eventListener.sendPasswordResetVerificationEmail(utilisateur, applicationUrl);
         log.info("Click the link to reset your password :  {}", applicationUrl);
         return applicationUrl;
     }

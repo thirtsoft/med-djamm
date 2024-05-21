@@ -40,13 +40,13 @@ public class UtilisateurController implements UtilisateurApi {
 
     @Override
     public String activation(String code) {
-        String FormConnexionFrontend =
-                "<h1>Votre compte a bien été activié.,</h1>" + " <br>" +
+        String formConnexionFrontend =
+                "<h1>Votre compte a bien été activé.,</h1>" + " <br>" +
                         "<h2> Veuillez cliquez sur le lien ci-dessous pour vous connectez.</h2>" +
                         "<h2> Avec votre email et le mot de passe que vous avez reçu par émail.</h2>" +
                         "<a href=\"" + ConstantDeployment.HOST_FRONT + "\">Se connecter</a>";
         utilisateurService.lireEnFonctionDuCode(code);
-        return FormConnexionFrontend;
+        return formConnexionFrontend;
     }
 
     @Override
@@ -81,8 +81,8 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-    public ResponseEntity<String> changerMotDePasseRequest(ChangerMotDePasseRequest changerMotDePasseRequest,
-                                                           HttpServletRequest request) {
+    public ResponseEntity<String> resetPasswordRequest(ChangerMotDePasseRequest changerMotDePasseRequest,
+                                                       HttpServletRequest request) {
         String url = getUrl(request) + "/med-dalaljamm/v1/utilisateur/reset-password?token=";
         return new ResponseEntity<>(utilisateurService.demandeChangerMotDePasse(changerMotDePasseRequest.getEmail(), url), CREATED);
     }
