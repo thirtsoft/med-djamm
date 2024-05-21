@@ -83,19 +83,37 @@ public class MedDjammApplication implements CommandLineRunner {
         Profil profileAdmin = new Profil("ADMIN", "Administrateur", Set.of(action1, action2, action3, action4, action5, action6), 1);
         Profil profileUser = new Profil("USER", "Utilisateur", Set.of(action1, action4, action6), 1);
 
-        actionRepository.saveAll(List.of(action1, action2, action3, action4, action5, action6));
-        profilRepository.saveAll(List.of(profileAdmin, profileUser));
+        actionRepository.saveAll(of(action1, action2, action3, action4, action5, action6));
+        profilRepository.saveAll(of(profileAdmin, profileUser));
 
-        Utilisateur utilisateur = Utilisateur.builder().email("root@test").prenom("Tairou").nom("Diallo").matricule(genererMatricule()).motdepasse(passwordEncoder.encode("root")).profil(profileAdmin).actif(true).build();
-        utilisateurRepository.save(utilisateur);
+        Utilisateur tairou = Utilisateur.builder()
+                .email("saliouwourydiallo@gmail.com")
+                .prenom("Tairou")
+                .nom("Diallo")
+                .matricule(genererMatricule())
+                .motdepasse(passwordEncoder.encode("root"))
+                .profil(profileAdmin)
+                .actif(true)
+                .build();
+        TimeUnit.SECONDS.sleep(2);
+        Utilisateur saliou = Utilisateur.builder()
+                .email("saliouwourydiallo3@gmail.com")
+                .prenom("Saliou Woury")
+                .nom("Diallo")
+                .matricule(genererMatricule())
+                .motdepasse(passwordEncoder.encode("root"))
+                .profil(profileAdmin)
+                .actif(true)
+                .build();
+        utilisateurRepository.saveAll(of(tairou, saliou));
 
         var admin = RegisterRequest.builder().firstname("Admin").prenom("Admin").email("admin@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Admin token: " + authenticationService.register(admin).getAccessToken());
 
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
-
-        Patient patient = Patient.builder()
+*/
+/*        Patient patient = Patient.builder()
                 .code("0001")
                 .nom("Diallo")
                 .prenom("Saliou")
@@ -145,8 +163,8 @@ public class MedDjammApplication implements CommandLineRunner {
         Hospitalisation savedHospitalisation = hospitalisationRepository.save(hospitalisation);
 
         System.out.println("savedPatient " + savedPatient);
-        System.out.println("savedHospitalisation " + savedHospitalisation);
-*/
+        System.out.println("savedHospitalisation " + savedHospitalisation);*/
+
         /*
         var manager = RegisterRequest.builder().firstname("User012").prenom("User012").email("mana12ger@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
@@ -182,7 +200,5 @@ public class MedDjammApplication implements CommandLineRunner {
 
         typeDocumentRepository.saveAllAndFlush(typeDocumentList);
         */
-
-
     }
 }

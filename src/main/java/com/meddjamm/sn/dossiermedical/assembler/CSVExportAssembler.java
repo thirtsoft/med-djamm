@@ -2,8 +2,6 @@ package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailsExport;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
-import com.meddjamm.sn.dossiermedical.services.ConsultationMedicalService;
-import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +14,6 @@ import static java.util.Arrays.asList;
 @Component
 @RequiredArgsConstructor
 public class CSVExportAssembler {
-
-    private final HospitalisationService hospitalisationService;
-    private final HospitalisationAssembler hospitalisationAssembler;
-
-    private final ConsultationMedicalAssembler consultationMedicalAssembler;
-    private final ConsultationMedicalService consultationMedicalService;
 
     public static List<String> headers() {
         return asList(
