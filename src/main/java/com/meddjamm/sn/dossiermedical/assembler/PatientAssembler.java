@@ -1,7 +1,18 @@
 package com.meddjamm.sn.dossiermedical.assembler;
 
-import com.meddjamm.sn.dossiermedical.entity.*;
-import com.meddjamm.sn.dossiermedical.remote.model.*;
+import com.meddjamm.sn.dossiermedical.entity.Diagnostic;
+import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
+import com.meddjamm.sn.dossiermedical.entity.Patient;
+import com.meddjamm.sn.dossiermedical.entity.PersonneConfiance;
+import com.meddjamm.sn.dossiermedical.entity.TraitementMedicalItem;
+import com.meddjamm.sn.dossiermedical.remote.model.DiagnosticDs;
+import com.meddjamm.sn.dossiermedical.remote.model.HospitalisationDsExport;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailsExport;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
+import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
+import com.meddjamm.sn.dossiermedical.remote.model.PersonneConfianceDs;
+import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalItemExport;
 import com.meddjamm.sn.dossiermedical.services.HospitalisationService;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.rh.entity.Medicament;
@@ -64,9 +75,11 @@ public class PatientAssembler {
     private TraitementMedicalItemExport assembleTraitementMedicalItem(TraitementMedicalItem traitementMedicalItem) {
         TraitementMedicalItemExport traitementMedicalItemDs = new TraitementMedicalItemExport();
 
-        traitementMedicalItemDs.setLibelle(ofNullable(medicamentService.findById(traitementMedicalItem.getMedicamendId()))
-                .map(Medicament::getLibelle)
-                .orElse(null));
+        if (traitementMedicalItem.getMedicamendId() != null) {
+            traitementMedicalItemDs.setLibelle(ofNullable(medicamentService.findById(traitementMedicalItem.getMedicamendId()))
+                    .map(Medicament::getLibelle)
+                    .orElse(null));
+        }
         traitementMedicalItemDs.setPsologie(traitementMedicalItem.getPsologie());
         traitementMedicalItemDs.setAdministrePar(traitementMedicalItem.getAdministrePar());
         traitementMedicalItemDs.setNbrePrise(traitementMedicalItem.getNbrePrise());
