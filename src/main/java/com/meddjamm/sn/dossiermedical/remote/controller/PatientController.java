@@ -114,7 +114,7 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<InputStreamResource> exportDossierPatient(String code) {
+    public ResponseEntity<InputStreamResource> exportDossierPatient() {
         List<List<String>> strings = patientAssembler.assembleEntitiesFromPatientDetailDs(patientService.findAllPatients()).stream()
                 .map(csvExportAssembler::mapEntityToListData)
                 .toList();

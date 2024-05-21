@@ -61,8 +61,8 @@ public interface PatientApi {
     @GetMapping(value = "/list/order")
     ResponseEntity<List<PatientMinDs>> findAllPatientOrderByFirstName();
 
-    @GetMapping(value = "/export-dossier/{code}")
+    @GetMapping(value = "/export-dossier")
     @Transactional(readOnly = true)
-    ResponseEntity<InputStreamResource> exportDossierPatient(@PathVariable String code);
+    ResponseEntity<InputStreamResource> exportDossierPatient();
 
 }

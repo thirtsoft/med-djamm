@@ -2,7 +2,6 @@ package com.meddjamm.sn.dossiermedical.assembler;
 
 import com.meddjamm.sn.dossiermedical.entity.TraitementMedicalItem;
 import com.meddjamm.sn.dossiermedical.remote.model.TraitementMedicalItemDs;
-import com.meddjamm.sn.dossiermedical.repository.TraitementMedicalItemRepository;
 import com.meddjamm.sn.dossiermedical.services.TraitementMedicalService;
 import com.meddjamm.sn.rh.assembler.MedicamentAssembler;
 import com.meddjamm.sn.rh.remote.model.MedicamentDs;
@@ -23,8 +22,6 @@ public class TraitementMedicalItemAssembler {
     private final MedicamentService medicamentService;
 
     private final MedicamentAssembler medicamentAssembler;
-
-    private final TraitementMedicalItemRepository traitementMedicalItemRepository;
 
     private final TraitementMedicalService traitementMedicalService;
 
@@ -63,6 +60,7 @@ public class TraitementMedicalItemAssembler {
             MedicamentDs medicamentDs = medicamentAssembler.assembleEntityToDs(medicamentService.findById(traitementMedicalItem.getMedicamendId()));
             traitementMedicalItemDs.setMedicamentDs(medicamentDs);
         }
+        traitementMedicalItemDs.setDatePrescription(traitementMedicalItem.getCreationDate());
         return traitementMedicalItemDs;
     }
 

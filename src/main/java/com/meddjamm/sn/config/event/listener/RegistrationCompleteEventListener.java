@@ -46,11 +46,11 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
     }
 
     public void sendVerificationEmail(String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Invitation sur l'application MEDICAPP";
+        String subject = "Invitation sur l'application SNAPPLIMED";
         String senderName = "Service Médecine";
         String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
-                "<p>Le Service Médecine Interne de Dalal-Jamm est heureuse de vous compter parmi ses collaborateurs.," + " <br>" +
-                "Vous pouvez cliquez sur le lien ci-dessous pour activer votre compte.</p>" +
+                "<p>Le service Médecine Interne l’hôpital Dalal-Jamm est heureux de vous compter parmi ses collaborateurs.," + " <br>" +
+                "Vous pouvez cliquer sur le lien ci-dessous pour activer votre compte.</p>" +
                 "<a href=\"" + url + "\">activer votre compte</a>" +
                 "<p>Votre mot de passe: " + utilisateur.getMotdepasseprecedent() + "</p>" +
                 "<p> Cordialement <br> Service d'enregistrement</p>";
