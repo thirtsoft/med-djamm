@@ -65,4 +65,8 @@ public interface PatientApi {
     @Transactional(readOnly = true)
     ResponseEntity<InputStreamResource> exportDossierPatient();
 
+    @GetMapping(value = "/export-patients")
+    @Transactional(readOnly = true)
+    ResponseEntity<InputStreamResource> exportPatientComplete();
+
 }

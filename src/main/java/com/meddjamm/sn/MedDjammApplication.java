@@ -112,17 +112,54 @@ public class MedDjammApplication implements CommandLineRunner {
 
         var manager = RegisterRequest.builder().firstname("User").prenom("User").email("manager@mail.com").password("password").profilCode("USER").build();
         System.out.println("Manager token: " + authenticationService.register(manager).getAccessToken());
-*/
-/*        Patient patient = Patient.builder()
+
+
+        Patient patient = Patient.builder()
                 .code("0001")
                 .nom("Diallo")
                 .prenom("Saliou")
                 .numeroTelephone("77 000 00 00")
                 .address("addresse")
                 .dateAdmission(LocalDate.now().toDate())
+                .age(25)
+                .race("race")
+                .ethnie("ethnie")
+                .origine("origine").nationalite("nationalite").originePere("originePere")
+                .origineMere("origineMere").prototype("prototype").consanguinite("consanguinite")
+                .niveauSocialEconomique("niveauSocialEconomique").regimeAlimentaire("regimeAlimentaire")
+                .diagnostic(Diagnostic.builder()
+                        .diagnostic_principal("diagnostic_principal")
+                        .diagnostic_associe("diagnostic_associe")
+                        .build())
                 .actif(1)
                 .build();
-        Patient savedPatient = patientRepository.save(patient);
+        Patient patient1 = Patient.builder()
+                .code("0002")
+                .nom("Diallo")
+                .prenom("Tahiou")
+                .numeroTelephone("77 000 00 00")
+                .address("addresse")
+                .dateAdmission(LocalDate.now().toDate())
+                .age(25)
+                .race("race...")
+                .ethnie("ethnie...")
+                .origine("origine...").nationalite("nationalite...")
+                .originePere("originePere...")
+                .origineMere("origineMere...")
+                .prototype("prototype...")
+                .consanguinite("consanguinite...")
+                .niveauSocialEconomique("niveauSocialEconomique...")
+                .regimeAlimentaire("regimeAlimentaire...")
+                .diagnostic(Diagnostic.builder()
+                        .diagnostic_principal("diagnostic_principal...")
+                        .diagnostic_associe("diagnostic_associe...")
+                        .build())
+                .actif(1)
+                .build();
+        patientRepository.saveAll(of(patient, patient1));
+
+ */
+/*
         ExamenComplementaire examenComplementair = ExamenComplementaire.builder()
                 .biologie("biologie")
                 .immunologie("immunologie")
@@ -130,7 +167,6 @@ public class MedDjammApplication implements CommandLineRunner {
                 .anatomopathologie("anatomopathologie")
                 .actif(1)
                 .build();
-
         ExamenComplementaire savedExamenComplementaire = examenComplementaireRepository.save(examenComplementair);
         Discussion discussion = discussionRepository.save(Discussion.builder().resume("resume resume").actif(1).build());
         Synthese synthese = syntheseRepository.save(Synthese.builder().observation("observation observation").actif(1).build());

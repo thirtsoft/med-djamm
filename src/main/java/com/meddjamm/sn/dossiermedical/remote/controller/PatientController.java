@@ -9,7 +9,6 @@ import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.reportpdfexcel.services.ReportPdfService;
-import com.meddjamm.sn.utils.CSVSupport;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.List;
 
+import static com.meddjamm.sn.dossiermedical.assembler.CSVExportAssembler.ENTETEPATIENTS;
+import static com.meddjamm.sn.dossiermedical.assembler.CSVExportAssembler.headeurs;
+import static com.meddjamm.sn.utils.CSVSupport.generate;
 import static org.springframework.http.MediaType.TEXT_PLAIN;
 
 @RestController
@@ -110,7 +112,7 @@ public class PatientController implements PatientApi {
                 .toList();
         return ResponseEntity.ok()
                 .contentType(TEXT_PLAIN)
-                .body(CSVSupport.generate(CSVExportAssembler.headers().toArray(new String[]{}), strings));
+                .body(generate(CSVExportAssembler.headers().toArray(new String[]{}), strings));
     }
 
     @Override
@@ -120,7 +122,18 @@ public class PatientController implements PatientApi {
                 .toList();
         return ResponseEntity.ok()
                 .contentType(TEXT_PLAIN)
-                .body(CSVSupport.generate(CSVExportAssembler.headeurs().toArray(new String[]{}), strings));
+                .body(generate(headeurs().toArray(new String[]{}), strings));
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> exportPatientComplete() {
+        List<List<String>> patientDetailDs = patientService.findAllPatients().stream()
+                .map(patientAssembler::assemblePatientDetails)
+                .map(csvExportAssembler::mapEntityToData)
+                .toList();
+        return ResponseEntity.ok()
+                .contentType(TEXT_PLAIN)
+                .body(generate(ENTETEPATIENTS().toArray(new String[0]), patientDetailDs));
     }
 
     @GetMapping(value = "/mySession")
