@@ -46,10 +46,7 @@ public interface UtilisateurApi {
 
     @PostMapping("/password-reset-request")
     ResponseEntity<String> resetPasswordRequest(@RequestBody ChangerMotDePasseRequest changerMotDePasseRequest, HttpServletRequest request);
-
-    @PostMapping("/reset-password")
-    String resetPassword(@RequestBody ChangerMotDePasseRequest changerMotDePasseRequest, @RequestParam("token") String token);
-
+    
     @PostMapping("/change-password")
     ResponseEntity<String> changePassword(@RequestBody ChangerMotDePasseRequest requestUtil);
 

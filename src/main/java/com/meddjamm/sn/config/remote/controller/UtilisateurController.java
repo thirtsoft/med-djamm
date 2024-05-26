@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.meddjamm.sn.utils.UtilString.getUrl;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -85,20 +84,6 @@ public class UtilisateurController implements UtilisateurApi {
                                                        HttpServletRequest request) {
         String url = getUrl(request) + "/med-dalaljamm/v1/utilisateur/reset-password?token=";
         return new ResponseEntity<>(utilisateurService.demandeChangerMotDePasse(changerMotDePasseRequest.getEmail(), url), CREATED);
-    }
-
-    @Override
-    public String resetPassword(ChangerMotDePasseRequest changerMotDePasseRequest, String token) {
-        String tokenVerificationResult = utilisateurService.validatePasswordResetToken(token);
-        if (!tokenVerificationResult.equalsIgnoreCase("valide")) {
-            return "Invalid token password reset token";
-        }
-        Optional<Utilisateur> theUser = Optional.ofNullable(utilisateurService.findUserByPasswordToken(token));
-        if (theUser.isPresent()) {
-            utilisateurService.changePassword(theUser.get(), changerMotDePasseRequest.getNouveauMotDePasse());
-            return "Password has been reset successfully";
-        }
-        return "Invalid password reset token";
     }
 
     @Override

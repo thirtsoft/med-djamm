@@ -44,7 +44,7 @@ public class CSVExportAssembler {
         return asList(
                 "INDEX",
                 "NOM",
-                "PRÉNOM",
+                "PRENOM",
                 "DATE ADMISSION",
                 "ADRESSE",
                 "TÉLÉPHONE",
@@ -93,10 +93,10 @@ public class CSVExportAssembler {
         return asList(
                 "INDEX",
                 "NOM",
-                "PRÉNOM",
+                "PRENOM",
                 "DATE ADMISSION",
                 "ADRESSE",
-                "TÉLÉPHONE",
+                "TELEPHONE",
                 "AGE",
                 "RACE",
                 "ETHNIE",
