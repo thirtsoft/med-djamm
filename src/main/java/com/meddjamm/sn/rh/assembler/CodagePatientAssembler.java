@@ -31,7 +31,7 @@ public class CodagePatientAssembler {
         if (codagePatient.getId() != null)
             codagePatientDs.setId(codagePatient.getId());
         codagePatientDs.setPatientId(codagePatient.getPatientId());
-        codagePatientDs.setEpistemologies(new ArrayList<>(codagePatient.getEpistemologies()));
+        codagePatientDs.setEpidemiologiques(new ArrayList<>(codagePatient.getEpidemiologiques()));
         codagePatientDs.setCliniques(new ArrayList<>(codagePatient.getCliniques()));
         codagePatientDs.setExamenComplementaires(new ArrayList<>(codagePatient.getExamenComplementaires()));
         codagePatientDs.setTraitements(new ArrayList<>(codagePatient.getTraitements()));
@@ -45,11 +45,21 @@ public class CodagePatientAssembler {
         if (codagePatientDs.getId() != null)
             codagePatient.setId(codagePatientDs.getId());
         codagePatient.setPatientId(codagePatientDs.getPatientId());
-        codagePatient.setEpistemologies(new HashSet<>(codagePatientDs.getEpistemologies()));
-        codagePatient.setCliniques(new HashSet<>(codagePatientDs.getCliniques()));
-        codagePatient.setExamenComplementaires(new HashSet<>(codagePatientDs.getExamenComplementaires()));
-        codagePatient.setTraitements(new HashSet<>(codagePatientDs.getTraitements()));
-        codagePatient.setSyntheses(new HashSet<>(codagePatientDs.getSyntheses()));
+        if (codagePatientDs.getEpidemiologiques() != null) {
+            codagePatient.setEpidemiologiques(new HashSet<>(codagePatientDs.getEpidemiologiques()));
+        }
+        if (codagePatientDs.getCliniques() != null) {
+            codagePatient.setCliniques(new HashSet<>(codagePatientDs.getCliniques()));
+        }
+        if (codagePatientDs.getExamenComplementaires() != null) {
+            codagePatient.setExamenComplementaires(new HashSet<>(codagePatientDs.getExamenComplementaires()));
+        }
+        if (codagePatientDs.getTraitements() != null) {
+            codagePatient.setTraitements(new HashSet<>(codagePatientDs.getTraitements()));
+        }
+        if (codagePatientDs.getSyntheses() != null) {
+            codagePatient.setSyntheses(new HashSet<>(codagePatientDs.getSyntheses()));
+        }
         return codagePatient;
     }
 
@@ -71,7 +81,7 @@ public class CodagePatientAssembler {
             String nomComplet = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
             codagePatientDetailDs.setNomCompletAgent(nomComplet);
         }
-        codagePatientDetailDs.setEpistemologies(new ArrayList<>(codagePatient.getEpistemologies()));
+        codagePatientDetailDs.setEpidemiologiques(new ArrayList<>(codagePatient.getEpidemiologiques()));
         codagePatientDetailDs.setCliniques(new ArrayList<>(codagePatient.getCliniques()));
         codagePatientDetailDs.setExamenComplementaires(new ArrayList<>(codagePatient.getExamenComplementaires()));
         codagePatientDetailDs.setTraitements(new ArrayList<>(codagePatient.getTraitements()));

@@ -18,7 +18,7 @@ public class CodagePatientDetailDs {
 
     private String nomCompletAgent;
 
-    private List<String> epistemologies;
+    private List<String> epidemiologiques;
 
     private List<String> cliniques;
 

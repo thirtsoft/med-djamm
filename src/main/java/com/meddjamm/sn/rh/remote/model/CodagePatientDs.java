@@ -15,7 +15,7 @@ public class CodagePatientDs {
 
     private Long patientId;
 
-    private List<String> epistemologies;
+    private List<String> epidemiologiques;
 
     private List<String> cliniques;
 

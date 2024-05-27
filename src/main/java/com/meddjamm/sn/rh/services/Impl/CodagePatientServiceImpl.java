@@ -32,7 +32,7 @@ public class CodagePatientServiceImpl implements CodagePatientService {
             throw new Exception("Codage not found");
         }
         codagePatientResult.setPatientId(codagePatient.getPatientId());
-        codagePatientResult.setEpistemologies(new HashSet<>(codagePatient.getEpistemologies()));
+        codagePatientResult.setEpidemiologiques(new HashSet<>(codagePatient.getEpidemiologiques()));
         codagePatientResult.setCliniques(new HashSet<>(codagePatient.getCliniques()));
         codagePatientResult.setExamenComplementaires(new HashSet<>(codagePatient.getExamenComplementaires()));
         codagePatientResult.setTraitements(new HashSet<>(codagePatient.getTraitements()));

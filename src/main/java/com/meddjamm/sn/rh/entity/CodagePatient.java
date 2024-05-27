@@ -28,9 +28,9 @@ public class CodagePatient extends AbstractAuditableEntity implements Serializab
     private Long patientId;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "codage_epistemolgique_par_patient", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "codage_epistemolgique")
-    private Set<String> epistemologies;
+    @CollectionTable(name = "codage_epidemiologique_par_patient", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "codage_epidemiologique")
+    private Set<String> epidemiologiques;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "codage_clinique_par_patient", joinColumns = @JoinColumn(name = "id"))
