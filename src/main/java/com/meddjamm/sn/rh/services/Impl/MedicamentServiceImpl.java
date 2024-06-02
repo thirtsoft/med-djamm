@@ -21,20 +21,21 @@ public class MedicamentServiceImpl implements MedicamentService {
     }
 
     @Override
-    public Medicament saveMedicament(Medicament medicament) throws Exception {
+    public Long saveMedicament(Medicament medicament) throws Exception {
         String code = medicament.getCode();
         Optional<Medicament> byCode = medicamentRepository.findByCode(code);
         if (medicament.getId() == null && byCode.isPresent()
                 || (medicament.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(medicament.getId()))) {
-            throw new Exception(String.format("Le code %s est déjà associé à pour un autre médicament .", code));
+            throw new Exception(String.format("Le code %s est déjà associé à un autre médicament .", code));
         }
         medicament.setActif(true);
         medicament.setCreateDate(new Date());
-        return medicamentRepository.save(medicament);
+        Medicament savedMedicament = medicamentRepository.save(medicament);
+        return savedMedicament.getId();
     }
 
     @Override
-    public Medicament updateMedicament(Long id, Medicament medicament) throws Exception {
+    public Long updateMedicament(Long id, Medicament medicament) throws Exception {
         if (!medicamentRepository.existsById(id)) {
             log.info("This Medicament that id is " + id + "not found");
         }
@@ -44,7 +45,13 @@ public class MedicamentServiceImpl implements MedicamentService {
         }
         medicamentResult.setCode(medicament.getCode());
         medicamentResult.setLibelle(medicament.getLibelle());
-        return medicamentRepository.save(medicamentResult);
+        Optional<Medicament> byCode = medicamentRepository.findByCode(medicament.getCode());
+        if (medicament.getId() == null && byCode.isPresent()
+                || (medicament.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(medicament.getId()))) {
+            throw new Exception(String.format("Le code %s est déjà associé à un autre médicament .", medicament.getCode()));
+        }
+        Medicament updatedMedicament = medicamentRepository.save(medicamentResult);
+        return updatedMedicament.getId();
     }
 
     @Override

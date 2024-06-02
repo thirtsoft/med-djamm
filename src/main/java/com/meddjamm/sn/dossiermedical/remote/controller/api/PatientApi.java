@@ -3,6 +3,7 @@ package com.meddjamm.sn.dossiermedical.remote.controller.api;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
+import com.meddjamm.sn.dossiermedical.remote.model.ResponsePatientDs;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +26,8 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface PatientApi {
 
     @PostMapping(value = "/save")
-    ResponseEntity<PatientMinDs> creerPatient(@RequestBody PatientDetailDs patientDetailDs) throws Exception;
+    @ResponseBody
+    ResponsePatientDs creerPatient(@RequestBody PatientDetailDs patientDetailDs);
 
     @PostMapping(value = "/generated-dossier-patient")
     ResponseEntity<PatientDetailDs> creerDossierPatient(@RequestBody PatientDetailDs patientDetailDs) throws Exception;

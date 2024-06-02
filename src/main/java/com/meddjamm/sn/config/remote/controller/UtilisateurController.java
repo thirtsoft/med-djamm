@@ -8,6 +8,7 @@ import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
 import com.meddjamm.sn.config.service.UtilisateurService;
 import com.meddjamm.sn.utils.ConstantDeployment;
+import com.meddjamm.sn.utils.ResponseMassageDs;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,13 +31,25 @@ public class UtilisateurController implements UtilisateurApi {
     private final UtilisateurAssembler utilisateurAssembler;
 
     @Override
-    public ResponseEntity<UtilisateurDs> creerUtilisateur(UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception {
+    public ResponseMassageDs creerUtilisateur(UtilisateurDs utilisateurDs, HttpServletRequest request) {
         Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurFromDs(utilisateurDs);
-        return new ResponseEntity<>(utilisateurAssembler
-                .assembleUtilisateurDsFromEntity(utilisateurService.
-                        saveUtilisateur(utilisateur, getUrl(request))), HttpStatus.CREATED);
+        try {
+            Long id = utilisateurService.saveUtilisateur(utilisateur, getUrl(request));
+            return new ResponseMassageDs("OK", id.toString());
+        } catch (Exception e) {
+            return new ResponseMassageDs("FAILED", e.getMessage());
+        }
     }
 
+    /*
+        @Override
+        public ResponseEntity<UtilisateurDs> creerUtilisateur(UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception {
+            Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurFromDs(utilisateurDs);
+            return new ResponseEntity<>(utilisateurAssembler
+                    .assembleUtilisateurDsFromEntity(utilisateurService.
+                            saveUtilisateur(utilisateur, getUrl(request))), HttpStatus.CREATED);
+        }
+    */
     @Override
     public String activation(String code) {
         String formConnexionFrontend =

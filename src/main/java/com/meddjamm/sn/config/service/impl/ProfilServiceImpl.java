@@ -28,6 +28,12 @@ public class ProfilServiceImpl implements ProfilService {
                 || (profil.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(profil.getId()))) {
             throw new Exception(String.format("Le code %s est déjà associé à pour un autre profil .", code));
         }
+        String libelle = profil.getLibelle();
+        Optional<Profil> byLibelle = profilRepository.findByProfilLibelle(libelle);
+        if (profil.getId() == null && byLibelle.isPresent()
+                || (profil.getId() != null && byLibelle.isPresent() && !byLibelle.get().getId().equals(profil.getId()))) {
+            throw new Exception(String.format("Le profil que vous voulez crée %s existe déjà .", libelle));
+        }
         profil.setActif(true);
         return profilRepository.save(profil);
     }

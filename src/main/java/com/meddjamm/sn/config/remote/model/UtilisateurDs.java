@@ -51,6 +51,8 @@ public class UtilisateurDs {
 
     private String speciality;
 
+    private boolean actif;
+
 
     public boolean isEst_valide() {
         if (est_valide == 1)

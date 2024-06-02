@@ -1,6 +1,7 @@
 package com.meddjamm.sn.config.remote.controller.api;
 
 import com.meddjamm.sn.config.remote.model.ProfilDs;
+import com.meddjamm.sn.utils.ResponseMassageDs;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface ProfilApi {
 
     @PostMapping(value = "/save")
-    ResponseEntity<ProfilDs> creerProfil(@RequestBody ProfilDs profilDs) throws Exception;
+    ResponseMassageDs creerProfil(@RequestBody ProfilDs profilDs);
 
     @PutMapping(value = "/edit/{id}")
     ResponseEntity<ProfilDs> updateProfil(@PathVariable Long id, @RequestBody ProfilDs profilDs) throws Exception;

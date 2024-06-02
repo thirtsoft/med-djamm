@@ -12,6 +12,9 @@ import java.util.Optional;
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
+    @Query("Select DISTINCT u from Utilisateur u where u.est_valide=1 order by u.nom")
+    List<Utilisateur> findAll();
+
     @Query("Select DISTINCT u from Utilisateur u where u.est_valide=1 and u.id!=1 order by u.nom")
     List<Utilisateur> findAllActive();
 
@@ -55,15 +58,15 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.matricule=:matricule")
     Utilisateur findUtilisateurByMatricule(@Param("matricule") String matricule);
 
-    @Query("Select DISTINCT u from Utilisateur u where u.actif=true and ((u.typeUtilisateur='Medecin') or (u.typeUtilisateur='Paramedical')) order by u.nom")
+    @Query("Select DISTINCT u from Utilisateur u where u.actif=true and u.est_valide=1 and ((u.typeUtilisateur='Medecin') or (u.typeUtilisateur='Paramedical')) order by u.nom")
     List<Utilisateur> findAllMedecins();
 
-    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.codeUtilisateur=:code and u.actif=true")
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.codeUtilisateur=:code and u.est_valide=1")
     Optional<Utilisateur> findUtilisateurByCodeUtilisateur(@Param("code") String code);
 
-    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.email=:email and u.actif=true")
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.email=:email and u.est_valide=1")
     Optional<Utilisateur> findUtilisateurByEmail(@Param("email") String email);
 
-    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.email=:telephone and u.actif=true")
+    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.telephone=:telephone and u.est_valide=1")
     Optional<Utilisateur> findUtilisateurByTelephone(@Param("telephone") String telephone);
 }

@@ -5,6 +5,7 @@ import com.meddjamm.sn.config.entity.Profil;
 import com.meddjamm.sn.config.remote.controller.api.ProfilApi;
 import com.meddjamm.sn.config.remote.model.ProfilDs;
 import com.meddjamm.sn.config.service.ProfilService;
+import com.meddjamm.sn.utils.ResponseMassageDs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -25,9 +25,13 @@ public class ProfilController implements ProfilApi {
     private final ProfilAssembler profilAssembler;
 
     @Override
-    public ResponseEntity<ProfilDs> creerProfil(ProfilDs profilDs) throws Exception {
-        Profil profil = profilAssembler.assembleProfilFromDs(profilDs);
-        return new ResponseEntity<>(profilAssembler.assembleEntityToDs(profilService.saveProfil(profil)), CREATED);
+    public ResponseMassageDs creerProfil(ProfilDs profilDs) {
+        try {
+            Profil profil = profilService.saveProfil(profilAssembler.assembleProfilFromDs(profilDs));
+            return new ResponseMassageDs("OK", profil.getId().toString());
+        } catch (Exception e) {
+            return new ResponseMassageDs("FAILED", e.getMessage());
+        }
     }
 
     @Override

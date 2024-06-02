@@ -46,7 +46,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final ProfilRepository profilRepository;
 
     @Override
-    public Utilisateur saveUtilisateur(Utilisateur utilisateur, String url) throws Exception {
+    public Long saveUtilisateur(Utilisateur utilisateur, String url) throws Exception {
         String code = utilisateur.getCodeUtilisateur();
         Optional<Utilisateur> byCode = utilisateurRepository.findUtilisateurByCodeUtilisateur(code);
         if (utilisateur.getId() == null && byCode.isPresent()
@@ -63,15 +63,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Optional<Utilisateur> byTelephone = utilisateurRepository.findUtilisateurByTelephone(telephone);
         if (utilisateur.getId() == null && byTelephone.isPresent()
                 || (utilisateur.getId() != null && byTelephone.isPresent() && !byTelephone.get().getId().equals(utilisateur.getId()))) {
-            throw new Exception(String.format("Le numéro de téléphone %s est déjà associé à un compte utilisateur .", email));
+            throw new Exception(String.format("Le numéro de téléphone %s est déjà associé à un compte utilisateur .", telephone));
         }
         utilisateur.setMatricule(genererMatricule());
         String defaultPassword = generateCommonsLang3Password();
         utilisateur.setMotdepasse(passwordEncoder.encode(defaultPassword));
+        utilisateur.setEst_valide(true);
         var savedUser = utilisateurRepository.saveAndFlush(utilisateur);
         savedUser.setMotdepasseprecedent(defaultPassword);
         publisher.publishEvent(new RegistrationCompleteEvent(savedUser, url));
-        return savedUser;
+        return savedUser.getId();
     }
 
     @Override
@@ -213,7 +214,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public void deleteUtilisateur(String email) {
         var utilisateur = this.findUtilisateurByEmail(email);
-        utilisateur.setActif(false);
+        utilisateur.setEst_valide(false);
     }
 
     @Override

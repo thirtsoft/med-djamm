@@ -7,6 +7,7 @@ import com.meddjamm.sn.dossiermedical.remote.controller.api.PatientApi;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientMinDs;
 import com.meddjamm.sn.dossiermedical.remote.model.PatientUpdateDs;
+import com.meddjamm.sn.dossiermedical.remote.model.ResponsePatientDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.reportpdfexcel.services.ReportPdfService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -41,9 +42,17 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<PatientMinDs> creerPatient(PatientDetailDs patientDetailDs) throws Exception {
-        Patient patientAjouter = patientAssembler.assemblePatientFromDs(patientDetailDs);
-        return new ResponseEntity<>(patientAssembler.assembleMinFrom(patientService.savePatient(patientAjouter)), HttpStatus.CREATED);
+    public ResponsePatientDs creerPatient(PatientDetailDs patientDetailDs) {
+        //   Patient patientAjouter = patientAssembler.assemblePatientFromDs(patientDetailDs);
+        //    return new ResponseEntity<>(patientAssembler.assembleMinFrom(patientService.savePatient(patientAjouter)), HttpStatus.CREATED);
+        try {
+            Patient savedPatient = patientService.savePatient(patientAssembler.assemblePatientFromDs(patientDetailDs));
+            PatientMinDs patientMinDs = patientAssembler.assembleMinFrom(savedPatient);
+            return new ResponsePatientDs("OK", "", patientMinDs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponsePatientDs("FAILED", e.getMessage(), null);
+        }
     }
 
     @Override

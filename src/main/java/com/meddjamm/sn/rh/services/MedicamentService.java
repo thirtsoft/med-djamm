@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface MedicamentService {
 
-    Medicament saveMedicament(Medicament medicament) throws Exception;
+    Long saveMedicament(Medicament medicament) throws Exception;
 
-    Medicament updateMedicament(Long id, Medicament medicament) throws Exception;
+    Long updateMedicament(Long id, Medicament medicament) throws Exception;
 
     Medicament findById(Long id);
 

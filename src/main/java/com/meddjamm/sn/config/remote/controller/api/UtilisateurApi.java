@@ -3,6 +3,7 @@ package com.meddjamm.sn.config.remote.controller.api;
 import com.meddjamm.sn.config.motdepasse.ChangerMotDePasseRequest;
 import com.meddjamm.sn.config.remote.model.UtilisateurDs;
 import com.meddjamm.sn.config.remote.model.UtilisateurProfilDs;
+import com.meddjamm.sn.utils.ResponseMassageDs;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import static com.meddjamm.sn.utils.ApiUrlAccess.APP_ROOT;
 public interface UtilisateurApi {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UtilisateurDs> creerUtilisateur(@RequestBody @Valid UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception;
+    ResponseMassageDs creerUtilisateur(@RequestBody @Valid UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception;
 
     @GetMapping(value = "/activation")
     String activation(@RequestParam("code") String code);
@@ -46,7 +47,7 @@ public interface UtilisateurApi {
 
     @PostMapping("/password-reset-request")
     ResponseEntity<String> resetPasswordRequest(@RequestBody ChangerMotDePasseRequest changerMotDePasseRequest, HttpServletRequest request);
-    
+
     @PostMapping("/change-password")
     ResponseEntity<String> changePassword(@RequestBody ChangerMotDePasseRequest requestUtil);
 

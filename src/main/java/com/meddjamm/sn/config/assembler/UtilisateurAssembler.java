@@ -76,6 +76,7 @@ public class UtilisateurAssembler {
         utilisateurDs.setTypeUtilisateur(utilisateur.getTypeUtilisateur());
         utilisateurDs.setCivilite(utilisateur.getCivilite());
         utilisateurDs.setSexe(utilisateur.getSexe());
+        utilisateurDs.setActif(utilisateur.isActif());
         return utilisateurDs;
     }
 

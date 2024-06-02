@@ -27,6 +27,9 @@ public interface ProfilRepository extends JpaRepository<Profil, Long> {
     @Query("Select DISTINCT act from  Profil act where act.actif=1 AND act.code=:code")
     Optional<Profil> findByProfilCode(@Param("code") String code);
 
+    @Query("Select DISTINCT act from  Profil act where act.actif=1 AND act.libelle=:libelle")
+    Optional<Profil> findByProfilLibelle(@Param("libelle") String libelle);
+
     @Query("Select DISTINCT act from  Profil act where act.code=:code")
     Profil findByCodeFromAction(@Param("code") String code);
 }

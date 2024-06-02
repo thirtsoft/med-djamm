@@ -5,6 +5,7 @@ import com.meddjamm.sn.rh.entity.Medicament;
 import com.meddjamm.sn.rh.remote.controller.api.MedicamentApi;
 import com.meddjamm.sn.rh.remote.model.MedicamentDs;
 import com.meddjamm.sn.rh.services.MedicamentService;
+import com.meddjamm.sn.utils.ResponseMassageDs;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,19 +26,29 @@ public class MedicamentController implements MedicamentApi {
     }
 
     @Override
-    public ResponseEntity<MedicamentDs> creerMedicament(MedicamentDs medicamentDs) throws Exception {
+    public ResponseMassageDs creerMedicament(MedicamentDs medicamentDs) {
         Medicament medicament = medicamentAssembler.assembleMedicamentFromDs(medicamentDs);
-        return new ResponseEntity<>(medicamentAssembler.assembleEntityToDs(
-                medicamentService.saveMedicament(medicament)
-        ), HttpStatus.OK);
+        try {
+            Long id = medicamentService.saveMedicament(medicament);
+            return new ResponseMassageDs("OK", id.toString());
+        } catch (Exception e) {
+            return new ResponseMassageDs("FAILED", e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<MedicamentDs> updateMedicament(Long id, MedicamentDs medicamentDs) throws Exception {
+    public ResponseMassageDs updateMedicament(Long id, MedicamentDs medicamentDs) {
         Medicament medicament = medicamentAssembler.assembleMedicamentFromDs(medicamentDs);
+        /*
         return new ResponseEntity<>(medicamentAssembler.assembleEntityToDs(
                 medicamentService.updateMedicament(id, medicament)
-        ), HttpStatus.OK);
+        ), HttpStatus.OK);*/
+        try {
+            Long updatedMedicament = medicamentService.updateMedicament(id, medicament);
+            return new ResponseMassageDs("OK", updatedMedicament.toString());
+        } catch (Exception e) {
+            return new ResponseMassageDs("FAILED", e.getMessage());
+        }
     }
 
     @Override

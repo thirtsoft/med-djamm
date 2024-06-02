@@ -18,8 +18,6 @@ public class PatientMinDs implements Serializable {
     private Date dateAdmission;
     private String prenom;
     private String nom;
-    //    private String sexe;
-//    private int age;
     private int isCircuitGenerated;
     private Long createdBy;
     private boolean est_accompagne;
