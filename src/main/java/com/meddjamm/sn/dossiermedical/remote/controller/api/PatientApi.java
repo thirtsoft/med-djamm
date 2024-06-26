@@ -72,4 +72,16 @@ public interface PatientApi {
     @Transactional(readOnly = true)
     ResponseEntity<InputStreamResource> exportPatientComplete();
 
+    @GetMapping(value = "/count-number-patient")
+    long countNumberOfPatient();
+
+    @GetMapping(value = "/count-number-passage-patient/{code}")
+    long countNumberPassageOfPatient(@PathVariable String code);
+
+    @GetMapping(value = "/number-consultation-patient/{code}")
+    long countNumberConsultationMedicalByPatient(@PathVariable String code);
+
+    @GetMapping(value = "/number-hospitalisation-patient/{code}")
+    long countNumberHospitalisationByPatient(@PathVariable String code);
+
 }

@@ -145,6 +145,26 @@ public class PatientController implements PatientApi {
                 .body(generate(ENTETEPATIENTS().toArray(new String[0]), patientDetailDs));
     }
 
+    @Override
+    public long countNumberOfPatient() {
+        return patientService.countNumberOfPatient();
+    }
+
+    @Override
+    public long countNumberPassageOfPatient(String code) {
+        return patientService.countNumberPassagePatient(code);
+    }
+
+    @Override
+    public long countNumberConsultationMedicalByPatient(String code) {
+        return patientService.countNumberConsultationMedicalByPatient(code);
+    }
+
+    @Override
+    public long countNumberHospitalisationByPatient(String code) {
+        return patientService.countNumberHospitalisationByPatient(code);
+    }
+
     @GetMapping(value = "/mySession")
     Authentication authentication(Authentication authentication) {
         return authentication;

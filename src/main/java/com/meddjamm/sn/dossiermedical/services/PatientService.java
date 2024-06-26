@@ -23,7 +23,13 @@ public interface PatientService {
 
     Page<Patient> findAllPatients(Integer pageNumber, Integer pageSize);
 
-    long countActivePatient();
-
     List<Patient> findAllActivesPatients();
+
+    long countNumberOfPatient();
+
+    long countNumberPassagePatient(String code);
+
+    long countNumberConsultationMedicalByPatient(String code);
+
+    long countNumberHospitalisationByPatient(String code);
 }

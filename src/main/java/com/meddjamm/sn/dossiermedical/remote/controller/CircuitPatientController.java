@@ -138,4 +138,9 @@ public class CircuitPatientController implements CircuitPatientApi {
         allCircuitPatientDs.addAll(hospitalisationCircuitPatientDs);
         return new ResponseEntity<>(allCircuitPatientDs, HttpStatus.OK);
     }
+
+    @Override
+    public long countNumberOfCirccuit() {
+        return circuitPatientService.countNumberOfCircuit();
+    }
 }

@@ -4,6 +4,7 @@ import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.Hospitalisation;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
+import com.meddjamm.sn.dossiermedical.repository.ConsultationMedicalRepository;
 import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
@@ -24,12 +25,17 @@ public class PatientServiceImpl implements PatientService {
 
     private final HospitalisationRepository hospitalisationRepository;
 
+
+    private final ConsultationMedicalRepository consultationMedicalRepository;
+
     public PatientServiceImpl(PatientRepository patientRepository,
                               CircuitPatientRepository circuitPatientRepository,
-                              HospitalisationRepository hospitalisationRepository) {
+                              HospitalisationRepository hospitalisationRepository,
+                              ConsultationMedicalRepository consultationMedicalRepository) {
         this.patientRepository = patientRepository;
         this.circuitPatientRepository = circuitPatientRepository;
         this.hospitalisationRepository = hospitalisationRepository;
+        this.consultationMedicalRepository = consultationMedicalRepository;
     }
 
     @Override
@@ -136,12 +142,29 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public long countActivePatient() {
+    public List<Patient> findAllActivesPatients() {
+        return patientRepository.findAllPatientOrderByFirstName();
+    }
+
+    @Override
+    public long countNumberOfPatient() {
         return patientRepository.countActivePatient();
     }
 
     @Override
-    public List<Patient> findAllActivesPatients() {
-        return patientRepository.findAllPatientOrderByFirstName();
+    public long countNumberPassagePatient(String code) {
+        long numberHospitalisation = hospitalisationRepository.countActiveHospitalisationByPatient(code);
+        long numberConsultationMedical = consultationMedicalRepository.countActiveConsultationMedicalByPatient(code);
+        return numberHospitalisation + numberConsultationMedical;
+    }
+
+    @Override
+    public long countNumberConsultationMedicalByPatient(String code) {
+        return consultationMedicalRepository.countActiveConsultationMedicalByPatient(code);
+    }
+
+    @Override
+    public long countNumberHospitalisationByPatient(String code) {
+        return hospitalisationRepository.countActiveHospitalisationByPatient(code);
     }
 }

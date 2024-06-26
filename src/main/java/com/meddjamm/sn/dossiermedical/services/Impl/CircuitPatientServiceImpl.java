@@ -86,6 +86,11 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
         circuitPatientRepository.save(circuitPatient);
     }
 
+    @Override
+    public long countNumberOfCircuit() {
+        return circuitPatientRepository.countCircuit();
+    }
+
     public synchronized int createNumeroCircuit() {
         int nbr = 0;
         try {

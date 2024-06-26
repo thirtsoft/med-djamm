@@ -44,5 +44,8 @@ public interface CircuitPatientApi {
 
     @GetMapping(value = "/allcircuit/bypatient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(@PathVariable String code);
-    
+
+    @GetMapping(value = "/number-of-circuit")
+    long countNumberOfCirccuit();
+
 }
