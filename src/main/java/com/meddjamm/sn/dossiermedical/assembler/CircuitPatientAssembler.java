@@ -10,6 +10,7 @@ import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
 import com.meddjamm.sn.dossiermedical.entity.Ordonnance;
 import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
+import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientByPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
@@ -161,4 +162,23 @@ public class CircuitPatientAssembler {
         }
         return circuitPatientDs;
     }
+
+    public CircuitPatientByPatientDs assembleEntityToCircuitByPatient(CircuitPatient circuitPatient) {
+        CircuitPatientByPatientDs circuitPatientDs = new CircuitPatientByPatientDs();
+        if (circuitPatient.getId() != null)
+            circuitPatientDs.setId(circuitPatient.getId());
+        circuitPatientDs.setCode(circuitPatient.getCode());
+        circuitPatientDs.setMatricule(circuitPatient.getMatricule());
+        circuitPatientDs.setEtat(circuitPatient.getEtat());
+        circuitPatientDs.setActif(circuitPatient.isActif());
+        circuitPatientDs.setNumeroCircuit(
+                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        if (circuitPatient.getCode() != null) {
+            Patient patient = patientService.findByCode(circuitPatient.getCode());
+            PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
+            circuitPatientDs.setPatientDetailDs(patientDetailDs);
+        }
+        return circuitPatientDs;
+    }
+
 }
