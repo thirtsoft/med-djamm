@@ -8,6 +8,7 @@ import com.meddjamm.sn.dossiermedical.assembler.OrdonnanceAssembler;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.remote.controller.api.CircuitPatientApi;
 import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
+import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientByPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
@@ -88,8 +89,8 @@ public class CircuitPatientController implements CircuitPatientApi {
     }
 
     @Override
-    public ResponseEntity<CircuitPatientDetailDs> findCircuitPatientsByPatient(String code) {
-        return new ResponseEntity<>(circuitPatientAssembler.assembleEntityToDetailDs(
+    public ResponseEntity<CircuitPatientByPatientDs> findCircuitPatientsByPatient(String code) {
+        return new ResponseEntity<>(circuitPatientAssembler.assembleEntityToCircuitByPatient(
                 circuitPatientService.findCircuitPatientsByPatient(code)
         ), HttpStatus.OK);
     }

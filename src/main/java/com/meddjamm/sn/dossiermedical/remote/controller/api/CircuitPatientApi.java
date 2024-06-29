@@ -1,6 +1,7 @@
 package com.meddjamm.sn.dossiermedical.remote.controller.api;
 
 import com.meddjamm.sn.dossiermedical.remote.model.AllCircuitPatientDs;
+import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientByPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDetailDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientDs;
 import com.meddjamm.sn.dossiermedical.remote.model.CircuitPatientListDs;
@@ -31,7 +32,7 @@ public interface CircuitPatientApi {
     ResponseEntity<CircuitPatientDetailDs> findCircuitPatientById(@PathVariable Long id);
 
     @GetMapping(value = "/patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<CircuitPatientDetailDs> findCircuitPatientsByPatient(@PathVariable("code") String code);
+    ResponseEntity<CircuitPatientByPatientDs> findCircuitPatientsByPatient(@PathVariable("code") String code);
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatients();

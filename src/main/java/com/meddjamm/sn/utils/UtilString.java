@@ -106,6 +106,10 @@ public class UtilString {
         String numbers = RandomStringUtils.randomNumeric(2);
         String specialChar = RandomStringUtils.random(2, 33, 47, false, false);
         String totalChars = RandomStringUtils.randomAlphanumeric(2);
+        //        List<Character> pwdChars = combinedChars.chars()
+//                .mapToObj(c -> (char) c)
+//                .toList();
+//        Collections.shuffle(pwdChars);
         return upperCaseLetters.concat(lowerCaseLetters)
                 .concat(numbers)
                 .concat(specialChar)
