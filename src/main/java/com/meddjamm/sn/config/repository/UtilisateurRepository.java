@@ -45,13 +45,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE (lower(u.codeUtilisateur)=lower(:code) or lower(u.email)=lower(:code)) and u.est_valide=1")
     Optional<Utilisateur> findByCodeUtilisateurOrEmailLow(@Param("code") String code);
 
-    boolean existsByCodeUtilisateurAndMotdepasse(String code, String password);
-
     @Query(value = "SELECT DISTINCT u.email FROM Utilisateur u WHERE u.activation=:code")
     String findMailByActivation(@Param("code") String code);
-
-    @Query(value = "SELECT DISTINCT u FROM Utilisateur u WHERE u.activation=:code")
-    Utilisateur findUtilisateurByActivation(@Param("code") String code);
 
     Optional<Utilisateur> findByEmail(String email);
 
