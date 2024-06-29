@@ -36,7 +36,6 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         validationService.enregistrerCode(utilisateur, token);
 
         String url = event.getUrl() + "/med-dalaljamm/v1/utilisateur/activation?code=".concat(token);
-        //  String url = event + ConstantDeployment.HOST_API + "/med-dalaljamm/v1/utilisateur/activation?code=".concat(token);
         try {
             sendVerificationEmail(url);
         } catch (MessagingException | UnsupportedEncodingException e) {
@@ -49,10 +48,10 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String subject = "Invitation sur l'application SNAPPLIMED";
         String senderName = "Service Médecine";
         String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
-                "<p>Le service Médecine Interne l’hôpital Dalal-Jamm est heureux de vous compter parmi ses collaborateurs.," + " <br>" +
+                "<p>Le service Médecine Interne l’hôpital Dalal-Jamm est heureux de vous compter parmi ses collaborateurs.<br>" +
                 "Vous pouvez cliquer sur le lien ci-dessous pour activer votre compte.</p>" +
                 "<a href=\"" + url + "\">activer votre compte</a>" +
-                "<p>Votre mot de passe: " + utilisateur.getMotdepasseprecedent() + "</p>" +
+                "<p>Votre mot de passe: " + utilisateur.getMotdepasse() + "</p>" +
                 "<p> Cordialement <br> Service d'enregistrement</p>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
@@ -63,14 +62,13 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         mailSender.send(message);
     }
 
-    public void sendPasswordResetVerificationEmail(Utilisateur utilisateur, String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Password Reset Request Verification";
+    public void sendPasswordResetVerificationEmail(Utilisateur utilisateur, String newPassword) throws MessagingException, UnsupportedEncodingException {
+        String subject = "Demande de réinitialisation de mot de passe";
         String senderName = "Service Enregistrement";
-        String mailContent = "<p> Hi, " + utilisateur.getPrenom() + ", </p>" +
-                "<p><b>You recently requested to reset your password,</b>" + "" +
-                "Please, follow the link below to complete the action.</p>" +
-                "<a href=\"" + url + "\">Reset password</a>" +
-                "<p> Users Registration Portal Service";
+        String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
+                "<p><b>Vous avez récemment demandé la réinitialisation de votre mot de passe,</b></p>" +
+                "<p>Voici votre nouveau mot de passe: " + newPassword + "</p>" +
+                "<p>Cordialement <br> Service d'enregistrement</p>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
         messageHelper.setFrom(configEmail, senderName);

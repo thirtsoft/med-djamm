@@ -86,12 +86,13 @@ public class MedDjammApplication implements CommandLineRunner {
         actionRepository.saveAll(of(action1, action2, action3, action4, action5, action6));
         profilRepository.saveAll(of(profileAdmin, profileUser));
 
+        String motDePasse = passwordEncoder.encode("root");
         Utilisateur tairou = Utilisateur.builder()
                 .email("saliouwourydiallo@gmail.com")
                 .prenom("Tairou")
                 .nom("Diallo")
                 .matricule(genererMatricule())
-                .motdepasse(passwordEncoder.encode("root"))
+                .motdepasse(motDePasse)
                 .profil(profileAdmin)
                 .actif(true)
                 .build();
@@ -101,11 +102,21 @@ public class MedDjammApplication implements CommandLineRunner {
                 .prenom("Saliou Woury")
                 .nom("Diallo")
                 .matricule(genererMatricule())
-                .motdepasse(passwordEncoder.encode("root"))
+                .motdepasse(motDePasse)
                 .profil(profileAdmin)
                 .actif(true)
                 .build();
-        utilisateurRepository.saveAll(of(tairou, saliou));
+        TimeUnit.SECONDS.sleep(2);
+        Utilisateur tahirou = Utilisateur.builder()
+                .email("thirdiallo@gmail.com")
+                .prenom("Mamadou Tahirou")
+                .nom("Diallo")
+                .matricule(genererMatricule())
+                .motdepasse(motDePasse)
+                .profil(profileAdmin)
+                .actif(true)
+                .build();
+        utilisateurRepository.saveAll(of(tairou, saliou, tahirou));
 
         var admin = RegisterRequest.builder().firstname("Admin").prenom("Admin").email("admin@mail.com").password("password").profilCode("ADMIN").build();
         System.out.println("Admin token: " + authenticationService.register(admin).getAccessToken());
