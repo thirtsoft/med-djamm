@@ -12,10 +12,12 @@ public class RegistrationCompleteEvent extends ApplicationEvent {
 
     private Utilisateur utilisateur;
     private String url;
+    private String defaultPassword;
 
-    public RegistrationCompleteEvent(Utilisateur utilisateur, String url) {
+    public RegistrationCompleteEvent(Utilisateur utilisateur, String defaultPassword) {
         super(utilisateur);
         this.utilisateur = utilisateur;
         this.url = ConstantDeployment.HOST_API;
+        this.defaultPassword = defaultPassword;
     }
 }

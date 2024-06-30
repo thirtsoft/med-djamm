@@ -41,15 +41,6 @@ public class UtilisateurController implements UtilisateurApi {
         }
     }
 
-    /*
-        @Override
-        public ResponseEntity<UtilisateurDs> creerUtilisateur(UtilisateurDs utilisateurDs, HttpServletRequest request) throws Exception {
-            Utilisateur utilisateur = utilisateurAssembler.assembleUtilisateurFromDs(utilisateurDs);
-            return new ResponseEntity<>(utilisateurAssembler
-                    .assembleUtilisateurDsFromEntity(utilisateurService.
-                            saveUtilisateur(utilisateur, getUrl(request))), HttpStatus.CREATED);
-        }
-    */
     @Override
     public String activation(String code) {
         String formConnexionFrontend =
@@ -95,8 +86,8 @@ public class UtilisateurController implements UtilisateurApi {
     @Override
     public ResponseEntity<String> resetPasswordRequest(ChangerMotDePasseRequest changerMotDePasseRequest,
                                                        HttpServletRequest request) {
-        String url = getUrl(request) + "/med-dalaljamm/v1/utilisateur/reset-password?token=";
-        return new ResponseEntity<>(utilisateurService.demandeChangerMotDePasse(changerMotDePasseRequest.getEmail(), url), CREATED);
+        utilisateurService.demandeResetMotDePasse(changerMotDePasseRequest.getEmail());
+        return new ResponseEntity<>("Le mot de passe a été réinitialisé avec succès", CREATED);
     }
 
     @Override
@@ -126,5 +117,4 @@ public class UtilisateurController implements UtilisateurApi {
         utilisateurService.deactivatedAccount(matricule);
         return new ResponseEntity<>(OK);
     }
-
 }
