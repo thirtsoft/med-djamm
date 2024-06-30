@@ -47,12 +47,12 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
     private void sendVerificationEmail(String url, String defaultPassword) throws MessagingException, UnsupportedEncodingException {
         String subject = "Invitation sur l'application SNAPPLIMED";
         String senderName = "Service Médecine";
-        String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
+        String mailContent = "<p> Bonjour, M(e)" + utilisateur.getPrenom() + " </p>" +
                 "<p>Le service Médecine Interne l’hôpital Dalal-Jamm est heureux de vous compter parmi ses collaborateurs.<br>" +
                 "Vous pouvez cliquer sur le lien ci-dessous pour activer votre compte.</p>" +
                 "<a href=\"" + url + "\">activer votre compte</a>" +
                 "<p>Votre mot de passe: " + defaultPassword + "</p>" +
-                "<p> Cordialement <br> Service d'enregistrement</p>";
+                "<p> Cordialement <br> Service Médecine Dalal-Jamm</p>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
         messageHelper.setFrom(configEmail, senderName);
@@ -64,11 +64,11 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
 
     public void sendPasswordResetVerificationEmail(Utilisateur utilisateur, String newPassword) throws MessagingException, UnsupportedEncodingException {
         String subject = "Demande de réinitialisation de mot de passe";
-        String senderName = "Service Enregistrement";
-        String mailContent = "<p> Bonjour, " + utilisateur.getPrenom() + ", </p>" +
+        String senderName = "Service Médecine";
+        String mailContent = "<p> Bonjour, M(e) " + utilisateur.getPrenom() + " </p>" +
                 "<p><b>Vous avez récemment demandé la réinitialisation de votre mot de passe,</b></p>" +
-                "<p>Voici votre nouveau mot de passe: " + newPassword + "</p>" +
-                "<p>Cordialement <br> Service d'enregistrement</p>";
+                "<p>Votre nouveau mot de passe est : " + newPassword + "</p>" +
+                "<p>Cordialement <br> Service Médecine Dalal-Jamm</p>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
         messageHelper.setFrom(configEmail, senderName);
