@@ -55,6 +55,15 @@ public class HospitalisationServiceImpl implements HospitalisationService {
             hospitalisation.setTypePatient(0);
         }
         Hospitalisation hospitalisationResult = hospitalisationRepository.save(hospitalisation);
+        Patient patientResult = patientService.findByCode(hospitalisation.getCode());
+        try {
+            if (patientResult != null) {
+                patient.setNombre_passage(patient.getNombre_passage() + 1);
+                patientService.savePatient(patientResult);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return hospitalisationResult.getId();
     }
 

@@ -32,4 +32,6 @@ public interface PatientService {
     long countNumberConsultationMedicalByPatient(String code);
 
     long countNumberHospitalisationByPatient(String code);
+
+    int nombrePassage(String code);
 }

@@ -5,9 +5,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.meddjamm.sn.dossiermedical.entity.CircuitPatient;
 import com.meddjamm.sn.dossiermedical.entity.ConsultationMedical;
 import com.meddjamm.sn.dossiermedical.entity.ExamenBiologique;
+import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.ConsultationMedicalRepository;
 import com.meddjamm.sn.dossiermedical.services.ConsultationMedicalService;
+import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointes;
 import com.meddjamm.sn.rh.piecejointe.PiecesJointesService;
 import com.meddjamm.sn.utils.ConstantSigps;
@@ -28,12 +30,16 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
 
     private final PiecesJointesService piecesJointesService;
 
+    private final PatientService patientService;
+
     public ConsultationMedicalServiceImpl(ConsultationMedicalRepository consultationMedicalRepository,
                                           CircuitPatientRepository circuitPatientRepository,
-                                          PiecesJointesService piecesJointesService) {
+                                          PiecesJointesService piecesJointesService,
+                                          PatientService patientService) {
         this.consultationMedicalRepository = consultationMedicalRepository;
         this.circuitPatientRepository = circuitPatientRepository;
         this.piecesJointesService = piecesJointesService;
+        this.patientService = patientService;
     }
 
     @Override
@@ -44,6 +50,15 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
         consultationMedical.setCircuitPatientId(circuitPatient.getId());
         consultationMedical.setCircuitPatient(circuitPatient);
         ConsultationMedical saveconsultationMedical = consultationMedicalRepository.save(consultationMedical);
+        Patient patient = patientService.findByCode(saveconsultationMedical.getCircuitPatient().getCode());
+        try {
+            if (patient != null) {
+                patient.setNombre_passage(patient.getNombre_passage() + 1);
+                patientService.savePatient(patient);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return saveconsultationMedical.getId();
     }
 

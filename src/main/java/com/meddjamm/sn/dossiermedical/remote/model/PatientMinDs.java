@@ -25,4 +25,5 @@ public class PatientMinDs implements Serializable {
     private Date dateNaissance;
     private LocalDateTime createdDate;
     private DiagnosticDs diagnosticDs;
+    private int nombre_passage;
 }

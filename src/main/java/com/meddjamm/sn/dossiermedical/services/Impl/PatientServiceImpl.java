@@ -167,4 +167,10 @@ public class PatientServiceImpl implements PatientService {
     public long countNumberHospitalisationByPatient(String code) {
         return hospitalisationRepository.countActiveHospitalisationByPatient(code);
     }
+
+    @Override
+    public int nombrePassage(String code) {
+        Patient patient = patientRepository.findPatientByCode(code);
+        return patient.getNombre_passage() + 1;
+    }
 }

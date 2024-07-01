@@ -176,6 +176,7 @@ public class PatientAssembler {
         patientMinDs.setEst_accompagne(patient.isEst_accompagne());
         patientMinDs.setCreatedDate(patient.getCreationDate());
         patientMinDs.setDiagnosticDs(diagnosticAssembler.assembleEntityToDs(patient.getDiagnostic()));
+        patientMinDs.setNombre_passage(patient.getNombre_passage());
         return patientMinDs;
     }
 

@@ -59,7 +59,10 @@ public class Patient extends AbstractAuditableEntity implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private Diagnostic diagnostic;
-    
+
+    @Column(name = "nombre_passage", columnDefinition = "int default 0")
+    private int nombre_passage;
+
     private int actif;
 
     public boolean isActif() {
