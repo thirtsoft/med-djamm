@@ -36,7 +36,7 @@ public interface PatientApi {
     void updatePatientByMedecin(@PathVariable Long id, @RequestBody PatientUpdateDs patientUpdateDs) throws Exception;
 
     @PutMapping(value = "/edit/by-administration/{id}")
-    ResponseEntity<PatientMinDs> updatePatientByAdministration(@PathVariable Long id, @RequestBody PatientDetailDs patientDetailDs) throws Exception;
+    ResponsePatientDs updatePatientByAdministration(@PathVariable Long id, @RequestBody PatientDetailDs patientDetailDs) throws Exception;
 
     @GetMapping(value = "/{id}")
     ResponseEntity<PatientDetailDs> findById(@PathVariable Long id);

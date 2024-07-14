@@ -50,6 +50,18 @@ public class ProfilServiceImpl implements ProfilService {
         profilResult.setCode(profil.getCode());
         profilResult.setLibelle(profil.getLibelle());
         profilResult.setAction(profil.getAction());
+        String code = profilResult.getCode();
+        Optional<Profil> byCode = profilRepository.findByProfilCode(code);
+        if (profilResult.getId() == null && byCode.isPresent()
+                || (profilResult.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(profilResult.getId()))) {
+            throw new Exception(String.format("Le code %s est déjà associé à pour un autre profil .", code));
+        }
+        String libelle = profilResult.getLibelle();
+        Optional<Profil> byLibelle = profilRepository.findByProfilLibelle(libelle);
+        if (profilResult.getId() == null && byLibelle.isPresent()
+                || (profilResult.getId() != null && byLibelle.isPresent() && !byLibelle.get().getId().equals(profilResult.getId()))) {
+            throw new Exception(String.format("Le profil que vous voulez crée %s existe déjà .", libelle));
+        }
         return profilRepository.save(profilResult);
     }
 

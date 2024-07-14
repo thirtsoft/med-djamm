@@ -78,6 +78,18 @@ public class PatientServiceImpl implements PatientService {
         patientResult.setProfession(patient.getProfession());
         patientResult.setSituationMatrimonial(patient.getSituationMatrimonial());
         patientResult.setPersonneConfiance(patient.getPersonneConfiance());
+        String code = patientResult.getCode();
+        Optional<Patient> byCode = patientRepository.findByCode(code);
+        if (patientResult.getId() == null && byCode.isPresent()
+                || (patientResult.getId() != null && byCode.isPresent() && !byCode.get().getId().equals(patientResult.getId()))) {
+            throw new Exception(String.format("L'index %s est déjà associé à un autre patient.", code));
+        }
+        String telephone = patientResult.getNumeroTelephone();
+        Optional<Patient> byTelephone = patientRepository.findByNumeroTelephone(telephone);
+        if (patientResult.getId() == null && byTelephone.isPresent()
+                || (patientResult.getId() != null && byTelephone.isPresent() && !byTelephone.get().getId().equals(patientResult.getId()))) {
+            throw new Exception(String.format("Le numéro téléphone %s est déjà associé à un autre patient.", telephone));
+        }
         return patientRepository.save(patientResult);
     }
 

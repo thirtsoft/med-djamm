@@ -22,7 +22,7 @@ public interface ProfilApi {
     ResponseMassageDs creerProfil(@RequestBody ProfilDs profilDs);
 
     @PutMapping(value = "/edit/{id}")
-    ResponseEntity<ProfilDs> updateProfil(@PathVariable Long id, @RequestBody ProfilDs profilDs) throws Exception;
+    ResponseMassageDs updateProfil(@PathVariable Long id, @RequestBody ProfilDs profilDs) throws Exception;
 
     @GetMapping(value = "/{id}")
     ResponseEntity<ProfilDs> findProfilById(@PathVariable Long id);

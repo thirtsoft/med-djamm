@@ -35,11 +35,13 @@ public class ProfilController implements ProfilApi {
     }
 
     @Override
-    public ResponseEntity<ProfilDs> updateProfil(Long id, ProfilDs profilDs) throws Exception {
-        Profil profil = profilAssembler.assembleProfilFromDs(profilDs);
-        return new ResponseEntity<>(profilAssembler.assembleEntityToDs(
-                profilService.updateProfil(id, profil)
-        ), OK);
+    public ResponseMassageDs updateProfil(Long id, ProfilDs profilDs) throws Exception {
+        try {
+            Profil profil = profilService.updateProfil(id, profilAssembler.assembleProfilFromDs(profilDs));
+            return new ResponseMassageDs("OK", profil.getId().toString());
+        } catch (Exception e) {
+            return new ResponseMassageDs("FAILED", e.getMessage());
+        }
     }
 
     @Override
