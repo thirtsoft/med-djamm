@@ -59,5 +59,7 @@ public interface RendezVousApi {
     int countNumberOfRendezVousByDoctorAndDataRendezVous(@PathVariable Long matricule,
                                                          @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateRv);
 
+    @GetMapping(value = "/rendezvous-journalier/{dateRv}")
+    ResponseEntity<List<RendezVousDetailDs>> getAllRendezVousJournaliers(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateRv);
 
 }

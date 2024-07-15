@@ -72,6 +72,7 @@ public class RendezVousServiceImpl implements RendezVousService {
 
     @Override
     public List<RendezVous> findRendezVousDuJours() {
+
         return rendezVousRepository.findAllRendezVousDay();
     }
 
@@ -97,5 +98,10 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Override
     public int countNumberOfRendezVousByDoctorAndDataRendezVous(Long matricule, Date date) {
         return rendezVousRepository.countNumberOfRendezVousByDoctorAndDataRendezVous(matricule, date);
+    }
+
+    @Override
+    public List<RendezVous> findAllRendezVousByDay(Date date) {
+        return rendezVousRepository.findAllByDateRendezVousAndActif(date, 1);
     }
 }

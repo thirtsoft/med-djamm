@@ -1,10 +1,11 @@
 package com.meddjamm.sn.rh.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.meddjamm.sn.config.entity.AbstractAuditableEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,10 @@ public class RendezVous extends AbstractAuditableEntity implements Serializable 
 
     @Column(name = "medecin_uid")
     private Long medecinId;
-    
+
     @Column(name = "date_rendez_vous")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
+    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
+    @Temporal(TemporalType.DATE)
     private Date dateRendezVous;
 
     private String heure;

@@ -25,13 +25,16 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     @Query("SELECT DISTINCT p from RendezVous p where p.patientId=:patient and p.actif=1 ORDER BY p.id DESC LIMIT 3")
     List<RendezVous> findTreeLatestRendezVousByPatient(@Param("patient") Long code);
 
-    @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.dateRendezVous=current_date and r.actif=1 ORDER BY r.id")
+    @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.dateRendezVous<=current_date and r.dateRendezVous>=current_date and r.actif=1 ORDER BY r.id DESC")
     List<RendezVous> findAllRendezVousDay();
+
+    List<RendezVous> findAllByDateRendezVousAndActif(Date dateRendezVous, int actif);
+
 
     @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.medecinId=:matricule and month(r.dateRendezVous)=month(current_date) and r.actif=1 ORDER BY r.id")
     List<RendezVous> findAllRendezVousOfDoctorInMonth(@Param("matricule") Long matricule);
 
-    @Query("select p from RendezVous p where p.actif=1 and p.dateRendezVous=:date Order by p.dateRendezVous DESC")
+    @Query("SELECT DISTINCT r from RendezVous r where r.actif=1 and r.dateRendezVous=:date Order by r.dateRendezVous DESC")
     List<RendezVous> findRendezVousBySelectedDate(@Param("date") Date date);
 
     @Query("select count(c) from RendezVous c where c.medecinId=:matricule and c.dateRendezVous=:date and c.actif=1 ")

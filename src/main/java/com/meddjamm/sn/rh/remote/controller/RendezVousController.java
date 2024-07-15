@@ -113,4 +113,13 @@ public class RendezVousController implements RendezVousApi {
     public int countNumberOfRendezVousByDoctorAndDataRendezVous(Long matricule, Date dateRv) {
         return rendezVousService.countNumberOfRendezVousByDoctorAndDataRendezVous(matricule, dateRv);
     }
+
+    @Override
+    public ResponseEntity<List<RendezVousDetailDs>> getAllRendezVousJournaliers(Date dateRv) {
+        List<RendezVousDetailDs> rendezVousDsList = rendezVousService.findAllRendezVousByDay(dateRv)
+                .stream()
+                .map(rendezVousAssembler::assembleEntitiesToDs)
+                .toList();
+        return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
+    }
 }
