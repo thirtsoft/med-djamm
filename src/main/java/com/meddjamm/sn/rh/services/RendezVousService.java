@@ -30,8 +30,10 @@ public interface RendezVousService {
     List<RendezVous> findRendezVousBySelectedDate(Date date);
 
     int countNumberOfRendezVousByDoctorAndDataRendezVous(Long matricule, Date date);
-    
+
     List<RendezVous> findAllRendezVousByDay(Date date);
+
+    List<RendezVous> findAllActivesRendezVous();
 
 
 }

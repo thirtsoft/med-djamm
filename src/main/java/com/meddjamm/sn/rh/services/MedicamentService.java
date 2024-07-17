@@ -17,4 +17,6 @@ public interface MedicamentService {
     List<Medicament> findAllMedicaments();
 
     void deleteMedicament(Long id);
+
+    List<Medicament> findAllMedicamentsOrderByLibelle();
 }

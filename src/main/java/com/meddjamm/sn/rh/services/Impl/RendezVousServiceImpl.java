@@ -104,4 +104,9 @@ public class RendezVousServiceImpl implements RendezVousService {
     public List<RendezVous> findAllRendezVousByDay(Date date) {
         return rendezVousRepository.findAllByDateRendezVousAndActif(date, 1);
     }
+
+    @Override
+    public List<RendezVous> findAllActivesRendezVous() {
+        return rendezVousRepository.findAllByActif(1);
+    }
 }

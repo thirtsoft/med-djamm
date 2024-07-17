@@ -69,4 +69,11 @@ public class MedicamentController implements MedicamentApi {
     public void deleteMedicament(Long id) {
         medicamentService.deleteMedicament(id);
     }
+
+    @Override
+    public ResponseEntity<List<MedicamentDs>> findAllOrderedMedicaments() {
+        return new ResponseEntity<>(medicamentAssembler.assembleEntitiesFrom(
+                medicamentService.findAllMedicamentsOrderByLibelle()
+        ), HttpStatus.OK);
+    }
 }

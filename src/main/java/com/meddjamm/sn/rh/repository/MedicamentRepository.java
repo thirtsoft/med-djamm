@@ -22,5 +22,8 @@ public interface MedicamentRepository extends JpaRepository<Medicament, Long> {
     @Query("SELECT m FROM Medicament m WHERE lower(m.code) = lower(:code) AND m.actif = 1")
     Optional<Medicament> findByCode(@Param("code") String code);
 
+    @Query("SELECT DISTINCT m from Medicament m where m.actif=1 ORDER BY m.libelle ASC")
+    List<Medicament> findAllMedicaments();
+
 
 }

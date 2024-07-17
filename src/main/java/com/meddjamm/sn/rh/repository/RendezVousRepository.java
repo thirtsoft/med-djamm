@@ -24,7 +24,7 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
     @Query("SELECT DISTINCT p from RendezVous p where p.patientId=:patient and p.actif=1 ORDER BY p.id DESC LIMIT 3")
     List<RendezVous> findTreeLatestRendezVousByPatient(@Param("patient") Long code);
-    
+
     @Query("SELECT DISTINCT r FROM RendezVous r WHERE r.dateRendezVous=current_date and r.actif=1 ORDER BY r.id")
     List<RendezVous> findAllRendezVousDay();
 
@@ -39,5 +39,7 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
     @Query("select count(c) from RendezVous c where c.medecinId=:matricule and c.dateRendezVous=:date and c.actif=1 ")
     int countNumberOfRendezVousByDoctorAndDataRendezVous(@Param("matricule") Long matricule, @Param("date") Date date);
+
+    List<RendezVous> findAllByActif(int actif);
 
 }

@@ -122,4 +122,13 @@ public class RendezVousController implements RendezVousApi {
                 .toList();
         return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<RendezVousDetailDs>> getAllActivesRendezVous() {
+        List<RendezVousDetailDs> rendezVousDsList = rendezVousService.findAllActivesRendezVous()
+                .stream()
+                .map(rendezVousAssembler::assembleEntitiesToDs)
+                .toList();
+        return new ResponseEntity<>(rendezVousDsList, HttpStatus.OK);
+    }
 }

@@ -62,4 +62,7 @@ public interface RendezVousApi {
     @GetMapping(value = "/rendezvous-journalier/{dateRv}")
     ResponseEntity<List<RendezVousDetailDs>> getAllRendezVousJournaliers(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateRv);
 
+    @GetMapping(value = "/all-actif")
+    ResponseEntity<List<RendezVousDetailDs>> getAllActivesRendezVous();
+
 }

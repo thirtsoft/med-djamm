@@ -75,4 +75,9 @@ public class MedicamentServiceImpl implements MedicamentService {
         medicament.setActif(false);
         medicamentRepository.save(medicament);
     }
+
+    @Override
+    public List<Medicament> findAllMedicamentsOrderByLibelle() {
+        return medicamentRepository.findAllMedicaments();
+    }
 }
