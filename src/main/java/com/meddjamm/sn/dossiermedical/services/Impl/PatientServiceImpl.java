@@ -8,6 +8,8 @@ import com.meddjamm.sn.dossiermedical.repository.ConsultationMedicalRepository;
 import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.rh.entity.RendezVous;
+import com.meddjamm.sn.rh.repository.RendezVousRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -28,14 +30,18 @@ public class PatientServiceImpl implements PatientService {
 
     private final ConsultationMedicalRepository consultationMedicalRepository;
 
+    private final RendezVousRepository rendezVousRepository;
+
     public PatientServiceImpl(PatientRepository patientRepository,
                               CircuitPatientRepository circuitPatientRepository,
                               HospitalisationRepository hospitalisationRepository,
-                              ConsultationMedicalRepository consultationMedicalRepository) {
+                              ConsultationMedicalRepository consultationMedicalRepository,
+                              RendezVousRepository rendezVousRepository) {
         this.patientRepository = patientRepository;
         this.circuitPatientRepository = circuitPatientRepository;
         this.hospitalisationRepository = hospitalisationRepository;
         this.consultationMedicalRepository = consultationMedicalRepository;
+        this.rendezVousRepository = rendezVousRepository;
     }
 
     @Override
@@ -143,9 +149,23 @@ public class PatientServiceImpl implements PatientService {
         CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientByPatient(patient.getCode());
         circuitPatient.setActif(false);
         circuitPatientRepository.save(circuitPatient);
-        Hospitalisation hospitalisation = hospitalisationRepository.findHospitalisationByPatientCode(patient.getCode());
-        hospitalisation.setActif(false);
-        hospitalisationRepository.saveAndFlush(hospitalisation);
+        List<Hospitalisation> hospitalisationList = hospitalisationRepository.findHospitalisationByPatient(patient.getCode());
+        if (hospitalisationList != null) {
+            for (Hospitalisation hospitalisation : hospitalisationList) {
+                hospitalisation.setActif(false);
+                hospitalisationRepository.saveAndFlush(hospitalisation);
+            }
+
+        }
+        List<RendezVous> rendezVousList = rendezVousRepository.findListetRendezVousByPatient(patient.getId());
+        if (rendezVousList != null) {
+            for (RendezVous rendezVous : rendezVousList) {
+                rendezVous.setActif(false);
+                rendezVousRepository.save(rendezVous);
+            }
+        }
+
+
     }
 
     @Override

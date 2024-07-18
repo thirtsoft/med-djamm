@@ -42,4 +42,7 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
     List<RendezVous> findAllByActif(int actif);
 
+    @Query("SELECT DISTINCT rv from RendezVous rv where rv.patientId=:patient and rv.actif=1")
+    List<RendezVous> findListetRendezVousByPatient(@Param("patient") Long code);
+
 }
