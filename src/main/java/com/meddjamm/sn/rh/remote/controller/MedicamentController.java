@@ -39,10 +39,6 @@ public class MedicamentController implements MedicamentApi {
     @Override
     public ResponseMassageDs updateMedicament(Long id, MedicamentDs medicamentDs) {
         Medicament medicament = medicamentAssembler.assembleMedicamentFromDs(medicamentDs);
-        /*
-        return new ResponseEntity<>(medicamentAssembler.assembleEntityToDs(
-                medicamentService.updateMedicament(id, medicament)
-        ), HttpStatus.OK);*/
         try {
             Long updatedMedicament = medicamentService.updateMedicament(id, medicament);
             return new ResponseMassageDs("OK", updatedMedicament.toString());
@@ -74,6 +70,20 @@ public class MedicamentController implements MedicamentApi {
     public ResponseEntity<List<MedicamentDs>> findAllOrderedMedicaments() {
         return new ResponseEntity<>(medicamentAssembler.assembleEntitiesFrom(
                 medicamentService.findAllMedicamentsOrderByLibelle()
+        ), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<MedicamentDs>> findAllMedicamentByLibelle(String libelle) {
+        return new ResponseEntity<>(medicamentAssembler.assembleEntitiesFrom(
+                medicamentService.findAllMedicamentByLibelle(libelle)
+        ), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<MedicamentDs>> findAllMedicamentByCode(String code) {
+        return new ResponseEntity<>(medicamentAssembler.assembleEntitiesFrom(
+                medicamentService.findAllMedicamentByCode(code)
         ), HttpStatus.OK);
     }
 }

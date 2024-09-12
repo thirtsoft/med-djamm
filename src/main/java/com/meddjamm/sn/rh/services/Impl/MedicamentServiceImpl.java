@@ -80,4 +80,14 @@ public class MedicamentServiceImpl implements MedicamentService {
     public List<Medicament> findAllMedicamentsOrderByLibelle() {
         return medicamentRepository.findAllMedicaments();
     }
+
+    @Override
+    public List<Medicament> findAllMedicamentByLibelle(String libelle) {
+        return medicamentRepository.findAllMedicamentByLibelle(libelle);
+    }
+
+    @Override
+    public List<Medicament> findAllMedicamentByCode(String code) {
+        return medicamentRepository.findAllMedicamentByCode(code);
+    }
 }

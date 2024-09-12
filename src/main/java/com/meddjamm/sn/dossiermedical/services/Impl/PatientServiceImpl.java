@@ -72,6 +72,7 @@ public class PatientServiceImpl implements PatientService {
         if (patientResult == null) {
             throw new Exception("This Patient is not found");
         }
+        patientResult.setCode(patient.getCode());
         patientResult.setPrenom(patient.getPrenom());
         patientResult.setNom(patient.getNom());
         patientResult.setAddress(patient.getAddress());

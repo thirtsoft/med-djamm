@@ -43,8 +43,6 @@ public class PatientController implements PatientApi {
 
     @Override
     public ResponsePatientDs creerPatient(PatientDetailDs patientDetailDs) {
-        //   Patient patientAjouter = patientAssembler.assemblePatientFromDs(patientDetailDs);
-        //    return new ResponseEntity<>(patientAssembler.assembleMinFrom(patientService.savePatient(patientAjouter)), HttpStatus.CREATED);
         try {
             Patient savedPatient = patientService.savePatient(patientAssembler.assemblePatientFromDs(patientDetailDs));
             PatientMinDs patientMinDs = patientAssembler.assembleMinFrom(savedPatient);

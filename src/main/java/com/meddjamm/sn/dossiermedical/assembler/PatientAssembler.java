@@ -158,9 +158,21 @@ public class PatientAssembler {
 
     public Patient assembleUpdatePatientFromDs(PatientDetailDs patientDetailDs) {
         Patient patient = patientService.findById(patientDetailDs.getId());
+        patient.setCode(patientDetailDs.getCode());
+        patient.setCivilite(patientDetailDs.getCivilite());
+        patient.setSituationMatrimonial(patientDetailDs.getSituationMatrimonial());
+        patient.setNationalite(patientDetailDs.getNationalite());
+        patient.setNom(patientDetailDs.getNom());
+        patient.setPrenom(patientDetailDs.getPrenom());
+        patient.setSexe(patientDetailDs.getSexe());
+        patient.setProfession(patientDetailDs.getProfession());
+        patient.setDateNaissance(patientDetailDs.getDateNaissance());
+        patient.setAge(patientDetailDs.getAge());
+        patient.setAddress(patientDetailDs.getAddress());
+        patient.setNumeroTelephone(patientDetailDs.getNumeroTelephone());
+        patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
         if (patientDetailDs.getPersonneConfianceDs() != null)
             patient.setPersonneConfiance(assembleUpdateEntityFromDs(patient.getPersonneConfiance(), patientDetailDs.getPersonneConfianceDs()));
-        patient.setEst_accompagne(patientDetailDs.isEst_accompagne());
         return patient;
     }
 
