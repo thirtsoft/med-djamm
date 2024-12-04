@@ -18,6 +18,9 @@ public interface CircuitPatientRepository extends JpaRepository<CircuitPatient, 
     @Query("SELECT DISTINCT p from CircuitPatient p where p.code=:code and p.actif=1 order by p.id desc")
     CircuitPatient findCircuitPatientByPatient(@Param("code") String code);
 
+    @Query("SELECT DISTINCT p from CircuitPatient p where p.patientId=:patientId")
+    CircuitPatient findCircuitPatientByPatientId(@Param("patientId") Long patientId);
+
     @Query("SELECT DISTINCT p from CircuitPatient p where p.actif=1 order by p.id desc")
     List<CircuitPatient> findAllCircuitPatients();
 

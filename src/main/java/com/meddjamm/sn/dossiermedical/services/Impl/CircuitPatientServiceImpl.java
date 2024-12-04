@@ -5,6 +5,7 @@ import com.meddjamm.sn.dossiermedical.entity.Patient;
 import com.meddjamm.sn.dossiermedical.repository.CircuitPatientRepository;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.dossiermedical.services.CircuitPatientService;
+import com.meddjamm.sn.exception.DossierMedicalException;
 import com.meddjamm.sn.utils.ConstantSigps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,21 +29,28 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
 
     @Override
     public CircuitPatient saveCircuitPatient(CircuitPatient circuitPatient) {
-        circuitPatient.setActif(true);
-        circuitPatient.setCreateDate(new Date());
-        if (circuitPatient.getNumeroCircuit() == 0) {
-            circuitPatient.setNumeroCircuit(createNumeroCircuit());
-        }
-        Patient patient = patientRepository.findPatientById(circuitPatient.getPatientId());
-        String sexe = patient.getSexe();
-        if (sexe.equals(ConstantSigps.TYPE_SEXE_PATIENT)) {
-            circuitPatient.setTypePatient(1);
+        CircuitPatient existCircuitForPatient = circuitPatientRepository.findCircuitPatientByPatientId(
+                circuitPatient.getPatientId()
+        );
+        if (existCircuitForPatient != null) {
+            throw new DossierMedicalException("Ce patient a déjà un circuit");
         } else {
-            circuitPatient.setTypePatient(0);
+            circuitPatient.setActif(true);
+            circuitPatient.setCreateDate(new Date());
+            if (circuitPatient.getNumeroCircuit() == 0) {
+                circuitPatient.setNumeroCircuit(createNumeroCircuit());
+            }
+            Patient patient = patientRepository.findPatientById(circuitPatient.getPatientId());
+            String sexe = patient.getSexe();
+            if (sexe.equals(ConstantSigps.TYPE_SEXE_PATIENT)) {
+                circuitPatient.setTypePatient(1);
+            } else {
+                circuitPatient.setTypePatient(0);
+            }
+            circuitPatientRepository.save(circuitPatient);
+            patient.setIsCircuitGenerated(1);
+            patientRepository.save(patient);
         }
-        circuitPatientRepository.save(circuitPatient);
-        patient.setIsCircuitGenerated(1);
-        patientRepository.save(patient);
         return circuitPatient;
     }
 
