@@ -18,10 +18,12 @@ import com.meddjamm.sn.dossiermedical.remote.model.PatientDetailDs;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
 import com.meddjamm.sn.utils.UtilString;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CircuitPatientAssembler {
@@ -40,16 +42,14 @@ public class CircuitPatientAssembler {
 
     public CircuitPatientListDs assembleEntityToListDs(CircuitPatient circuitPatient) {
         CircuitPatientListDs circuitPatientDs = new CircuitPatientListDs();
-        if (circuitPatient.getId() != null)
-            circuitPatientDs.setId(circuitPatient.getId());
+        if (circuitPatient.getId() != null) circuitPatientDs.setId(circuitPatient.getId());
         circuitPatientDs.setEtat(circuitPatient.getEtat());
         circuitPatientDs.setActif(circuitPatient.isActif());
         circuitPatientDs.setType(circuitPatient.getType());
         circuitPatientDs.setCreateDate(circuitPatient.getCreateDate());
-        circuitPatientDs.setNumeroCircuit(
-                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
-        if (circuitPatient.getCode() != null) {
-            Patient patient = patientService.findByCode(circuitPatient.getCode());
+        circuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        if (circuitPatient.getPatientId() != null) {
+            Patient patient = patientService.findById(circuitPatient.getPatientId());
             String nomPatient = patient.getPrenom() + ' ' + patient.getNom();
             circuitPatientDs.setNomCompletPatient(nomPatient);
         }
@@ -64,16 +64,15 @@ public class CircuitPatientAssembler {
 
     public CircuitPatientDs assembleEntityToDs(CircuitPatient circuitPatient) {
         CircuitPatientDs circuitPatientDs = new CircuitPatientDs();
-        if (circuitPatient.getId() != null)
-            circuitPatientDs.setId(circuitPatient.getId());
+        if (circuitPatient.getId() != null) circuitPatientDs.setId(circuitPatient.getId());
         circuitPatientDs.setCode(circuitPatient.getCode());
+        circuitPatientDs.setPatientId(circuitPatient.getPatientId());
         circuitPatientDs.setMatricule(circuitPatient.getMatricule());
         circuitPatientDs.setEtat(circuitPatient.getEtat());
         circuitPatientDs.setActif(circuitPatient.isActif());
         circuitPatientDs.setType(circuitPatient.getType());
         circuitPatientDs.setCreateDate(circuitPatient.getCreateDate());
-        circuitPatientDs.setNumeroCircuit(
-                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        circuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
         if (circuitPatient.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getCreatedByUser());
             String nomMedecin = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
@@ -84,9 +83,9 @@ public class CircuitPatientAssembler {
 
     public CircuitPatient assembleCircuitPatientFromDs(CircuitPatientDs circuitPatientDs) {
         CircuitPatient circuitPatient = new CircuitPatient();
-        if (circuitPatientDs.getId() != null)
-            circuitPatient.setId(circuitPatientDs.getId());
+        if (circuitPatientDs.getId() != null) circuitPatient.setId(circuitPatientDs.getId());
         circuitPatient.setCode(circuitPatientDs.getCode());
+        circuitPatient.setPatientId(circuitPatientDs.getPatientId());
         circuitPatient.setMatricule(circuitPatientDs.getMatricule());
         circuitPatient.setEtat(circuitPatientDs.getEtat());
         circuitPatient.setActif(circuitPatientDs.isActif());
@@ -98,9 +97,9 @@ public class CircuitPatientAssembler {
 
     public CircuitPatientDetailDs assembleEntityToDetailDs(CircuitPatient circuitPatient) {
         CircuitPatientDetailDs circuitPatientDs = new CircuitPatientDetailDs();
-        if (circuitPatient.getId() != null)
-            circuitPatientDs.setId(circuitPatient.getId());
+        if (circuitPatient.getId() != null) circuitPatientDs.setId(circuitPatient.getId());
         circuitPatientDs.setCode(circuitPatient.getCode());
+        circuitPatientDs.setPatientId(circuitPatient.getPatientId());
         circuitPatientDs.setMatricule(circuitPatient.getMatricule());
         circuitPatientDs.setEtat(circuitPatient.getEtat());
         circuitPatientDs.setActif(circuitPatient.isActif());
@@ -109,10 +108,9 @@ public class CircuitPatientAssembler {
         circuitPatientDs.setConsultationMedicalDs(consultationMedicalAssembler.assembleEntitiesFrom(circuitPatient.getConsultationMedicals()));
         circuitPatientDs.setOrdonnanceDs(ordonnanceAssembler.assembleEntitiesFrom(circuitPatient.getOrdonnances()));
         circuitPatientDs.setAvisSpecialisteDs(avisSpecialisteAssembler.assembleEntitiesFrom(circuitPatient.getAvisSpecialistes()));
-        circuitPatientDs.setNumeroCircuit(
-                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
-        if (circuitPatient.getCode() != null) {
-            Patient patient = patientService.findByCode(circuitPatient.getCode());
+        circuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        if (circuitPatient.getPatientId() != null) {
+            Patient patient = patientService.findById(circuitPatient.getPatientId());
             PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
             circuitPatientDs.setPatientDetailDs(patientDetailDs);
         }
@@ -131,15 +129,13 @@ public class CircuitPatientAssembler {
     }
 
     public AllCircuitPatientDs createAllCircuitDs(CircuitPatient circuitPatient) {
-        if (circuitPatient == null)
-            return null;
+        if (circuitPatient == null) return null;
         AllCircuitPatientDs circuitPatientDs = new AllCircuitPatientDs();
         circuitPatientDs.setId(circuitPatient.getId());
         circuitPatientDs.setEtat(circuitPatient.getEtat());
         circuitPatientDs.setActif(circuitPatient.isActif());
         circuitPatientDs.setCreateDate(circuitPatient.getCreateDate());
-        circuitPatientDs.setNumeroCircuit(
-                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        circuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
         if (circuitPatient.getCreatedByUser() != null) {
             Utilisateur utilisateur = utilisateurService.findUtilisateurByMatricule(circuitPatient.getCreatedByUser());
             String nomAgent = utilisateur.getPrenom() + ' ' + utilisateur.getNom();
@@ -165,16 +161,15 @@ public class CircuitPatientAssembler {
 
     public CircuitPatientByPatientDs assembleEntityToCircuitByPatient(CircuitPatient circuitPatient) {
         CircuitPatientByPatientDs circuitPatientDs = new CircuitPatientByPatientDs();
-        if (circuitPatient.getId() != null)
-            circuitPatientDs.setId(circuitPatient.getId());
+        if (circuitPatient.getId() != null) circuitPatientDs.setId(circuitPatient.getId());
         circuitPatientDs.setCode(circuitPatient.getCode());
+        circuitPatientDs.setPatientId(circuitPatient.getPatientId());
         circuitPatientDs.setMatricule(circuitPatient.getMatricule());
         circuitPatientDs.setEtat(circuitPatient.getEtat());
         circuitPatientDs.setActif(circuitPatient.isActif());
-        circuitPatientDs.setNumeroCircuit(
-                UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
-        if (circuitPatient.getCode() != null) {
-            Patient patient = patientService.findByCode(circuitPatient.getCode());
+        circuitPatientDs.setNumeroCircuit(UtilString.createNumeroCircuitPatient(circuitPatient.getNumeroCircuit()));
+        if (circuitPatient.getPatientId() != null) {
+            Patient patient = patientService.findById(circuitPatient.getPatientId());
             PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
             circuitPatientDs.setPatientDetailDs(patientDetailDs);
         }

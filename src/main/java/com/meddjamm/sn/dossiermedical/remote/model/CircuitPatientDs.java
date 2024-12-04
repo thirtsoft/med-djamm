@@ -17,6 +17,8 @@ public class CircuitPatientDs {
 
     private String code;
 
+    private Long patientId;
+
     private String matricule;
 
     private String type;

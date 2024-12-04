@@ -33,7 +33,7 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
         if (circuitPatient.getNumeroCircuit() == 0) {
             circuitPatient.setNumeroCircuit(createNumeroCircuit());
         }
-        Patient patient = patientRepository.findPatientByCode(circuitPatient.getCode());
+        Patient patient = patientRepository.findPatientById(circuitPatient.getPatientId());
         String sexe = patient.getSexe();
         if (sexe.equals(ConstantSigps.TYPE_SEXE_PATIENT)) {
             circuitPatient.setTypePatient(1);

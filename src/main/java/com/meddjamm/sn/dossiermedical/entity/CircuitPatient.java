@@ -28,6 +28,9 @@ public class CircuitPatient extends AbstractAuditableEntity implements Serializa
     @Column(name = "patient_uid")
     private String code;
 
+    @Column(name = "patient_id")
+    private Long patientId;
+
     @Column(name = "medecin_uid")
     private String matricule;
 
@@ -46,7 +49,7 @@ public class CircuitPatient extends AbstractAuditableEntity implements Serializa
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "circuitPatient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ConsultationMedical> consultationMedicals;
-    
+
     private Date createDate;
 
     private int estTransfere;
