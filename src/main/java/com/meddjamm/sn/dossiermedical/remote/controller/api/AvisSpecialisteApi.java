@@ -34,7 +34,7 @@ public interface AvisSpecialisteApi {
     void deleteAvisSpecialiste(@PathVariable Long id);
 
     @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<AvisSpecialisteDs>> findAllAvisSpecialistesByPatientId(@PathVariable String code);
+    ResponseEntity<List<AvisSpecialisteDs>> findAllAvisSpecialistesByPatientId(@PathVariable Long code);
 
     @GetMapping(value = "/by-circuit/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<AvisSpecialisteDs>> findAllAvisSpecialistesByCircuitId(@PathVariable Long code);

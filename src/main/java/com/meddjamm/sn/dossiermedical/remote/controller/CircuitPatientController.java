@@ -89,7 +89,7 @@ public class CircuitPatientController implements CircuitPatientApi {
     }
 
     @Override
-    public ResponseEntity<CircuitPatientByPatientDs> findCircuitPatientsByPatient(String code) {
+    public ResponseEntity<CircuitPatientByPatientDs> findCircuitPatientsByPatient(Long code) {
         return new ResponseEntity<>(circuitPatientAssembler.assembleEntityToCircuitByPatient(
                 circuitPatientService.findCircuitPatientsByPatient(code)
         ), HttpStatus.OK);
@@ -103,7 +103,7 @@ public class CircuitPatientController implements CircuitPatientApi {
     }
 
     @Override
-    public ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatientsByPatient(String code) {
+    public ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatientsByPatient(Long code) {
         return new ResponseEntity<>(circuitPatientAssembler.assembleEntitiesFrom(
                 circuitPatientService.findAllCircuitPatientsByPatient(code)
         ), HttpStatus.OK);
@@ -115,7 +115,7 @@ public class CircuitPatientController implements CircuitPatientApi {
     }
 
     @Override
-    public ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(String code) {
+    public ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(Long code) {
         List<AllCircuitPatientDs> ordonnanceCircuitPatientDs =
                 ordonnanceAssembler.assembleAllCircuitPatientEntitiesFrom(
                         ordonnanceService.findOrdonnancesByPatientId(code)

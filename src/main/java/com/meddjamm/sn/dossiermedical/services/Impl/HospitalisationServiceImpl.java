@@ -47,7 +47,10 @@ public class HospitalisationServiceImpl implements HospitalisationService {
         if (hospitalisation.getNumeroHospitalisation() == 0) {
             hospitalisation.setNumeroHospitalisation(createNumeroHospitalisation());
         }
-        Patient patient = patientService.findByCode(hospitalisation.getCode());
+        Patient patient = null;
+        if (hospitalisation.getPatientId() != null)
+            patient = patientService.findById(hospitalisation.getPatientId());
+        assert patient != null;
         String sexe = patient.getSexe();
         if (sexe.equals(ConstantSigps.TYPE_SEXE_PATIENT)) {
             hospitalisation.setTypePatient(1);
@@ -55,7 +58,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
             hospitalisation.setTypePatient(0);
         }
         Hospitalisation hospitalisationResult = hospitalisationRepository.save(hospitalisation);
-        Patient patientResult = patientService.findByCode(hospitalisation.getCode());
+        Patient patientResult = patientService.findById(hospitalisation.getPatientId());
         try {
             if (patientResult != null) {
                 patient.setNombre_passage(patient.getNombre_passage() + 1);
@@ -98,7 +101,7 @@ public class HospitalisationServiceImpl implements HospitalisationService {
     }
 
     @Override
-    public List<Hospitalisation> findAllByPatient(String code) {
+    public List<Hospitalisation> findAllByPatient(Long code) {
         return hospitalisationRepository.findAllByPatient(code);
     }
 

@@ -15,8 +15,8 @@ public interface CircuitPatientRepository extends JpaRepository<CircuitPatient, 
     @Query("SELECT DISTINCT p from CircuitPatient p where p.numeroCircuit=:numero and p.actif=1")
     CircuitPatient findCircuitPatientByNumero(@Param("numero") int numero);
 
-    @Query("SELECT DISTINCT p from CircuitPatient p where p.code=:code and p.actif=1 order by p.id desc")
-    CircuitPatient findCircuitPatientByPatient(@Param("code") String code);
+    @Query("SELECT DISTINCT p from CircuitPatient p where p.patientId=:patientId and p.actif=1 order by p.id desc")
+    CircuitPatient findCircuitPatientByPatient(@Param("patientId") Long patientId);
 
     @Query("SELECT DISTINCT p from CircuitPatient p where p.patientId=:patientId")
     CircuitPatient findCircuitPatientByPatientId(@Param("patientId") Long patientId);
@@ -27,8 +27,8 @@ public interface CircuitPatientRepository extends JpaRepository<CircuitPatient, 
     @Query("SELECT DISTINCT max(act.numeroCircuit) FROM CircuitPatient act")
     int maxNumeroCircuitPatient();
 
-    @Query("SELECT DISTINCT p from CircuitPatient p where p.code=:code and p.actif=1 order by p.id desc")
-    List<CircuitPatient> findAllCircuitPatientsByPatient(@Param("code") String code);
+    @Query("SELECT DISTINCT p from CircuitPatient p where p.patientId=:patientId and p.actif=1 order by p.id desc")
+    List<CircuitPatient> findAllCircuitPatientsByPatient(@Param("patientId") Long patientId);
 
     @Query("SELECT COUNT(c) FROM CircuitPatient c WHERE c.actif=1 ")
     long countCircuit();

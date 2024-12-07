@@ -16,7 +16,7 @@ public interface AvisSpecialisteService {
 
     void deleteAvisSpecialiste(Long id);
 
-    List<AvisSpecialiste> findAvisSpecialisteByPatientId(String code);
+    List<AvisSpecialiste> findAvisSpecialisteByPatientId(Long code);
 
     List<AvisSpecialiste> findAvisSpecialisteByCircuitId(Long circuitId);
 

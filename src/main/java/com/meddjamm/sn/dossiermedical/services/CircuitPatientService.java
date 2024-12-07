@@ -14,11 +14,11 @@ public interface CircuitPatientService {
 
     CircuitPatient findByNumero(int numero);
 
-    CircuitPatient findCircuitPatientsByPatient(String code);
+    CircuitPatient findCircuitPatientsByPatient(Long code);
 
     List<CircuitPatient> findAllCircuitPatients();
 
-    List<CircuitPatient> findAllCircuitPatientsByPatient(String code);
+    List<CircuitPatient> findAllCircuitPatientsByPatient(Long code);
 
     void deleteCircuitPatient(Long id);
 

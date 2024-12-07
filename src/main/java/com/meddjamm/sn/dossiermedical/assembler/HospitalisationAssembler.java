@@ -51,12 +51,11 @@ public class HospitalisationAssembler {
             hospitalisationListDs.setId(hospitalisation.getId());
         hospitalisationListDs.setActif(hospitalisation.isActif());
         hospitalisationListDs.setCreateDate(hospitalisation.getCreatedDate());
-        //  hospitalisationListDs.setCreatedByUser(hospitalisation.getCreatedByUser());
         hospitalisationListDs.setNumeroHospitalisation(
                 UtilString.createNumeroHospitalisation(hospitalisation.getNumeroHospitalisation())
         );
-        if (hospitalisation.getCode() != null) {
-            Patient patient = patientService.findByCode(hospitalisation.getCode());
+        if (hospitalisation.getPatientId() != null) {
+            Patient patient = patientService.findById(hospitalisation.getPatientId());
             String nomPatient = patient.getPrenom() + ' ' + patient.getNom();
             hospitalisationListDs.setNomCompletPatient(nomPatient);
         }
@@ -72,7 +71,7 @@ public class HospitalisationAssembler {
         HospitalisationDs hospitalisationDs = new HospitalisationDs();
         if (hospitalisation.getId() != null)
             hospitalisationDs.setId(hospitalisation.getId());
-        hospitalisationDs.setCode(hospitalisation.getCode());
+        hospitalisationDs.setPatientId(hospitalisation.getPatientId());
         hospitalisationDs.setActif(hospitalisation.isActif());
         hospitalisationDs.setCreatedDate(hospitalisation.getCreatedDate());
         hospitalisationDs.setCreatedBy(hospitalisation.getCreatedBy());
@@ -99,7 +98,7 @@ public class HospitalisationAssembler {
         Hospitalisation hospitalisation = new Hospitalisation();
         if (hospitalisationDs.getId() != null)
             hospitalisation.setId(hospitalisationDs.getId());
-        hospitalisation.setCode(hospitalisationDs.getCode());
+        hospitalisation.setPatientId(hospitalisationDs.getPatientId());
         hospitalisation.setActif(hospitalisationDs.isActif());
         hospitalisation.setCreatedDate(hospitalisationDs.getCreatedDate());
         hospitalisation.setCreatedBy(hospitalisationDs.getCreatedBy());
@@ -165,8 +164,8 @@ public class HospitalisationAssembler {
         hospitalisationDetailDs.setNumeroHospitalisation(
                 UtilString.createNumeroHospitalisation(hospitalisation.getNumeroHospitalisation())
         );
-        if (hospitalisation.getCode() != null) {
-            Patient patient = patientService.findByCode(hospitalisation.getCode());
+        if (hospitalisation.getPatientId() != null) {
+            Patient patient = patientService.findById(hospitalisation.getPatientId());
             PatientDetailDs patientDetailDs = patientAssembler.assemblePatientDetails(patient);
             hospitalisationDetailDs.setPatientDetailDs(patientDetailDs);
         }

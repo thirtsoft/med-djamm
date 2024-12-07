@@ -15,7 +15,7 @@ public interface HospitalisationService {
 
     List<Hospitalisation> findAllHospitalisations();
 
-    List<Hospitalisation> findAllByPatient(String code);
+    List<Hospitalisation> findAllByPatient(Long code);
 
     void deleteHospitalisation(Long id);
 

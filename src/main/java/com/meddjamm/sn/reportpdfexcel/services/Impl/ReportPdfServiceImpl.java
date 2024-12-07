@@ -140,10 +140,10 @@ public class ReportPdfServiceImpl extends ReportAbstract implements ReportPdfSer
         table.addCell(cell);
 
         List<HospitalisationDetailDs> hospitalisationDetailDsList = hospitalisationAssembler.assembleHospitalisationsDetailsFromEntity(
-                hospitalisationService.findAllByPatient(patientDetailDs.getCode())
+                hospitalisationService.findAllByPatient(patientDetailDs.getId())
         );
         List<ConsultationMedicalDs> consultationMedicalDsList = consultationMedicalAssembler.assembleEntitiesFrom(
-                consultationMedicalService.findConsultationMedicalByPatientId(patientDetailDs.getCode())
+                consultationMedicalService.findConsultationMedicalByPatientId(patientDetailDs.getId())
         );
 
         for (ConsultationMedicalDs consultationMedicalDs : consultationMedicalDsList) {

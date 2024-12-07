@@ -61,7 +61,7 @@ public class AvisSpecialisteController implements AvisSpecialisteApi {
     }
 
     @Override
-    public ResponseEntity<List<AvisSpecialisteDs>> findAllAvisSpecialistesByPatientId(String code) {
+    public ResponseEntity<List<AvisSpecialisteDs>> findAllAvisSpecialistesByPatientId(Long code) {
         return new ResponseEntity<>(avisSpecialisteAssembler.assembleEntitiesFrom(
                 avisSpecialisteService.findAvisSpecialisteByPatientId(code)
         ), HttpStatus.OK);

@@ -68,7 +68,7 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
     }
 
     @Override
-    public CircuitPatient findCircuitPatientsByPatient(String code) {
+    public CircuitPatient findCircuitPatientsByPatient(Long code) {
         return circuitPatientRepository.findCircuitPatientByPatient(code);
     }
 
@@ -83,7 +83,7 @@ public class CircuitPatientServiceImpl implements CircuitPatientService {
     }
 
     @Override
-    public List<CircuitPatient> findAllCircuitPatientsByPatient(String code) {
+    public List<CircuitPatient> findAllCircuitPatientsByPatient(Long code) {
         return circuitPatientRepository.findAllCircuitPatientsByPatient(code);
     }
 

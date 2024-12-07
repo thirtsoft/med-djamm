@@ -17,6 +17,8 @@ public class HospitalisationDs {
 
     private String code;
 
+    private Long patientId;
+
     private String nomCompletPatient;
 
     private String matricule;
@@ -25,23 +27,13 @@ public class HospitalisationDs {
 
     private Date createdDate;
 
-    //   private List<ObservationCliniqueDs> observationCliniqueDsList;
-
     private ObservationCliniqueDs observationCliniqueDs;
-
-    //  private List<ExamenComplementaireDs> examenComplementaireDsList;
 
     private ExamenComplementaireDs examenComplementaireDs;
 
-//    private List<TraitementMedicalDs> traitementMedicalDsList;
-
     private TraitementMedicalDs traitementMedicalDs;
 
-    //   private List<DiscussionDs> discussionDsList;
-
     private DiscussionDs discussionDs;
-
-    //   private List<SyntheseDs> syntheseDsList;
 
     private SyntheseDs syntheseDs;
 

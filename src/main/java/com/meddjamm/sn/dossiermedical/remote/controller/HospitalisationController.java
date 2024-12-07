@@ -51,13 +51,13 @@ public class HospitalisationController implements HospitalisationApi {
     }
 
     @Override
-    public ResponseEntity<List<HospitalisationListDs>> getHospitalisationListByPatient(String code) {
+    public ResponseEntity<List<HospitalisationListDs>> getHospitalisationListByPatient(Long code) {
         return new ResponseEntity<>(hospitalisationAssembler
                 .assembleEntitiesFrom(hospitalisationService.findAllByPatient(code)), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<HospitalisationDetailDs>> getHospitalisationsDetailsByPatient(String code) {
+    public ResponseEntity<List<HospitalisationDetailDs>> getHospitalisationsDetailsByPatient(Long code) {
         return new ResponseEntity<>(hospitalisationAssembler.assembleHospitalisationsDetailsFromEntity(
                 hospitalisationService.findAllByPatient((code)
                 )

@@ -34,7 +34,7 @@ public interface OrdonnanceApi {
     void deleteOrdonnance(@PathVariable Long id);
 
     @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByPatientId(@PathVariable String code);
+    ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByPatientId(@PathVariable Long code);
 
     @GetMapping(value = "/by-circuit/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByCircuitId(@PathVariable Long code);

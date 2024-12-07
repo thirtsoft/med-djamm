@@ -38,10 +38,10 @@ public interface HospitalisationApi {
     ResponseEntity<List<HospitalisationListDs>> findAllHospitalisations();
 
     @GetMapping(value = "/patient/{code}")
-    ResponseEntity<List<HospitalisationListDs>> getHospitalisationListByPatient(@PathVariable("code") String code);
+    ResponseEntity<List<HospitalisationListDs>> getHospitalisationListByPatient(@PathVariable("code") Long code);
 
     @GetMapping(value = "/detail/patient/{code}")
-    ResponseEntity<List<HospitalisationDetailDs>> getHospitalisationsDetailsByPatient(@PathVariable("code") String code);
+    ResponseEntity<List<HospitalisationDetailDs>> getHospitalisationsDetailsByPatient(@PathVariable("code") Long code);
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteHospitalisation(@PathVariable Long id);

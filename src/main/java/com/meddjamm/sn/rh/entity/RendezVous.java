@@ -29,7 +29,6 @@ public class RendezVous extends AbstractAuditableEntity implements Serializable 
     private Long medecinId;
 
     @Column(name = "date_rendez_vous")
-    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "GMT")
     @Temporal(TemporalType.DATE)
     private Date dateRendezVous;
 

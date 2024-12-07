@@ -82,7 +82,7 @@ public class OrdonnanceServiceImpl implements OrdonnanceService {
     }
 
     @Override
-    public List<Ordonnance> findOrdonnancesByPatientId(String code) {
+    public List<Ordonnance> findOrdonnancesByPatientId(Long code) {
         return ordonnanceRepository.findOrdonnanceByPatientId(code);
     }
 

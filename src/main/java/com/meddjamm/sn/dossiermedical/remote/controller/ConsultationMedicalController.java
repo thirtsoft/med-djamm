@@ -55,7 +55,7 @@ public class ConsultationMedicalController implements ConsultationMedicalApi {
     }
 
     @Override
-    public ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByPatientId(String code) {
+    public ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByPatientId(Long code) {
         return new ResponseEntity<>(consultationMedicalAssembler.assembleEntitiesFrom(
                 consultationMedicalService.findConsultationMedicalByPatientId(code)
         ), HttpStatus.OK);

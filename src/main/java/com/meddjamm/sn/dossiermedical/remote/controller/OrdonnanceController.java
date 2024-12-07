@@ -58,7 +58,7 @@ public class OrdonnanceController implements OrdonnanceApi {
     }
 
     @Override
-    public ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByPatientId(String code) {
+    public ResponseEntity<List<OrdonnanceDs>> findAllOrdonnancesByPatientId(Long code) {
         return new ResponseEntity<>(ordonnanceAssembler.assembleEntitiesFrom(ordonnanceService.findOrdonnancesByPatientId(code)), HttpStatus.OK);
     }
 

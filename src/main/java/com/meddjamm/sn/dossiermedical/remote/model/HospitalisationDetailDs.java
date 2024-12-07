@@ -24,20 +24,11 @@ public class HospitalisationDetailDs {
 
     private ObservationCliniqueDs observationCliniqueDs;
 
-
-    //  private List<ExamenComplementaireDs> examenComplementaireDsList;
-
     private ExamenComplementaireDs examenComplementaireDs;
-
-    //   private List<TraitementMedicalDs> traitementMedicalDsList;
 
     private TraitementMedicalDs traitementMedicalDs;
 
-    //   private List<DiscussionDs> discussionDsList;
-
     private DiscussionDs discussionDs;
-
-    //   private List<SyntheseDs> syntheseDsList;
 
     private List<PiecesJointesDs> piecesJointesDs;
 

@@ -15,14 +15,14 @@ public interface HospitalisationRepository extends JpaRepository<Hospitalisation
     @Query("SELECT DISTINCT p from Hospitalisation p where p.actif=1")
     List<Hospitalisation> findAllHospitalisations();
 
-    @Query("SELECT DISTINCT p from Hospitalisation p where p.code=:code and p.actif=1 ORDER BY p.id DESC LIMIT 3")
-    List<Hospitalisation> findAllByPatient(@Param("code") String code);
+    @Query("SELECT DISTINCT p from Hospitalisation p where p.patientId=:patientId and p.actif=1 ORDER BY p.id DESC LIMIT 3")
+    List<Hospitalisation> findAllByPatient(@Param("patientId") Long patientId);
 
     @Query("SELECT DISTINCT max(act.numeroHospitalisation) FROM Hospitalisation act")
     int maxNumeroHospitalisation();
 
-    @Query("SELECT DISTINCT p from Hospitalisation p where p.code=:code and p.actif=1")
-    Hospitalisation findHospitalisationByPatientCode(@Param("code") String code);
+    @Query("SELECT DISTINCT p from Hospitalisation p where p.patientId=:patientId and p.actif=1")
+    Hospitalisation findHospitalisationByPatientCode(@Param("patientId") Long patientId);
 
     @Query("SELECT COUNT(h) FROM Hospitalisation h WHERE h.typePatient=1 and h.actif=1 ")
     int countHospitalisationHomme();
@@ -33,9 +33,9 @@ public interface HospitalisationRepository extends JpaRepository<Hospitalisation
     @Query("SELECT COUNT(h) FROM Hospitalisation h WHERE h.actif=1 ")
     long countHospitalisation();
 
-    @Query("SELECT COUNT(h) from Hospitalisation h where h.code=:code and h.actif=1")
-    long countActiveHospitalisationByPatient(@Param("code") String code);
+    @Query("SELECT COUNT(h) from Hospitalisation h where h.patientId=:patientId and h.actif=1")
+    long countActiveHospitalisationByPatient(@Param("patientId") Long patientId);
 
-    @Query("SELECT DISTINCT o from Hospitalisation o where o.code=:code and o.actif=1")
-    List<Hospitalisation> findHospitalisationByPatient(@Param("code") String code);
+    @Query("SELECT DISTINCT o from Hospitalisation o where o.patientId=:patientId and o.actif=1")
+    List<Hospitalisation> findHospitalisationByPatient(@Param("patientId") Long patientId);
 }

@@ -42,7 +42,7 @@ public interface PatientApi {
     ResponseEntity<PatientDetailDs> findById(@PathVariable Long id);
 
     @GetMapping(value = "/detail/{index}")
-    ResponseEntity<PatientDetailDs> findPatientByIndex(@PathVariable String index);
+    ResponseEntity<PatientDetailDs> findPatientByIndex(@PathVariable Long index);
 
     @GetMapping(value = "/list")
     ResponseEntity<List<PatientMinDs>> findAllPatients();
@@ -76,12 +76,12 @@ public interface PatientApi {
     long countNumberOfPatient();
 
     @GetMapping(value = "/count-number-passage-patient/{code}")
-    long countNumberPassageOfPatient(@PathVariable String code);
+    long countNumberPassageOfPatient(@PathVariable Long code);
 
     @GetMapping(value = "/number-consultation-patient/{code}")
-    long countNumberConsultationMedicalByPatient(@PathVariable String code);
+    long countNumberConsultationMedicalByPatient(@PathVariable Long code);
 
     @GetMapping(value = "/number-hospitalisation-patient/{code}")
-    long countNumberHospitalisationByPatient(@PathVariable String code);
+    long countNumberHospitalisationByPatient(@PathVariable Long code);
 
 }

@@ -17,7 +17,7 @@ public interface ConsultationMedicalService {
 
     void deleteConsultationMedical(Long id);
 
-    List<ConsultationMedical> findConsultationMedicalByPatientId(String code);
+    List<ConsultationMedical> findConsultationMedicalByPatientId(Long code);
 
     boolean addConsultationBiologicToConsultation(Long biologicId, MultipartFile biologic) throws Exception;
 

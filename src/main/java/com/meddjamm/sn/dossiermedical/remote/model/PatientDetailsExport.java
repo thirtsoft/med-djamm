@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientDetailsExport implements Serializable {
 
+    private Long patientId;
     private String code;
     private String nom;
     private String prenom;

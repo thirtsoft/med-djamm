@@ -27,11 +27,11 @@ public interface PatientService {
 
     long countNumberOfPatient();
 
-    long countNumberPassagePatient(String code);
+    long countNumberPassagePatient(Long code);
 
-    long countNumberConsultationMedicalByPatient(String code);
+    long countNumberConsultationMedicalByPatient(Long code);
 
-    long countNumberHospitalisationByPatient(String code);
+    long countNumberHospitalisationByPatient(Long code);
 
-    int nombrePassage(String code);
+    int nombrePassage(Long code);
 }

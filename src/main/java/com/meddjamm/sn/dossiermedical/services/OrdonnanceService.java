@@ -17,7 +17,7 @@ public interface OrdonnanceService {
 
     void deleteOrdonnance(Long id);
 
-    List<Ordonnance> findOrdonnancesByPatientId(String code);
+    List<Ordonnance> findOrdonnancesByPatientId(Long code);
 
     OrdonnanceItem findOrdonnanceItemById(Long id);
 

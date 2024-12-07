@@ -24,9 +24,9 @@ public class Hospitalisation extends AbstractAuditableEntity implements Serializ
 
     @Column(name = "numero_hospisatisation", nullable = true, unique = true)
     private int numeroHospitalisation;
-
-    @Column(name = "patient_uid")
-    private String code;
+    
+    @Column(name = "patient_id")
+    private Long patientId;
 
     @OneToOne(cascade = {CascadeType.ALL})
     private ObservationClinique observationClinique;

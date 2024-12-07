@@ -96,7 +96,7 @@ public class ConsultationMedicalServiceImpl implements ConsultationMedicalServic
 
 
     @Override
-    public List<ConsultationMedical> findConsultationMedicalByPatientId(String code) {
+    public List<ConsultationMedical> findConsultationMedicalByPatientId(Long code) {
         return consultationMedicalRepository.findConsultationMedicalByPatientId(code);
     }
 

@@ -36,7 +36,7 @@ public interface ConsultationMedicalApi {
     void deleteConsultationMedical(@PathVariable Long id);
 
     @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByPatientId(@PathVariable String code);
+    ResponseEntity<List<ConsultationMedicalDs>> findAllConsultationMedicalsByPatientId(@PathVariable Long code);
 
     @PutMapping("/exam-biologic/{consultationId}/add-consultation-biologic-file")
     boolean addConsultationBiologicToConsultation(@PathVariable Long consultationId, @RequestParam(required = false) MultipartFile biologic) throws Exception;

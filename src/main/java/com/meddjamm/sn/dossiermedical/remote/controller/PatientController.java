@@ -85,8 +85,8 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public ResponseEntity<PatientDetailDs> findPatientByIndex(String index) {
-        PatientDetailDs patientResult = patientAssembler.assemblePatientDetails(patientService.findByCode(index));
+    public ResponseEntity<PatientDetailDs> findPatientByIndex(Long index) {
+        PatientDetailDs patientResult = patientAssembler.assemblePatientDetails(patientService.findById(index));
         return new ResponseEntity<>(patientResult, HttpStatus.OK);
     }
 
@@ -155,17 +155,17 @@ public class PatientController implements PatientApi {
     }
 
     @Override
-    public long countNumberPassageOfPatient(String code) {
+    public long countNumberPassageOfPatient(Long code) {
         return patientService.countNumberPassagePatient(code);
     }
 
     @Override
-    public long countNumberConsultationMedicalByPatient(String code) {
+    public long countNumberConsultationMedicalByPatient(Long code) {
         return patientService.countNumberConsultationMedicalByPatient(code);
     }
 
     @Override
-    public long countNumberHospitalisationByPatient(String code) {
+    public long countNumberHospitalisationByPatient(Long code) {
         return patientService.countNumberHospitalisationByPatient(code);
     }
 

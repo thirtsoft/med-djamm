@@ -32,19 +32,19 @@ public interface CircuitPatientApi {
     ResponseEntity<CircuitPatientDetailDs> findCircuitPatientById(@PathVariable Long id);
 
     @GetMapping(value = "/patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<CircuitPatientByPatientDs> findCircuitPatientsByPatient(@PathVariable("code") String code);
+    ResponseEntity<CircuitPatientByPatientDs> findCircuitPatientsByPatient(@PathVariable("code") Long code);
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatients();
 
     @GetMapping(value = "/by-patient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatientsByPatient(@PathVariable("code") String code);
+    ResponseEntity<List<CircuitPatientListDs>> findAllCircuitPatientsByPatient(@PathVariable("code") Long code);
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteCircuitPatient(@PathVariable Long id);
 
     @GetMapping(value = "/allcircuit/bypatient/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(@PathVariable String code);
+    ResponseEntity<List<AllCircuitPatientDs>> findAllCircuitPatientByPatientId(@PathVariable Long code);
 
     @GetMapping(value = "/number-of-circuit")
     long countNumberOfCirccuit();

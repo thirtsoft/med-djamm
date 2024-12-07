@@ -147,10 +147,10 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = patientRepository.findPatientById(id);
         patient.setActif(false);
         patientRepository.save(patient);
-        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientByPatient(patient.getCode());
+        CircuitPatient circuitPatient = circuitPatientRepository.findCircuitPatientByPatient(patient.getId());
         circuitPatient.setActif(false);
         circuitPatientRepository.save(circuitPatient);
-        List<Hospitalisation> hospitalisationList = hospitalisationRepository.findHospitalisationByPatient(patient.getCode());
+        List<Hospitalisation> hospitalisationList = hospitalisationRepository.findHospitalisationByPatient(patient.getId());
         if (hospitalisationList != null) {
             for (Hospitalisation hospitalisation : hospitalisationList) {
                 hospitalisation.setActif(false);
@@ -185,25 +185,25 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public long countNumberPassagePatient(String code) {
+    public long countNumberPassagePatient(Long code) {
         long numberHospitalisation = hospitalisationRepository.countActiveHospitalisationByPatient(code);
         long numberConsultationMedical = consultationMedicalRepository.countActiveConsultationMedicalByPatient(code);
         return numberHospitalisation + numberConsultationMedical;
     }
 
     @Override
-    public long countNumberConsultationMedicalByPatient(String code) {
+    public long countNumberConsultationMedicalByPatient(Long code) {
         return consultationMedicalRepository.countActiveConsultationMedicalByPatient(code);
     }
 
     @Override
-    public long countNumberHospitalisationByPatient(String code) {
+    public long countNumberHospitalisationByPatient(Long code) {
         return hospitalisationRepository.countActiveHospitalisationByPatient(code);
     }
 
     @Override
-    public int nombrePassage(String code) {
-        Patient patient = patientRepository.findPatientByCode(code);
+    public int nombrePassage(Long code) {
+        Patient patient = patientRepository.findPatientById(code);
         return patient.getNombre_passage() + 1;
     }
 }

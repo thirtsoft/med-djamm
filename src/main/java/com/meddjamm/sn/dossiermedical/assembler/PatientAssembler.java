@@ -49,7 +49,7 @@ public class PatientAssembler {
         patientDetailDs.setDateAdmission(patient.getDateAdmission());
         patientDetailDs.setAddress(patient.getAddress());
         patientDetailDs.setNumeroTelephone(patient.getNumeroTelephone());
-        List<Hospitalisation> allByPatient = hospitalisationService.findAllByPatient(patient.getCode());
+        List<Hospitalisation> allByPatient = hospitalisationService.findAllByPatient(patient.getId());
         patientDetailDs.setHospitalisation(allByPatient.stream()
                 .map(this::assemblePatientHospiDossier)
                 .toList());
@@ -88,8 +88,7 @@ public class PatientAssembler {
 
     public PatientDetailDs assemblePatientDetails(Patient patient) {
         PatientDetailDs patientDetailDs = new PatientDetailDs();
-        if (patient.getCode() != null)
-            patientDetailDs.setCode(patient.getCode());
+        patientDetailDs.setCode(patient.getCode());
         patientDetailDs.setId(patient.getId());
         patientDetailDs.setDateAdmission(patient.getDateAdmission());
         patientDetailDs.setNom(patient.getNom());

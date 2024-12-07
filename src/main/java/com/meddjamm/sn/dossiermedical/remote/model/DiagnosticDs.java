@@ -15,6 +15,8 @@ public class DiagnosticDs {
 
     private String codePatient;
 
+    private Long patientId;
+
     private int actif;
 
     public boolean isActif() {

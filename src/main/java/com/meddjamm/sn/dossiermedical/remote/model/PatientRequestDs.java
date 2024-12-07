@@ -14,6 +14,9 @@ public class PatientRequestDs {
 
     @NotNull
     private String code;
+
+    private Long patientId;
+
     @NotNull
     private String prenom;
     @NotNull

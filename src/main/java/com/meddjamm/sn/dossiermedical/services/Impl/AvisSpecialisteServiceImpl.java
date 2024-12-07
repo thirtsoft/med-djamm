@@ -63,7 +63,7 @@ public class AvisSpecialisteServiceImpl implements AvisSpecialisteService {
     }
 
     @Override
-    public List<AvisSpecialiste> findAvisSpecialisteByPatientId(String code) {
+    public List<AvisSpecialiste> findAvisSpecialisteByPatientId(Long code) {
         return avisSpecialisteRepository.findAvisSpecialisteByPatientId(code);
     }
 

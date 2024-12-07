@@ -32,5 +32,5 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("SELECT p FROM Patient p WHERE lower(p.numeroTelephone) = lower(:telephone) AND p.actif = 1")
     Optional<Patient> findByNumeroTelephone(@Param("telephone") String telephone);
-    
+
 }
