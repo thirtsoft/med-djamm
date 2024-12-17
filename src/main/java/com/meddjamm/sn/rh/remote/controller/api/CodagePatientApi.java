@@ -31,6 +31,9 @@ public interface CodagePatientApi {
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<CodagePatientDetailDs>> findAllCodagePatients();
 
+    @GetMapping(value = "/bypatient/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<CodagePatientDetailDs>> findListCodageByPatientId(@PathVariable Long id);
+
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     void deleteCodagePatient(@PathVariable Long id);
 }

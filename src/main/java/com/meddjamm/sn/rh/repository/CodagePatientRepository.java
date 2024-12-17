@@ -15,4 +15,7 @@ public interface CodagePatientRepository extends JpaRepository<CodagePatient, Lo
     @Query("SELECT DISTINCT m from CodagePatient m where m.actif=1 ORDER BY m.id DESC")
     List<CodagePatient> findAllActiveCodagePatient();
 
+    @Query("SELECT DISTINCT c from CodagePatient c where c.patientId=:patientId and c.actif=1")
+    List<CodagePatient> findCodagesByPatient(@Param("patientId") Long patientId);
+
 }

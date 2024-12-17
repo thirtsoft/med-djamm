@@ -50,6 +50,13 @@ public class CodagePatientController implements CodagePatientApi {
     }
 
     @Override
+    public ResponseEntity<List<CodagePatientDetailDs>> findListCodageByPatientId(Long id) {
+        return new ResponseEntity<>(codagePatientAssembler.assembleEntitiesFromCodagePatientDetail(
+                codagePatientService.findListCodageByPatientId(id)
+        ), HttpStatus.OK);
+    }
+
+    @Override
     public void deleteCodagePatient(Long id) {
         codagePatientService.deleteCodagePatient(id);
     }

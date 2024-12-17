@@ -15,4 +15,6 @@ public interface CodagePatientService {
     List<CodagePatient> findAllCodagePatients();
 
     void deleteCodagePatient(Long id);
+
+    List<CodagePatient> findListCodageByPatientId(Long id);
 }

@@ -8,7 +8,9 @@ import com.meddjamm.sn.dossiermedical.repository.ConsultationMedicalRepository;
 import com.meddjamm.sn.dossiermedical.repository.HospitalisationRepository;
 import com.meddjamm.sn.dossiermedical.repository.PatientRepository;
 import com.meddjamm.sn.dossiermedical.services.PatientService;
+import com.meddjamm.sn.rh.entity.CodagePatient;
 import com.meddjamm.sn.rh.entity.RendezVous;
+import com.meddjamm.sn.rh.repository.CodagePatientRepository;
 import com.meddjamm.sn.rh.repository.RendezVousRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,16 +34,20 @@ public class PatientServiceImpl implements PatientService {
 
     private final RendezVousRepository rendezVousRepository;
 
+    private final CodagePatientRepository codagePatientRepository;
+
     public PatientServiceImpl(PatientRepository patientRepository,
                               CircuitPatientRepository circuitPatientRepository,
                               HospitalisationRepository hospitalisationRepository,
                               ConsultationMedicalRepository consultationMedicalRepository,
-                              RendezVousRepository rendezVousRepository) {
+                              RendezVousRepository rendezVousRepository,
+                              CodagePatientRepository codagePatientRepository) {
         this.patientRepository = patientRepository;
         this.circuitPatientRepository = circuitPatientRepository;
         this.hospitalisationRepository = hospitalisationRepository;
         this.consultationMedicalRepository = consultationMedicalRepository;
         this.rendezVousRepository = rendezVousRepository;
+        this.codagePatientRepository = codagePatientRepository;
     }
 
     @Override
@@ -163,6 +169,14 @@ public class PatientServiceImpl implements PatientService {
             for (RendezVous rendezVous : rendezVousList) {
                 rendezVous.setActif(false);
                 rendezVousRepository.save(rendezVous);
+            }
+        }
+
+        List<CodagePatient> codagePatientList = codagePatientRepository.findCodagesByPatient(patient.getId());
+        if (codagePatientList != null) {
+            for (CodagePatient codagePatient : codagePatientList) {
+                codagePatient.setActif(false);
+                codagePatientRepository.save(codagePatient);
             }
         }
 

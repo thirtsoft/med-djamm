@@ -57,4 +57,9 @@ public class CodagePatientServiceImpl implements CodagePatientService {
         codagePatient.setActif(false);
         codagePatientRepository.save(codagePatient);
     }
+
+    @Override
+    public List<CodagePatient> findListCodageByPatientId(Long id) {
+        return codagePatientRepository.findCodagesByPatient(id);
+    }
 }
